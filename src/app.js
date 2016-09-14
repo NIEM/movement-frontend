@@ -12,7 +12,8 @@ angular
     'ngCookies',
     'ui.router',
     'ngSanitize',
-    'ngTouch'
+    'ngTouch',
+    'solr'
   ])
   .config(function ($urlRouterProvider) {
     $urlRouterProvider.when('', '/'); // redirect to root if the state is ''

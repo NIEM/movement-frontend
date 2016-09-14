@@ -14,6 +14,12 @@
     .module('dhsniem')
     .controller('HomeCtrl', HomeCtrl);
 
-  function HomeCtrl() { }
+  function HomeCtrl($location) {
+
+    var vm = this;
+
+    vm.params = $location.search();
+
+  }
 
 })();
