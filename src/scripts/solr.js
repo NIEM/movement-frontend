@@ -192,6 +192,7 @@ var solr = angular.module("solr", [])
           'facet': "on",
           'facet.mincount':"1",
           'wt': 'json',
+          'json.wrf': 'JSON_CALLBACK',
           'json.nl': "map",
           'rows': that.getRows()
         };
