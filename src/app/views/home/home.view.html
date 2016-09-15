@@ -1,2 +1,27 @@
-<!-- Controller As lets you keep things nice and name spaced -->
-<h1>Hello {{MainCtrl.user.username}}!</h1>
+<solr docs="docs" num-found="numFound" solr-url="'http://localhost:8983/solr/niem-test-csv/select'">
+  <div class="row">
+    <div class="col-md-4">
+      <solr-search preload='true' query=''></solr-search>
+      
+<!--       <solr-facet-group>
+        <h2>Search:</h2>
+        <solr-search preload='true' query='{{HomeCtrl.params.q}}'></solr-search>
+        <solr-selected><h2>Selected:</h2></solr-selected>
+        <h2>Facet List:</h2>
+        <solr-facet display="Manufacturer"          field="manu"></solr-facet>
+        <solr-facet display="Popularity"    field="popularity"></solr-facet>
+        <solr-facet display="In Stock?"       field="inStock"></solr-facet>
+      </solr-facet-group> -->
+    
+    </div>
+
+    <div class="col-md-8">
+      <h2>Results ({{numFound}})</h2>
+      <ul class="list-unstyled">
+        <li ng-repeat="doc in docs">
+          {{doc.PropertyName}} --- {{doc.TypeName}}
+        </li>
+      </ul>
+    </div>
+  </div>
+</solr>

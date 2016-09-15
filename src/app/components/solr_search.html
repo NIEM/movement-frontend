@@ -1,0 +1,8 @@
+<form ng-submit="search(query, rows)">
+  <input ng-model="query"/>
+  <select 
+    ng-model="rows"
+    ng-options="r for r in roptions">
+  </select>
+  <button type="submit">Search</button>
+</form>
