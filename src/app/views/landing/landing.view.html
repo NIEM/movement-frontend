@@ -2,7 +2,6 @@
   <div class="content">
     <div class="welcome">
       <div class="welcome-items">
-
         <div class="welcome-top row">
           <img src="images/logo.svg" alt="Wist" class="logo pull-left"></img>
           <a href="http://www.niem.gov" target="_blank" class="niem-link pull-right">NIEM.gov</a>
@@ -15,13 +14,8 @@
               <br>you get the data you need
             </p>
           </div>
-          <div class="search row input-group">
-            <input type="text" class="form-control" aria-label="Enter keyword" placeholder="Enter Keyword"></input>
-            <div class="input-group-btn">
-              <button class="search-btn btn" aria-label="Search">
-                <img src="images/icon_search.svg" aria-hidden="true"></img>
-              </button>
-            </div>
+          <div class="search row">
+            <niem-search></niem-search>
           </div>
         </div>
       </div>

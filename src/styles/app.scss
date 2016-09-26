@@ -26,7 +26,6 @@ $mont-semi-bold:  600;
 body {
   height: 100%;
   min-width: 768px;
-  //width: 100%;
   font: $mont-regular 14px Arial, sans-serif;
   font-color: $body-text-color;
 }
@@ -119,6 +118,7 @@ h4 {
 }
 
 // injector
+@import '../app/components/niemSearch/niemSearch.directive.scss';
 @import '../app/views/about/about.view.scss';
 @import '../app/views/home/home.view.scss';
 @import '../app/views/landing/landing.view.scss';
