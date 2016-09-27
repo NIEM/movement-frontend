@@ -44,6 +44,9 @@
       padding: 20px;
       margin: 0 20px 20px;
       background: $light-teal;
+      .search-string {
+        font-style: italic;
+      }
     }
 
     .search-filter {
