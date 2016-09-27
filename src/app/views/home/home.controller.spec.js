@@ -12,8 +12,5 @@ describe('Controller: HomeCtrl', function () {
     HomeCtrl = $injector.get('$controller')('HomeCtrl');
   }));
 
-  it('should attach a list of awesomeThings to the scope', function () {
-
-  });
 
 });
