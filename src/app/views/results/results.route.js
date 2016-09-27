@@ -6,7 +6,7 @@
     .module('dhsniem')
     .config(function($stateProvider) {
       $stateProvider
-        .state('results', {
+        .state('main.results', {
           url: '/results',
           templateUrl: 'app/views/results/results.view.html',
           controller: 'ResultsCtrl',
