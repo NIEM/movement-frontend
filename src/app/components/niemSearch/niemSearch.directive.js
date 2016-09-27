@@ -14,23 +14,39 @@
     .module('dhsniem')
     .directive('niemSearch', niemSearch);
 
-  function niemSearch() {
+  function niemSearch($location) {
     return {
       restrict: 'E',
       templateUrl: 'app/components/niemSearch/niemSearch.directive.html',
       scope: {},
+      require: '^solr',
       link: link
     };
 
-  }
+    /**
+     *  Defines variables and functions within niemSearch scope
+     */
+    function link(scope, element, attrs, ctrl) {
 
-  /**
-   *  Defines variables and functions within niemSearch scope
-   *
-   */
-  function link(scope) {
+      scope.search = function(query) {
+        // row = rows || '10';
+        query = query || '*';
+        $location.search('q', query);
+        // $location.search('rows', rows);
+        ctrl.search(query);
+      };
 
-    console.log('this is link');
+      // scope.roptions = ['3', '10', '20', '30'];
+      // scope.rows = '10';
+
+      scope.preload = attrs.preload;
+      scope.query = attrs.query;
+
+      if (scope.preload) {
+        scope.search(scope.query);
+      }
+    }
+
   }
 
 })();

@@ -1,43 +1,56 @@
 <div class="results">
-  <header class="header">
-    <div class="header-top">
-      <img class="header-top-img" src="images/logo.svg"></img>
-      <a href="http://www.niem.gov" target="_blank" class="header-top-link pull-right">NIEM.gov</a>
-    </div>
-    <div class="header-search">
-      <niem-search></niem-search>
-    </div>
-    <nav class="niem-navbar navbar navbar-default">
-      <div class="collapse navbar-collapse">
-        <ul class="nav navbar-nav">
-          <li class="active"><a href="#">All (56)</a></li>
-          <li><a href="#">Elements (35)</a></li>
-          <li><a href="#">Type (15)</a></li>
-          <li><a href="#">Code Lists (6)</a></li>
-        </ul>
+
+  <solr docs="docs" num-found="numFound" solr-url="'http://localhost:8983/solr/niem-test-xsd/select'">
+    
+    <header class="header">
+      <div class="header-top">
+        <img class="header-top-img" src="images/logo.svg"></img>
+        <a href="http://www.niem.gov" target="_blank" class="header-top-link pull-right">NIEM.gov</a>
       </div>
-    </nav>
-  </header>
+      <div class="header-search">
+        <niem-search preload='true' query=''></niem-search>
+      </div>
+      <nav class="niem-navbar navbar navbar-default">
+        <div class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="#">All (56)</a></li>
+            <li><a href="#">Elements (35)</a></li>
+            <li><a href="#">Type (15)</a></li>
+            <li><a href="#">Code Lists (6)</a></li>
+          </ul>
+        </div>
+      </nav>
+    </header>
 
-  <section class="content">
-    <div class="search-heading row">
-      <span class="pull-left">
-        You searched for <span class="search-string">"Card"</span>
-      </span>
-      <span class="sort-by pull-right">
-        
-      </span>
-    </div>
-    <div class="row">
-      <div class="search-filter col-sm-3">Filter by domain</div>
-      <div class="search-results col-sm-9">Search Results</div>
-    </div>
-  </section>
+    <section class="content">
+      <div class="search-heading row">
+        <span class="pull-left">
+          You searched for <span class="search-string">"Card"</span>
+        </span>
+        <span class="sort-by pull-right">
+          
+        </span>
+      </div>
+      <div class="row">
+        <div class="search-filter col-sm-3">Filter by domain</div>
+        <div class="search-results col-sm-9">Search Results ({{numFound}})
+          
+          <ul class="list-unstyled">
+            <li ng-repeat="doc in docs">
+              <h2>{{doc.name}}</h2>
+              <p>{{doc.definition}}</p>
+            </li>
+          </ul>
 
-  <footer class="footer">
-    <niem-export></niem-export>
-    <div class="footer-bottom pull-right">
-      <a href="http://www.niem.gov" target="_blank"> NIEM.gov </a> | <a href="http://niem.gov/Pages/contact.aspx" target="_blank">Contact Us</a>
-    </div>
-  </footer>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <niem-export></niem-export>
+      <div class="footer-bottom pull-right">
+        <a href="http://www.niem.gov" target="_blank"> NIEM.gov </a> | <a href="http://niem.gov/Pages/contact.aspx" target="_blank">Contact Us</a>
+      </div>
+    </footer>
+  </solr>
 </div>

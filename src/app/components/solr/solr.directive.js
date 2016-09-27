@@ -1,20 +1,46 @@
 'use strict';
 
 /**
- * @ngdoc controller
+ * @ngdoc directive
  *
- * @name ResultsCtrl
+ * @name solr
  *
  * @description
- * Controller for Search Results Page of dhsniem app
+ * Wrapper for Solr instantiation
  */
 (function() {
 
   angular
     .module('dhsniem')
-    .controller('ResultsCtrl', ResultsCtrl);
+    .directive('solr', solr);
 
-  function ResultsCtrl($scope, $http, $location) {
+  function solr() {
+    return {
+      scope: {
+        solrUrl: '=',
+        docs: '=',
+        preload: '=',
+        numFound: '=',
+      },
+      restrict: 'E',
+      controller: SolrCtrl,
+      // controllerAs: 'vm',
+      // require: 'solr',
+      link: link
+    };
+
+    /**
+     *  Defines variables and functions within solr scope
+     */
+    function link(scope, element, attrs, ctrl) {
+      ctrl.solrUrl = scope.solrUrl;
+    }
+
+  }
+
+
+  function SolrCtrl($scope, $http, $location) {
+
     var vm = this;
 
     // vm.facet_fields = {};
@@ -103,8 +129,6 @@
         vm.search();
       }
     }, true);   
-
-
 
   }
 
