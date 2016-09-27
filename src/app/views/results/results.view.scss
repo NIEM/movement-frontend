@@ -37,4 +37,20 @@
       border-right: 1px solid #777;
     }
   }
+  .content {
+    background-color: $white;
+
+    .search-heading {
+      padding: 20px;
+      margin: 0 20px 20px;
+      background: $light-teal;
+    }
+
+    .search-filter {
+      background: red;
+    }
+    .search-results {
+      background: orange;
+    }
+  }
 }
