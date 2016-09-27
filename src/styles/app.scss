@@ -52,8 +52,8 @@ h4 {
 
 /* Everything but the jumbotron gets side spacing for mobile first views */
 .header, .marketing, .footer {
-  padding-left: 15px;
-  padding-right: 15px;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
 /* Custom page header */
@@ -71,9 +71,15 @@ h4 {
 
 /* Custom page footer */
 .footer {
-  padding-top: 19px;
-  color: #777;
+  position: absolute;
+  bottom: 0;
   border-top: 1px solid #e5e5e5;
+  width: 100%;
+  background-color: $white;
+  padding: 0;
+  .footer-bottom {
+    padding: 10px;
+  }
 }
 
 .container-narrow > hr {
@@ -103,10 +109,10 @@ h4 {
 /* Responsive: Portrait tablets and up */
 @media screen and (min-width: 768px) {
   /* Remove the padding we set earlier */
-  .header, .marketing, .footer {
-    padding-left: 0;
-    padding-right: 0;
-  }
+  //.header, .marketing, .footer {
+    //padding-left: 0;
+    //padding-right: 0;
+//  }
   /* Space out the masthead */
   .header {
     margin-bottom: 30px;
@@ -118,9 +124,11 @@ h4 {
 }
 
 // injector
+@import '../app/components/niemExport/niemExport.directive.scss';
 @import '../app/components/niemSearch/niemSearch.directive.scss';
 @import '../app/views/about/about.view.scss';
 @import '../app/views/home/home.view.scss';
 @import '../app/views/landing/landing.view.scss';
 @import '../app/views/main/main.view.scss';
+@import '../app/views/results/results.view.scss';
 // endinjector

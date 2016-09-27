@@ -1,0 +1,40 @@
+.results {
+  .header {
+    padding-top: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    background-color: $teal;
+
+    .header-top {
+      padding-bottom: 10px;
+      border-bottom: 1px solid $white;
+      .header-top-img {
+        width: 100px;
+      }
+      .header-top-link {
+        color: $white;
+        text-decoration: none;
+      }
+    }
+    .header-search {
+      padding-top: 10px;
+      padding-left: 15px;
+      width: 40%;
+    }
+    .niem-navbar.navbar.navbar-default {
+      margin: 0;
+    }
+    .collapse.navbar-collapse {
+      padding: 0;
+    }
+    .navbar-default .navbar-nav > .active > a {
+      background-color: $darkest-blue;
+      color: $white;
+    }
+    .navbar-default .navbar-nav a {
+      padding-left: 60px;
+      padding-right: 60px;
+      border-right: 1px solid #777;
+    }
+  }
+}
