@@ -1,27 +1,44 @@
-<solr docs="docs" num-found="numFound" solr-url="'http://localhost:8983/solr/niem-test-csv/select'">
-  <div class="row">
-    <div class="col-md-4">
-      <solr-search preload='true' query=''></solr-search>
-      
-<!--       <solr-facet-group>
-        <h2>Search:</h2>
-        <solr-search preload='true' query='{{HomeCtrl.params.q}}'></solr-search>
-        <solr-selected><h2>Selected:</h2></solr-selected>
-        <h2>Facet List:</h2>
-        <solr-facet display="Manufacturer"          field="manu"></solr-facet>
-        <solr-facet display="Popularity"    field="popularity"></solr-facet>
-        <solr-facet display="In Stock?"       field="inStock"></solr-facet>
-      </solr-facet-group> -->
-    
-    </div>
+<div class="landing">
+  <div class="content">
+    <div class="welcome">
+      <div class="welcome-items">
+        <div class="welcome-top row">
+          <img src="images/logo.svg" alt="Wist" class="logo pull-left"></img>
+          <a href="http://www.niem.gov" target="_blank" class="niem-link pull-right">NIEM.gov</a>
+        </div>
 
-    <div class="col-md-8">
-      <h2>Results ({{numFound}})</h2>
-      <ul class="list-unstyled">
-        <li ng-repeat="doc in docs">
-          {{doc.PropertyName}} --- {{doc.TypeName}}
-        </li>
-      </ul>
+        <div class="welcome-main row">
+          <div class="description row">
+            <p>Welcome to a community
+              <br>collaboration project that helps
+              <br>you get the data you need
+            </p>
+          </div>
+          <div class="search row">
+            <niem-search></niem-search>
+          </div>
+        </div>
+      </div>
     </div>
+    <niem-export></niem-export>
+    <!--<div class="export">
+      <niem-export></niem-export>
+      <div class="export-top">
+        <img class="export-img" src="images/icon_download-circle.svg">
+        <div class="export-top-text">
+          <h2 class="export-heading">Would you like an export of all data instead?</h2>
+          <p class="export-description">You may choose to download an Excel version of the model
+            <br>view at your own pace offline.
+          </p>
+        </div>
+      </div>
+
+      <div class="download">
+        <a href="files/niem-3.2.xlsx" class="download-link">Download Current Model
+          <i class="glyphicon glyphicon-download-alt"></i>
+        </a>
+
+        <p class="download-version">(Version 3.2)</p>
+      </div>
+    </div>-->
   </div>
-</solr>
