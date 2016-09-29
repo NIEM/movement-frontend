@@ -1,6 +1,6 @@
 <div class="results">
 
-  <solr docs="docs" num-found="numFound" solr-url="'http://localhost:8983/solr/niem-test-xsd/select'">
+  <solr docs="docs" num-found="numFound" solr-url="http://localhost:8983/solr/niem-test-xsd/select">
     
     <header class="header">
       <div class="header-top">
@@ -27,14 +27,12 @@
         <span class="pull-left">
           You searched for <span class="search-string">"Card"</span>
         </span>
-        <span class="sort-by pull-right">
-          
-        </span>
+        <span class="sort-by pull-right"></span>
       </div>
       <div class="row">
         <div class="search-filter col-sm-3">Filter by domain</div>
         <div class="search-results col-sm-9">Search Results ({{numFound}})
-          
+
           <ul class="list-unstyled">
             <li ng-repeat="doc in docs">
               <h2>{{doc.name}}</h2>

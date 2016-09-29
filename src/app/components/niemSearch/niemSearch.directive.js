@@ -28,22 +28,14 @@
      */
     function link(scope, element, attrs, ctrl) {
 
-      scope.search = function(query) {
-        // row = rows || '10';
+      scope.search = function search(query) {
         query = query || '*';
         $location.search('q', query);
-        // $location.search('rows', rows);
-        ctrl.search(query);
+        ctrl.search();
       };
 
-      // scope.roptions = ['3', '10', '20', '30'];
-      // scope.rows = '10';
-
-      scope.preload = attrs.preload;
-      scope.query = attrs.query;
-
-      if (scope.preload) {
-        scope.search(scope.query);
+      if ( attrs.preload ) {
+        scope.search(attrs.query);
       }
     }
 

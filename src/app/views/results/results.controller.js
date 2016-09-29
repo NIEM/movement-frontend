@@ -14,7 +14,8 @@
     .module('dhsniem')
     .controller('ResultsCtrl', ResultsCtrl);
 
-  function ResultsCtrl($scope, $http, $location) {
+  function ResultsCtrl($http, $location) {
+    
     var vm = this;
 
     // vm.facet_fields = {};
@@ -52,16 +53,15 @@
       $http.jsonp(vm.solrUrl, { params: vm.buildSearchParams(), cache: true}).success(function(data) {
 
         // vm.facet_fields = data.facet_counts.facet_fields;
-        $scope.docs = data.response.docs;
-        $scope.numFound = data.response.numFound;
+
+        vm.docs = data.response.docs;
+        vm.numFound = data.response.numFound;
 
         // vm.selected_facets = vm.getSelectedFacets();
         // vm.selected_facets_obj = vm.getSelectedFacetsObjects();
       });
     };
 
-
-    $scope.search = vm.search;
 
     // this.setFacetGroup = function(newGroup) {
     //   $scope.facet_group = newGroup;
@@ -96,15 +96,15 @@
     // this.selected_facets = this.getSelectedFacets();
     // this.selected_facets_obj = this.getSelectedFacetsObjects();
 
-    $scope.$watch(function() {
-      return $location.search();
-    }, function(newVal, oldVal) {
-      if (newVal !== oldVal) {
-        vm.search();
-      }
-    }, true);   
 
-
+    //TODO: Implement back in for URL change searching; however, this causes a performance issue and currently makes several calls.
+    // $scope.$watch(function() {
+    //   return $location.search();
+    // }, function(newVal, oldVal) {
+    //   if (newVal !== oldVal) {
+    //     vm.search();
+    //   }
+    // }, true);   
 
   }
 
