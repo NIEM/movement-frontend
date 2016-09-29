@@ -1,119 +1,105 @@
 <div class="results">
-  <header class="header">
-    <div class="header-top">
-      <img class="header-top-img" src="images/logo.svg"></img>
-      <a href="http://www.niem.gov" target="_blank" class="header-top-link pull-right">NIEM.gov</a>
-    </div>
-    <div class="header-search">
-      <niem-search></niem-search>
-    </div>
-    <nav class="niem-navbar navbar navbar-default">
-      <div class="collapse navbar-collapse">
-        <ul class="nav navbar-nav">
-          <li class="active"><a href="#">All (56)</a></li>
-          <li><a href="#">Elements (35)</a></li>
-          <li><a href="#">Type (15)</a></li>
-          <li><a href="#">Code Lists (6)</a></li>
-        </ul>
+
+  <solr docs="docs" num-found="numFound" solr-url="http://localhost:8983/solr/niem-test-xsd/select">
+    
+    <header class="header">
+      <div class="header-top">
+        <img class="header-top-img" src="images/logo.svg"></img>
+        <a href="http://www.niem.gov" target="_blank" class="header-top-link pull-right">NIEM.gov</a>
       </div>
-    </nav>
-  </header>
-
-  <section class="content">
-    <div class="search-heading row">
-      <span class="pull-left">
-        You searched for <span class="search-string">"Card"</span>
-      </span>
-      <span class="sort-by pull-right"></span>
-    </div>
-    <div class="row">
-      <div class="search-filter col-sm-3">
-        <div class="row">
-          <h4 class="filter-heading">Filter by Domain</h4>
-          <button class="clear-button pull-right">CLEAR ALL</button>
-        </div>
-        <div class="row">
-          <div class="checkbox">
-            <label>
-              <input type="checkbox"> Core (5)
-            </label>
-          </div>
-
-          <div class="checkbox">
-            <label>
-              <input type="checkbox"> Biometrics (9)
-            </label>
-          </div>
-
-        </div>
+      <div class="header-search">
+        <niem-search preload='true' query=''></niem-search>
       </div>
-      <div class="search-results col-sm-9">
-        <div class="legend row pull-right">
-          <h4 class="legend-heading">Legend</h4>
-          <div class="legend-symbols">
-            <div class="legend-symbol">
-              <img class="legend-img" src="images/icon_e.svg"></img>
-              <div class="legend-title">Element</div>
+      <nav class="niem-navbar navbar navbar-default">
+        <div class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="#">All (56)</a></li>
+            <li><a href="#">Elements (35)</a></li>
+            <li><a href="#">Type (15)</a></li>
+            <li><a href="#">Code Lists (6)</a></li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+
+    <section class="content">
+      <div class="search-heading row">
+        <span class="pull-left">
+          You searched for <span class="search-string">"Card"</span>
+        </span>
+        <span class="sort-by pull-right"></span>
+      </div>
+      <div class="row">
+        <div class="search-filter col-sm-3">
+          <div class="row">
+            <h4 class="filter-heading">Filter by Domain</h4>
+            <button class="clear-button pull-right">CLEAR ALL</button>
+          </div>
+          <div class="row">
+            <div class="checkbox">
+              <label>
+                <input type="checkbox"> Core (5)
+              </label>
             </div>
 
-            <div class="legend-symbol">
-              <img class="legend-img" src="images/icon_t.svg"></img>
-              <div class="legend-title">Type</div>
+            <div class="checkbox">
+              <label>
+                <input type="checkbox"> Biometrics (9)
+              </label>
             </div>
 
-            <div class="legend-symbol">
-              <img class="legend-img" src="images/icon_c.svg"></img>
-              <div class="legend-title">Code List</div>
-            </div>
           </div>
         </div>
 
+        <div class="search-results col-sm-9">
+          <div class="legend row pull-right">
+            <h4 class="legend-heading">Legend</h4>
+            <div class="legend-symbols">
+              <div class="legend-symbol">
+                <img class="legend-img" src="images/icon_e.svg"></img>
+                <div class="legend-title">Element</div>
+              </div>
 
-        <div class="results-list row">
-          <div class="result">
-            <h4 class="result-heading">cc: Core (5)</h4>
-            <div class="result-item row">
-              <div class="row">
-                <div class="item-img-section">
-                  <img class="item-img" src="images/icon_t.svg">
-                </div>
-                <span class="item-title">CardPicture</span>
+              <div class="legend-symbol">
+                <img class="legend-img" src="images/icon_t.svg"></img>
+                <div class="legend-title">Type</div>
               </div>
-              <p class="item-description">Lorem ipsum Lorem ipsum Lorem ipsum</p>
-            </div>
-            <div class="result-item row">
-              <div class="row">
-                <div class="item-img-section">
-                  <img class="item-img" src="images/icon_t.svg">
-                </div>
-                <span class="item-title">CardPicture</span>
+
+              <div class="legend-symbol">
+                <img class="legend-img" src="images/icon_c.svg"></img>
+                <div class="legend-title">Code List</div>
               </div>
-              <p class="item-description">Lorem ipsum Lorem ipsum Lorem ipsum</p>
             </div>
           </div>
 
-          <div class="result">
-            <h4 class="result-heading">cc: Core (5)</h4>
-            <div class="result-item row">
-              <div class="row">
-                <div class="item-img-section">
-                  <img class="item-img" src="images/icon_t.svg">
+
+          <div class="results-list row">
+
+            <div class="result">
+              <h4 class="result-heading">cc: All of NIEM ({{numFound}})</h4>
+
+              <div class="result-item row" ng-repeat="doc in docs">
+                <div class="row">
+                  <div class="item-img-section">
+                    <img class="item-img" src="images/icon_t.svg">
+                  </div>
+                  <span class="item-title">{{doc.name}}</span>
                 </div>
-                <span class="item-title">CardPicture</span>
+                <p class="item-description">{{doc.definition}}</p>
               </div>
-              <p class="item-description">Lorem ipsum Lorem ipsum Lorem ipsum</p>
+
             </div>
           </div>
 
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <footer class="footer">
-    <niem-export></niem-export>
-    <div class="footer-bottom pull-right">
-      <a href="http://www.niem.gov" target="_blank"> NIEM.gov </a> | <a href="http://niem.gov/Pages/contact.aspx" target="_blank">Contact Us</a>
-    </div>
-  </footer>
+    <footer class="footer">
+      <niem-export></niem-export>
+      <div class="footer-bottom pull-right">
+        <a href="http://www.niem.gov" target="_blank"> NIEM.gov </a> | <a href="http://niem.gov/Pages/contact.aspx" target="_blank">Contact Us</a>
+      </div>
+    </footer>
+  </solr>
 </div>

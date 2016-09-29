@@ -217,6 +217,7 @@ var solr = angular.module("solr", [])
           that.selected_facets_obj = that.getSelectedFacetsObjects();
         });
       };
+      
 
       $scope.search = that.search;
 
