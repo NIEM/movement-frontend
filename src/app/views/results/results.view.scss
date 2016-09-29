@@ -44,13 +44,76 @@
       padding: 20px;
       margin: 0 20px 20px;
       background: $light-teal;
+      .search-string {
+        font-style: italic;
+      }
     }
 
     .search-filter {
-      background: red;
+      background: $white;
+      padding-left: 50px;
+      border-right: 1px solid $body-text-color;
+      .filter-heading {
+        display: inline-block;
+        margin: 0;
+      }
+      .clear-button {
+        border: none;
+        background: transparent;
+        color: $medium-blue;
+        font-weight: $mont-semi-bold;
+      }
     }
     .search-results {
-      background: orange;
+      padding: 0 50px;
+      .legend {
+        .legend-heading {
+          padding-right: 10px;
+          border-right: 1px solid $body-text-color;
+          display: inline-block;
+        }
+        .legend-symbols {
+          padding-left: 10px;
+          display: inline-block;
+          .legend-symbol {
+            display: inline-block;
+            .legend-img, .legend-title {
+              display: inline-block;
+            }
+            .legend-img {
+              width: 20px;
+            }
+          }
+        }
+      }
+
+      .results-list {
+        .result-heading {
+          padding-bottom: 5px;
+          border-bottom: 2px solid $body-text-color;
+        }
+        .result {
+          padding-top: 30px;
+          .result-item {
+            border-bottom: 1px solid $body-text-color;
+            .item-img-section {
+              display: inline-block;
+              padding: 0 30px;
+              .item-img {
+                width: 20px;
+              }
+
+            }
+            .item-title {
+              color: $medium-blue;
+              font-weight: $mont-semi-bold;
+            }
+            .item-description {
+              padding-left: 70px;
+            }
+          }
+        }
+      }
     }
   }
 }
