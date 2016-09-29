@@ -14,7 +14,7 @@
     .module('dhsniem')
     .controller('ResultsCtrl', ResultsCtrl);
 
-  function ResultsCtrl($http, $location) {
+  function ResultsCtrl($http, $location, solrSearch) {
     
     var vm = this;
 
@@ -70,12 +70,12 @@
      *
      * @memberof dhsniem.controller:ResultsCtrl
      *
-     * @description Performs the solr search via an $http jsonp request with built params object. On success, returns the total count and document list.
+     * @description Performs the solr search via solrSearch service. On success, sets response data to the vm.
      */
     vm.search = function() {
 
-      $http.jsonp(vm.solrUrl, { params: buildSearchParams(), cache: true}).success(function(data) {
-
+      solrSearch.search(vm.solrUrl, buildSearchParams()).then(function(data) {
+        
         // vm.facet_fields = data.facet_counts.facet_fields;
 
         vm.docs = data.response.docs;
@@ -83,7 +83,9 @@
 
         // vm.selected_facets = vm.getSelectedFacets();
         // vm.selected_facets_obj = vm.getSelectedFacetsObjects();
+        
       });
+
     };
 
 
