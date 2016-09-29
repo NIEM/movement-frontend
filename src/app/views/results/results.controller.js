@@ -21,13 +21,29 @@
     // vm.facet_fields = {};
     // vm.selected_facets=[];
 
-    vm.getQuery = function() {
-      return $location.search().q || '*';
-    };
 
-    vm.buildSearchParams = function() {
+    /**
+     * @name getQuery
+     *
+     * @memberof dhsniem.controller:ResultsCtrl
+     *
+     * @description Returns the query (q) param from $location
+     */
+    function getQuery() {
+      return $location.search().q || '*';
+    }
+
+
+    /**
+     * @name buildSearchParams
+     *
+     * @memberof dhsniem.controller:ResultsCtrl
+     *
+     * @description Dynamically builds the search params for a jsonp $http request to the solr instance.
+     */
+    function buildSearchParams() {
       var params = {
-        'q': vm.getQuery(),
+        'q': getQuery(),
         'facet': 'on',
         'facet.mincount': '1',
         'wt': 'json',
@@ -46,11 +62,19 @@
 
       return params;
 
-    };
+    }
 
-    vm.search = function(query) {
 
-      $http.jsonp(vm.solrUrl, { params: vm.buildSearchParams(), cache: true}).success(function(data) {
+    /**
+     * @name search
+     *
+     * @memberof dhsniem.controller:ResultsCtrl
+     *
+     * @description Performs the solr search via an $http jsonp request with built params object. On success, returns the total count and document list.
+     */
+    vm.search = function() {
+
+      $http.jsonp(vm.solrUrl, { params: buildSearchParams(), cache: true}).success(function(data) {
 
         // vm.facet_fields = data.facet_counts.facet_fields;
 

@@ -28,6 +28,17 @@
      */
     function link(scope, element, attrs, ctrl) {
 
+
+      /**
+       * @name search
+       *
+       * @memberof dhsniem.directive:NiemSearch
+       *
+       * @description
+       * Sets the query param and $location and then calls the ResultsCtrl search function.
+       *
+       * @param query
+       */
       scope.search = function search(query) {
         query = query || '*';
         $location.search('q', query);
