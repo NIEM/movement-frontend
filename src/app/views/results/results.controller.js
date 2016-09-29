@@ -14,12 +14,12 @@
     .module('dhsniem')
     .controller('ResultsCtrl', ResultsCtrl);
 
-  function ResultsCtrl($http, $location, solrSearch) {
+  function ResultsCtrl($scope, $http, $location, solrSearch) {
     
     var vm = this;
 
     // vm.facet_fields = {};
-    // vm.selected_facets=[];
+    vm.selected_facets=[];
 
 
     /**
@@ -51,14 +51,14 @@
         'json.nl': 'map'
       };
 
-      // selectedFacets = this.selected_facets;
-      // if (selectedFacets) {
-      //   params['fq'] = selectedFacets;
-      // }
+      var selectedFacets = vm.selected_facets;
+      if (selectedFacets) {
+        params['fq'] = selectedFacets;
+      }
 
-      // if ($scope.facet_group) {
-      //   params['facet.field'] = $scope.facet_group.listFields();
-      // }
+      if ($scope.facet_group) {
+        params['facet.field'] = $scope.facet_group.listFields();
+      }
 
       return params;
 
@@ -76,51 +76,48 @@
 
       solrSearch.search(vm.solrUrl, buildSearchParams()).then(function(data) {
         
-        // vm.facet_fields = data.facet_counts.facet_fields;
-
         vm.docs = data.response.docs;
         vm.numFound = data.response.numFound;
 
-        // vm.selected_facets = vm.getSelectedFacets();
-        // vm.selected_facets_obj = vm.getSelectedFacetsObjects();
+        vm.facet_fields = data.facet_counts.facet_fields;
+        vm.selected_facets = vm.getSelectedFacets();
+        vm.selected_facets_obj = vm.getSelectedFacetsObjects();
         
       });
 
     };
 
 
-    // this.setFacetGroup = function(newGroup) {
-    //   $scope.facet_group = newGroup;
-    // }
+    vm.setFacetGroup = function(newGroup) {
+      $scope.facet_group = newGroup;
+    };
 
-    // this.getSelectedFacetsObjects = function() {
-    //   var retValue = [];
-    //   this.selected_facets.forEach(function(value, key) {
-    //     split_val = value.split(':');
-    //     retValue.push({
-    //       field: split_val[0],
-    //       value: split_val[1].replace(/"/g, "")
-    //     });
-    //   });
-    //   return retValue;
-    // };
+    vm.getSelectedFacetsObjects = function() {
+      var retValue = [];
+      vm.selected_facets.forEach(function(value, key) {
+        split_val = value.split(':');
+        retValue.push({
+          field: split_val[0],
+          value: split_val[1].replace(/"/g, "")
+        });
+      });
+      return retValue;
+    };
 
-    // this.getSelectedFacets = function() {
-    //   selected = $location.search().selected_facets;
-    //   selectedFacets = [];
+    vm.getSelectedFacets = function() {
+      selected = $location.search().selected_facets;
+      selectedFacets = [];
 
-    //   if (angular.isArray(selected)) {
-    //     selectedFacets = selected;
-    //   } else {
-    //     if (selected) {
-    //       selectedFacets.push(selected);
-    //     }
-    //   }
-    //   return selectedFacets;
-    // };
+      if (angular.isArray(selected)) {
+        selectedFacets = selected;
+      } else if ( selected ) {
+        selectedFacets.push(selected);
+      }
+      return selectedFacets;
+    };
 
-    // this.selected_facets = this.getSelectedFacets();
-    // this.selected_facets_obj = this.getSelectedFacetsObjects();
+    vm.selected_facets = vm.getSelectedFacets();
+    vm.selected_facets_obj = vm.getSelectedFacetsObjects();
 
 
     //TODO: Implement back in for URL change searching; however, this causes a performance issue and currently makes several calls.
