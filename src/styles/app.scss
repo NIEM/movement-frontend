@@ -71,8 +71,8 @@ h4 {
 
 /* Custom page footer */
 .footer {
-  position: absolute;
-  bottom: 0;
+  // position: absolute;
+  // bottom: 0;
   border-top: 1px solid #e5e5e5;
   width: 100%;
   background-color: $white;
@@ -129,7 +129,6 @@ h4 {
 @import '../app/components/solrFacet/solrFacet.directive.scss';
 @import '../app/components/solrFacetGroup/solrFacetGroup.directive.scss';
 @import '../app/components/solrFacetResult/solrFacetResult.directive.scss';
-@import '../app/components/solrFacetSelected/solrFacetSelected.directive.scss';
 @import '../app/views/home/home.view.scss';
 @import '../app/views/main/main.view.scss';
 @import '../app/views/results/results.view.scss';

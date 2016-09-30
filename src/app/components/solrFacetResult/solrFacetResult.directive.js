@@ -21,7 +21,6 @@
         field:'@',
         key: '@',
         count: '@',
-        remove:'@',
       },
       templateUrl: 'app/components/solrFacetResult/solrFacetResult.directive.html',
       require: '^solr',
@@ -41,26 +40,39 @@
         var selectedFacets = ctrl.selectedFacets;
         var facetString = scope.facetString();
         for (var i in selectedFacets){
-          if (selectedFacets[i]==facetString) return true;
+          if (selectedFacets[i] === facetString) {
+            return true; 
+          }
         }
         return false;
       };
 
-      scope.addFacet = function (){ 
-        if (!scope.isSelected()){
-          var selectedFacets = ctrl.selectedFacets;
+      scope.addRemoveFacet = function() {
+        var selectedFacets = ctrl.selectedFacets;
+        if(!scope.isSelected()) {
           selectedFacets.push(scope.facetString());
-          $location.search('selected_facets', selectedFacets);
-          ctrl.search();
+        } else {
+          selectedFacets.pop(scope.facetString());
         }
+        $location.search('selected_facets', selectedFacets);
+        ctrl.search();          
       };
 
-      scope.removeFacet = function (){ 
-        var selectedFacets = ctrl.selectedFacets;
-        selectedFacets.pop(scope.facetString());
-        $location.search('selected_facets', selectedFacets);
-        ctrl.search();
-      };
+      // scope.addFacet = function (){
+      //   if (!scope.isSelected()){
+      //     var selectedFacets = ctrl.selectedFacets;
+      //     selectedFacets.push(scope.facetString());
+      //     $location.search('selected_facets', selectedFacets);
+      //     ctrl.search();
+      //   }
+      // };
+
+      // scope.removeFacet = function (){ 
+      //   var selectedFacets = ctrl.selectedFacets;
+      //   selectedFacets.pop(scope.facetString());
+      //   $location.search('selected_facets', selectedFacets);
+      //   ctrl.search();
+      // };
 
     }
 

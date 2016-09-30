@@ -25,6 +25,7 @@
     vm.selectedFacets = getSelectedFacets();
     vm.selectedFacetsObj = getSelectedFacetsObjects();
 
+
     /**
      * @name getQuery
      *

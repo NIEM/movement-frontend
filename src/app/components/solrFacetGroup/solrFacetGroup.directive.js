@@ -33,7 +33,7 @@
 
       scope.$watch(
         function(){ return ctrl.facetFields;},
-        function ( newVal, oldVal){
+        function (newVal, oldVal){
           if ( newVal !== oldVal ) {
             for (var k in ctrl.getFacets()){
               ctrl.setFacetResult(k, ctrl.facetFields[k]);
