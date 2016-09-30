@@ -8,7 +8,7 @@
         <a href="http://www.niem.gov" target="_blank" class="header-top-link pull-right">NIEM.gov</a>
       </div>
       <div class="header-search">
-        <niem-search preload='true' query=''></niem-search>
+        <niem-search query=''></niem-search>
       </div>
       <nav class="niem-navbar navbar navbar-default">
         <div class="collapse navbar-collapse">
@@ -31,12 +31,20 @@
       </div>
       <div class="row">
         <div class="search-filter col-sm-3">
+          
           <div class="row">
             <h4 class="filter-heading">Filter by Domain</h4>
             <button class="clear-button pull-right">CLEAR ALL</button>
           </div>
           <div class="row">
-            <div class="checkbox">
+
+            <solr-facet-group>
+              <solr-selected><h2>Selected:</h2></solr-selected>
+              <h2>Facet List:</h2>
+              <solr-facet display="Namespace" field="namespace"></solr-facet>
+            </solr-facet-group>
+            
+<!--             <div class="checkbox">
               <label>
                 <input type="checkbox"> Core (5)
               </label>
@@ -46,7 +54,7 @@
               <label>
                 <input type="checkbox"> Biometrics (9)
               </label>
-            </div>
+            </div> -->
 
           </div>
         </div>

@@ -18,7 +18,7 @@
     
     var vm = this;
 
-    // vm.facet_fields = {};
+    vm.facet_fields = {};
     vm.selected_facets=[];
 
 
@@ -57,7 +57,7 @@
       }
 
       if ($scope.facet_group) {
-        params['facet.field'] = $scope.facet_group.listFields();
+        params['facet.field'] = $scope.listFields();
       }
 
       return params;
@@ -95,7 +95,7 @@
     vm.getSelectedFacetsObjects = function() {
       var retValue = [];
       vm.selected_facets.forEach(function(value, key) {
-        split_val = value.split(':');
+        var split_val = value.split(':');
         retValue.push({
           field: split_val[0],
           value: split_val[1].replace(/"/g, "")
@@ -105,8 +105,8 @@
     };
 
     vm.getSelectedFacets = function() {
-      selected = $location.search().selected_facets;
-      selectedFacets = [];
+      var selected = $location.search().selected_facets;
+      var selectedFacets = [];
 
       if (angular.isArray(selected)) {
         selectedFacets = selected;
@@ -127,7 +127,33 @@
     //   if (newVal !== oldVal) {
     //     vm.search();
     //   }
-    // }, true);   
+    // }, true);
+
+    // Start facetGroup subcontrolelr
+    $scope.facets={};
+    vm.getFacets =  function(){ return $scope.facets;};
+    
+    vm.registerFacet = function (facet){
+      $scope.facets[facet.field]=facet;
+    };
+
+    $scope.listFields = function() {
+      var fields=[];
+      for (var k in $scope.facets){
+        fields.push($scope.facets[k].field);
+      }
+      return fields;
+    };
+
+    vm.setFacetResult = function( facet_key, facet_results){
+      for (var k in $scope.facets){
+        if ($scope.facets[k].field === facet_key){
+          $scope.facets[k].results = facet_results;
+        }
+      }
+    };
+    //end subcontroller
+
 
   }
 

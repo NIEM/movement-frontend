@@ -1,76 +1,76 @@
 // var solr = angular.module("solr", [])
 
-.controller('facetGroupController', function($scope){
-  $scope.facets={};
-  this.getFacets =  function(){ return $scope.facets;};
-  this.registerFacet = function (facet){
-    $scope.facets[facet.field]=facet;
-  };
-  $scope.listFields = function() {
-    var fields=[];
-    for (var k in $scope.facets){
-      fields.push($scope.facets[k].field);
-    }
-    return fields;
-  };
-  this.setFacetResult = function( facet_key, facet_results){
-    for (var k in $scope.facets){
-      if ($scope.facets[k].field === facet_key){
-        $scope.facets[k].results = facet_results;
-      }
-    }
-  };
-})
+// .controller('facetGroupController', function($scope){
+//   $scope.facets={};
+//   this.getFacets =  function(){ return $scope.facets;};
+//   this.registerFacet = function (facet){
+//     $scope.facets[facet.field]=facet;
+//   };
+//   $scope.listFields = function() {
+//     var fields=[];
+//     for (var k in $scope.facets){
+//       fields.push($scope.facets[k].field);
+//     }
+//     return fields;
+//   };
+//   this.setFacetResult = function( facet_key, facet_results){
+//     for (var k in $scope.facets){
+//       if ($scope.facets[k].field === facet_key){
+//         $scope.facets[k].results = facet_results;
+//       }
+//     }
+//   };
+// })
 
-.directive("solrFacetGroup", function() {
-  return {
-    restrict: "E",
-    scope: {},
-    controller: 'facetGroupController',
-    transclude: true,
-    templateUrl:"app/components/solr_facet_group.html",
-    require:["^solr", "solrFacetGroup"],
-    link: function(scope, element, attrs, ctrls){
-      var solrCtrl=ctrls[0];
-      var facetGroupCtrl= ctrls[1];
+// .directive("solrFacetGroup", function() {
+//   return {
+//     restrict: "E",
+//     scope: {},
+//     controller: 'facetGroupController',
+//     transclude: true,
+//     templateUrl:"app/components/solr_facet_group.html",
+//     require:["^solr", "solrFacetGroup"],
+//     link: function(scope, element, attrs, ctrls){
+//       var solrCtrl=ctrls[0];
+//       var facetGroupCtrl= ctrls[1];
 
-      solrCtrl.setFacetGroup(scope);
-      scope.$watch(
-        function(){ return solrCtrl.facet_fields;},
-        function ( newVal, oldVal){
-          if ( newVal !== oldVal ) {
-            for (var k in facetGroupCtrl.getFacets()){
-              facetGroupCtrl.setFacetResult(k, solrCtrl.facet_fields[k]);
-            }
-          }
-        }
-      );
+//       solrCtrl.setFacetGroup(scope);
+//       scope.$watch(
+//         function(){ return solrCtrl.facet_fields;},
+//         function ( newVal, oldVal){
+//           if ( newVal !== oldVal ) {
+//             for (var k in facetGroupCtrl.getFacets()){
+//               facetGroupCtrl.setFacetResult(k, solrCtrl.facet_fields[k]);
+//             }
+//           }
+//         }
+//       );
 
-    }
-  }
-})
+//     }
+//   }
+// })
 
-.directive("solrSelected", function(){
-  return {
-    restrict: "E",
-    scope:{},
-    controller: function($scope) {
-      $scope.selected = {
-        field: "mods_type_of_resource",
-        value: "notated music"
-      }
-    },
-    transclude: true,
-    templateUrl: "app/components/solr_selected.html",
-    require:"^solr",
-    link: function(scope, element, attrs, ctrl){
-      scope.selected = function(){
-        return ctrl.selected_facets_obj;
-      };
-    }
+// .directive("solrSelected", function(){
+//   return {
+//     restrict: "E",
+//     scope:{},
+//     controller: function($scope) {
+//       $scope.selected = {
+//         field: "mods_type_of_resource",
+//         value: "notated music"
+//       }
+//     },
+//     transclude: true,
+//     templateUrl: "app/components/solr_selected.html",
+//     require:"^solr",
+//     link: function(scope, element, attrs, ctrl){
+//       scope.selected = function(){
+//         return ctrl.selected_facets_obj;
+//       };
+//     }
 
-  }
-})
+//   }
+// })
 
 // .directive("solrSearch", function($location) {
 //   return {
@@ -100,71 +100,73 @@
 //   }
 // })
 
-.directive("solrFacet", function() {
-  return {
-    restrict: "E",
-    scope: {
-      display: "@",
-      field: "@",
-      results:"&",
-    },
-    require:"^solrFacetGroup",
-    templateUrl:"app/components/solr_facet.html",
-    link: function( scope, element, attrs, ctrl){
-      ctrl.registerFacet(scope);
+// .directive("solrFacet", function() {
+//   return {
+//     restrict: "E",
+//     scope: {
+//       display: "@",
+//       field: "@",
+//       results:"&",
+//     },
+//     require:"^solrFacetGroup",
+//     templateUrl:"app/components/solr_facet.html",
+//     link: function( scope, element, attrs, ctrl){
+//       ctrl.registerFacet(scope);
 
-      var es5getprops = Object.getOwnPropertyNames;
-      scope.isEmpty = function() {
-        return (es5getprops(scope.results).length === 0);
-      };
-    }
-  }
-})
+//       var es5getprops = Object.getOwnPropertyNames;
+//       scope.isEmpty = function() {
+//         return (es5getprops(scope.results).length === 0);
+//       };
+//     }
+//   }
+// })
 
-.directive("solrFacetResult", function($location) {
-  return {
-    restrict: "E",
-    scope: {
-      field:"@",
-      key: "@",
-      count: "@",
-      remove:"@",
-    },
-    require: "^solr",
-    templateUrl:"app/components/solr_facet_result.html",
-    link: function( scope, element, attrs, ctrl){
-      scope.facetString = function(){ 
-        return scope.field+':"'+scope.key+'"';
-      };
+// .directive("solrFacetResult", function($location) {
+//   return {
+//     restrict: "E",
+//     scope: {
+//       field:"@",
+//       key: "@",
+//       count: "@",
+//       remove:"@",
+//     },
+//     require: "^solr",
+//     templateUrl:"app/components/solr_facet_result.html",
+//     link: function( scope, element, attrs, ctrl){
+      
+//       scope.facetString = function(){ 
+//         return scope.field+':"'+scope.key+'"';
+//       };
 
-      scope.isSelected = function(){
-        selectedFacets = ctrl.selected_facets;
-        facetString = scope.facetString();
-        for (i in selectedFacets){
-          if (selectedFacets[i]==facetString) return true;
-        }
-        return false;
+//       scope.isSelected = function(){
+//         selectedFacets = ctrl.selected_facets;
+//         facetString = scope.facetString();
+//         for (i in selectedFacets){
+//           if (selectedFacets[i]==facetString) return true;
+//         }
+//         return false;
 
-      };
+//       };
 
-      scope.addFacet = function (){ 
-        if (!scope.isSelected()){
-          selectedFacets = ctrl.selected_facets;
-          selectedFacets.push(scope.facetString());
-          $location.search('selected_facets', selectedFacets);
-          ctrl.search();
-        }
-      };
+//       scope.addFacet = function (){ 
+//         if (!scope.isSelected()){
+//           selectedFacets = ctrl.selected_facets;
+//           selectedFacets.push(scope.facetString());
+//           $location.search('selected_facets', selectedFacets);
+//           ctrl.search();
+//         }
+//       };
 
-      scope.removeFacet = function (){ 
-        selectedFacets = ctrl.selected_facets;
-        selectedFacets.pop(scope.facetString());
-        $location.search('selected_facets', selectedFacets);
-        ctrl.search();
-      };
-    }
-  }
-})
+//       scope.removeFacet = function (){ 
+//         selectedFacets = ctrl.selected_facets;
+//         selectedFacets.pop(scope.facetString());
+//         $location.search('selected_facets', selectedFacets);
+//         ctrl.search();
+//       };
+      
+//     }
+//   }
+// })
 
 // .directive("solr", function() {
 //   return {

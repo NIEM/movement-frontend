@@ -18,8 +18,6 @@
     return {
       restrict: 'E',
       scope: {},
-      controller: 'ResultsCtrl',
-      controllerAs: 'ResultsCtrl',
       transclude: true,
       templateUrl: 'app/components/solrFacetGroup/solrFacetGroup.directive.html',
       require: '^solr',
@@ -31,23 +29,21 @@
      */
     function link(scope, element, attrs, ctrl) {
 
-      var solrCtrl=ctrls[0];
-      var facetGroupCtrl= ctrls[1];
+      ctrl.setFacetGroup(scope);
+      console.log('DIRECTIVE', scope);
 
-      solrCtrl.setFacetGroup(scope);
       scope.$watch(
-        function(){ return solrCtrl.facet_fields;},
+        function(){ return ctrl.facet_fields;},
         function ( newVal, oldVal){
           if ( newVal !== oldVal ) {
-            for (var k in facetGroupCtrl.getFacets()){
-              facetGroupCtrl.setFacetResult(k, solrCtrl.facet_fields[k]);
+            for (var k in ctrl.getFacets()){
+              ctrl.setFacetResult(k, ctrl.facet_fields[k]);
             }
           }
         }
       );
 
 
-      
     }
 
   }
