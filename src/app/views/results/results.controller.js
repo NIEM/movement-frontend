@@ -14,13 +14,16 @@
     .module('dhsniem')
     .controller('ResultsCtrl', ResultsCtrl);
 
-  function ResultsCtrl($scope, $http, $location, solrSearch) {
+  function ResultsCtrl($http, $location, solrSearch) {
     
     var vm = this;
 
-    vm.facet_fields = {};
-    vm.selected_facets=[];
+    vm.facets = {};
+    vm.facetFields = {};
 
+    // vm.selectedFacets = [];
+    vm.selectedFacets = getSelectedFacets();
+    vm.selectedFacetsObj = getSelectedFacetsObjects();
 
     /**
      * @name getQuery
@@ -51,13 +54,13 @@
         'json.nl': 'map'
       };
 
-      var selectedFacets = vm.selected_facets;
+      var selectedFacets = vm.selectedFacets;
       if (selectedFacets) {
         params['fq'] = selectedFacets;
       }
 
-      if ($scope.facet_group) {
-        params['facet.field'] = $scope.listFields();
+      if (vm.facetGroup) {
+        params['facet.field'] = listFields();
       }
 
       return params;
@@ -79,45 +82,131 @@
         vm.docs = data.response.docs;
         vm.numFound = data.response.numFound;
 
-        vm.facet_fields = data.facet_counts.facet_fields;
-        vm.selected_facets = vm.getSelectedFacets();
-        vm.selected_facets_obj = vm.getSelectedFacetsObjects();
+        vm.facetFields = data.facet_counts.facet_fields;
+        vm.selectedFacets = getSelectedFacets();
+        vm.selectedFacetsObj = getSelectedFacetsObjects();
         
       });
 
     };
 
 
+    /**
+     * @name setFacetGroup
+     *
+     * @memberof dhsniem.controller:ResultsCtrl
+     *
+     * @description Sets the facet group to the scope of the solrFacetGroup directive.
+     *
+     * @param newGroup
+     */
     vm.setFacetGroup = function(newGroup) {
-      $scope.facet_group = newGroup;
+      vm.facetGroup = newGroup;
     };
 
-    vm.getSelectedFacetsObjects = function() {
-      var retValue = [];
-      vm.selected_facets.forEach(function(value, key) {
-        var split_val = value.split(':');
-        retValue.push({
-          field: split_val[0],
-          value: split_val[1].replace(/"/g, "")
+
+    /**
+     * @name registerFacet
+     *
+     * @memberof dhsniem.controller:ResultsCtrl
+     *
+     * @description Sets the vm.facets object with a key and value of a facet field and its scope from the solrFacet directive, respectively.
+     *
+     * @param facet
+     */
+    vm.registerFacet = function(facet){
+      vm.facets[facet.field]=facet;
+    };
+
+
+    /**
+     * @name getFacets
+     *
+     * @memberof dhsniem.controller:ResultsCtrl
+     *
+     * @description Returns the vm.facets object.
+     *
+     * @retursn vm.facets
+     */
+     vm.getFacets =  function(){ return vm.facets;};
+    
+
+    /**
+     * @name setFacetResult
+     *
+     * @memberof dhsniem.controller:ResultsCtrl
+     *
+     * @description Sets the results (possible filter values) to the respective facet field name on the vm.facets object.
+     */
+    vm.setFacetResult = function(facetKey, facetResults){
+      for (var k in vm.facets){
+        if (vm.facets[k].field === facetKey){
+          vm.facets[k].results = facetResults;
+        }
+      }
+    };
+
+
+    /**
+     * @name listFields
+     *
+     * @memberof dhsniem.controller:ResultsCtrl
+     *
+     * @description Iterates over the vm.facets object to return an array of the fields to be used as facets.
+     *
+     * @returns fields - an array of the facet fields
+     */
+    function listFields() {
+      var fields=[];
+      for (var k in vm.facets){
+        fields.push(vm.facets[k].field);
+      }
+      return fields;
+    }
+
+
+    /**
+     * @name getSelectedFacetsObjects
+     *
+     * @memberof dhsniem.controller:ResultsCtrl
+     *
+     * @description Loops through the selected facets and parses out the field and value of each into a new object, each of which added to an array
+     *
+     * @returns selectedFacetsObjects - an array of the facets objects with the field and value properties (e.g. domain, niem-core)
+     */
+    function getSelectedFacetsObjects() {
+      var selectedFacetsObjs = [];
+      vm.selectedFacets.forEach(function(selectedFacet) {
+        var splitVal = selectedFacet.split(':');
+        selectedFacetsObjs.push({
+          field: splitVal[0],
+          value: splitVal[1].replace(/'/g, '')
         });
       });
-      return retValue;
-    };
+      return selectedFacetsObjs;
+    }
 
-    vm.getSelectedFacets = function() {
+
+    /**
+     * @name getSelectedFacets
+     *
+     * @memberof dhsniem.controller:ResultsCtrl
+     *
+     * @description Returns an array of the selected facets from $location selected_facets param(s)
+     *
+     * @returns selectedFacets - an array of the facets
+     */
+    function getSelectedFacets() {
       var selected = $location.search().selected_facets;
       var selectedFacets = [];
 
       if (angular.isArray(selected)) {
         selectedFacets = selected;
-      } else if ( selected ) {
+      } else if (selected) {
         selectedFacets.push(selected);
       }
       return selectedFacets;
-    };
-
-    vm.selected_facets = vm.getSelectedFacets();
-    vm.selected_facets_obj = vm.getSelectedFacetsObjects();
+    }
 
 
     //TODO: Implement back in for URL change searching; however, this causes a performance issue and currently makes several calls.
@@ -128,32 +217,6 @@
     //     vm.search();
     //   }
     // }, true);
-
-    // Start facetGroup subcontrolelr
-    $scope.facets={};
-    vm.getFacets =  function(){ return $scope.facets;};
-    
-    vm.registerFacet = function (facet){
-      $scope.facets[facet.field]=facet;
-    };
-
-    $scope.listFields = function() {
-      var fields=[];
-      for (var k in $scope.facets){
-        fields.push($scope.facets[k].field);
-      }
-      return fields;
-    };
-
-    vm.setFacetResult = function( facet_key, facet_results){
-      for (var k in $scope.facets){
-        if ($scope.facets[k].field === facet_key){
-          $scope.facets[k].results = facet_results;
-        }
-      }
-    };
-    //end subcontroller
-
 
   }
 

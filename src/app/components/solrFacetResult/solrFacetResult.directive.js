@@ -29,7 +29,7 @@
     };
 
     /**
-     *  Defines variables and functions within solr scope
+     *  Defines variables and functions within solrFacetResult scope
      */
     function link(scope, element, attrs, ctrl) {
 
@@ -38,7 +38,7 @@
       };
 
       scope.isSelected = function(){
-        var selectedFacets = ctrl.selected_facets;
+        var selectedFacets = ctrl.selectedFacets;
         var facetString = scope.facetString();
         for (var i in selectedFacets){
           if (selectedFacets[i]==facetString) return true;
@@ -48,7 +48,7 @@
 
       scope.addFacet = function (){ 
         if (!scope.isSelected()){
-          var selectedFacets = ctrl.selected_facets;
+          var selectedFacets = ctrl.selectedFacets;
           selectedFacets.push(scope.facetString());
           $location.search('selected_facets', selectedFacets);
           ctrl.search();
@@ -56,7 +56,7 @@
       };
 
       scope.removeFacet = function (){ 
-        var selectedFacets = ctrl.selected_facets;
+        var selectedFacets = ctrl.selectedFacets;
         selectedFacets.pop(scope.facetString());
         $location.search('selected_facets', selectedFacets);
         ctrl.search();

@@ -17,8 +17,6 @@
   function niemSearch($location) {
     return {
       restrict: 'E',
-      terminal: true,
-      priority: -1,
       templateUrl: 'app/components/niemSearch/niemSearch.directive.html',
       scope: {},
       require: '^solr',

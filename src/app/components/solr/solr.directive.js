@@ -19,7 +19,6 @@
       scope: {
         solrUrl: '@',
         docs: '=',
-        // preload: '=',
         numFound: '=',
       },
       restrict: 'E',

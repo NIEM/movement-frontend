@@ -28,12 +28,11 @@
     };
 
     /**
-     *  Defines variables and functions within solr scope
+     *  Defines variables and functions within solrFacet scope
      */
     function link(scope, element, attrs, ctrl) {
       
       ctrl.registerFacet(scope);
-      console.log('****registered***');
 
       // var es5getprops = Object.getOwnPropertyNames;
       // scope.isEmpty = function() {

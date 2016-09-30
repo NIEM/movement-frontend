@@ -25,24 +25,22 @@
     };
 
     /**
-     *  Defines variables and functions within solr scope
+     *  Defines variables and functions within solrFacetGroup scope
      */
     function link(scope, element, attrs, ctrl) {
 
       ctrl.setFacetGroup(scope);
-      console.log('DIRECTIVE', scope);
 
       scope.$watch(
-        function(){ return ctrl.facet_fields;},
+        function(){ return ctrl.facetFields;},
         function ( newVal, oldVal){
           if ( newVal !== oldVal ) {
             for (var k in ctrl.getFacets()){
-              ctrl.setFacetResult(k, ctrl.facet_fields[k]);
+              ctrl.setFacetResult(k, ctrl.facetFields[k]);
             }
           }
         }
       );
-
 
     }
 

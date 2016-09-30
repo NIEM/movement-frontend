@@ -36,7 +36,7 @@
     function link(scope, element, attrs, ctrl) {
 
       scope.selected = function(){
-        return ctrl.selected_facets_obj;
+        return ctrl.selectedFacetsObj;
       };
 
     }
