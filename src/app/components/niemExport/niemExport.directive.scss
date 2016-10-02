@@ -1,33 +1,37 @@
 .niem-export {
-  background: #35969b;
-  height: 30%;
+  background: $darkest-blue;
+  height: 140px;
   color: $white;
   width: 100%;
+
   .export-top {
-    width: 50%;
+    width: $niem-min-width;
     margin: 0 auto;
-    .export-img {
-      width: 50px;
-      opacity: 0.3;
+    .export-top-img {
       display: inline-block;
-      margin: 0 15px 40px;
+      img {
+        width: 66px;
+        display: inline-block;
+        margin: 0 15px 70px;
+      }
+
     }
     .export-top-text {
        display: inline-block;
+       margin-top: 20px;
+       padding-left: 10px;
+       border-left: 1px solid $white;
       .export-heading, .export-description {
-        margin: 0;
-        font-weight: $mont-regular;
+        margin-top: 0;
       }
-    }
-  }
-  .download {
-    width: 50%;
-    margin: 0 auto;
-    padding: 0 85px;
-    .download-link {
-      color: $white;
-      text-decoration: none;
-      font-weight: $mont-semi-bold;
+      .download {
+        color: $white;
+        text-decoration: none;
+        text-transform: uppercase;
+        &:hover {
+          text-decoration: underline;
+        }
+      }
     }
   }
 }

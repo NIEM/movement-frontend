@@ -1,105 +1,75 @@
 <div class="results">
 
   <solr docs="docs" num-found="numFound" solr-url="http://localhost:8983/solr/niem-test-xsd/select">
-    
-    <header class="header">
-      <div class="header-top">
-        <img class="header-top-img" src="images/logo.svg"></img>
-        <a href="http://www.niem.gov" target="_blank" class="header-top-link pull-right">NIEM.gov</a>
-      </div>
-      <div class="header-search">
-        <niem-search preload='true' query=''></niem-search>
-      </div>
-      <nav class="niem-navbar navbar navbar-default">
-        <div class="collapse navbar-collapse">
-          <ul class="nav navbar-nav">
-            <li class="active"><a href="#">All (56)</a></li>
-            <li><a href="#">Elements (35)</a></li>
-            <li><a href="#">Type (15)</a></li>
-            <li><a href="#">Code Lists (6)</a></li>
-          </ul>
-        </div>
-      </nav>
-    </header>
+    <search-header></search-header>
 
     <section class="content">
-      <div class="search-heading row">
-        <span class="pull-left">
-          You searched for <span class="search-string">"Card"</span>
-        </span>
-        <span class="sort-by pull-right"></span>
-      </div>
-      <div class="row">
-        <div class="search-filter col-sm-3">
-          <div class="row">
-            <h4 class="filter-heading">Filter by Domain</h4>
-            <button class="clear-button pull-right">CLEAR ALL</button>
-          </div>
-          <div class="row">
-            <div class="checkbox">
-              <label>
-                <input type="checkbox"> Core (5)
-              </label>
-            </div>
-
-            <div class="checkbox">
-              <label>
-                <input type="checkbox"> Biometrics (9)
-              </label>
-            </div>
-
-          </div>
+      <div class="search-filter col-sm-4">
+        <div class="filter-heading row">
+          <h2>Filter by</h2>
+          <button class="clear-button pull-right">CLEAR ALL</button>
         </div>
+        <div class="filter-details row">
+          <div class="checkbox">
+            <label>
+              <input type="checkbox"> Core (5)
+            </label>
+          </div>
 
-        <div class="search-results col-sm-9">
-          <div class="legend row pull-right">
-            <h4 class="legend-heading">Legend</h4>
+          <div class="checkbox">
+            <label>
+              <input type="checkbox"> Biometrics (9)
+            </label>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="search-results col-sm-8">
+        <div class="legend row">
+          <div class="pull-right">
+            <h6 class="legend-heading">Legend</h6>
             <div class="legend-symbols">
               <div class="legend-symbol">
                 <img class="legend-img" src="images/icon_e.svg"></img>
-                <div class="legend-title">Element</div>
+                <h6 class="legend-title">Element</h6>
               </div>
 
               <div class="legend-symbol">
                 <img class="legend-img" src="images/icon_t.svg"></img>
-                <div class="legend-title">Type</div>
-              </div>
-
-              <div class="legend-symbol">
-                <img class="legend-img" src="images/icon_c.svg"></img>
-                <div class="legend-title">Code List</div>
+                <h6 class="legend-title">Type</h6>
               </div>
             </div>
           </div>
-
-
-          <div class="results-list row">
-
-            <div class="result">
-              <h4 class="result-heading">cc: All of NIEM ({{numFound}})</h4>
-
-              <div class="result-item row" ng-repeat="doc in docs">
-                <div class="row">
-                  <div class="item-img-section">
-                    <img class="item-img" src="images/icon_t.svg">
-                  </div>
-                  <span class="item-title">{{doc.name}}</span>
-                </div>
-                <p class="item-description">{{doc.definition}}</p>
-              </div>
-
-            </div>
-          </div>
-
         </div>
+        <div class="search-heading row">
+          <h1 class="pull-left">
+              You searched for "Card"
+            </h1>
+        </div>
+
+        <div class="results-list row">
+
+          <div class="result">
+            <h2 class="result-heading">cc: All of NIEM ({{numFound}})</h2>
+
+            <div class="result-item row" ng-repeat="doc in docs">
+              <div class="row">
+                <h3 class="item-title">{{doc.name}}</h3>
+                <div class="item-img-section">
+                  <img class="item-img" src="images/icon_t.svg">
+                </div>
+              </div>
+              <p class="item-description row">{{doc.definition}}</p>
+            </div>
+
+          </div>
+        </div>
+
       </div>
     </section>
 
-    <footer class="footer">
-      <niem-export></niem-export>
-      <div class="footer-bottom pull-right">
-        <a href="http://www.niem.gov" target="_blank"> NIEM.gov </a> | <a href="http://niem.gov/Pages/contact.aspx" target="_blank">Contact Us</a>
-      </div>
-    </footer>
+    <ccp-footer></ccp-footer>
+
   </solr>
 </div>
