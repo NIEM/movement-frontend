@@ -127,24 +127,28 @@
     <!-- Global NIEM fields -->
     <field name="name"              type="text_general" indexed="true"  stored="true" multiValued="false" omitNorms="false" />
     <field name="definition"        type="text_general" indexed="true"  stored="true" multiValued="false" omitNorms="false" />
-    <field name="namespace"         type="text_general" indexed="true"  stored="true" multiValued="false" />
+    
+    <field name="namespace"         type="string"       indexed="true"  stored="true" multiValued="false" />
+    <field name="domain"            type="string"       indexed="true"  stored="true" multiValued="false" />
+    <field name="namespaceType"     type="string" indexed="true"  stored="true" multiValued="false" />
+    <field name="entityType"        type="string" indexed="true"  stored="true" multiValued="false" />
 
     <!-- Element fields -->
-    <field name="type"              type="string" indexed="false" stored="true" multiValued="false" />
-    <field name="substitutionGroup" type="string" indexed="false" stored="true" multiValued="false" />
+    <field name="type"              type="string" indexed="true" stored="true" multiValued="false" />
+    <field name="substitutionGroup" type="string" indexed="true" stored="true" multiValued="false" />
     <field name="abstract"          type="string" indexed="false" stored="true" multiValued="false" />
 
     <!-- Complex CCC Type fields -->
-    <field name="parentTypeName"    type="string" indexed="false" stored="true" multiValued="false" />
-    <field name="elements"          type="string" indexed="false" stored="true" multiValued="true" />
+    <field name="parentTypeName"    type="string" indexed="true" stored="true" multiValued="false" />
+    <field name="elements"          type="string" indexed="true" stored="true" multiValued="true" />
 
     <!-- Complex CSC Type fields -->
-    <field name="parentSimpleType"  type="string" indexed="false" stored="true" multiValued="false" />
-    <field name="attributeGroup"    type="string" indexed="false" stored="true" multiValued="false" />
-    <field name="attributes"        type="string" indexed="false" stored="true" multiValued="true" />
+    <field name="parentSimpleType"  type="string" indexed="true" stored="true" multiValued="false" />
+    <field name="attributeGroup"    type="string" indexed="true" stored="true" multiValued="false" />
+    <field name="attributes"        type="string" indexed="true" stored="true" multiValued="true" />
 
     <!-- SimpleType fields -->
-    <field name="facets"                    type="string" indexed="false" stored="true" multiValued="true" />  
+    <field name="facets"                    type="string" indexed="true" stored="true" multiValued="true" />  
     <dynamicField name="facetValue_*"       type="string" indexed="false" stored="false"  multiValued="true" />
     <dynamicField name="facetDefinition_*"  type="string" indexed="false" stored="false"  multiValued="true" />
 
@@ -160,9 +164,9 @@
 
     <!-- Only enabled in the "schemaless" data-driven example (assuming the client
          does not know what fields may be searched) because it's very expensive to index everything twice. -->
-    <!-- <copyField source="*" dest="_text_"/> -->
-    <copyField source="name"        dest="_text_"/>
-    <copyField source="definition"  dest="_text_"/>
+    <copyField source="*" dest="_text_"/>
+    <!-- <copyField source="name"        dest="_text_"/> -->
+    <!-- <copyField source="definition"  dest="_text_"/> -->
 
     <!-- Dynamic field definitions allow using convention over configuration
        for fields via the specification of patterns to match field names. 
