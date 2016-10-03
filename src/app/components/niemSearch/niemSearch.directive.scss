@@ -1,6 +1,9 @@
 .niem-search {
   display: inline-block;
-  margin: 0;
+  .form-group {
+      margin: 0;
+  }
+
   label {
     color: $white;
     font-size: 18px;
@@ -22,8 +25,6 @@
       }
     }
   }
-
-
 
   .search-btn {
     background-color: $darkest-blue;
