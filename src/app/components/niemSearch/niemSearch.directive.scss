@@ -1,21 +1,31 @@
 .niem-search {
-  width: 400px;
   display: inline-block;
-  #niem-search-input {
-    color: $marine-blue;
-    +.dropdown-menu {
-      width: 390px;
-      a {
-        color: $marine-blue;
+  label {
+    color: $white;
+    font-size: 18px;
+    font-weight: $mont-regular;
+    padding-right: 10px;
+    letter-spacing: 2.6px;
+  }
+  .search-group {
+    width: 475px;
+    #niem-search-input {
+      color: $marine-blue;
+      +.dropdown-menu {
+        border-radius: 0;
+        width: 390px;
+        a {
+          color: $marine-blue;
+        }
       }
     }
   }
 
 
+
   .search-btn {
     background-color: $darkest-blue;
     color: $white;
-
     img {
       width: 17px;
     }

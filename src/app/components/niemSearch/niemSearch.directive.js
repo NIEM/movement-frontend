@@ -18,7 +18,9 @@
     return {
       restrict: 'E',
       templateUrl: 'app/components/niemSearch/niemSearch.directive.html',
-      scope: {},
+      scope: {
+        hasLabel: '='
+      },
       require: '^solr',
       link: link
     };

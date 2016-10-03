@@ -1,8 +1,9 @@
 <div class="niem-search form-horizontal">
   <div class="form-group row">
 
-    <form ng-submit="search(query)">
-      <div class="input-group">
+    <form ng-submit="search(query)" class="form-inline">
+      <label for "niem-search-input" ng-show="!!hasLabel && hasLabel">Search Model</label>
+      <div class="input-group search-group">
         <input type="text" id="niem-search-input" class="form-control" aria-label="Enter keyword" placeholder="Enter Keyword" ng-model="query" autocomplete="off" uib-typeahead="state for state in states | filter:$viewValue | limitTo:5">
 
         <div class="input-group-btn">
