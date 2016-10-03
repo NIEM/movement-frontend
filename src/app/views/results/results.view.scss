@@ -1,7 +1,9 @@
 .results {
   .content {
     background-color: $white;
+    position: relative;
     min-width: $niem-min-width;
+    height: calc(100% - 373px);
 
     h2 {
       color: $black;

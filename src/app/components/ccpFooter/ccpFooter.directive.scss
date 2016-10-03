@@ -1,5 +1,6 @@
 .ccp-footer {
   z-index: 2;
+  display: inline-block;
   &.footer {
     min-width: $niem-min-width;
   }
