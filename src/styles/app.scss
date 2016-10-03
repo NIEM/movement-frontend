@@ -28,11 +28,15 @@ $niem-min-width:  768px;
 }
 
 /* Space out content a bit */
-body {
+html, body {
   height: 100%;
-  //min-width: 768px;
+}
+body {
   font: $mont-regular 14px 'Montserrat', Arial, sans-serif;
   font-color: $body-text-color;
+  .ng-scope {
+    height: 100%;
+  }
 }
 
 h1 {
@@ -86,8 +90,6 @@ h6 {
 
 /* Custom page footer */
 .footer {
-  position: fixed;
-  bottom: 0;
   border-top: 1px solid #e5e5e5;
   width: 100%;
   background-color: $white;
