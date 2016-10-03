@@ -17,8 +17,16 @@
           width: 70%;
           margin: auto;
           padding-top: 75px;
-          h1 {
-            font-size: 40px;
+          .welcome-text-heading {
+            font-size: 36px;
+            letter-spacing: 1.4px;
+            color: $marine-blue;
+            margin-bottom: 20px;
+          }
+          .welcome-text-description {
+            color: $evergreen;
+            font-size: 24px;
+            letter-spacing: 1.3px;
           }
         }
 
