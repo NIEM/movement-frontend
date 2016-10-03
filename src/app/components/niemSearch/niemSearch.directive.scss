@@ -1,6 +1,17 @@
 .niem-search {
   width: 400px;
   display: inline-block;
+  #niem-search-input {
+    color: $marine-blue;
+    +.dropdown-menu {
+      width: 390px;
+      a {
+        color: $marine-blue;
+      }
+    }
+  }
+
+
   .search-btn {
     background-color: $darkest-blue;
     color: $white;
