@@ -27,6 +27,7 @@
      *  Defines variables and functions within niemSearch scope
      */
     function link(scope, element, attrs, ctrl) {
+      scope.states = ['state1', 'state2'];
 
       scope.search = function search(query) {
         query = query || '*';
@@ -34,7 +35,7 @@
         ctrl.search();
       };
 
-      if ( attrs.preload ) {
+      if (attrs.preload) {
         scope.search(attrs.query);
       }
     }

@@ -3,7 +3,7 @@
 
     <form ng-submit="search(query)">
       <div class="input-group">
-        <input type="text" id="niem-search-input" class="form-control" aria-label="Enter keyword" placeholder="Enter Keyword" ng-model="query">
+        <input type="text" id="niem-search-input" class="form-control" aria-label="Enter keyword" placeholder="Enter Keyword" ng-model="query" uib-typeahead="state for state in states | filter:$viewValue | limitTo:2">
 
         <div class="input-group-btn">
           <button type="submit" class="search-btn btn" aria-label="Search">
