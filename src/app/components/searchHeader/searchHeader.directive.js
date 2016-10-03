@@ -18,7 +18,6 @@
     return {
       restrict: 'E',
       templateUrl: 'app/components/searchHeader/searchHeader.directive.html',
-      scope: {},
       link: link
     };
 

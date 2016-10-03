@@ -12,9 +12,10 @@ angular
     'ngCookies',
     'ui.router',
     'ngSanitize',
-    'ngTouch'
+    'ngTouch',
+    'ui.bootstrap'
   ])
-  .config(function ($urlRouterProvider) {
+  .config(function($urlRouterProvider) {
     $urlRouterProvider.when('', '/'); // redirect to root if the state is ''
 
     $urlRouterProvider.otherwise('/'); // redirect to root if state is not found
