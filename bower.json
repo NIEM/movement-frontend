@@ -9,6 +9,7 @@
     "angular-cookies": "^1.5.x",
     "angular-sanitize": "^1.5.x",
     "angular-touch": "^1.5.x",
+    "angular-bootstrap": "^1.5.x",
     "angular-ui-router": "~0.2.15"
   },
   "overrides": {

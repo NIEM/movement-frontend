@@ -13,7 +13,9 @@
             </p>
           </div>
           <div class="search row">
-            <niem-search></niem-search>
+            <solr docs="docs" num-found="numFound" solr-url="http://localhost:8983/solr/niem-test-xsd/select">
+              <niem-search></niem-search>
+            </solr>
           </div>
         </div>
       </div>
