@@ -20,10 +20,8 @@
 
     vm.facets = {};
     vm.facetFields = {};
-
-    // vm.selectedFacets = [];
+    vm.selectedFacets = [];
     vm.selectedFacets = getSelectedFacets();
-    vm.selectedFacetsObj = getSelectedFacetsObjects();
 
 
     /**
@@ -55,14 +53,8 @@
         'json.nl': 'map'
       };
 
-      var selectedFacets = vm.selectedFacets;
-      // var selectedFacets =  ["{!tag=domaintag}domain:Chemical, Biological, Radiological, Nuclear International Trade"];
-      // var selectedFacets = getSelectedFacetsWithExcludes();
-
-      if (selectedFacets) {
-        params['fq'] = getSelectedFacetsWithExcludes();
-        console.log('SELCTED FACETS', selectedFacets);
-        console.log('PARAMS FQ', params['fq']);
+      if (vm.selectedFacets) {
+        params['fq'] = groupSelectedFacets();
       }
 
       if (vm.facetGroup) {
@@ -90,7 +82,6 @@
 
         vm.facetFields = data.facet_counts.facet_fields;
         vm.selectedFacets = getSelectedFacets();
-        vm.selectedFacetsObj = getSelectedFacetsObjects();
         
       });
 
@@ -145,9 +136,9 @@
      * @description Sets the results (possible filter values) to the respective facet field name on the vm.facets object.
      */
     vm.setFacetResult = function(facetKey, facetResults){
-      for (var k in vm.facets){
-        if (vm.facets[k].field === facetKey){
-          vm.facets[k].results = facetResults;
+      for (var key in vm.facets){
+        if (vm.facets[key].field === facetKey){
+          vm.facets[key].results = facetResults;
         }
       }
     };
@@ -174,48 +165,39 @@
 
 
     /**
-     * @name getSelectedFacetsObjects
+     * @name groupSelectedFacets
      *
      * @memberof dhsniem.controller:ResultsCtrl
      *
-     * @description Loops through the selected facets and parses out the field and value of each into a new object, each of which added to an array
+     * @description Loops through the selected facets and groups the same facet values under the same facet name. Adds the exclude tag to make the array ready for the solr search param, fq.
      *
-     * @returns selectedFacetsObjects - an array of the facets objects with the field and value properties (e.g. domain, niem-core)
+     * @returns groupedFacets - an array of the facet values grouped by facet name in query with exclude format, e.g. ['{!tag=domaintag}domain:Biometrics Justice Intelligence']
      */
-    function getSelectedFacetsObjects() {
-      var selectedFacetsObjs = [];
-      vm.selectedFacets.forEach(function(selectedFacet) {
-        var splitVal = selectedFacet.split(':');
-        selectedFacetsObjs.push({
-          field: splitVal[0],
-          value: splitVal[1].replace(/'/g, '')
-        });
-      });
-      return selectedFacetsObjs;
-    }
+    function groupSelectedFacets() {
 
-
-    function getSelectedFacetsWithExcludes() {
-
-      var flags = {};
-      var arr = [];
+      var facetGroups = {};
+      var facetKey;
+      var facetVal;
+      var groupedFacets = [];
+      var groupedFacetString;
 
       vm.selectedFacets.forEach(function(selectedFacet) {
-        var splitVal = selectedFacet.split(':');
+        facetKey = selectedFacet.split(':')[0];
+        facetVal = selectedFacet.split(':')[1];
 
-        if (flags[splitVal[0]]) {
-          flags[splitVal[0]] = flags[splitVal[0]].concat(' ').concat(splitVal[1]); //join the new one
+        if (facetGroups[facetKey]) {
+          facetGroups[facetKey] = facetGroups[facetKey].concat(' ').concat(facetVal);
         } else {
-          flags[splitVal[0]] = splitVal[1];
+          facetGroups[facetKey] = facetVal;
         }
       });
 
-      Object.keys(flags).forEach(function(key) {
-
-        arr.push('{!tag='+key+'tag}'+key+':'+flags[key]);
+      Object.keys(facetGroups).forEach(function(key) {
+        groupedFacetString = '{!tag=' + key + 'tag}' + key + ':' + facetGroups[key];
+        groupedFacets.push(groupedFacetString);
       });
 
-      return arr;
+      return groupedFacets;
     }
 
 
@@ -239,16 +221,6 @@
       }
       return selectedFacets;
     }
-
-
-    //TODO: Implement back in for URL change searching; however, this causes a performance issue and currently makes several calls.
-    // $scope.$watch(function() {
-    //   return $location.search();
-    // }, function(newVal, oldVal) {
-    //   if (newVal !== oldVal) {
-    //     vm.search();
-    //   }
-    // }, true);
 
   }
 

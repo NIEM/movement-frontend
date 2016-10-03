@@ -33,9 +33,7 @@
     function link(scope, element, attrs, ctrl) {
 
       scope.facetString = function(){ 
-        return scope.field+':'+scope.key;
-        // return scope.field+':"'+scope.key+'"';
-        // return '{!tag='+scope.field+'tag}'+scope.field+':"'+scope.key+'"';
+        return scope.field+':"'+scope.key+'"';
       };
 
       scope.isSelected = function(){
@@ -54,7 +52,6 @@
         if(!scope.isSelected()) {
           selectedFacets.push(scope.facetString());
         } else {
-          // selectedFacets.pop(scope.facetString());
           selectedFacets.splice(selectedFacets.indexOf(scope.facetString()), 1);
         }
         $location.search('selectedFacets', selectedFacets);

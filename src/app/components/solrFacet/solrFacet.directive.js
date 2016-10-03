@@ -34,11 +34,6 @@
       
       ctrl.registerFacet(scope);
 
-      // var es5getprops = Object.getOwnPropertyNames;
-      // scope.isEmpty = function() {
-      //   return (es5getprops(scope.results).length === 0);
-      // };
-
     }
 
   }
