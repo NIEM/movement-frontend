@@ -18,7 +18,9 @@
     return {
       restrict: 'E',
       templateUrl: 'app/components/ccpFooter/ccpFooter.directive.html',
-      scope: {},
+      scope: {
+        isAbsolutePositioning: '='
+      },
       link: link
     };
 

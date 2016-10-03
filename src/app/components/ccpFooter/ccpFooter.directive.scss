@@ -4,6 +4,10 @@
   &.footer {
     min-width: $niem-min-width;
   }
+  &.absolute-positioning {
+    position: absolute;
+    bottom: 0;
+  }
   .footer-bottom {
     padding: 20px;
   }
