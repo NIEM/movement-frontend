@@ -1,0 +1,9 @@
+.ccp-footer {
+  z-index: 2;
+  &.footer {
+    min-width: $niem-min-width;
+  }
+  .footer-bottom {
+    padding: 20px;
+  }
+}

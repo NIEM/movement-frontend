@@ -1,87 +1,66 @@
 .results {
-  .header {
-    padding-top: 20px;
-    padding-left: 20px;
-    padding-right: 20px;
-    background-color: $teal;
-
-    .header-top {
-      padding-bottom: 10px;
-      border-bottom: 1px solid $white;
-      .header-top-img {
-        width: 100px;
-      }
-      .header-top-link {
-        color: $white;
-        text-decoration: none;
-      }
-    }
-    .header-search {
-      padding-top: 10px;
-      padding-left: 15px;
-      width: 40%;
-    }
-    .niem-navbar.navbar.navbar-default {
-      margin: 0;
-    }
-    .collapse.navbar-collapse {
-      padding: 0;
-    }
-    .navbar-default .navbar-nav > .active > a {
-      background-color: $darkest-blue;
-      color: $white;
-    }
-    .navbar-default .navbar-nav a {
-      padding-left: 60px;
-      padding-right: 60px;
-      border-right: 1px solid #777;
-    }
-  }
   .content {
     background-color: $white;
+    min-width: $niem-min-width;
 
-    .search-heading {
-      padding: 20px;
-      margin: 0 20px 20px;
-      background: $light-teal;
-      .search-string {
-        font-style: italic;
-      }
+    h2 {
+      color: $black;
     }
 
     .search-filter {
       background: $white;
       padding-left: 50px;
-      border-right: 1px solid $body-text-color;
       .filter-heading {
         display: inline-block;
         margin: 0;
+        width: 100%;
+        padding: 30px 0 10px;
+        border-bottom: 1px solid $ugly-blue;
+
+        h2 {
+          display: inline-block;
+          margin: 0;
+        }
+        .clear-button {
+          border: none;
+          background: transparent;
+          color: $medium-blue;
+          padding-top: 8px;
+        }
       }
-      .clear-button {
-        border: none;
-        background: transparent;
-        color: $medium-blue;
-        font-weight: $mont-semi-bold;
+      .filter-details {
+        padding-left: 15px;
+        color: $body-text-color;
       }
+
     }
     .search-results {
       padding: 0 50px;
+
+      .search-heading {
+        padding: 0 20px;
+        background-image: linear-gradient(to left, #29819c, #004666);
+        color: $white;
+      }
       .legend {
         .legend-heading {
           padding-right: 10px;
           border-right: 1px solid $body-text-color;
           display: inline-block;
+          color: $marine-blue;
         }
         .legend-symbols {
           padding-left: 10px;
           display: inline-block;
+          color: $ocean-blue;
           .legend-symbol {
             display: inline-block;
             .legend-img, .legend-title {
               display: inline-block;
             }
             .legend-img {
-              width: 20px;
+              width: 12px;
+              opacity: 0.3;
             }
           }
         }
@@ -90,26 +69,28 @@
       .results-list {
         .result-heading {
           padding-bottom: 5px;
-          border-bottom: 2px solid $body-text-color;
+          border-bottom: 1px solid $body-text-color;
         }
         .result {
           padding-top: 30px;
           .result-item {
             border-bottom: 1px solid $body-text-color;
+            padding: 0 50px;
             .item-img-section {
               display: inline-block;
-              padding: 0 30px;
+              padding: 0 5px;
               .item-img {
-                width: 20px;
+                width: 12px;
+                opacity: 0.3;
               }
 
             }
             .item-title {
               color: $medium-blue;
-              font-weight: $mont-semi-bold;
+              display: inline-block;
             }
             .item-description {
-              padding-left: 70px;
+              color: $body-text-color;
             }
           }
         }

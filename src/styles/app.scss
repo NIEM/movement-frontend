@@ -2,18 +2,22 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat:400,600,700,800');
 
 //Color variables to be used throughout all stylesheets
-$darkest-blue:   #005170;
-$dark-blue:      #005170;
-$medium-blue:    #007fb9;
-$teal:           #35969b;
-$light-teal:     #68d0b2;
-$black:         #000000;
-$white:         #ffffff;
-$body-text-color: rgb(51, 51, 51);
+$darkest-blue:    #005170;
+$dark-blue:       #005170;
+$medium-blue:     #007fb9;
+$teal:            #35969b;
+$light-teal:      #68d0b2;
+$black:           #000000;
+$white:           #ffffff;
+$ugly-blue:       #288b91;
+$marine-blue:     #004666;
+$ocean-blue:      #0073b2;
+$body-text-color: rgba(0,0,0,0.58);
 $mont-extra-bold: 800;
-$mont-bold:      700;
-$mont-regular:   400;
+$mont-bold:       700;
+$mont-regular:    400;
 $mont-semi-bold:  600;
+$niem-min-width:  768px;
 
 .browsehappy {
   margin: 0.2em 0;
@@ -25,29 +29,38 @@ $mont-semi-bold:  600;
 /* Space out content a bit */
 body {
   height: 100%;
-  min-width: 768px;
-  font: $mont-regular 14px Arial, sans-serif;
+  //min-width: 768px;
+  font: $mont-regular 14px 'Montserrat', Arial, sans-serif;
   font-color: $body-text-color;
 }
 
 h1 {
-  font: $mont-semi-bold 27px 'Montserrat', Arial, sans-serif;
-  font-color: $darkest-blue;
+  font: $mont-regular 27px 'Montserrat', Arial, sans-serif;
 }
 
 h2 {
-  font: $mont-semi-bold 21px 'Montserrat', Arial, sans-serif;
-  font-color: $darkest-blue;
+  font: $mont-regular 21px 'Montserrat', Arial, sans-serif;
+  letter-spacing: 3px;
 }
 
 h3 {
-  font: $mont-semi-bold 18px 'Montserrat', Arial, sans-serif;
-  font-color: $body-text-color;
+  font: $mont-regular 18px 'Montserrat', Arial, sans-serif;
+  letter-spacing: 2.6px;
 }
 
 h4 {
-  font: $mont-semi-bold 16px 'Montserrat', Arial, sans-serif;
-  font-color: $darkest-blue;
+  font: $mont-regular 16px 'Montserrat', Arial, sans-serif;
+}
+
+h5 {
+  font: $mont-regular 14px 'Montserrat', Arial, sans-serif;
+  letter-spacing: 0.9px;
+}
+
+
+h6 {
+  font: $mont-regular 12px 'Montserrat', Arial, sans-serif;
+  letter-spacing: 2px;
 }
 
 /* Everything but the jumbotron gets side spacing for mobile first views */
@@ -60,6 +73,7 @@ h4 {
 .header {
   border-bottom: 1px solid #e5e5e5;
 
+
   /* Make the masthead heading the same height as the navigation */
   h3 {
     margin-top: 0;
@@ -71,7 +85,7 @@ h4 {
 
 /* Custom page footer */
 .footer {
-  position: absolute;
+  position: fixed;
   bottom: 0;
   border-top: 1px solid #e5e5e5;
   width: 100%;
@@ -107,25 +121,28 @@ h4 {
 }
 
 /* Responsive: Portrait tablets and up */
-@media screen and (min-width: 768px) {
+//@media screen and (min-width: 768px) {
   /* Remove the padding we set earlier */
   //.header, .marketing, .footer {
     //padding-left: 0;
     //padding-right: 0;
 //  }
   /* Space out the masthead */
-  .header {
+  //.header {
     //margin-bottom: 30px;
-  }
+  //}
   /* Remove the bottom border on the jumbotron for visual effect */
-  .jumbotron {
-    border-bottom: 0;
-  }
-}
+  //.jumbotron {
+    //border-bottom: 0;
+//  }
+//}
 
 // injector
+@import '../app/components/ccpFooter/ccpFooter.directive.scss';
+@import '../app/components/ccpHeader/ccpHeader.directive.scss';
 @import '../app/components/niemExport/niemExport.directive.scss';
 @import '../app/components/niemSearch/niemSearch.directive.scss';
+@import '../app/components/searchHeader/searchHeader.scss';
 @import '../app/views/home/home.view.scss';
 @import '../app/views/main/main.view.scss';
 @import '../app/views/results/results.view.scss';

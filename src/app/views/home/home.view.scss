@@ -1,39 +1,24 @@
 .landing {
   .content {
+    min-width: $niem-min-width;
     width: 100%;
     height: 100%;
     position: absolute;
+    background: url(../../images/ccp_homeimage.jpg);
+    background-size: cover;
+    padding: 0 30px;
+
     .welcome {
-      background: url(../../images/wist_homeimage.jpg);
-      background-size: cover;
-      height: 75%;
+
       width: 100%;
       .welcome-items {
         padding: 30px;
-        .welcome-top {
-          .logo {
-            height: 40px;
-          }
-          .niem-link {
-            text-decoration: none;
-            color: $white;
-            padding-right: 60px;
-            padding-top: 20px;
-          }
-        }
         .welcome-main {
-          width: 40%;
+          width: 70%;
           margin: auto;
           padding-top: 75px;
-          .description {
-            margin: 0 auto;
-            width: 100%;
-            font: $mont-regular 34px 'Montserrat', Arial, sans-serif;
-            margin: 0 auto;
-          }
-
-          .search {
-            width: 70%;
+          h1 {
+            font-size: 40px;
           }
         }
 
