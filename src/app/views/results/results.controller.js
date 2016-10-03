@@ -18,8 +18,10 @@
     
     var vm = this;
 
-    // vm.facet_fields = {};
-    // vm.selected_facets=[];
+    vm.facets = {};
+    vm.facetFields = {};
+    vm.selectedFacets = [];
+    vm.selectedFacets = getSelectedFacets();
 
 
     /**
@@ -51,14 +53,13 @@
         'json.nl': 'map'
       };
 
-      // selectedFacets = this.selected_facets;
-      // if (selectedFacets) {
-      //   params['fq'] = selectedFacets;
-      // }
+      if (vm.selectedFacets) {
+        params['fq'] = groupSelectedFacets();
+      }
 
-      // if ($scope.facet_group) {
-      //   params['facet.field'] = $scope.facet_group.listFields();
-      // }
+      if (vm.facetGroup) {
+        params['facet.field'] = listFields();
+      }
 
       return params;
 
@@ -76,61 +77,150 @@
 
       solrSearch.search(vm.solrUrl, buildSearchParams()).then(function(data) {
         
-        // vm.facet_fields = data.facet_counts.facet_fields;
-
         vm.docs = data.response.docs;
         vm.numFound = data.response.numFound;
 
-        // vm.selected_facets = vm.getSelectedFacets();
-        // vm.selected_facets_obj = vm.getSelectedFacetsObjects();
+        vm.facetFields = data.facet_counts.facet_fields;
+        vm.selectedFacets = getSelectedFacets();
         
       });
 
     };
 
 
-    // this.setFacetGroup = function(newGroup) {
-    //   $scope.facet_group = newGroup;
-    // }
-
-    // this.getSelectedFacetsObjects = function() {
-    //   var retValue = [];
-    //   this.selected_facets.forEach(function(value, key) {
-    //     split_val = value.split(':');
-    //     retValue.push({
-    //       field: split_val[0],
-    //       value: split_val[1].replace(/"/g, "")
-    //     });
-    //   });
-    //   return retValue;
-    // };
-
-    // this.getSelectedFacets = function() {
-    //   selected = $location.search().selected_facets;
-    //   selectedFacets = [];
-
-    //   if (angular.isArray(selected)) {
-    //     selectedFacets = selected;
-    //   } else {
-    //     if (selected) {
-    //       selectedFacets.push(selected);
-    //     }
-    //   }
-    //   return selectedFacets;
-    // };
-
-    // this.selected_facets = this.getSelectedFacets();
-    // this.selected_facets_obj = this.getSelectedFacetsObjects();
+    /**
+     * @name setFacetGroup
+     *
+     * @memberof dhsniem.controller:ResultsCtrl
+     *
+     * @description Sets the facet group to the scope of the solrFacetGroup directive.
+     *
+     * @param newGroup
+     */
+    vm.setFacetGroup = function(newGroup) {
+      vm.facetGroup = newGroup;
+    };
 
 
-    //TODO: Implement back in for URL change searching; however, this causes a performance issue and currently makes several calls.
-    // $scope.$watch(function() {
-    //   return $location.search();
-    // }, function(newVal, oldVal) {
-    //   if (newVal !== oldVal) {
-    //     vm.search();
-    //   }
-    // }, true);   
+    /**
+     * @name registerFacet
+     *
+     * @memberof dhsniem.controller:ResultsCtrl
+     *
+     * @description Sets the vm.facets object with a key and value of a facet field and its scope from the solrFacet directive, respectively.
+     *
+     * @param facet
+     */
+    vm.registerFacet = function(facet){
+      vm.facets[facet.field]=facet;
+    };
+
+
+    /**
+     * @name getFacets
+     *
+     * @memberof dhsniem.controller:ResultsCtrl
+     *
+     * @description Returns the vm.facets object.
+     *
+     * @retursn vm.facets
+     */
+     vm.getFacets =  function(){ return vm.facets;};
+    
+
+    /**
+     * @name setFacetResult
+     *
+     * @memberof dhsniem.controller:ResultsCtrl
+     *
+     * @description Sets the results (possible filter values) to the respective facet field name on the vm.facets object.
+     */
+    vm.setFacetResult = function(facetKey, facetResults){
+      for (var key in vm.facets){
+        if (vm.facets[key].field === facetKey){
+          vm.facets[key].results = facetResults;
+        }
+      }
+    };
+
+
+    /**
+     * @name listFields
+     *
+     * @memberof dhsniem.controller:ResultsCtrl
+     *
+     * @description Iterates over the vm.facets object to return an array of the fields to be used as facets.
+     *
+     * @returns fields - an array of the facet fields
+     */
+    function listFields() {
+      var fields=[];
+      var excludeTag;
+      for (var k in vm.facets){
+        excludeTag = '{!ex=' + vm.facets[k].field + 'tag}';
+        fields.push(excludeTag + vm.facets[k].field);
+      }
+      return fields;
+    }
+
+
+    /**
+     * @name groupSelectedFacets
+     *
+     * @memberof dhsniem.controller:ResultsCtrl
+     *
+     * @description Loops through the selected facets and groups the same facet values under the same facet name. Adds the exclude tag to make the array ready for the solr search param, fq.
+     *
+     * @returns groupedFacets - an array of the facet values grouped by facet name in query with exclude format, e.g. ['{!tag=domaintag}domain:Biometrics Justice Intelligence']
+     */
+    function groupSelectedFacets() {
+
+      var facetGroups = {};
+      var facetKey;
+      var facetVal;
+      var groupedFacets = [];
+      var groupedFacetString;
+
+      vm.selectedFacets.forEach(function(selectedFacet) {
+        facetKey = selectedFacet.split(':')[0];
+        facetVal = selectedFacet.split(':')[1];
+
+        if (facetGroups[facetKey]) {
+          facetGroups[facetKey] = facetGroups[facetKey].concat(' ').concat(facetVal);
+        } else {
+          facetGroups[facetKey] = facetVal;
+        }
+      });
+
+      Object.keys(facetGroups).forEach(function(key) {
+        groupedFacetString = '{!tag=' + key + 'tag}' + key + ':' + facetGroups[key];
+        groupedFacets.push(groupedFacetString);
+      });
+
+      return groupedFacets;
+    }
+
+
+    /**
+     * @name getSelectedFacets
+     *
+     * @memberof dhsniem.controller:ResultsCtrl
+     *
+     * @description Returns an array of the selected facets from $location selected_facets param(s)
+     *
+     * @returns selectedFacets - an array of the facets
+     */
+    function getSelectedFacets() {
+      var selected = $location.search().selectedFacets;
+      var selectedFacets = [];
+
+      if (angular.isArray(selected)) {
+        selectedFacets = selected;
+      } else if (selected) {
+        selectedFacets.push(selected);
+      }
+      return selectedFacets;
+    }
 
   }
 

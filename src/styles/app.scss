@@ -142,6 +142,9 @@ h6 {
 @import '../app/components/ccpHeader/ccpHeader.directive.scss';
 @import '../app/components/niemExport/niemExport.directive.scss';
 @import '../app/components/niemSearch/niemSearch.directive.scss';
+@import '../app/components/solrFacet/solrFacet.directive.scss';
+@import '../app/components/solrFacetGroup/solrFacetGroup.directive.scss';
+@import '../app/components/solrFacetResult/solrFacetResult.directive.scss';
 @import '../app/components/searchHeader/searchHeader.scss';
 @import '../app/views/home/home.view.scss';
 @import '../app/views/main/main.view.scss';

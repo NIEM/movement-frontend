@@ -10,18 +10,10 @@
           <button class="clear-button pull-right">CLEAR ALL</button>
         </div>
         <div class="filter-details row">
-          <div class="checkbox">
-            <label>
-              <input type="checkbox"> Core (5)
-            </label>
-          </div>
-
-          <div class="checkbox">
-            <label>
-              <input type="checkbox"> Biometrics (9)
-            </label>
-          </div>
-
+          <solr-facet-group>
+            <solr-facet display="Domain" field="domain"></solr-facet>
+            <solr-facet display="Entity Type" field="entityType"></solr-facet>
+          </solr-facet-group>
         </div>
       </div>
 
@@ -52,12 +44,11 @@
 
           <div class="result">
             <h2 class="result-heading">cc: All of NIEM ({{numFound}})</h2>
-
             <div class="result-item row" ng-repeat="doc in docs">
               <div class="row">
                 <h3 class="item-title">{{doc.name}}</h3>
                 <div class="item-img-section">
-                  <img class="item-img" src="images/icon_t.svg">
+                  <img class="item-img" src="images/icon_{{doc.entityType.substring(0,1)}}.svg">
                 </div>
               </div>
               <p class="item-description row">{{doc.definition}}</p>

@@ -3,14 +3,55 @@
 
   <script> <![CDATA[
 
-    function getNamespace(row) {
+    function getNamespaceInfo(row) {
 
-      var fullFileName = row.get("file");
-      var namespace = fullFileName.substring(0, fullFileName.indexOf('.'));
+      var domainLookup = {
+        biometrics: 'Biometrics',
+        cbrn: 'Chemical, Biological, Radiological, Nuclear',
+        cyfs: 'Children, Youth & Family Services',
+        emergencyManagement: 'Emergency Management',
+        humanServices: 'Human Services',
+        immigration: 'Immigration',
+        infrastructureProtection: 'Infrastructure Protection',
+        intelligence: 'Intelligence',
+        internationalTrade: 'International Trade',
+        jxdm: 'Justice',
+        maritime: 'Maritime',
+        militaryOperations: 'Military Operations',
+        screening: 'Screening',
+        surfaceTransportation: 'Surface Transportation'
+      };
+
+      var fileName = row.get("file");
+      var namespace = fileName.substring(0, fileName.indexOf('.'));
+
+      var path = row.get("fileAbsolutePath");
+      var namespaceType = '';
+      var domain = '';
+
+      // Determine if file is in domains dir
+      if (path.indexOf('domains') > -1) {
+        namespaceType = 'domain';
+        
+        // Loop through domainLookup object to find match        
+        Object.keys(domainLookup).forEach(function(key) {
+          if (path.indexOf(key) > -1) {
+            domain = domainLookup[key];
+          }
+        });
+
+      } else if ( path.indexOf('codes') > -1 || path.indexOf('external' > -1) ) {
+        namespaceType = 'external';
+      } else {
+        namespaceType = 'other';
+      }
 
       row.put("namespace", namespace);
+      row.put("namespaceType", namespaceType);
+      row.put("domain", domain);
 
       return row;
+
     };
 
 
@@ -65,8 +106,8 @@
             dataSource="null"
             excludes="gmx.xsd"
             onError="skip"
-            transformer="script:getNamespace,TemplateTransformer"
-            baseDir="C:/solr-6.2.0/niem-xsd">
+            transformer="script:getNamespaceInfo,TemplateTransformer"
+            baseDir="/solr-6.2.0/niem-xsd">
 
       <!-- the inner processors extract content using Xpath from each file found -->
       <entity name="element"
@@ -78,12 +119,11 @@
 
         <field column ="id"               template="${f.namespace}:${element.name}" />
         <field column="name"              xpath="/schema/element/@name"                        boost="5.0" />            
+        <field column="entityType"        template="Element" />
         <field column="definition"        xpath="/schema/element/annotation/documentation"     boost="2.0" />
         <field column="type"              xpath="/schema/element/@type" />
         <field column="substitutionGroup" xpath="/schema/element/@substitutionGroup" />
         <field column="abstract"          xpath="/schema/element/@abstract" />
-
-
       </entity>
 
 
@@ -97,6 +137,7 @@
         <field column ="id"               template="${f.namespace}:${complexType.name}" />
         <field column="name"              xpath="/schema/complexType/@name"                        boost="5.0" />            
         <field column="definition"        xpath="/schema/complexType/annotation/documentation"     boost="2.0" />
+        <field column="entityType"        template="Type" />
 
         <!-- For CCC -->
         <field column="parentTypeName"    xpath="/schema/complexType/complexContent/extension/@base" />
@@ -149,6 +190,7 @@
         <field column ="id"           template="${f.namespace}:${simpleType.name}" />
         <field column="name"          xpath="/schema/simpleType/@name"                        boost="5.0" />            
         <field column="definition"    xpath="/schema/simpleType/annotation/documentation"     boost="2.0" />
+        <field column="entityType"    template="Type" />
 
         <field column="facetValue_enumeration"        xpath="/schema/simpleType/restriction/enumeration/@value" />
         <field column="facetValue_minInclusive"       xpath="/schema/simpleType/restriction/minInclusive/@value" />

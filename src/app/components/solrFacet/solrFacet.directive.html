@@ -1,0 +1,6 @@
+<h3>{{display}}:</h3>
+<ul class="list-unstyled">
+  <li ng-repeat="(k, v) in results">
+    <solr-facet-result field="{{field}}" key="{{k}}" count="{{v}}"></solr-facet-result>
+  </li>
+</ul>

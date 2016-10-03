@@ -937,7 +937,7 @@
   <!-- Data Import Handler Request Handler; see https://wiki.apache.org/solr/DataImportHandler -->
   <requestHandler name="/dataimport" class="org.apache.solr.handler.dataimport.DataImportHandler">
     <lst name="defaults">
-      <str name="config">C:/solr-6.2.0/server/solr/niem-test-xsd/conf/data-config.xml</str> <!-- Path the the DIH config file for dhsniem -->
+      <str name="config">/solr-6.2.0/server/solr/niem-test-xsd/conf/data-config.xml</str> <!-- Path the the DIH config file for dhsniem -->
     </lst>
   </requestHandler>
 
