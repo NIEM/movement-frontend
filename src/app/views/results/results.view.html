@@ -1,6 +1,4 @@
 <div class="results">
-
-  <solr docs="docs" num-found="numFound" solr-url="http://localhost:8983/solr/niem-test-xsd/select">
     <search-header></search-header>
 
     <section class="content">
@@ -11,8 +9,8 @@
         </div>
         <div class="filter-details row">
           <solr-facet-group>
-            <solr-facet display="Domain" field="domain"></solr-facet>
             <solr-facet display="Entity Type" field="entityType"></solr-facet>
+            <solr-facet display="Domain" field="domain"></solr-facet>
           </solr-facet-group>
         </div>
       </div>
@@ -36,7 +34,7 @@
         </div>
         <div class="search-heading row">
           <h1 class="pull-left">
-              You searched for "Card"
+              You searched for "{{ResultsCtrl.getQuery()}}"
             </h1>
         </div>
 
@@ -61,6 +59,4 @@
     </section>
 
     <ccp-footer></ccp-footer>
-
-  </solr>
 </div>
