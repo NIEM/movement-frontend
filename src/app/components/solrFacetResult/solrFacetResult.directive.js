@@ -54,7 +54,8 @@
         if(!scope.isSelected()) {
           selectedFacets.push(scope.facetString());
         } else {
-          selectedFacets.pop(scope.facetString());
+          // selectedFacets.pop(scope.facetString());
+          selectedFacets.splice(selectedFacets.indexOf(scope.facetString()), 1);
         }
         $location.search('selectedFacets', selectedFacets);
         ctrl.search();          

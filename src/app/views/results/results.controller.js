@@ -55,19 +55,18 @@
         'json.nl': 'map'
       };
 
-      // var selectedFacets = vm.selectedFacets;
+      var selectedFacets = vm.selectedFacets;
       // var selectedFacets =  ["{!tag=domaintag}domain:Chemical, Biological, Radiological, Nuclear International Trade"];
-      var selectedFacets = getSelectedFacetsWithExcludes();
+      // var selectedFacets = getSelectedFacetsWithExcludes();
 
       if (selectedFacets) {
-        params['fq'] = selectedFacets;
+        params['fq'] = getSelectedFacetsWithExcludes();
         console.log('SELCTED FACETS', selectedFacets);
         console.log('PARAMS FQ', params['fq']);
       }
 
       if (vm.facetGroup) {
         params['facet.field'] = listFields();
-        console.log('FACET FIELD', listFields());
       }
 
       return params;
