@@ -4,14 +4,15 @@
       min-width: $niem-min-width;
     }
 
-    padding-top: 20px;
+    padding-top: 35px;
     padding-left: 20px;
     padding-right: 20px;
     background-color: transparent;
-    
+
 
     .header-top {
       padding-bottom: 10px;
+      border-bottom: 1px solid $white;
       .header-top-img {
         width: 150px;
       }

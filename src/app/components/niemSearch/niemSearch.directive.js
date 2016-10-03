@@ -29,7 +29,7 @@
      *  Defines variables and functions within niemSearch scope
      */
     function link(scope, element, attrs, ctrl) {
-      scope.states = ['CardPermitHolder', 'CreditBankIDCardCategories', 'CardCapabilityContainer', 'CreditCard'];
+      scope.states = ['DriverLicenseCardIdentification', 'CreditBankIDCardCategoryCode', 'CardPicture', 'CreditCard'];
 
       scope.search = function search(query) {
 
