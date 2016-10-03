@@ -1,5 +1,6 @@
 .search-header {
   padding: 0 30px;
+  height: 160px;
   background: url(../../images/ccp_homeimage.jpg);
 
   .ccp-header {
@@ -9,19 +10,5 @@
   .header-search {
     padding: 20px 35px 0;
   }
-  .niem-navbar.navbar.navbar-default {
-    margin: 0;
-  }
-  .collapse.navbar-collapse {
-    padding: 0;
-  }
-  .navbar-default .navbar-nav > .active > a {
-    background-color: $darkest-blue;
-    color: $white;
-  }
-  .navbar-default .navbar-nav a {
-    padding-left: 60px;
-    padding-right: 60px;
-    border-right: 1px solid #777;
-  }
+
 }
