@@ -55,13 +55,19 @@
         'json.nl': 'map'
       };
 
-      var selectedFacets = vm.selectedFacets;
+      // var selectedFacets = vm.selectedFacets;
+      // var selectedFacets =  ["{!tag=domaintag}domain:Chemical, Biological, Radiological, Nuclear International Trade"];
+      var selectedFacets = getSelectedFacetsWithExcludes();
+
       if (selectedFacets) {
         params['fq'] = selectedFacets;
+        console.log('SELCTED FACETS', selectedFacets);
+        console.log('PARAMS FQ', params['fq']);
       }
 
       if (vm.facetGroup) {
         params['facet.field'] = listFields();
+        console.log('FACET FIELD', listFields());
       }
 
       return params;
@@ -159,8 +165,10 @@
      */
     function listFields() {
       var fields=[];
+      var excludeTag;
       for (var k in vm.facets){
-        fields.push(vm.facets[k].field);
+        excludeTag = '{!ex=' + vm.facets[k].field + 'tag}';
+        fields.push(excludeTag + vm.facets[k].field);
       }
       return fields;
     }
@@ -188,6 +196,30 @@
     }
 
 
+    function getSelectedFacetsWithExcludes() {
+
+      var flags = {};
+      var arr = [];
+
+      vm.selectedFacets.forEach(function(selectedFacet) {
+        var splitVal = selectedFacet.split(':');
+
+        if (flags[splitVal[0]]) {
+          flags[splitVal[0]] = flags[splitVal[0]].concat(' ').concat(splitVal[1]); //join the new one
+        } else {
+          flags[splitVal[0]] = splitVal[1];
+        }
+      });
+
+      Object.keys(flags).forEach(function(key) {
+
+        arr.push('{!tag='+key+'tag}'+key+':'+flags[key]);
+      });
+
+      return arr;
+    }
+
+
     /**
      * @name getSelectedFacets
      *
@@ -198,7 +230,7 @@
      * @returns selectedFacets - an array of the facets
      */
     function getSelectedFacets() {
-      var selected = $location.search().selected_facets;
+      var selected = $location.search().selectedFacets;
       var selectedFacets = [];
 
       if (angular.isArray(selected)) {

@@ -33,7 +33,9 @@
     function link(scope, element, attrs, ctrl) {
 
       scope.facetString = function(){ 
-        return scope.field+':"'+scope.key+'"';
+        return scope.field+':'+scope.key;
+        // return scope.field+':"'+scope.key+'"';
+        // return '{!tag='+scope.field+'tag}'+scope.field+':"'+scope.key+'"';
       };
 
       scope.isSelected = function(){
@@ -54,25 +56,9 @@
         } else {
           selectedFacets.pop(scope.facetString());
         }
-        $location.search('selected_facets', selectedFacets);
+        $location.search('selectedFacets', selectedFacets);
         ctrl.search();          
       };
-
-      // scope.addFacet = function (){
-      //   if (!scope.isSelected()){
-      //     var selectedFacets = ctrl.selectedFacets;
-      //     selectedFacets.push(scope.facetString());
-      //     $location.search('selected_facets', selectedFacets);
-      //     ctrl.search();
-      //   }
-      // };
-
-      // scope.removeFacet = function (){ 
-      //   var selectedFacets = ctrl.selectedFacets;
-      //   selectedFacets.pop(scope.facetString());
-      //   $location.search('selected_facets', selectedFacets);
-      //   ctrl.search();
-      // };
 
     }
 
