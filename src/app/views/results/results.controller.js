@@ -31,9 +31,9 @@
      *
      * @description Returns the query (q) param from $location
      */
-    function getQuery() {
+    vm.getQuery = function() {
       return $location.search().q || '*';
-    }
+    };
 
 
     /**
@@ -45,7 +45,7 @@
      */
     function buildSearchParams() {
       var params = {
-        'q': getQuery(),
+        'q': vm.getQuery(),
         'facet': 'on',
         'facet.mincount': '1',
         'wt': 'json',
@@ -75,7 +75,11 @@
      */
     vm.search = function() {
 
+      var query = vm.getQuery();
+
       solrSearch.search(vm.solrUrl, buildSearchParams()).then(function(data) {
+        
+        $location.search('q', query);
 
         vm.docs = data.response.docs;
         vm.numFound = data.response.numFound;

@@ -26,8 +26,8 @@
       var namespace = fileName.substring(0, fileName.indexOf('.'));
 
       var path = row.get("fileAbsolutePath");
-      var namespaceType = '';
-      var domain = '';
+      var namespaceType;
+      var domain;
 
       // Determine if file is in domains dir
       if (path.indexOf('domains') > -1) {
@@ -45,10 +45,13 @@
       } else {
         namespaceType = 'other';
       }
+      
+      if (domain) {
+        row.put("domain", domain);
+      }
 
       row.put("namespace", namespace);
       row.put("namespaceType", namespaceType);
-      row.put("domain", domain);
 
       return row;
 
@@ -157,8 +160,7 @@
               transformer="TemplateTransformer"
               forEach="/schema/attribute" >
         
-        <!-- todo: can we not index the id? -->
-        <field column ="id"                   template="${f.namespace}:${attribute.attribute_name}" />
+        <field column="attribute_id"         template="${f.namespace}:${attribute.attribute_name}" />
         <field column="attribute_name"        xpath="/schema/attribute/@name" />            
         <field column="attribute_definition"  xpath="/schema/attribute/annotation/documentation" />
         <field column="attribute_type"        xpath="/schema/attribute/@type" />
@@ -172,8 +174,7 @@
               transformer="TemplateTransformer"                        
               forEach="/schema/attributeGroup" >
         
-        <!-- todo: can we not index the id? -->
-        <field column ="id"                       template="${f.namespace}:${attributeGroup.attributeGroup_name}" />
+        <field column="attributeGroup_id"        template="${f.namespace}:${attributeGroup.attributeGroup_name}" />
         <field column="attributeGroup_name"       xpath="/schema/attributeGroup/@name" />         
         <field column="attributeGroup_attributes" xpath="/schema/attributeGroup/attribute/@ref" />
       </entity>
