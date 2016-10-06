@@ -19,6 +19,7 @@ $mont-bold:       700;
 $mont-regular:    400;
 $mont-semi-bold:  600;
 $niem-min-width:  768px;
+$niem-max-width:  1280px;
 
 .browsehappy {
   margin: 0.2em 0;
@@ -149,6 +150,7 @@ h6 {
 @import '../app/components/solrFacet/solrFacet.directive.scss';
 @import '../app/components/solrFacetGroup/solrFacetGroup.directive.scss';
 @import '../app/components/solrFacetResult/solrFacetResult.directive.scss';
+@import '../app/views/details/details.view.scss';
 @import '../app/views/home/home.view.scss';
 @import '../app/views/main/main.view.scss';
 @import '../app/views/results/results.view.scss';
