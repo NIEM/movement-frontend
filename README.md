@@ -52,7 +52,7 @@ Solr Setup and Integration
 
 5) Drag and drop the files from this repo, dhsniem/solr_config, and drop into /solr-6.2.0/server/solr/niem-test-xsd/conf. Replace the existing files
 
-6) Hit the url (either via a browser, curl, or another tool): http://localhost:8983/solr/niem-test-xsd/dataimport?command=full-import. Note: You might have to hit it twice to get the data response back.
+6) Hit the url (either via a browser, curl, or another tool): http://localhost:8983/solr/niem-test-xsd/dataimport?command=full-import. Note: Hit it twice to get the data response back.
 
 7) Start the dhsniem app, `npm start` if you have not already and verify results are returned.
 

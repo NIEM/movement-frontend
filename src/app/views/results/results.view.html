@@ -46,7 +46,7 @@
             <div class="row">
               <h3 class="item-title">{{doc.name}}</h3>
               <div class="item-img-section">
-                <img class="item-img" ng-src="images/icon_{{doc.entityType.substring(0,1)}}.svg">
+                <img class="item-img" ng-src="{{ResultsCtrl.getImagePath(doc.entityType)}}">
               </div>
             </div>
             <p class="item-description row">{{doc.definition}}</p>
