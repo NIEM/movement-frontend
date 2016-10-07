@@ -24,7 +24,7 @@
 
       var deferred = $q.defer();
 
-      $http.jsonp(url, {params: params, cache:true}).then(function(response) {
+      $http.jsonp(url, {params: params}).then(function(response) {
         deferred.resolve(response.data);
       }).catch(function(error) {
         console.log('Error: ', error);

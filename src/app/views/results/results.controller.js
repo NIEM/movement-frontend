@@ -23,6 +23,8 @@
     vm.selectedFacets = [];
     vm.selectedFacets = getSelectedFacets();
 
+    vm.test = 'adapter';
+
 
     /**
      * @name getQuery
@@ -75,12 +77,8 @@
      */
     vm.search = function() {
 
-      var query = vm.getQuery();
-
       solrSearch.search(vm.solrUrl, buildSearchParams()).then(function(data) {
         
-        $location.search('q', query);
-
         vm.docs = data.response.docs;
         vm.numFound = data.response.numFound;
 
@@ -227,6 +225,19 @@
       }
       return selectedFacets;
     }
+
+    /**
+     * @name getImagePath
+     *
+     * @memberof dhsniem.controller:ResultsCtrl
+     *
+     * @description Returns the image path for an entity, based on the entity type (Element or Type)
+     *
+     * @returns String of the image path
+     */
+    vm.getImagePath = function(entityType) {
+      return 'images/icon_' + entityType.substring(0,1) + '.svg';
+    };
 
   }
 

@@ -31,15 +31,18 @@
     function link(scope, element, attrs, ctrl) {
       scope.states = ['DriverLicenseCardIdentification', 'CreditBankIDCardCategoryCode', 'CardPicture', 'CreditCard'];
 
+      scope.query = $location.search().q;
+
       scope.search = function search(query) {
 
         query = query || '*';
 
         if ($location.path() !== '/results') {
-          $state.go('main.results');
+          $state.go('main.results', {q: query});
         }
-
+        
         $location.search('q', query);
+
         ctrl.search();
 
       };

@@ -34,7 +34,7 @@ html, body {
 }
 body {
   font: $mont-regular 14px 'Montserrat', Arial, sans-serif;
-  font-color: $body-text-color;
+  font-color: $body-text-color !important;
   .ng-scope {
     height: 100%;
   }

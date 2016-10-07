@@ -1,12 +1,54 @@
 .details {
   .content {
     padding: 30px;
+    min-width: $niem-min-width;
+    max-width: $niem-max-width;
+    margin: 0 auto;
 
     .details-heading {
       background-image: linear-gradient(to left, #29819c, #004666);
       color: $white;
       padding: 5px;
       margin-top: 10px;
+      .details-heading-img {
+        width: 17.9px;
+      }
+    }
+
+    .details-info {
+      padding-top: 30px;
+      padding-bottom: 30px;
+      display: inline-flex;
+      margin: auto;
+
+      .details-info-col {
+        width: 50%;
+        display: inline-block;
+      }
+
+      .details-info-content {
+        width: 600px;
+        height: 106px;
+        border: 1px solid $ocean-blue;
+        margin: 10px 5px;
+        h3 {
+          letter-spacing: 0.5px;
+        }
+      }
+    }
+
+    .details-desc {
+      .facet-details {
+        .facet-heading {
+          border-bottom: 1px solid $body-text-color;
+        }
+        .facet-list {
+          .facet-item {
+            border-bottom: 1px solid $body-text-color;
+            padding: 20px;
+          }
+        }
+      }
     }
   }
 

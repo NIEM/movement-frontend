@@ -46,16 +46,14 @@ Solr Setup and Integration
 
 2) On Command Line/Terminal, go to your solr/bin directory, and run the command `solr start`
 
-4) Check to make sure solr is running with `solr status`
+3) Check to make sure solr is running with `solr status`
 
-5) Create a core to be able to index and search. From solr/bin run `solr create -c niem-test-csv`
+4) Create a core to be able to index and search. From solr/bin run `solr create -c niem-test-xsd`
 
-6) To index files, we will use Solr's SimplePostTool, a standalone Java program bundled into an executable JAR. Run the command below and replace the relatvie paths to solr and this app (dhsniem) with the appropriate paths.
+5) Drag and drop the files from this repo, dhsniem/solr_config, and drop into /solr-6.2.0/server/solr/niem-test-xsd/conf. Replace the existing files
 
-`java -Durl=http://localhost:8983/solr/niem-test-csv/update/csv -Dtype=text/csv -jar [path/to/solr]/example/exampledocs/post.jar [path/to/dhsniem]/src/csv/*.csv`
+6) Hit the url (either via a browser, curl, or another tool): http://localhost:8983/solr/niem-test-xsd/dataimport?command=full-import. Note: Hit it twice to get the data response back.
 
-7) Run dhsniem app with `npm start`. Confirm that Results are found with the count noted on the page. Search `alien` to confirm that the query is working.
+7) Start the dhsniem app, `npm start` if you have not already and verify results are returned.
 
-8) More to come...
-
-9) To stop solr, from solr/bin run `solr stop -all`
+8) To stop solr, from solr/bin run `solr stop -all`
