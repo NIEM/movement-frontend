@@ -127,16 +127,9 @@
 
 
     function clearAllFilters() {
-
       selectedFacets = [];
       $location.search('selectedFacets', selectedFacets);
       search();
-
-      // angular.forEach(facets, function(facet) {
-      //   angular.forEach(facet.results, function(facetResult) {
-      //     console.log(facetResult);
-      //   });
-      // });
     }
 
 
