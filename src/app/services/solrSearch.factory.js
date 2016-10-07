@@ -14,46 +14,126 @@
     .module('dhsniem')
     .factory('solrSearch', solrSearch);
 
-  function solrSearch($q, $http, $location, $rootScope) {
+  function solrSearch($q, $http, $location, $rootScope, SOLR_URL) {
 
     var docs;
     var numFound;
     var facets = {};
     var facetFields = {};
-    var selectedFacets = getSelectedFacets();
-    var solrUrl = 'http://localhost:8983/solr/niem-test-xsd/select';
+    var selectedFacets = getSelectedFacetsFromLocation();
 
     return {
-      search: search,
-      getQuery: getQuery,
-      buildSearchParams: buildSearchParams,
-      registerFacet: registerFacet,
-      getFacets: getFacets,
-      setFacetResult: setFacetResult,
       getDocs: getDocs,
       getNumFound: getNumFound,
+      getQuery: getQuery,
+      getFacets: getFacets,
       getFacetFields: getFacetFields,
-      returnSelectedFacets: returnSelectedFacets
+      getSelectedFacets: getSelectedFacets,
+      setFacet: setFacet,
+      setFacetResult: setFacetResult,
+      search: search
     };
 
-    function returnSelectedFacets() {
-      return selectedFacets;
-    }
 
+    /* 
+    * Getters
+    */
     function getDocs() {
       return docs;
     }
 
-    function getFacetFields() {
-      return facetFields;
-    }
 
     function getNumFound() {
       return numFound;
     }
 
 
-    function request(url, params) {
+    function getQuery() {
+      return $location.search().q || '*';
+    }
+
+
+    function getFacets() {
+      return facets;
+    }
+
+
+    function getFacetFields() {
+      return facetFields;
+    }
+
+    
+    function getSelectedFacets() {
+      return selectedFacets;
+    }
+
+
+    /*
+    * Setters
+    */
+
+    /**
+     * @name setFacet
+     *
+     * @memberof dhsniem.service:solrSearch
+     *
+     * @description Sets the facets object with a key and value of a facet field and its scope from the solrFacet directive, respectively.
+     *
+     * @param facet
+     */
+    function setFacet(facet) {
+      facets[facet.field] = facet;      
+    }
+
+
+    /**
+     * @name setFacetResult
+     *
+     * @memberof dhsniem.service:solrSearch
+     *
+     * @description Sets the results (possible filter values) to the respective facet field name on the facets object.
+     */
+    function setFacetResult(facetKey, facetResults) {
+      for (var key in facets) {
+        if (facets[key].field === facetKey) {
+          facets[key].results = facetResults;
+        }
+      }      
+    }
+
+
+    /**
+     * @name search
+     *
+     * @memberof dhsniem.service:solrSearch
+     *
+     * @description Performs the solr search via call to the http method. On success, sets response data to the service variables.
+     */
+    function search() {
+      makeSolrRequest(SOLR_URL, buildSearchParams()).then(function(data) {
+        
+        docs = data.response.docs;
+        numFound = data.response.numFound;
+
+        facetFields = data.facet_counts.facet_fields;
+        selectedFacets = getSelectedFacetsFromLocation();
+
+        $rootScope.$emit('newSearch');
+
+      });
+    }
+
+
+    /**
+     * @name makeSolrRequest
+     *
+     * @memberof dhsniem.service:solrSearch
+     *
+     * @description Makes http jsonp call to the SOLR_URL and returns a promise.
+     *
+     * @returns deferred.promise
+     */
+    function makeSolrRequest(url, params) {
 
       var deferred = $q.defer();
 
@@ -64,15 +144,16 @@
       });
 
       return deferred.promise;
-
     }
 
-
-    function getQuery() {
-      return $location.search().q || '*';
-    }
-    
-
+ 
+    /**
+     * @name buildSearchParams
+     *
+     * @memberof dhsniem.service:solrSearch
+     *
+     * @description Dynamically builds the search params for a jsonp $http request to the solr instance.
+     */
     function buildSearchParams() {
       var params = {
         'q': getQuery(),
@@ -93,25 +174,15 @@
     }
 
 
-    function registerFacet(facet) {
-      facets[facet.field] = facet;      
-    }
-
-
-    function getFacets() {
-      return facets;
-    }
-
-
-    function setFacetResult(facetKey, facetResults) {
-      for (var key in facets) {
-        if (facets[key].field === facetKey) {
-          facets[key].results = facetResults;
-        }
-      }      
-    }
-
-
+    /**
+     * @name listFields
+     *
+     * @memberof dhsniem.service:solrSearch
+     *
+     * @description Iterates over the facets object to return an array of the fields to be used as facets.
+     *
+     * @returns fields - an array of the facet fields
+     */
     function listFields() {
       var fields = [];
       var excludeTag;
@@ -123,6 +194,15 @@
     }
 
 
+    /**
+     * @name groupSelectedFacets
+     *
+     * @memberof dhsniem.service:solrSearch
+     *
+     * @description Loops through the selected facets and groups the same facet values under the same facet name. Adds the exclude tag to make the array ready for the solr search param, fq.
+     *
+     * @returns groupedFacets - an array of the facet values grouped by facet name in query with exclude format, e.g. ['{!tag=domaintag}domain:Biometrics Justice Intelligence']
+     */
     function groupSelectedFacets() {
 
       var facetGroups = {};
@@ -151,7 +231,7 @@
     }
 
 
-    function getSelectedFacets() {
+    function getSelectedFacetsFromLocation() {
       var selected = $location.search().selectedFacets;
       var selectedFacets = [];
 
@@ -163,22 +243,6 @@
       return selectedFacets;
     }
 
-
-    function search() {
-      request(solrUrl, buildSearchParams()).then(function(data) {
-        
-        docs = data.response.docs;
-        numFound = data.response.numFound;
-
-        facetFields = data.facet_counts.facet_fields;
-        selectedFacets = getSelectedFacets();
-
-        $rootScope.$emit('newSearch')
-
-      });
-    }
-
   }
 
 })();
-

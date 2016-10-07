@@ -30,7 +30,7 @@
      *  Defines variables and functions within solrFacet scope
      */
     function link(scope, element, attrs, ctrl) {
-      solrSearch.registerFacet(scope);
+      solrSearch.setFacet(scope);
     }
 
   }

@@ -14,35 +14,32 @@
     .module('dhsniem')
     .directive('solrResults', solrResults);
 
-  function solrResults() {
+  function solrResults(solrSearch, $rootScope) {
     return {
       restrict: 'E',
       templateUrl: 'app/components/solrResults/solrResults.directive.html',
-      controller: SolrResultsCtrl,
-      controllerAs: 'SolrResultsCtrl',
       link: link
     };
 
     /**
      *  Defines variables and functions within solr scope
      */
-    function link(scope, element, attrs, ctrl) { }
+    function link(scope, element, attrs, ctrl) {
 
-  }
+      $rootScope.$on('newSearch', function() {
+        for (var key in solrSearch.getFacets()){
+          solrSearch.setFacetResult(key, solrSearch.getFacetFields()[key]);
+        }
+        scope.docs = solrSearch.getDocs();
+        scope.numFound = solrSearch.getNumFound();
+        scope.query = solrSearch.getQuery();
+      });
 
-  function SolrResultsCtrl(solrSearch, $rootScope) {
-    var vm = this;
+      scope.getImagePath = function(entityType) {
+        return 'images/icon_' + entityType.substring(0,1) + '.svg';
+      };
 
-    $rootScope.$on('newSearch', function() {
-      vm.docs = solrSearch.getDocs();
-      vm.numFound = solrSearch.getNumFound();
-      vm.query = solrSearch.getQuery();
-    });
-
-    vm.getImagePath = function(entityType) {
-      return 'images/icon_' + entityType.substring(0,1) + '.svg';
-    };
-
+    }
 
   }
 

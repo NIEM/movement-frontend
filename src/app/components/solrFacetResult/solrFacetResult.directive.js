@@ -32,11 +32,11 @@
     function link(scope, element, attrs, ctrl) {
 
       scope.facetString = function(){ 
-        return scope.field+':"'+scope.key+'"';
+        return scope.field + ':"' + scope.key + '"';
       };
 
       scope.isSelected = function(){
-        var selectedFacets = solrSearch.returnSelectedFacets();
+        var selectedFacets = solrSearch.getSelectedFacets();
         var facetString = scope.facetString();
         for (var i in selectedFacets){
           if (selectedFacets[i] === facetString) {
@@ -47,7 +47,7 @@
       };
 
       scope.addRemoveFacet = function() {
-        var selectedFacets = solrSearch.returnSelectedFacets();
+        var selectedFacets = solrSearch.getSelectedFacets();
         if(!scope.isSelected()) {
           selectedFacets.push(scope.facetString());
         } else {
