@@ -29,7 +29,7 @@
     /**
      *  Defines variables and functions within solrFacet scope
      */
-    function link(scope, element, attrs, ctrl) {
+    function link(scope, element, attrs) {
       solrSearch.setFacet(scope);
     }
 

@@ -5,7 +5,7 @@
     <div class="search-filter col-sm-4">
       <div class="filter-heading row">
         <h2>Filter by</h2>
-        <button class="clear-button pull-right">CLEAR ALL</button>
+        <button class="clear-button pull-right" ng-click="clearAllFilters()">CLEAR ALL</button>
       </div>
       <div class="filter-details row">
         <solr-facet display="Entity Type" field="entityType"></solr-facet>

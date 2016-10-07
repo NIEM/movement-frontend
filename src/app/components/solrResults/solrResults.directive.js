@@ -35,6 +35,10 @@
         scope.query = solrSearch.getQuery();
       });
 
+      scope.clearAllFilters = function() {
+        solrSearch.clearAllFilters();
+      };
+
       scope.getImagePath = function(entityType) {
         return 'images/icon_' + entityType.substring(0,1) + '.svg';
       };
