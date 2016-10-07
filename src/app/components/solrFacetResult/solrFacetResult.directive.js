@@ -14,7 +14,7 @@
     .module('dhsniem')
     .directive('solrFacetResult', solrFacetResult);
 
-  function solrFacetResult($location, solrSearch, $rootScope) {
+  function solrFacetResult($location, solrSearch) {
     return {
       restrict: 'E',
       scope: {
