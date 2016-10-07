@@ -14,43 +14,45 @@
     .module('dhsniem')
     .directive('niemSearch', niemSearch);
 
-  function niemSearch($location, $state) {
+  function niemSearch() {
     return {
       restrict: 'E',
       templateUrl: 'app/components/niemSearch/niemSearch.directive.html',
       scope: {
         hasLabel: '='
       },
-      require: '^solr',
+      controller: SolrSearchCtrl,
+      controllerAs: 'SolrSearchCtrl',
       link: link
     };
 
     /**
      *  Defines variables and functions within niemSearch scope
      */
-    function link(scope, element, attrs, ctrl) {
-      scope.states = ['DriverLicenseCardIdentification', 'CreditBankIDCardCategoryCode', 'CardPicture', 'CreditCard'];
+    function link(scope, element, attrs, ctrl) { }
 
-      scope.query = $location.search().q;
+  }
 
-      scope.search = function search(query) {
+  function SolrSearchCtrl($location, $state, solrSearch) {
+    var vm = this;
 
-        query = query || '*';
+    vm.states = ['DriverLicenseCardIdentification', 'CreditBankIDCardCategoryCode', 'CardPicture', 'CreditCard'];
 
-        if ($location.path() !== '/results') {
-          $state.go('main.results', {q: query});
-        }
-        
-        $location.search('q', query);
+    vm.query = $location.search().q;
 
-        ctrl.search();
+    vm.search = function search() {
+
+      var query = vm.query || '*';
+
+      if ($location.path() !== '/results') {
+        $state.go('main.results', {q: query});
+      }
+      
+      $location.search('q', query);
+
+      solrSearch.search();
 
       };
-
-      if (attrs.preload) {
-        scope.search(attrs.query);
-      }
-    }
 
   }
 

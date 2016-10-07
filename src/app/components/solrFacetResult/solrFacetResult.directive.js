@@ -14,7 +14,7 @@
     .module('dhsniem')
     .directive('solrFacetResult', solrFacetResult);
 
-  function solrFacetResult($location) {
+  function solrFacetResult($location, solrSearch) {
     return {
       restrict: 'E',
       scope: {
@@ -23,7 +23,6 @@
         count: '@',
       },
       templateUrl: 'app/components/solrFacetResult/solrFacetResult.directive.html',
-      require: '^solr',
       link: link
     };
 
@@ -37,7 +36,7 @@
       };
 
       scope.isSelected = function(){
-        var selectedFacets = ctrl.selectedFacets;
+        var selectedFacets = solrSearch.returnSelectedFacets();
         var facetString = scope.facetString();
         for (var i in selectedFacets){
           if (selectedFacets[i] === facetString) {
@@ -48,14 +47,14 @@
       };
 
       scope.addRemoveFacet = function() {
-        var selectedFacets = ctrl.selectedFacets;
+        var selectedFacets = solrSearch.returnSelectedFacets();
         if(!scope.isSelected()) {
           selectedFacets.push(scope.facetString());
         } else {
           selectedFacets.splice(selectedFacets.indexOf(scope.facetString()), 1);
         }
         $location.search('selectedFacets', selectedFacets);
-        ctrl.search();          
+        solrSearch.search();          
       };
 
     }

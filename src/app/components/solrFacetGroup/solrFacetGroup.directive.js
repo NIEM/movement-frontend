@@ -18,31 +18,27 @@
     return {
       restrict: 'E',
       scope: {},
+      controller: SolrFacetGroupCtrl,
+      controllerAs: 'SolrFacetGroupCtrl',
       transclude: true,
       templateUrl: 'app/components/solrFacetGroup/solrFacetGroup.directive.html',
-      require: '^solr',
       link: link
     };
 
     /**
      *  Defines variables and functions within solrFacetGroup scope
      */
-    function link(scope, element, attrs, ctrl) {
+    function link(scope, element, attrs, ctrl) { }
 
-      ctrl.setFacetGroup(scope);
+  }
 
-      scope.$watch(
-        function(){ return ctrl.facetFields;},
-        function (newVal, oldVal){
-          if ( newVal !== oldVal ) {
-            for (var key in ctrl.getFacets()){
-              ctrl.setFacetResult(key, ctrl.facetFields[key]);
-            }
-          }
-        }
-      );
+  function SolrFacetGroupCtrl($rootScope, solrSearch) {
 
-    }
+    $rootScope.$on('newSearch', function() {
+      for (var key in solrSearch.getFacets()){
+        solrSearch.setFacetResult(key, solrSearch.getFacetFields()[key]);
+      }
+    });
 
   }
 

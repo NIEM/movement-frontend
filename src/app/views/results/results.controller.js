@@ -23,8 +23,6 @@
     vm.selectedFacets = [];
     vm.selectedFacets = getSelectedFacets();
 
-    vm.test = 'adapter';
-
 
     /**
      * @name getQuery
