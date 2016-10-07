@@ -3,39 +3,39 @@
 /**
  * @ngdoc directive
  *
- * @name NiemSearch
+ * @name solrSearch
  *
  * @description
- * Search input for NIEM model
+ * Search input for solr
  */
 (function() {
 
   angular
     .module('dhsniem')
-    .directive('niemSearch', niemSearch);
+    .directive('solrSearch', solrSearch);
 
-  function niemSearch($location, $state) {
+  function solrSearch($location, $state, solrSearch) {
     return {
       restrict: 'E',
-      templateUrl: 'app/components/niemSearch/niemSearch.directive.html',
+      templateUrl: 'app/components/solrSearch/solrSearch.directive.html',
       scope: {
         hasLabel: '='
       },
-      require: '^solr',
       link: link
     };
 
     /**
-     *  Defines variables and functions within niemSearch scope
+     *  Defines variables and functions within solrSearch scope
      */
     function link(scope, element, attrs, ctrl) {
+
       scope.states = ['DriverLicenseCardIdentification', 'CreditBankIDCardCategoryCode', 'CardPicture', 'CreditCard'];
 
-      scope.query = $location.search().q;
+      scope.searchQuery = $location.search().q;
 
-      scope.search = function search(query) {
+      scope.search = function search() {
 
-        query = query || '*';
+        var query = scope.searchQuery || '*';
 
         if ($location.path() !== '/results') {
           $state.go('main.results', {q: query});
@@ -43,13 +43,10 @@
         
         $location.search('q', query);
 
-        ctrl.search();
+        solrSearch.search();
 
       };
 
-      if (attrs.preload) {
-        scope.search(attrs.query);
-      }
     }
 
   }
