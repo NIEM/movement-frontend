@@ -42,8 +42,7 @@
         }
         
         $location.search('q', query);
-
-        solrSearch.search();
+        solrSearch.clearAllFilters();
 
       };
 

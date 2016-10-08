@@ -54,7 +54,7 @@
           selectedFacets.splice(selectedFacets.indexOf(scope.facetString()), 1);
         }
         $location.search('selectedFacets', selectedFacets);
-        solrSearch.search();          
+        solrSearch.search();
       };
 
     }

@@ -31,7 +31,8 @@
       getSelectedFacets: getSelectedFacets,
       setFacet: setFacet,
       setFacetResult: setFacetResult,
-      search: search
+      search: search,
+      clearAllFilters: clearAllFilters
     };
 
 
@@ -110,6 +111,7 @@
      * @description Performs the solr search via call to the http method. On success, sets response data to the service variables.
      */
     function search() {
+
       makeSolrRequest(SOLR_URL, buildSearchParams()).then(function(data) {
         
         docs = data.response.docs;
@@ -121,6 +123,13 @@
         $rootScope.$emit('newSearch');
 
       });
+    }
+
+
+    function clearAllFilters() {
+      selectedFacets = [];
+      $location.search('selectedFacets', selectedFacets);
+      search();
     }
 
 
@@ -167,7 +176,6 @@
 
       if (selectedFacets) {
         params['fq'] = groupSelectedFacets();
-        console.log(groupSelectedFacets());
       }
 
       return params;
