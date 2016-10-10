@@ -19,6 +19,7 @@ $mont-bold:       700;
 $mont-regular:    400;
 $mont-semi-bold:  600;
 $niem-min-width:  768px;
+$niem-max-width:  1280px;
 
 .browsehappy {
   margin: 0.2em 0;
@@ -33,7 +34,7 @@ html, body {
 }
 body {
   font: $mont-regular 14px 'Montserrat', Arial, sans-serif;
-  font-color: $body-text-color;
+  font-color: $body-text-color !important;
   .ng-scope {
     height: 100%;
   }
@@ -147,6 +148,7 @@ h6 {
 @import '../app/components/searchHeader/searchHeader.scss';
 @import '../app/components/solrFacet/solrFacet.directive.scss';
 @import '../app/components/solrFacetResult/solrFacetResult.directive.scss';
+@import '../app/views/details/details.view.scss';
 @import '../app/components/solrSearch/solrSearch.directive.scss';
 @import '../app/views/home/home.view.scss';
 @import '../app/views/main/main.view.scss';
