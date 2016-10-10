@@ -14,7 +14,7 @@
     .module('dhsniem')
     .directive('solrFacet', solrFacet);
 
-  function solrFacet() {
+  function solrFacet(solrSearch) {
     return {
       restrict: 'E',
       scope: {
@@ -23,17 +23,14 @@
         results:'&',
       },
       templateUrl: 'app/components/solrFacet/solrFacet.directive.html',
-      require: '^solr',
       link: link
     };
 
     /**
      *  Defines variables and functions within solrFacet scope
      */
-    function link(scope, element, attrs, ctrl) {
-      
-      ctrl.registerFacet(scope);
-
+    function link(scope, element, attrs) {
+      solrSearch.setFacet(scope);
     }
 
   }

@@ -145,12 +145,11 @@ h6 {
 @import '../app/components/ccpFooter/ccpFooter.directive.scss';
 @import '../app/components/ccpHeader/ccpHeader.directive.scss';
 @import '../app/components/niemExport/niemExport.directive.scss';
-@import '../app/components/niemSearch/niemSearch.directive.scss';
 @import '../app/components/searchHeader/searchHeader.scss';
 @import '../app/components/solrFacet/solrFacet.directive.scss';
-@import '../app/components/solrFacetGroup/solrFacetGroup.directive.scss';
 @import '../app/components/solrFacetResult/solrFacetResult.directive.scss';
 @import '../app/views/details/details.view.scss';
+@import '../app/components/solrSearch/solrSearch.directive.scss';
 @import '../app/views/home/home.view.scss';
 @import '../app/views/main/main.view.scss';
 @import '../app/views/results/results.view.scss';

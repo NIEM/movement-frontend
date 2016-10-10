@@ -1,4 +1,4 @@
-.niem-search {
+.solr-search {
   display: inline-block;
   .form-group {
       margin: 0;
@@ -12,7 +12,7 @@
   }
   .search-group {
     width: 400px;
-    #niem-search-input {
+    #solr-search-input {
       color: $marine-blue;
       height: 39px;
       +.dropdown-menu {
