@@ -11,13 +11,18 @@
     letter-spacing: 2.6px;
   }
   .search-group {
-    width: 400px;
+    width: 432px;
     #solr-search-input {
       color: $marine-blue;
       height: 39px;
+      //&:focus {
+      //  border: none;
+      //}
       +.dropdown-menu {
         border-radius: 0;
-        width: 330px;
+        width: 361px;
+        border-top: none; //
+        margin: 0; //
         a {
           color: $marine-blue;
         }
@@ -26,8 +31,10 @@
   }
 
   .search-btn {
-    background-color: $darkest-blue;
+    background-color: $medium-blue;
     color: $white;
+    padding: 7.5px 8.5px 7.5px 8px;
+    border: none;
     img {
       width: 22.5px;
     }

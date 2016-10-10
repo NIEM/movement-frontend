@@ -9,6 +9,42 @@
     bottom: 0;
   }
   .footer-bottom {
-    padding: 20px;
+    padding: 52px 0 50px 0;
+    text-align: center;
+    color: $marine-blue;
+    font-size: 18px;
+    letter-spacing: 2.6px;
+    .light-blue-button {
+      background-color: $ocean-blue;
+      color: $white;
+      padding: 9px 9px 8px 38px;
+      border: none;
+      border-radius: 4px;
+      font-size: 14px;
+      letter-spacing: 0.9px;
+      margin-left: 17px;
+      vertical-align: middle;
+    }
+  }
+  .footer-link-right {
+    color: $warm-grey;
+    background-color: rgba(209, 210, 212, 0.3);
+    padding: 22px 30px 20px 0;
+    font-weight: bold;
+    font-size: 14px;
+    letter-spacing: 2px;
+    text-align: right;
+    width: 100%;
+    a {
+      color: $warm-grey;
+      text-transform: uppercase;
+      text-decoration: none;
+      &:first-of-type {
+        padding-right: 10px;
+      }
+      &:nth-of-type(2) {
+        padding-left: 10px;
+      }
+    }
   }
 }

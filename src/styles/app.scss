@@ -12,7 +12,10 @@ $white:           #ffffff;
 $ugly-blue:       #288b91;
 $marine-blue:     #004666;
 $ocean-blue:      #0073b2;
+$seafoam:         #58cba9;
 $evergreen:       #062434;
+$warm-grey:       #9b9b9b;
+$silver:          #d1d2d4;
 $body-text-color: rgba(0,0,0,0.58);
 $mont-extra-bold: 800;
 $mont-bold:       700;
@@ -91,7 +94,7 @@ h6 {
 
 /* Custom page footer */
 .footer {
-  border-top: 1px solid #e5e5e5;
+  //border-top: 1px solid #e5e5e5;
   width: 100%;
   background-color: $white;
   padding: 0;
