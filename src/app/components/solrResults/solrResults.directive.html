@@ -1,0 +1,68 @@
+<div class="results">
+  <search-header></search-header>
+
+  <section class="content">
+
+    <div class="legend row">
+      <div class="pull-right">
+        <h6 class="legend-heading">Legend</h6>
+        <div class="legend-symbols">
+          <div class="legend-symbol">
+            <img class="legend-img" src="images/icon_t.svg">
+            <h6 class="legend-title type-legend">Type</h6>
+          </div>
+          <div class="legend-symbol">
+            <img class="legend-img" src="images/icon_e.svg">
+            <h6 class="legend-title">Element</h6>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="search-heading row">
+      <h1 class="keyword-search-text">
+        You searched for "{{query}}"
+      </h1>
+      <p class="results-total">Total Number of Results ({{numFound}})</p>
+    </div>
+
+    <div class="search-filter col-sm-4">
+      <div class="filter-heading row">
+        <h2>Filter by</h2>
+        <button class="clear-button pull-right text-uppercase" ng-click="clearAllFilters()">Clear All</button>
+      </div>
+      <div class="filter-details row">
+        <a href="#" class="solr-facet-group-tooltip">
+          <solr-facet display="Entities" field="entityType"></solr-facet>
+        </a>
+        <a href="#" class="solr-facet-group-tooltip">Namespace</a>
+        <a href="#" class="solr-facet-subgroup-tooltip">
+          <solr-facet display="Domain" field="domain"></solr-facet>
+        </a>
+      </div>
+    </div>
+
+    <div class="search-results col-sm-8">
+      <div class="results-list row">
+        <div class="result">
+          <h2 class="result-heading">cc: All of NIEM ({{numFound}})</h2>
+          <div class="result-item row" ng-repeat="doc in docs">
+            <a ui-sref="main.details({ entityID: doc.id })">
+              <div class="row">
+                <h3 class="item-title">{{doc.name}}</h3>
+                <div class="item-img-section">
+                  <img class="item-img" ng-src="{{getImagePath(doc.entityType)}}">
+                </div>
+              </div>
+              <p class="item-description row">{{doc.definition}}</p>
+            </a>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+  <ccp-footer></ccp-footer>
+</div>

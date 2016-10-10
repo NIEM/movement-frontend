@@ -1,6 +1,6 @@
 <div class="checkbox" ng-show="key">
-  <label class="filter-group-option">
-    <input type="checkbox" ng-model="selectedState" ng-change="addRemoveFacet()">{{key}}
+    <label class="filter-group-option">
+    <input type="checkbox" ng-model="selected" ng-checked="isSelected()" ng-click="addRemoveFacet()">{{key}}
     <em>({{count}})</em>
   </label>
 </div>

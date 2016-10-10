@@ -1,12 +1,19 @@
-<div class="niem-search form-horizontal">
+<div class="solr-search form-horizontal">
   <div class="form-group row">
 
+<<<<<<< HEAD:src/app/components/niemSearch/niemSearch.directive.html
     <form ng-submit="search(query)" class="form-inline">
       <label for="niem-search-input" ng-show="!!hasLabel && hasLabel">Search Model</label>
       <div class="input-group search-group">
         <input type="text" id="niem-search-input" class="form-control" aria-label="Enter keyword"
                ng-model="query" autocomplete="off"
                uib-typeahead="state for state in states | filter:$viewValue | limitTo:5">
+=======
+    <form ng-submit="search()" class="form-inline">
+      <label for "solr-search-input" ng-show="!!hasLabel && hasLabel">Search Model</label>
+      <div class="input-group search-group">
+        <input type="text" id="solr-search-input" class="form-control" aria-label="Enter keyword" placeholder="Enter Keyword" ng-model="searchQuery" autocomplete="off" uib-typeahead="state for state in states | filter:$viewValue | limitTo:5">
+>>>>>>> release/dev:src/app/components/solrSearch/solrSearch.directive.html
         <div class="input-group-btn">
           <button type="submit" class="search-btn btn" aria-label="Search">
             <img src="images/icon_search.svg" aria-hidden="true">

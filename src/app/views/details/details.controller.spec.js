@@ -1,14 +1,14 @@
 'use strict';
 
-describe('Controller: ResultsCtrl', function() {
+describe('Controller: DetailsCtrl', function() {
 
   // load the controller's module
   beforeEach(module('dhsniem'));
 
-  var ResultsCtrl;
+  var DetailsCtrl;
 
   // Initialize the controller and a mock scope
   beforeEach(inject(function($injector) {
-    ResultsCtrl = $injector.get('$controller')('ResultsCtrl');
+    DetailsCtrl = $injector.get('$controller')('DetailsCtrl');
   }));
 });
