@@ -12,21 +12,24 @@
 
       width: 100%;
       .welcome-items {
-        padding: 30px;
+        padding: 0 30px 30px 30px;
         .welcome-main {
           width: 70%;
           margin: auto;
-          padding-top: 75px;
+          padding-top: 58px;
           .welcome-text-heading {
             font-size: 36px;
             letter-spacing: 1.4px;
             color: $marine-blue;
-            margin-bottom: 20px;
+            //margin-bottom: 20px;
+            margin: 0;
           }
           .welcome-text-description {
             color: $evergreen;
             font-size: 24px;
             letter-spacing: 1.3px;
+            margin-bottom: 27px;
+            margin-top: 20px;
           }
         }
 

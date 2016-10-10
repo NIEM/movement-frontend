@@ -2,12 +2,14 @@
   <div class="form-group row">
 
     <form ng-submit="search(query)" class="form-inline">
-      <label for "niem-search-input" ng-show="!!hasLabel && hasLabel">Search Model</label>
+      <label for="niem-search-input" ng-show="!!hasLabel && hasLabel">Search Model</label>
       <div class="input-group search-group">
-        <input type="text" id="niem-search-input" class="form-control" aria-label="Enter keyword" placeholder="Enter Keyword" ng-model="query" autocomplete="off" uib-typeahead="state for state in states | filter:$viewValue | limitTo:5">
+        <input type="text" id="niem-search-input" class="form-control" aria-label="Enter keyword"
+               ng-model="query" autocomplete="off"
+               uib-typeahead="state for state in states | filter:$viewValue | limitTo:5">
         <div class="input-group-btn">
           <button type="submit" class="search-btn btn" aria-label="Search">
-            <img src="images/icon_search.svg" aria-hidden="true"></img>
+            <img src="images/icon_search.svg" aria-hidden="true">
           </button>
         </div>
       </div>

@@ -2,6 +2,30 @@
   <search-header></search-header>
 
   <section class="content">
+
+    <div class="legend row">
+      <div class="pull-right">
+        <h6 class="legend-heading">Legend</h6>
+        <div class="legend-symbols">
+          <div class="legend-symbol">
+            <img class="legend-img" src="images/icon_t.svg">
+            <h6 class="legend-title type-legend">Type</h6>
+          </div>
+          <div class="legend-symbol">
+            <img class="legend-img" src="images/icon_e.svg">
+            <h6 class="legend-title">Element</h6>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="search-heading row">
+      <h1 class="keyword-search-text">
+        You searched for "{{ResultsCtrl.getQuery()}}"
+      </h1>
+      <p class="results-total">Total Number of Results ({{numFound}})</p>
+    </div>
+
     <div class="search-filter col-sm-4">
       <div class="filter-heading row">
         <h2>Filter by</h2>
@@ -9,35 +33,18 @@
       </div>
       <div class="filter-details row">
         <solr-facet-group>
-          <solr-facet display="Entity Type" field="entityType"></solr-facet>
-          <solr-facet display="Domain" field="domain"></solr-facet>
+          <a href="#" class="solr-facet-group-tooltip">
+            <solr-facet display="Entities" field="entityType"></solr-facet>
+          </a>
+          <a href="#" class="solr-facet-group-tooltip">Namespace</a>
+          <a href="#" class="solr-facet-subgroup-tooltip">
+            <solr-facet display="Domain" field="domain"></solr-facet>
+          </a>
         </solr-facet-group>
       </div>
     </div>
 
     <div class="search-results col-sm-8">
-      <div class="legend row">
-        <div class="pull-right">
-          <h6 class="legend-heading">Legend</h6>
-          <div class="legend-symbols">
-            <div class="legend-symbol">
-              <img class="legend-img" src="images/icon_e.svg"></img>
-              <h6 class="legend-title">Element</h6>
-            </div>
-
-            <div class="legend-symbol">
-              <img class="legend-img" src="images/icon_t.svg"></img>
-              <h6 class="legend-title">Type</h6>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="search-heading row">
-        <h1 class="pull-left">
-            You searched for "{{ResultsCtrl.getQuery()}}"
-          </h1>
-      </div>
-
       <div class="results-list row">
 
         <div class="result">
