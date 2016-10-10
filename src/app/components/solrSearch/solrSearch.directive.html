@@ -4,7 +4,7 @@
     <form ng-submit="search()" class="form-inline">
       <label for "solr-search-input" ng-show="!!hasLabel && hasLabel">Search Model</label>
       <div class="input-group search-group">
-        <input type="text" id="solr-search-input" class="form-control" aria-label="Enter keyword" placeholder="Enter Keyword" ng-model="searchQuery" autocomplete="off" uib-typeahead="state for state in states | filter:$viewValue | limitTo:5">
+        <input type="text" id="solr-search-input" class="form-control" aria-label="Enter keyword" placeholder="Enter Keyword" ng-model="searchQuery" autocomplete="off" uib-typeahead="result.name for result in getTypeaheadResults($viewValue)" typeahead-min-length="3">
         <div class="input-group-btn">
           <button type="submit" class="search-btn btn" aria-label="Search">
             <img src="images/icon_search.svg" aria-hidden="true"></img>

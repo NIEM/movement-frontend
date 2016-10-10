@@ -14,7 +14,7 @@
     .module('dhsniem')
     .directive('solrSearch', solrSearch);
 
-  function solrSearch($location, $state, solrSearch) {
+  function solrSearch($location, $state, solrSearch, solrRequest) {
     return {
       restrict: 'E',
       templateUrl: 'app/components/solrSearch/solrSearch.directive.html',
@@ -29,8 +29,6 @@
      */
     function link(scope, element, attrs, ctrl) {
 
-      scope.states = ['DriverLicenseCardIdentification', 'CreditBankIDCardCategoryCode', 'CardPicture', 'CreditCard'];
-
       scope.searchQuery = $location.search().q;
 
       scope.search = function search() {
@@ -43,6 +41,25 @@
         
         $location.search('q', query);
         solrSearch.clearAllFilters();
+
+      };
+
+      scope.getTypeaheadResults = function(query) {
+
+        var params = {
+          'q': 'name:*' + query + '*',
+          'rows': 5,
+          'wt': 'json',
+          'json.wrf': 'JSON_CALLBACK',
+          'json.nl': 'map'
+        };
+
+        return solrRequest.makeSolrRequest(params).then(function(data) {
+          if (data.response.docs) {
+            scope.topNamespace = data.response.docs[0].namespace;
+            return data.response.docs;
+          }
+        });
 
       };
 
