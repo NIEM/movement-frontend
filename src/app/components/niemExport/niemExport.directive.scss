@@ -1,6 +1,6 @@
 .niem-export {
   background: $darkest-blue;
-  height: 140px;
+  height: 190px;
   color: $white;
   width: 100%;
 
@@ -8,22 +8,33 @@
     width: $niem-min-width;
     height: 100%;
     margin: 0 auto;
+    padding: 44px 0;
     .export-top-img {
       display: inline-block;
       img {
         width: 66px;
         display: inline-block;
-        margin: 0 15px 70px;
+        //margin: 0 15px 70px;
+        margin-right: 33px;
+        position: relative;
+        bottom: 44px;
       }
 
     }
     .export-top-text {
        display: inline-block;
-       margin-top: 20px;
-       padding-left: 10px;
+       //margin-top: 20px;
+       padding-left: 29px;
        border-left: 1px solid $white;
-      .export-heading, .export-description {
+      .export-heading {
         margin-top: 0;
+        margin-bottom: 6px;
+        letter-spacing: 1.5px;
+      }
+      .export-description {
+        margin-top: 0;
+        margin-bottom: 17px;
+        letter-spacing: 1px;
       }
       .download {
         color: $white;
@@ -31,6 +42,9 @@
         text-transform: uppercase;
         &:hover {
           text-decoration: underline;
+        }
+        i {
+          padding-left: 6px;
         }
       }
     }

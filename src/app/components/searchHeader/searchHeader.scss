@@ -1,10 +1,12 @@
 .search-header {
   padding: 0 30px;
-  height: 175px;
+  height: 200px; // 175px
   background: url(../../images/ccp_homeimage.jpg);
 
   .header-search {
-    padding: 20px 35px 0;
+    padding-top: 23px;
+    padding-bottom: 20px;
+    //padding: 20px 35px 0;
   }
 
 }
