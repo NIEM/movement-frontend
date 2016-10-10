@@ -32,7 +32,8 @@
       setFacet: setFacet,
       setFacetResult: setFacetResult,
       search: search,
-      clearAllFilters: clearAllFilters
+      clearAllFilters: clearAllFilters,
+      makeSolrRequest: makeSolrRequest
     };
 
 
@@ -112,7 +113,7 @@
      */
     function search() {
 
-      makeSolrRequest(SOLR_URL, buildSearchParams()).then(function(data) {
+      makeSolrRequest(buildSearchParams()).then(function(data) {
         
         docs = data.response.docs;
         numFound = data.response.numFound;
@@ -142,11 +143,11 @@
      *
      * @returns deferred.promise
      */
-    function makeSolrRequest(url, params) {
+    function makeSolrRequest(params) {
 
       var deferred = $q.defer();
 
-      $http.jsonp(url, {params: params}).then(function(response) {
+      $http.jsonp(SOLR_URL, {params: params}).then(function(response) {
         deferred.resolve(response.data);
       }).catch(function(error) {
         console.log('Error: ', error);
