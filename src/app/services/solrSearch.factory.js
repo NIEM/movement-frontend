@@ -14,7 +14,7 @@
     .module('dhsniem')
     .factory('solrSearch', solrSearch);
 
-  function solrSearch($q, $http, $location, $rootScope, SOLR_URL) {
+  function solrSearch($location, $rootScope, solrRequest) {
 
     var docs;
     var numFound;
@@ -32,8 +32,7 @@
       setFacet: setFacet,
       setFacetResult: setFacetResult,
       search: search,
-      clearAllFilters: clearAllFilters,
-      makeSolrRequest: makeSolrRequest
+      clearAllFilters: clearAllFilters
     };
 
 
@@ -113,7 +112,7 @@
      */
     function search() {
 
-      makeSolrRequest(buildSearchParams()).then(function(data) {
+      solrRequest.makeSolrRequest(buildSearchParams()).then(function(data) {
         
         docs = data.response.docs;
         numFound = data.response.numFound;
@@ -131,29 +130,6 @@
       selectedFacets = [];
       $location.search('selectedFacets', selectedFacets);
       search();
-    }
-
-
-    /**
-     * @name makeSolrRequest
-     *
-     * @memberof dhsniem.service:solrSearch
-     *
-     * @description Makes http jsonp call to the SOLR_URL and returns a promise.
-     *
-     * @returns deferred.promise
-     */
-    function makeSolrRequest(params) {
-
-      var deferred = $q.defer();
-
-      $http.jsonp(SOLR_URL, {params: params}).then(function(response) {
-        deferred.resolve(response.data);
-      }).catch(function(error) {
-        console.log('Error: ', error);
-      });
-
-      return deferred.promise;
     }
 
  

@@ -14,7 +14,7 @@
     .module('dhsniem')
     .controller('DetailsCtrl', DetailsCtrl);
 
-  function DetailsCtrl(solrSearch, $location) {
+  function DetailsCtrl(solrRequest, $location) {
 
     var vm = this;
 
@@ -28,11 +28,11 @@
      */
     function init() {
 
-      solrSearch.makeSolrRequest(getEntityParams()).then(function(data) {
+      solrRequest.makeSolrRequest(getEntityParams()).then(function(data) {
         vm.entity = data.response.docs[0];
 
         if (vm.entity.entityType === 'Element') {
-          solrSearch.makeSolrRequest(getContainingTypesParams()).then(function(data) {
+          solrRequest.makeSolrRequest(getContainingTypesParams()).then(function(data) {
             vm.containingTypes = data.response.docs;
           });
         }
