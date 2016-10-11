@@ -22,14 +22,15 @@
         surfaceTransportation: 'Surface Transportation'
       };
 
-      var fileName = row.get("file");
-      var namespace = fileName.substring(0, fileName.indexOf('.'));
-
       var path = row.get("fileAbsolutePath");
+      var pathSlash = path.replace(/\\/g,"/");
       var namespaceType;
+      var namespace;
       var domain;
+      var externalStandard;
+      var otherNamespace;
 
-      // Determine if file is in domains dir
+      // Determine if file is in domains dir or niem-core
       if (path.indexOf('domains') > -1) {
         namespaceType = 'domain';
         
@@ -40,14 +41,36 @@
           }
         });
 
-      } else if ( path.indexOf('codes') > -1 || path.indexOf('external' > -1) ) {
+        namespace = domain;
+
+      } else if ( path.indexOf('niem-core') > -1) {
+        namespaceType = 'domain';
+        domain = 'NIEM Core';
+        namespace = domain;
+      } else if ( path.indexOf('codes') > -1 ) {
         namespaceType = 'external';
+        externalStandard = pathSlash.split('codes/')[1].split('/')[0];
+        namespace = externalStandard;
+      } else if (path.indexOf('external') > -1) {
+        namespaceType = 'external';
+        externalStandard = pathSlash.split('external/')[1].split('/')[0];
+        namespace = externalStandard;
+      } else if( path.indexOf('adapters') > -1) {
+        namespaceType = 'other';
+        otherNamespace = pathSlash.split('adapters/')[1].split('/')[0];
+        namespace = otherNamespace;
       } else {
         namespaceType = 'other';
+        otherNamespace = pathSlash.split('niem-xsd/')[1].split('/')[0];
+        namespace = otherNamespace;
       }
       
       if (domain) {
         row.put("domain", domain);
+      } else if (externalStandard) {
+        row.put("externalStandard", externalStandard);
+      } else if (otherNamespace) {
+        row.put("otherNamespace", otherNamespace);
       }
 
       row.put("namespace", namespace);
@@ -95,6 +118,23 @@
       return row;
     };
 
+    function getContentStyle(row) {
+
+      var contentStyle;
+      var complexContent = row.get("complexContent");
+      var simpleContent = row.get("simpleContent")
+
+      if (complexContent) {
+        contentStyle = 'Complex with Complex Content (CCC)';
+      } else if (simpleContent) {
+        contentStyle = 'Complex with Simple Content (CSC)';
+      }
+
+      row.put("contentStyle", contentStyle);
+
+      return row;
+    };
+
   ]]>  
   </script>
 
@@ -107,7 +147,7 @@
             recursive="true"
             rootEntity="false"
             dataSource="null"
-            excludes="gmx.xsd"
+            excludes="appinfo.xsd|conformanceTargets.xsd|localTerminology.xsd|gmx.xsd"
             onError="skip"
             transformer="script:getNamespaceInfo,TemplateTransformer"
             baseDir="/solr-6.2.0/niem-xsd">
@@ -125,7 +165,6 @@
         <field column="entityType"        template="Element" />
         <field column="definition"        xpath="/schema/element/annotation/documentation"     boost="2.0" />
         <field column="type"              xpath="/schema/element/@type" />
-        <field column="substitutionGroup" xpath="/schema/element/@substitutionGroup" />
         <field column="abstract"          xpath="/schema/element/@abstract" />
       </entity>
 
@@ -134,7 +173,7 @@
               url="${f.fileAbsolutePath}"
               processor="XPathEntityProcessor"
               stream="true"
-              transformer="TemplateTransformer"                      
+              transformer="TemplateTransformer,script:getContentStyle"                      
               forEach="/schema/complexType" >
 
         <field column ="id"               template="${f.namespace}:${complexType.name}" />
@@ -142,41 +181,15 @@
         <field column="definition"        xpath="/schema/complexType/annotation/documentation"     boost="2.0" />
         <field column="entityType"        template="Type" />
 
+        <field column="complexContent"    xpath="/schema/complexType/complexContent" />
+        <field column="simpleContent"     xpath="/schema/complexType/simpleContent" />
+
         <!-- For CCC -->
         <field column="parentTypeName"    xpath="/schema/complexType/complexContent/extension/@base" />
         <field column="elements"          xpath="/schema/complexType/complexContent/extension/sequence/element/@ref" />
 
-        <!-- For CSC; todo: confirm this is correct naming -->
+        <!-- For CSC -->
         <field column="parentSimpleType"  xpath="/schema/complexType/simpleContent/extension/@base" />      
-        <field column="attributeGroup"    xpath="/schema/complexType/simpleContent/extension/attributeGroup/@ref" />      
-        <field column="attributes"        xpath="/schema/complexType/simpleContent/extension/attribute/@ref" />            
-      </entity>
-
-
-      <entity name="attribute"
-              url="${f.fileAbsolutePath}"
-              processor="XPathEntityProcessor"
-              stream="true"
-              transformer="TemplateTransformer"
-              forEach="/schema/attribute" >
-        
-        <field column="attribute_id"         template="${f.namespace}:${attribute.attribute_name}" />
-        <field column="attribute_name"        xpath="/schema/attribute/@name" />            
-        <field column="attribute_definition"  xpath="/schema/attribute/annotation/documentation" />
-        <field column="attribute_type"        xpath="/schema/attribute/@type" />
-      </entity>
-
-
-      <entity name="attributeGroup"
-              url="${f.fileAbsolutePath}"
-              processor="XPathEntityProcessor"
-              stream="true"
-              transformer="TemplateTransformer"                        
-              forEach="/schema/attributeGroup" >
-        
-        <field column="attributeGroup_id"        template="${f.namespace}:${attributeGroup.attributeGroup_name}" />
-        <field column="attributeGroup_name"       xpath="/schema/attributeGroup/@name" />         
-        <field column="attributeGroup_attributes" xpath="/schema/attributeGroup/attribute/@ref" />
       </entity>
 
 
