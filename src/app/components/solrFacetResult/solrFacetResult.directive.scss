@@ -7,3 +7,22 @@ em {
   letter-spacing: 0.5px;
   color: rgba(0, 0, 0, 0.58);
 }
+
+.checkbox input[type="checkbox"] {
+  display: none;
+}
+
+.custom-checkbox {
+  width: 22px;
+  height: 22px;
+  border: 1px solid $warm-grey;
+  display: inline-block;
+  float: left;
+  .checked-image {
+    height: 22px;
+    width: 22px;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+}

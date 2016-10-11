@@ -7,6 +7,7 @@ $dark-blue:       #005170;
 $medium-blue:     #007fb9;
 $teal:            #35969b;
 $light-teal:      #68d0b2;
+$teal-gradient:   #29819c;
 $black:           #000000;
 $white:           #ffffff;
 $ugly-blue:       #288b91;
@@ -152,6 +153,7 @@ h6 {
 @import '../app/components/solrFacet/solrFacet.directive.scss';
 @import '../app/components/solrFacetResult/solrFacetResult.directive.scss';
 @import '../app/components/solrSearch/solrSearch.directive.scss';
+@import '../app/components/solrSort/solrSort.directive.scss';
 @import '../app/views/details/details.view.scss';
 @import '../app/views/home/home.view.scss';
 @import '../app/views/main/main.view.scss';
