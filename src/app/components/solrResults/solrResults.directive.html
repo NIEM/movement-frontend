@@ -32,23 +32,28 @@
         <button class="clear-button pull-right text-uppercase" ng-click="clearAllFilters()">Clear All</button>
       </div>
       <div class="filter-details row">
-        <a href="#" class="solr-facet-group-tooltip">
+        <div class="solr-facet-group-tooltip">
           <solr-facet display="Entities" field="entityType"></solr-facet>
-        </a>
+        </div>
         <a href="#" class="solr-facet-group-tooltip">Namespace</a>
-        <a href="#" class="solr-facet-subgroup-tooltip">
+        <div class="solr-facet-subgroup-tooltip">
           <solr-facet display="Domain" field="domain"></solr-facet>
-          <solr-facet display="External Standards" field="externalStandard"></solr-facet>
-          <solr-facet display="Others" field="otherNamespace"></solr-facet>
-        </a>
+          <div class="solr-facet-group-tooltip">
+            <solr-facet display="External Standards" field="externalStandard"></solr-facet>
+          </div>
+          <div class="solr-facet-group-tooltip">
+            <solr-facet display="Others" field="otherNamespace"></solr-facet>
+          </div>
+        </div>
       </div>
     </div>
 
     <div class="search-results col-sm-8">
+      <solr-sort></solr-sort>
       <div class="results-list row">
         <div class="result">
           <h2 class="result-heading">cc: All of NIEM ({{numFound}})</h2>
-          <div class="result-item row" ng-repeat="doc in docs">
+          <div class="result-item" ng-repeat="doc in docs">
             <a ui-sref="main.details({ entityID: doc.id })">
               <div class="row">
                 <h3 class="item-title">{{doc.name}}</h3>
