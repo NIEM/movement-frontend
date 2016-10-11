@@ -33,6 +33,7 @@
         scope.docs = solrSearch.getDocs();
         scope.numFound = solrSearch.getNumFound();
         scope.query = solrSearch.getQuery();
+        scope.facetFields = solrSearch.getFacetFields();
       });
 
       scope.clearAllFilters = function() {
@@ -43,10 +44,11 @@
         return 'images/icon_' + entityType.substring(0,1) + '.svg';
       };
 
-      scope.isFirstOfNamespace = function(current, last) {
+      scope.isFirstOfNamespace = function(previousNamespace, currentDoc) {
         if (solrSearch.getSort() === 'namespace asc') {
-          // if previous value is different
-          if (current !== last) {
+          if (currentDoc.namespace !== previousNamespace) {
+            scope.NamespaceCount = scope.facetFields[currentDoc.namespaceType][currentDoc.namespace];
+            console.log(scope.NamespaceCount);
             return true;
           }
         }

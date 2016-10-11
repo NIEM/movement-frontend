@@ -48,19 +48,19 @@
         domain = 'NIEM Core';
         namespace = domain;
       } else if ( path.indexOf('codes') > -1 ) {
-        namespaceType = 'external';
+        namespaceType = 'externalStandard';
         externalStandard = pathSlash.split('codes/')[1].split('/')[0];
         namespace = externalStandard;
       } else if (path.indexOf('external') > -1) {
-        namespaceType = 'external';
+        namespaceType = 'externalStandard';
         externalStandard = pathSlash.split('external/')[1].split('/')[0];
         namespace = externalStandard;
       } else if( path.indexOf('adapters') > -1) {
-        namespaceType = 'other';
+        namespaceType = 'otherNamespace';
         otherNamespace = pathSlash.split('adapters/')[1].split('/')[0];
         namespace = otherNamespace;
       } else {
-        namespaceType = 'other';
+        namespaceType = 'otherNamespace';
         otherNamespace = pathSlash.split('niem-xsd/')[1].split('/')[0];
         namespace = otherNamespace;
       }
