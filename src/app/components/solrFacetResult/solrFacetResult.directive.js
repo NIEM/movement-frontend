@@ -31,7 +31,7 @@
      */
     function link(scope, element, attrs, ctrl) {
 
-      scope.facetString = function(){ 
+      scope.facetString = function(){
         return scope.field + ':"' + scope.key + '"';
       };
 
@@ -40,7 +40,7 @@
         var facetString = scope.facetString();
         for (var i in selectedFacets){
           if (selectedFacets[i] === facetString) {
-            return true; 
+            return true;
           }
         }
         return false;
