@@ -44,11 +44,9 @@
       return docs;
     }
 
-
     function getNumFound() {
       return numFound;
     }
-
 
     function getQuery() {
       return $location.search().q || '*';
@@ -62,11 +60,9 @@
       return facets;
     }
 
-
     function getFacetFields() {
       return facetFields;
     }
-
     
     function getSelectedFacets() {
       return selectedFacets;
