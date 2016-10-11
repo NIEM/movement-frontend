@@ -1,4 +1,7 @@
-<a href="#" class="tooltip-link"><h3 class="filter-group">{{display}}</h3></a>
+<h3 class="filter-group" uib-popover="Sed ut perspiciatinis iste natus error sit voluptatem accus antium dolore."
+    popover-placement="right" popover-is-open="popoverIsOpen" ng-click="popoverIsOpen = !popoverIsOpen">
+  {{display}}
+</h3>
 <ul class="list-unstyled">
   <li ng-repeat="(k, v) in results">
     <solr-facet-result field="{{field}}" key="{{k}}" count="{{v}}"></solr-facet-result>
