@@ -43,6 +43,17 @@
         return 'images/icon_' + entityType.substring(0,1) + '.svg';
       };
 
+      scope.isFirstOfNamespace = function(current, last) {
+        if (solrSearch.getSort() === 'namespace asc') {
+          // if previous value is different
+          if (current !== last) {
+            return true;
+          }
+        }
+        
+        return false;
+      };
+
     }
 
   }

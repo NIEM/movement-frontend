@@ -14,21 +14,26 @@
     .module('dhsniem')
     .directive('solrSort', solrSort);
 
-  function solrSort() {
+  function solrSort(solrSearch, $location) {
     return {
       restrict: 'E',
       templateUrl: 'app/components/solrSort/solrSort.directive.html',
       link: link
     };
 
-  }
+    /**
+     *  Defines variables and functions within solrSort scope
+     */
+    function link(scope) {
+      scope.sortOption = $location.search().sortBy || 'namespace asc';
 
-  /**
-   *  Defines variables and functions within solrSort scope
-   *
-   */
-  function link(scope) {
-    scope.sortOption = 'Namespace';
+      scope.sortBy = function() {
+        $location.search('sortBy', scope.sortOption);
+        solrSearch.search();
+      };
+
+    }
+
   }
 
 })();
