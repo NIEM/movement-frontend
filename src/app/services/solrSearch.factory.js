@@ -26,6 +26,7 @@
       getDocs: getDocs,
       getNumFound: getNumFound,
       getQuery: getQuery,
+      getSort: getSort,
       getFacets: getFacets,
       getFacetFields: getFacetFields,
       getSelectedFacets: getSelectedFacets,
@@ -43,26 +44,25 @@
       return docs;
     }
 
-
     function getNumFound() {
       return numFound;
     }
-
 
     function getQuery() {
       return $location.search().q || '*';
     }
 
+    function getSort() {
+      return $location.search().sortBy || 'namespacePriority asc';
+    }
 
     function getFacets() {
       return facets;
     }
 
-
     function getFacetFields() {
       return facetFields;
     }
-
     
     function getSelectedFacets() {
       return selectedFacets;
@@ -143,6 +143,7 @@
     function buildSearchParams() {
       var params = {
         'q': getQuery(),
+        'sort': getSort(),
         'facet': 'on',
         'facet.mincount': '1',
         'wt': 'json',

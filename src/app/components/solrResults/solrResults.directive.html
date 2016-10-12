@@ -55,17 +55,17 @@
       <solr-sort></solr-sort>
       <div class="results-list row">
         <div class="result">
-          <h2 class="result-heading">cc: All of NIEM ({{numFound}})</h2>
           <div class="result-item" ng-repeat="doc in docs">
-            <div class="row">
+            <h2 class="result-heading" ng-show="isFirstOfNamespace(docs[$index - 1].namespace, doc)">{{doc.namespace}}  ({{doc.namespaceCount}})</h2>
+            <div class="result-content">
               <a ui-sref="main.details({ entityID: doc.id })">
                 <h3 class="item-title">{{doc.name}}</h3>
               </a>
               <div class="item-img-section">
                 <img class="item-img" ng-src="{{getImagePath(doc.entityType)}}">
               </div>
+              <p class="item-description">{{doc.definition}}</p>
             </div>
-            <p class="item-description row">{{doc.definition}}</p>
           </div>
         </div>
       </div>

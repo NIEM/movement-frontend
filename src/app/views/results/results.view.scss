@@ -127,18 +127,23 @@
     .search-results {
       padding: 0 43px;
       .results-list {
-        padding-top: 28px;
-        .result-heading {
-          padding-bottom: 18px;
-          border-bottom: 1px solid $silver;
-          margin: 0;
-          color: $evergreen;
-          letter-spacing: 0.5px;
-        }
         .result {
           .result-item {
             border-bottom: 1px solid $silver;
-            padding: 0 42px;
+            .result-heading {
+              padding: 38px 0 18px 0;
+              border-bottom: 1px solid $silver;
+              margin: 0;
+              color: $evergreen;
+              letter-spacing: 0.5px;
+              &:first-child {
+                padding-top: 28px;
+              }
+            }
+            .result-content {
+              display: inline-block;
+              padding: 0 30px;
+            }
             .item-img-section {
               display: inline-block;
               padding: 0 5px;

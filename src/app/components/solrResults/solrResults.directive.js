@@ -33,6 +33,7 @@
         scope.docs = solrSearch.getDocs();
         scope.numFound = solrSearch.getNumFound();
         scope.query = solrSearch.getQuery();
+        scope.facetFields = solrSearch.getFacetFields();
       });
 
       scope.clearAllFilters = function() {
@@ -48,6 +49,18 @@
       scope.closePopover = function() {
         scope.popoverIsOpen = false;
       }
+
+      scope.isFirstOfNamespace = function(previousNamespace, currentDoc) {
+        if (solrSearch.getSort() === 'namespacePriority asc') {
+          if (currentDoc.namespace !== previousNamespace) {
+            currentDoc.namespaceCount = scope.facetFields[currentDoc.namespaceType][currentDoc.namespace];
+            return true;
+          }
+        }
+
+        return false;
+      };
+
     }
 
   }
