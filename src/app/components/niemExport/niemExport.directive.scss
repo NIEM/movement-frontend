@@ -8,13 +8,12 @@
     width: $niem-min-width;
     height: 100%;
     margin: 0 auto;
-    padding: 44px 0;
+    padding: 44px 20px;
     .export-top-img {
       display: inline-block;
       img {
         width: 66px;
         display: inline-block;
-        //margin: 0 15px 70px;
         margin-right: 33px;
         position: relative;
         bottom: 44px;
@@ -23,7 +22,6 @@
     }
     .export-top-text {
        display: inline-block;
-       //margin-top: 20px;
        padding-left: 29px;
        border-left: 1px solid $white;
       .export-heading {

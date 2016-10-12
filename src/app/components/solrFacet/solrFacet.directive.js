@@ -31,6 +31,11 @@
      */
     function link(scope, element, attrs) {
       solrSearch.setFacet(scope);
+      scope.popoverIsOpen =  false;
+
+      scope.closePopover = function() {
+        scope.popoverIsOpen = false;
+      }
     }
 
   }
