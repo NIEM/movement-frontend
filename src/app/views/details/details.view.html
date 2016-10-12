@@ -5,42 +5,25 @@
     <a href="#/results">&#060; Back to search results for "Card" </a>
 
     <div class="details-heading">
-      <h1>{{DetailsCtrl.entity.name}} <img class="details-heading-img" src="images/icon_e.svg"/></h1>
-      <div class="text-uppercase">Namespace:Other</div>
+      <h1>{{DetailsCtrl.entity.name}}
+        <img class="details-heading-img" src="images/icon_e.svg" ng-if="DetailsCtrl.isElement()"/>
+        <img class="details-heading-img" src="images/icon_t.svg" ng-if="!DetailsCtrl.isElement()"/>
+      </h1>
+      <div class="text-uppercase">Namespace: {{DetailsCtrl.entity.namespace}} </div>
     </div>
 
     <div class="details-info row">
       <div class="details-info-col">
         <div class="details-info-content">
           <h3>Definition</h3>
-          <p>Lorem ipsum Lorem ipsum Lorem ipsum</p>
-        </div>
-
-        <div class="details-info-content">
-          <h3>Definition</h3>
-          <p>Lorem ipsum Lorem ipsum Lorem ipsum</p>
-        </div>
-
-        <div class="details-info-content">
-          <h3>Definition</h3>
-          <p>Lorem ipsum Lorem ipsum Lorem ipsum</p>
+          <p>{{DetailsCtrl.entity.definition}}</p>
         </div>
       </div>
 
       <div class="details-info-col">
         <div class="details-info-content">
-          <h3>Definition</h3>
-          <p>Lorem ipsum Lorem ipsum Lorem ipsum</p>
-        </div>
-
-        <div class="details-info-content">
-          <h3>Definition</h3>
-          <p>Lorem ipsum Lorem ipsum Lorem ipsum</p>
-        </div>
-
-        <div class="details-info-content">
-          <h3>Definition</h3>
-          <p>Lorem ipsum Lorem ipsum Lorem ipsum</p>
+          <h3>Simple Content Type</h3>
+          <p>{{DetailsCtrl.entity.entityType}}</p>
         </div>
       </div>
     </div>
@@ -51,38 +34,13 @@
         <h5 class="facet-heading text-uppercase">
           Facet, Value, and Description
         </h5>
-        <div class="facet-list">
-          <div class="facet-item row">
+        <ul class="facet-list">
+          <li class="facet-item row" ng-repeat="value in DetailsCtrl.entity.facets.enumerations.enumeration.facetValuesData">
             <div class="col-sm-3">Enumeration</div>
-            <div class="col-sm-2">"AAA"</div>
-            <div class="col-sm-7">Sampson Marine</div>
-          </div>
-          <div class="facet-item row">
-            <div class="col-sm-3">Enumeration</div>
-            <div class="col-sm-2">"AAA"</div>
-            <div class="col-sm-7">Sampson Marine</div>
-          </div>
-          <div class="facet-item row">
-            <div class="col-sm-3">Enumeration</div>
-            <div class="col-sm-2">"AAA"</div>
-            <div class="col-sm-7">Sampson Marine</div>
-          </div>
-          <div class="facet-item row">
-            <div class="col-sm-3">Enumeration</div>
-            <div class="col-sm-2">"AAA"</div>
-            <div class="col-sm-7">Sampson Marine</div>
-          </div>
-          <div class="facet-item row">
-            <div class="col-sm-3">Enumeration</div>
-            <div class="col-sm-2">"AAA"</div>
-            <div class="col-sm-7">Sampson Marine</div>
-          </div>
-          <div class="facet-item row">
-            <div class="col-sm-3">Enumeration</div>
-            <div class="col-sm-2">"AAA"</div>
-            <div class="col-sm-7">Sampson Marine</div>
-          </div>
-        </div>
+            <div class="col-sm-2">"{{value}}"</div>
+            <div class="col-sm-7">{{DetailsCtrl.entity.facets.enumerations.enumeration.facetDefinitionsData[$index]}}</div>
+          </li>
+        </ul>
       </div>
     </div>
   </section>
