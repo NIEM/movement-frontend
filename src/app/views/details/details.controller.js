@@ -34,29 +34,39 @@
 
         if (!!vm.entity.facets) {
           vm.entity.facets.enumerations = JSON.parse(vm.entity.facets[0]);
-          var facetValueData = vm.entity.facets.enumerations.enumeration.facetValue.split(',');
-          var facetDefinitionData = vm.entity.facets.enumerations.enumeration.facetDefinition.split(',');
-          var lastValue = facetValueData[facetValueData.length - 1];
-          var lastDefinition = facetDefinitionData[facetDefinitionData.length - 1];
 
-          //remove the braces from the first and last strings
-          facetValueData[0] = facetValueData[0].substring(1);
-          facetValueData[facetValueData.length - 1] = lastValue.substring(0, lastValue.length - 1);
-          facetDefinitionData[0] = facetDefinitionData[0].substring(1);
-          facetDefinitionData[facetDefinitionData.length - 1] = lastDefinition.substring(0, lastDefinition.length - 1);
+          if (!!vm.entity.facets.enumerations.enumeration.facetValue) {
+            var facetValueData = vm.entity.facets.enumerations.enumeration.facetValue.split(',');
+            var lastValue = facetValueData[facetValueData.length - 1];
 
-          //trim out any unneeded spaces
-          for (var i = 0; i < facetValueData.length; i++) {
-            facetValueData[i].trim();
+            //remove the braces from the first and last strings
+            facetValueData[0] = facetValueData[0].substring(1);
+            facetValueData[facetValueData.length - 1] = lastValue.substring(0, lastValue.length - 1);
+
+            //trim out any unneeded spaces
+            for (var i = 0; i < facetValueData.length; i++) {
+              facetValueData[i].trim();
+            }
+
+            //finally add new data
+            vm.entity.facets.enumerations.enumeration.facetValuesData = facetValueData;
           }
 
-          for (var i = 0; i < facetDefinitionData.length; i++) {
-            facetDefinitionData[i].trim();
-          }
+          if (!!vm.entity.facets.enumerations.enumeration.facetDefinition) {
+            var facetDefinitionData = vm.entity.facets.enumerations.enumeration.facetDefinition.split(',');
+            var lastDefinition = facetDefinitionData[facetDefinitionData.length - 1];
 
-          //finally add new data
-          vm.entity.facets.enumerations.enumeration.facetValuesData = facetValueData;
-          vm.entity.facets.enumerations.enumeration.facetDefinitionsData = facetDefinitionData;
+            //remove the braces from the first and last strings
+            facetDefinitionData[0] = facetDefinitionData[0].substring(1);
+            facetDefinitionData[facetDefinitionData.length - 1] = lastDefinition.substring(0, lastDefinition.length - 1);
+
+            //trim out any unneeded spaces
+            for (var i = 0; i < facetDefinitionData.length; i++) {
+              facetDefinitionData[i].trim();
+            }
+
+            vm.entity.facets.enumerations.enumeration.facetDefinitionsData = facetDefinitionData;
+          }
         }
 
         if (vm.entity.entityType === 'Element') {

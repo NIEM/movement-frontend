@@ -1,1 +1,23 @@
+.popover.right {
+  height: 69.5px;
+  width: 225px;
+  background-color: $silver;
+  border: none;
+  left: 235px !important;
+}
 
+.popover-inner .popover-content,
+.popover-content {
+  background-color: $silver;
+  color: $marine-blue;
+  font-size: 11px;
+  font-family: "Montserrat", Arial, sans-serif;
+  line-height: 1.45;
+  letter-spacing: 1px;
+  font-weight: normal;
+}
+
+.popover.right > .arrow:after,
+.popover.right > .arrow {
+  border-right-color: $silver;
+}
