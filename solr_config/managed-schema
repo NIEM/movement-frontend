@@ -135,6 +135,9 @@
     <field name="externalStandard"  type="string"       indexed="true"  stored="true" multiValued="false" />
     <field name="otherNamespace"    type="string"       indexed="true"  stored="true" multiValued="false" />
 
+    <field name="namespacePriority" type="int"          indexed="true"  stored="true" multiValued="false" />
+
+
     <!-- Element fields -->
     <field name="type"              type="string" indexed="true"  stored="true" multiValued="false" />
     <field name="abstract"          type="string" indexed="false" stored="true" multiValued="false" />
