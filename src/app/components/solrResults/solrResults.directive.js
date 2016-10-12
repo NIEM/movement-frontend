@@ -45,7 +45,7 @@
       };
 
       scope.isFirstOfNamespace = function(previousNamespace, currentDoc) {
-        if (solrSearch.getSort() === 'namespace asc') {
+        if (solrSearch.getSort() === 'namespacePriority asc') {
           if (currentDoc.namespace !== previousNamespace) {
             currentDoc.namespaceCount = scope.facetFields[currentDoc.namespaceType][currentDoc.namespace];
             return true;

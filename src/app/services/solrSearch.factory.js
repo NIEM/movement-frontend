@@ -53,7 +53,7 @@
     }
 
     function getSort() {
-      return $location.search().sortBy || 'namespace desc';
+      return $location.search().sortBy || 'namespacePriority asc';
     }
 
     function getFacets() {

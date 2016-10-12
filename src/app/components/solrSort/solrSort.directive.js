@@ -25,7 +25,7 @@
      *  Defines variables and functions within solrSort scope
      */
     function link(scope) {
-      scope.sortOption = $location.search().sortBy || 'namespace asc';
+      scope.sortOption = solrSearch.getSort();
 
       scope.sortBy = function() {
         $location.search('sortBy', scope.sortOption);
