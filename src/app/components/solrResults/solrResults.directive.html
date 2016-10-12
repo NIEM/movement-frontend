@@ -35,7 +35,10 @@
         <div class="solr-facet-group-tooltip">
           <solr-facet display="Entities" field="entityType"></solr-facet>
         </div>
-        <a href="#" class="solr-facet-group-tooltip">Namespace</a>
+        <div class="solr-facet-group-tooltip"
+             uib-popover="Sed ut perspiciatinis iste natus error sit voluptatem accus antium dolore."
+             popover-placement="right" popover-is-open="popoverIsOpen" ng-click="popoverIsOpen = !popoverIsOpen">Namespace
+        </div>
         <div class="solr-facet-subgroup-tooltip">
           <solr-facet display="Domain" field="domain"></solr-facet>
           <div class="solr-facet-group-tooltip">
@@ -54,16 +57,17 @@
         <div class="result">
           <div class="result-item" ng-repeat="doc in docs">
             <h2 class="result-heading" ng-show="isFirstOfNamespace(docs[$index - 1].namespace, doc)">{{doc.namespace}}  ({{doc.namespaceCount}})</h2>
-            <a class="result-content" ui-sref="main.details({ entityID: doc.id })">
-              <h3 class="item-title">{{doc.name}}</h3>
+            <div class="result-content">
+              <a ui-sref="main.details({ entityID: doc.id })">
+                <h3 class="item-title">{{doc.name}}</h3>
+              </a>
               <div class="item-img-section">
                 <img class="item-img" ng-src="{{getImagePath(doc.entityType)}}">
               </div>
               <p class="item-description">{{doc.definition}}</p>
-            </a>
+            </div>
           </div>
         </div>
-
       </div>
 
     </div>

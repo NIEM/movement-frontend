@@ -17,5 +17,12 @@
     padding: 6px 0 6px 10px;
     letter-spacing: 0.5px;
     font-weight: normal;
+    border-radius: 3px;
+    background: #fff url('../images/updownarrow.svg') no-repeat;
+    background-size: 30px;
+    background-position: right 0 center;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
   }
 }

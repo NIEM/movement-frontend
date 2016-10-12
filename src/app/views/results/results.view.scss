@@ -151,6 +151,9 @@
               display: inline-block;
               margin: 21px 0 11px 0;
               letter-spacing: 0.5px;
+              &:hover {
+                text-decoration: underline;
+              }
             }
             .item-description {
               color: $body-text-color;
