@@ -35,7 +35,10 @@
         <div class="solr-facet-group-tooltip">
           <solr-facet display="Entities" field="entityType"></solr-facet>
         </div>
-        <a href="#" class="solr-facet-group-tooltip">Namespace</a>
+        <div class="solr-facet-group-tooltip"
+             uib-popover="Sed ut perspiciatinis iste natus error sit voluptatem accus antium dolore."
+             popover-placement="right" popover-is-open="popoverIsOpen" ng-click="popoverIsOpen = !popoverIsOpen">Namespace
+        </div>
         <div class="solr-facet-subgroup-tooltip">
           <solr-facet display="Domain" field="domain"></solr-facet>
           <div class="solr-facet-group-tooltip">
@@ -54,18 +57,17 @@
         <div class="result">
           <h2 class="result-heading">cc: All of NIEM ({{numFound}})</h2>
           <div class="result-item" ng-repeat="doc in docs">
-            <a ui-sref="main.details({ entityID: doc.id })">
-              <div class="row">
+            <div class="row">
+              <a ui-sref="main.details({ entityID: doc.id })">
                 <h3 class="item-title">{{doc.name}}</h3>
-                <div class="item-img-section">
-                  <img class="item-img" ng-src="{{getImagePath(doc.entityType)}}">
-                </div>
+              </a>
+              <div class="item-img-section">
+                <img class="item-img" ng-src="{{getImagePath(doc.entityType)}}">
               </div>
-              <p class="item-description row">{{doc.definition}}</p>
-            </a>
+            </div>
+            <p class="item-description row">{{doc.definition}}</p>
           </div>
         </div>
-
       </div>
 
     </div>
