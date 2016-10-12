@@ -28,13 +28,14 @@
      */
     function init() {
 
-      solrRequest.makeSolrRequest(getEntityParams()).then(function(data) {
+      var id = $location.search().entityID;
+      var query = 'id:' + id.split(':')[0] + '\\:' + id.split(':')[1];
+
+      solrRequest.makeSolrRequest(getSearchParams(query)).then(function(data) {
         vm.entity = data.response.docs[0];
 
         if (vm.entity.entityType === 'Element') {
-          solrRequest.makeSolrRequest(getContainingTypesParams()).then(function(data) {
-            vm.containingTypes = data.response.docs;
-          });
+          getContainingTypes();
         }
 
       });
@@ -43,45 +44,91 @@
 
 
     /**
-     * @name getEntityParams
+     * @name getContainingTypes
      *
      * @memberof dhsniem.controller:DetailsCtrl
      *
-     * @description Buidls the search params to retrieve details data for the specific entity
+     * @description Retrieves the containing type documents for an element
      */
-    function getEntityParams() {
+    function getContainingTypes() {
+      var query = 'elements:*' + vm.entity.name + '*';
+      solrRequest.makeSolrRequest(getSearchParams(query)).then(function(data) {
+        vm.containingTypes = data.response.docs;
 
-      var id = $location.search().entityID;
-      var q = id.split(':')[0] + '\\:' + id.split(':')[1];
-
-      var params = {
-        'q': 'id:' + q,
-        'wt': 'json',
-        'json.wrf': 'JSON_CALLBACK',
-        'json.nl': 'map'
-      };
-
-      return params;
+        // Example code to return the first iteration of nested structure
+        // if (vm.containingTypes) {
+        //   getElementObjects(vm.containingTypes[0]);
+        //   console.log(vm.containingTypes);
+        // }
+      });      
     }
 
 
     /**
-     * @name getContainingTypesParams
+     * @name getElementObjects
      *
      * @memberof dhsniem.controller:DetailsCtrl
      *
-     * @description Buidls the search params to retrieve the containing types for an element
+     * @description Modifies a Type object's element array from a string reference to full Element objects
+     *
+     * @param typeDoc - type object (document)
      */
-    function getContainingTypesParams() {
+    function getElementObjects(typeDoc) {
+      typeDoc.elements.forEach(function(element, index, arr) {
+        var query = 'name:' + element.split(':')[1];
+        solrRequest.makeSolrRequest(getSearchParams(query)).then(function(data) {
+          arr[index] = data.response.docs[0];
 
+          if (arr[index].type) {
+            getTypeObject(arr[index]);
+          } else {
+            arr[index].type = 'abstract';
+          }
+
+        });
+      });
+    }
+
+
+    /**
+     * @name getTypeObject
+     *
+     * @memberof dhsniem.controller:DetailsCtrl
+     *
+     * @description Returns the full type object for an element's type field
+     *
+     * @param element
+     *
+     * @return The full Type document referenced from the Element type field
+     */
+    function getTypeObject(element) {
+      var query = 'name:' + element.type.split(':')[1];
+      solrRequest.makeSolrRequest(getSearchParams(query)).then(function(data) {
+        element.type = data.response.docs[0];
+      });
+    }
+
+
+    /**
+     * @name getSearchParams
+     *
+     * @memberof dhsniem.controller:DetailsCtrl
+     *
+     * @description Builds the search params for a solr query
+     *
+     * @param query
+     *
+     * @return params
+     */
+    function getSearchParams(query) {
       var params = {
-        'q': 'elements:*' + vm.entity.name + '*',
+        'q': query,
         'wt': 'json',
         'json.wrf': 'JSON_CALLBACK',
         'json.nl': 'map'
       };
 
-      return params;
+      return params;    
     }
 
 
