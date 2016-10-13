@@ -1,9 +1,16 @@
 .popover.right {
-  height: 69.5px;
+  height: inherit;
+  max-height: 110px;
   width: 225px;
   background-color: $silver;
   border: none;
   left: 212px !important;
+}
+
+.popover.bottom {
+  height: inherit;
+  background-color: $silver;
+  border: none;
 }
 
 .popover-inner .popover-content,
@@ -20,6 +27,14 @@
 .popover.right > .arrow:after,
 .popover.right > .arrow {
   border-right-color: $silver;
+}
+
+.popover.bottom > .arrow {
+  border-bottom-color: $silver;
+  top: -10px;
+  &:after {
+    border-bottom-color: $silver;
+  }
 }
 
 .tooltip-exit {
