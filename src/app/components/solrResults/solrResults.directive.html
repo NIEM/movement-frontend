@@ -9,11 +9,13 @@
         <div class="legend-symbols">
           <div class="legend-symbol">
             <img class="legend-img" src="images/icon_t.svg">
-            <h6 class="legend-title type-legend">Type</h6>
+            <h6 class="legend-title type-legend" uib-popover-template="typePopoverTemplateUrl"
+                popover-placement="bottom" popover-is-open="typePopoverIsOpen">Type</h6>
           </div>
           <div class="legend-symbol">
             <img class="legend-img" src="images/icon_e.svg">
-            <h6 class="legend-title">Element</h6>
+            <h6 class="legend-title" uib-popover-template="elementPopoverTemplateUrl"
+                popover-placement="bottom" popover-is-open="elementPopoverIsOpen">Element</h6>
           </div>
         </div>
       </div>
@@ -36,17 +38,18 @@
           <solr-facet display="Entities" field="entityType"></solr-facet>
         </div>
         <div class="solr-facet-group-tooltip"
-             uib-popover="Sed ut perspiciatinis iste natus error sit voluptatem accus antium dolore."
-             popover-placement="right" popover-is-open="popoverIsOpen" ng-click="popoverIsOpen = !popoverIsOpen">Namespace
+             uib-popover-template="namespacePopoverTemplateUrl"
+             popover-placement="right" popover-is-open="namespacePopoverIsOpen"><span
+          class="dotted-underline">Namespace</span>
         </div>
         <div class="solr-facet-subgroup-tooltip">
           <solr-facet display="Domain" field="domain"></solr-facet>
-          <div class="solr-facet-group-tooltip">
-            <solr-facet display="External Standards" field="externalStandard"></solr-facet>
-          </div>
-          <div class="solr-facet-group-tooltip">
-            <solr-facet display="Others" field="otherNamespace"></solr-facet>
-          </div>
+        </div>
+        <div class="solr-facet-subgroup-tooltip">
+          <solr-facet display="External Standards" field="externalStandard"></solr-facet>
+        </div>
+        <div class="solr-facet-subgroup-tooltip">
+          <solr-facet display="Others" field="otherNamespace"></solr-facet>
         </div>
       </div>
     </div>
@@ -56,7 +59,13 @@
       <div class="results-list row">
         <div class="result">
           <div class="result-item" ng-repeat="doc in docs">
-            <h2 class="result-heading" ng-show="isFirstOfNamespace(docs[$index - 1].namespace, doc)">{{doc.namespace}}  ({{doc.namespaceCount}})</h2>
+            <h2 class="result-heading" ng-show="isFirstOfNamespace(docs[$index - 1].namespace, doc)">
+              <span uib-popover-template="corePopoverTemplateUrl" popover-placement="right"
+                    popover-is-open="corePopoverIsOpen"
+                    popover-enable="doc.namespace == 'NIEM Core'">
+                {{doc.namespace}} ({{doc.namespaceCount}})
+              </span>
+            </h2>
             <div class="result-content">
               <a ui-sref="main.details({ entityID: doc.id })">
                 <h3 class="item-title">{{doc.name}}</h3>

@@ -41,7 +41,7 @@
           $location.search('q', query);
           solrSearch.clearAllFilters();
         }
-        
+
       };
 
       scope.getTypeaheadResults = function(query) {
@@ -54,10 +54,13 @@
           'json.nl': 'map'
         };
 
+        var domainArray = [{'name': query + ' in All Domains'}, {'name': query + ' in NIEM Core'}];
+
         return solrRequest.makeSolrRequest(params).then(function(data) {
           if (data.response.docs) {
             scope.topNamespace = data.response.docs[0].namespace;
-            return data.response.docs;
+            domainArray.push({'name': query + ' in ' + scope.topNamespace});
+            return domainArray.concat(data.response.docs);
           }
         });
 
