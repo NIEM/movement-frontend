@@ -4,7 +4,7 @@
       padding: 0 20px;
       background-image: linear-gradient(to left, $teal-gradient, $marine-blue);
       color: $white;
-      margin: 0 30px;
+      margin: 0 29px 0 30px;
       letter-spacing: 0.5px;
       height: 80px;
       .keyword-search-text {
@@ -75,7 +75,7 @@
 
     .search-filter {
       background: $white;
-      padding-left: 50px;
+      padding-left: 32px;
       .filter-heading {
         display: inline-block;
         margin: 0;
@@ -104,35 +104,41 @@
           font-size: 18px;
           letter-spacing: 0.5px;
           color: $marine-blue;
-          text-decoration: underline;
           margin-top: 18px;
+          .dotted-underline {
+            border-bottom: 1px dotted;
+          }
         }
         .solr-facet-subgroup-tooltip {
           .filter-group {
             font-size: 14px;
             letter-spacing: 0.5px;
             color: $seafoam;
-            text-decoration: underline;
             text-transform: uppercase;
             margin-top: 11px;
+            .dotted-underline {
+              border-bottom: 1px dotted;
+            }
           }
         }
       }
 
     }
     .search-results {
-      padding: 0 50px;
+      padding: 0 43px;
       .results-list {
-        padding-top: 28px;
         .result {
           .result-item {
             border-bottom: 1px solid $silver;
             .result-heading {
-              padding: 18px 0;
+              padding: 38px 0 18px 0;
               border-bottom: 1px solid $silver;
               margin: 0;
               color: $evergreen;
               letter-spacing: 0.5px;
+              &:first-child {
+                padding-top: 28px;
+              }
             }
             .result-content {
               display: inline-block;

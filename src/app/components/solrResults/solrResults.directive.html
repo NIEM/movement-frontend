@@ -36,8 +36,8 @@
           <solr-facet display="Entities" field="entityType"></solr-facet>
         </div>
         <div class="solr-facet-group-tooltip"
-             uib-popover="Sed ut perspiciatinis iste natus error sit voluptatem accus antium dolore."
-             popover-placement="right" popover-is-open="popoverIsOpen" ng-click="popoverIsOpen = !popoverIsOpen">Namespace
+             uib-popover-template="'app/components/solrFacet/custom-popover-template.html'"
+             popover-placement="right" popover-is-open="popoverIsOpen"><span class="dotted-underline">Namespace</span>
         </div>
         <div class="solr-facet-subgroup-tooltip">
           <solr-facet display="Domain" field="domain"></solr-facet>

@@ -3,7 +3,7 @@
   width: 225px;
   background-color: $silver;
   border: none;
-  left: 235px !important;
+  left: 212px !important;
 }
 
 .popover-inner .popover-content,
@@ -20,4 +20,12 @@
 .popover.right > .arrow:after,
 .popover.right > .arrow {
   border-right-color: $silver;
+}
+
+.tooltip-exit {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  font-size: 14px;
+  color: $ocean-blue;
 }

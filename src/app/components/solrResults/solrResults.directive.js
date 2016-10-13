@@ -44,6 +44,12 @@
         return 'images/icon_' + entityType.substring(0,1) + '.svg';
       };
 
+      scope.popoverIsOpen =  false;
+
+      scope.closePopover = function() {
+        scope.popoverIsOpen = false;
+      }
+
       scope.isFirstOfNamespace = function(previousNamespace, currentDoc) {
         if (solrSearch.getSort() === 'namespacePriority asc') {
           if (currentDoc.namespace !== previousNamespace) {
@@ -51,7 +57,7 @@
             return true;
           }
         }
-        
+
         return false;
       };
 
