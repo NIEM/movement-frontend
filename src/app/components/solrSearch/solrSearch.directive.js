@@ -57,7 +57,7 @@
         var domainArray = [{'name': query + ' in All Domains'}, {'name': query + ' in NIEM Core'}];
 
         return solrRequest.makeSolrRequest(params).then(function(data) {
-          if (data.response.docs) {
+          if (data.response.docs.length > 0) {
             scope.topNamespace = data.response.docs[0].namespace;
             domainArray.push({'name': query + ' in ' + scope.topNamespace});
             return domainArray.concat(data.response.docs);
