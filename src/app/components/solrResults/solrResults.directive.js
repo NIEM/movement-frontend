@@ -44,6 +44,34 @@
         return 'images/icon_' + entityType.substring(0,1) + '.svg';
       };
 
+      scope.corePopoverIsOpen =  false;
+      scope.namespacePopoverIsOpen =  false;
+      scope.elementPopoverIsOpen = false;
+      scope.typePopoverIsOpen = false;
+      scope.corePopoverTemplateUrl = 'app/components/solrResults/corePopoverTemplate.html'
+      scope.namespacePopoverTemplateUrl = 'app/components/solrResults/namespacePopoverTemplate.html';
+      scope.elementPopoverTemplateUrl = 'app/components/solrResults/elementPopoverTemplate.html';
+      scope.typePopoverTemplateUrl = 'app/components/solrResults/typePopoverTemplate.html';
+
+      scope.closePopover = function(type) {
+        if(type === 'namespace') {
+          scope.namespacePopoverIsOpen = false;
+        } else if (type === 'core') {
+          scope.corePopoverIsOpen = false;
+        } else if (type === 'type') {
+          scope.typePopoverIsOpen = false;
+        }
+        else if( type === 'element') {
+          scope.elementPopoverIsOpen = false;
+        }
+      };
+
+      scope.tooltipText = {
+        'Entities': 'A physical thing, document, abstract concept, number, or string',
+        'External Standards': 'Unmodified schema sources on the internet not encompassed by NIEM',
+        'Domain': 'Communities of interest (COI) that are formally established, with an executive steward, to officially manage and govern a portion of the NIEM data model'
+      };
+
       scope.isFirstOfNamespace = function(previousNamespace, currentDoc) {
         if (solrSearch.getSort() === 'namespacePriority asc') {
           if (currentDoc.namespace !== previousNamespace) {
@@ -51,7 +79,7 @@
             return true;
           }
         }
-        
+
         return false;
       };
 

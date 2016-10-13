@@ -15,16 +15,40 @@
     #solr-search-input {
       color: $marine-blue;
       height: 39px;
-      //&:focus {
-      //  border: none;
-      //}
       +.dropdown-menu {
         border-radius: 0;
         width: 361px;
-        border-top: none; //
-        margin: 0; //
+        border-top: none;
+        margin: 0;
+        li:first-child,
+        li:nth-child(2),
+        li:nth-child(3) {
+          a {
+            color: $ocean-blue;
+            strong {
+              font-weight: normal;
+              color: $marine-blue;
+            }
+          }
+        }
+        li:nth-child(3) {
+          a {
+            border-bottom: 1px solid #d1d2d4;
+            padding-bottom: 11px;
+            padding-left: 0;
+            strong {
+              margin: 0 0 0 10px;
+            }
+          }
+        }
+        .active > a,
+        .active > a:hover,
+        .active > a:focus {
+          background-color: lighten($ocean-blue, 20%);
+        }
         a {
           color: $marine-blue;
+          padding: 3px 10px;
         }
       }
     }

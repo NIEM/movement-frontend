@@ -1,0 +1,15 @@
+.solr-pagination {
+  float: right;
+  font-weight: normal;
+  letter-spacing: 0.5px;
+  color: $marine-blue;
+  text-transform: none;
+  margin-top: 5px;
+  a {
+    letter-spacing: 1px;
+    color: $marine-blue;
+    &:active {
+      color: $ocean-blue;
+    }
+  }
+}
