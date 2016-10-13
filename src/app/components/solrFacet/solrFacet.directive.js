@@ -32,7 +32,7 @@
     function link(scope, element, attrs) {
 
       function setResults() {
-        scope.results = solrSearch.getFacetFields()[scope.field];
+        scope.results = solrSearch.getFacet(scope.field);
       }
 
       setResults();

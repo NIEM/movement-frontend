@@ -26,19 +26,17 @@
      */
     function link(scope, element, attrs, ctrl) {
 
-      $rootScope.$on('newSearch', function() {
-        init();
-      });
-
       function init() {
         scope.docs = solrSearch.getDocs();
         scope.numFound = solrSearch.getNumFound();
         scope.query = solrSearch.getQuery();
-        scope.facetFields = solrSearch.getFacetFields();
       }
 
       init();
-
+      
+      $rootScope.$on('newSearch', function() {
+        init();
+      });
 
       scope.clearAllFilters = function() {
         solrSearch.clearAllFilters();
@@ -51,11 +49,10 @@
       scope.isFirstOfNamespace = function(previousNamespace, currentDoc) {
         if (solrSearch.getSort() === 'namespacePriority asc') {
           if (currentDoc.namespace !== previousNamespace) {
-            currentDoc.namespaceCount = scope.facetFields[currentDoc.namespaceType][currentDoc.namespace];
+            currentDoc.namespaceCount = solrSearch.getFacet(currentDoc.namespaceType)[currentDoc.namespace];
             return true;
           }
         }
-        
         return false;
       };
 

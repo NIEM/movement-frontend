@@ -20,7 +20,7 @@
     var numFound;
     var selectedFacets = getSelectedFacetsFromLocation();
 
-    var facetFields = {
+    var facets = {
       'entityType': {},
       'domain': {},
       'externalStandard': {},
@@ -32,7 +32,7 @@
       getNumFound: getNumFound,
       getQuery: getQuery,
       getSort: getSort,
-      getFacetFields: getFacetFields,
+      getFacet: getFacet,
       getSelectedFacets: getSelectedFacets,
       search: search,
       clearAllFilters: clearAllFilters
@@ -58,10 +58,10 @@
       return $location.search().sortBy || 'namespacePriority asc';
     }
 
-    function getFacetFields() {
-      return facetFields;
+    function getFacet(facetField) {
+      return facets[facetField];
     }
-    
+
     function getSelectedFacets() {
       return selectedFacets;
     }
@@ -81,7 +81,7 @@
         docs = data.response.docs;
         numFound = data.response.numFound;
 
-        facetFields = data.facet_counts.facet_fields;
+        facets = data.facet_counts.facet_fields;
         selectedFacets = getSelectedFacetsFromLocation();
 
         $rootScope.$emit('newSearch');
@@ -90,6 +90,13 @@
     }
 
 
+    /**
+     * @name clearAllFilters
+     *
+     * @memberof dhsniem.service:solrSearch
+     *
+     * @description Clears any selected facets (filters) and calls a new search.
+     */
     function clearAllFilters() {
       selectedFacets = [];
       $location.search('selectedFacets', selectedFacets);
@@ -113,7 +120,7 @@
         'wt': 'json',
         'json.wrf': 'JSON_CALLBACK',
         'json.nl': 'map',
-        'facet.field': listFields()
+        'facet.field': getFacetFields()
       };
 
       if (selectedFacets) {
@@ -125,27 +132,23 @@
 
 
     /**
-     * @name listFields
+     * @name getFacetFields
      *
      * @memberof dhsniem.service:solrSearch
      *
      * @description Iterates over the facets object to return an array of the fields to be used as facets.
      *
-     * @returns fields - an array of the facet fields
+     * @returns fields - an array of the facet fields with exclude tags
      */
-
-    function listFields() {
+    function getFacetFields() {
       var fields = [];
       var excludeTag;
-      for (var k in facetFields) {
-        excludeTag = '{!ex=' + k + 'tag}';
-        fields.push(excludeTag + k);
+      for (var facetField in facets) {
+        excludeTag = '{!ex=' + facetField + 'tag}';
+        fields.push(excludeTag + facetField);
       }
       return fields;
     }
-
-
-
 
 
     /**
