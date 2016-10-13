@@ -96,9 +96,14 @@
      * @memberof dhsniem.service:solrSearch
      *
      * @description Clears any selected facets (filters) and calls a new search.
+     *
+     * @param exception - a filter to keep for use with typeahead
      */
-    function clearAllFilters() {
+    function clearAllFilters(exception) {
       selectedFacets = [];
+      if (exception) {
+        selectedFacets.push(exception);
+      }
       $location.search('selectedFacets', selectedFacets);
       search();
     }

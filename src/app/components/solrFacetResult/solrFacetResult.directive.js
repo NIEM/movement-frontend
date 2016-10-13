@@ -29,7 +29,7 @@
     /**
      *  Defines variables and functions within solrFacetResult scope
      */
-    function link(scope, element, attrs, ctrl) {
+    function link(scope, element, attrs) {
 
       scope.facetString = function(){
         return scope.field + ':"' + scope.key + '"';
