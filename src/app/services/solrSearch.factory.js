@@ -27,13 +27,14 @@
       getNumFound: getNumFound,
       getQuery: getQuery,
       getSort: getSort,
-      getFacets: getFacets,
+      // getFacets: getFacets,
       getFacetFields: getFacetFields,
       getSelectedFacets: getSelectedFacets,
-      setFacet: setFacet,
-      setFacetResult: setFacetResult,
+      // setFacet: setFacet,
+      // setFacetResult: setFacetResult,
       search: search,
-      clearAllFilters: clearAllFilters
+      clearAllFilters: clearAllFilters,
+      setFacetFields: setFacetFields
     };
 
 
@@ -82,8 +83,18 @@
      *
      * @param facet
      */
-    function setFacet(facet) {
-      facets[facet.field] = facet;      
+    // function setFacet(facet) {
+    //   console.log('facet set!');
+    //   facets[facet.field] = facet;      
+    // }
+
+    function setFacetFields() {
+      facetFields = {
+        'entityType': {},
+        'domain': {},
+        'externalStandard': {},
+        'otherNamespace': {}
+      };
     }
 
 
@@ -96,7 +107,7 @@
      */
     function setFacetResult(facetKey, facetResults) {
       for (var key in facets) {
-        if (facets[key].field === facetKey) {
+        if (key === facetKey) {
           facets[key].results = facetResults;
         }
       }      
@@ -121,6 +132,8 @@
         selectedFacets = getSelectedFacetsFromLocation();
 
         $rootScope.$emit('newSearch');
+        console.log('facets', facets);
+        console.log('facetfields', facetFields);
 
       });
     }
@@ -169,15 +182,28 @@
      *
      * @returns fields - an array of the facet fields
      */
+    // function listFields() {
+    //   var fields = [];
+    //   var excludeTag;
+    //   for (var k in facets) {
+    //     excludeTag = '{!ex=' + facets[k].field + 'tag}';
+    //     fields.push(excludeTag + facets[k].field);
+    //   }
+    //   return fields;
+    // }
+
     function listFields() {
       var fields = [];
       var excludeTag;
-      for (var k in facets) {
-        excludeTag = '{!ex=' + facets[k].field + 'tag}';
-        fields.push(excludeTag + facets[k].field);
+      for (var k in facetFields) {
+        excludeTag = '{!ex=' + k + 'tag}';
+        fields.push(excludeTag + k);
       }
       return fields;
     }
+
+
+
 
 
     /**

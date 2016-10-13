@@ -27,9 +27,6 @@
     function link(scope, element, attrs, ctrl) {
 
       $rootScope.$on('newSearch', function() {
-        for (var key in solrSearch.getFacets()){
-          solrSearch.setFacetResult(key, solrSearch.getFacetFields()[key]);
-        }
         scope.docs = solrSearch.getDocs();
         scope.numFound = solrSearch.getNumFound();
         scope.query = solrSearch.getQuery();
