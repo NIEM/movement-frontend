@@ -106,7 +106,7 @@
           color: $marine-blue;
           margin-top: 18px;
           .dotted-underline {
-            border-bottom: 1px dotted;
+            border-bottom: 1px dashed;
           }
         }
         .solr-facet-subgroup-tooltip {
@@ -117,7 +117,7 @@
             text-transform: uppercase;
             margin-top: 11px;
             .dotted-underline {
-              border-bottom: 1px dotted;
+              border-bottom: 1px dashed;
             }
           }
         }
