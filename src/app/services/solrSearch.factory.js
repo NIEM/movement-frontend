@@ -18,23 +18,24 @@
 
     var docs;
     var numFound;
-    var facets = {};
-    var facetFields = {};
     var selectedFacets = getSelectedFacetsFromLocation();
+
+    var facetFields = {
+      'entityType': {},
+      'domain': {},
+      'externalStandard': {},
+      'otherNamespace': {}
+    };
 
     return {
       getDocs: getDocs,
       getNumFound: getNumFound,
       getQuery: getQuery,
       getSort: getSort,
-      // getFacets: getFacets,
       getFacetFields: getFacetFields,
       getSelectedFacets: getSelectedFacets,
-      // setFacet: setFacet,
-      // setFacetResult: setFacetResult,
       search: search,
-      clearAllFilters: clearAllFilters,
-      setFacetFields: setFacetFields
+      clearAllFilters: clearAllFilters
     };
 
 
@@ -57,60 +58,12 @@
       return $location.search().sortBy || 'namespacePriority asc';
     }
 
-    function getFacets() {
-      return facets;
-    }
-
     function getFacetFields() {
       return facetFields;
     }
     
     function getSelectedFacets() {
       return selectedFacets;
-    }
-
-
-    /*
-    * Setters
-    */
-
-    /**
-     * @name setFacet
-     *
-     * @memberof dhsniem.service:solrSearch
-     *
-     * @description Sets the facets object with a key and value of a facet field and its scope from the solrFacet directive, respectively.
-     *
-     * @param facet
-     */
-    // function setFacet(facet) {
-    //   console.log('facet set!');
-    //   facets[facet.field] = facet;      
-    // }
-
-    function setFacetFields() {
-      facetFields = {
-        'entityType': {},
-        'domain': {},
-        'externalStandard': {},
-        'otherNamespace': {}
-      };
-    }
-
-
-    /**
-     * @name setFacetResult
-     *
-     * @memberof dhsniem.service:solrSearch
-     *
-     * @description Sets the results (possible filter values) to the respective facet field name on the facets object.
-     */
-    function setFacetResult(facetKey, facetResults) {
-      for (var key in facets) {
-        if (key === facetKey) {
-          facets[key].results = facetResults;
-        }
-      }      
     }
 
 
@@ -132,8 +85,6 @@
         selectedFacets = getSelectedFacetsFromLocation();
 
         $rootScope.$emit('newSearch');
-        console.log('facets', facets);
-        console.log('facetfields', facetFields);
 
       });
     }
@@ -182,15 +133,6 @@
      *
      * @returns fields - an array of the facet fields
      */
-    // function listFields() {
-    //   var fields = [];
-    //   var excludeTag;
-    //   for (var k in facets) {
-    //     excludeTag = '{!ex=' + facets[k].field + 'tag}';
-    //     fields.push(excludeTag + facets[k].field);
-    //   }
-    //   return fields;
-    // }
 
     function listFields() {
       var fields = [];

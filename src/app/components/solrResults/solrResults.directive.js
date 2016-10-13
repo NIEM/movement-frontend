@@ -27,11 +27,18 @@
     function link(scope, element, attrs, ctrl) {
 
       $rootScope.$on('newSearch', function() {
+        init();
+      });
+
+      function init() {
         scope.docs = solrSearch.getDocs();
         scope.numFound = solrSearch.getNumFound();
         scope.query = solrSearch.getQuery();
         scope.facetFields = solrSearch.getFacetFields();
-      });
+      }
+
+      init();
+
 
       scope.clearAllFilters = function() {
         solrSearch.clearAllFilters();

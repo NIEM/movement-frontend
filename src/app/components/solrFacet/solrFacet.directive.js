@@ -32,8 +32,6 @@
     function link(scope, element, attrs) {
 
       function setResults() {
-        // solrSearch.setFacetResult(scope.field, solrSearch.getFacetFields()[scope.field]);
-        // scope.results = solrSearch.getFacets()[scope.field].results;
         scope.results = solrSearch.getFacetFields()[scope.field];
       }
 
