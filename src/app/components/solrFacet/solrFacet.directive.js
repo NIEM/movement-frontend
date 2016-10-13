@@ -31,14 +31,14 @@
      */
     function link(scope, element, attrs) {
 
-      function setResults() {
+      function setFacetResults() {
         scope.results = solrSearch.getFacet(scope.field);
       }
 
-      setResults();
+      setFacetResults();
 
       $rootScope.$on('newSearch', function() {
-        setResults();
+        setFacetResults();
       });
 
     }
