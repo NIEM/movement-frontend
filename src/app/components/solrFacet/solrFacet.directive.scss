@@ -1,5 +1,5 @@
 .popover.right {
-  height: inherit; //69.5px;
+  height: inherit;
   max-height: 110px;
   width: 225px;
   background-color: $silver;
@@ -29,7 +29,6 @@
   border-right-color: $silver;
 }
 
-//.popover.bottom > .arrow:after,
 .popover.bottom > .arrow {
   border-bottom-color: $silver;
   top: -10px;
