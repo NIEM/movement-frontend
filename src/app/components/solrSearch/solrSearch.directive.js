@@ -35,12 +35,12 @@
 
         var query = scope.searchQuery || '*';
 
-        if ($location.path() !== '/results') {
+        if (!$state.includes('main.results')) {
           $state.go('main.results', {q: query});
+        } else {
+          $location.search('q', query);
+          solrSearch.clearAllFilters();
         }
-
-        $location.search('q', query);
-        solrSearch.clearAllFilters();
 
       };
 

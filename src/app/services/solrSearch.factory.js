@@ -18,20 +18,22 @@
 
     var docs;
     var numFound;
-    var facets = {};
-    var facetFields = {};
     var selectedFacets = getSelectedFacetsFromLocation();
+
+    var facets = {
+      'entityType': {},
+      'domain': {},
+      'externalStandard': {},
+      'otherNamespace': {}
+    };
 
     return {
       getDocs: getDocs,
       getNumFound: getNumFound,
       getQuery: getQuery,
       getSort: getSort,
-      getFacets: getFacets,
-      getFacetFields: getFacetFields,
+      getFacet: getFacet,
       getSelectedFacets: getSelectedFacets,
-      setFacet: setFacet,
-      setFacetResult: setFacetResult,
       search: search,
       clearAllFilters: clearAllFilters
     };
@@ -56,50 +58,12 @@
       return $location.search().sortBy || 'namespacePriority asc';
     }
 
-    function getFacets() {
-      return facets;
+    function getFacet(facetField) {
+      return facets[facetField];
     }
 
-    function getFacetFields() {
-      return facetFields;
-    }
-    
     function getSelectedFacets() {
       return selectedFacets;
-    }
-
-
-    /*
-    * Setters
-    */
-
-    /**
-     * @name setFacet
-     *
-     * @memberof dhsniem.service:solrSearch
-     *
-     * @description Sets the facets object with a key and value of a facet field and its scope from the solrFacet directive, respectively.
-     *
-     * @param facet
-     */
-    function setFacet(facet) {
-      facets[facet.field] = facet;      
-    }
-
-
-    /**
-     * @name setFacetResult
-     *
-     * @memberof dhsniem.service:solrSearch
-     *
-     * @description Sets the results (possible filter values) to the respective facet field name on the facets object.
-     */
-    function setFacetResult(facetKey, facetResults) {
-      for (var key in facets) {
-        if (facets[key].field === facetKey) {
-          facets[key].results = facetResults;
-        }
-      }      
     }
 
 
@@ -117,7 +81,7 @@
         docs = data.response.docs;
         numFound = data.response.numFound;
 
-        facetFields = data.facet_counts.facet_fields;
+        facets = data.facet_counts.facet_fields;
         selectedFacets = getSelectedFacetsFromLocation();
 
         $rootScope.$emit('newSearch');
@@ -126,6 +90,13 @@
     }
 
 
+    /**
+     * @name clearAllFilters
+     *
+     * @memberof dhsniem.service:solrSearch
+     *
+     * @description Clears any selected facets (filters) and calls a new search.
+     */
     function clearAllFilters() {
       selectedFacets = [];
       $location.search('selectedFacets', selectedFacets);
@@ -149,7 +120,7 @@
         'wt': 'json',
         'json.wrf': 'JSON_CALLBACK',
         'json.nl': 'map',
-        'facet.field': listFields()
+        'facet.field': getFacetFields()
       };
 
       if (selectedFacets) {
@@ -161,20 +132,20 @@
 
 
     /**
-     * @name listFields
+     * @name getFacetFields
      *
      * @memberof dhsniem.service:solrSearch
      *
      * @description Iterates over the facets object to return an array of the fields to be used as facets.
      *
-     * @returns fields - an array of the facet fields
+     * @returns fields - an array of the facet fields with exclude tags
      */
-    function listFields() {
+    function getFacetFields() {
       var fields = [];
       var excludeTag;
-      for (var k in facets) {
-        excludeTag = '{!ex=' + facets[k].field + 'tag}';
-        fields.push(excludeTag + facets[k].field);
+      for (var facetField in facets) {
+        excludeTag = '{!ex=' + facetField + 'tag}';
+        fields.push(excludeTag + facetField);
       }
       return fields;
     }
