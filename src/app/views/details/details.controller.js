@@ -94,11 +94,11 @@
         vm.containingTypes = data.response.docs;
 
         // Example code to return the first iteration of nested structure
-        // if (vm.containingTypes) {
-        //   getElementObjects(vm.containingTypes[0]);
-        //   console.log(vm.containingTypes);
-        // }
-      });      
+        if (vm.containingTypes) {
+          getElementObjects(vm.containingTypes[0]);
+          console.log(vm.containingTypes);
+        }
+      });
     }
 
 
@@ -166,7 +166,7 @@
         'json.nl': 'map'
       };
 
-      return params;    
+      return params;
     }
 
     /**

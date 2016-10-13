@@ -1,17 +1,30 @@
 .details {
   .content {
-    padding: 30px;
+    padding: 10px 30px 30px 30px;
     min-width: $niem-min-width;
     max-width: $niem-max-width;
     margin: 0 auto;
 
+    .back-link {
+      font-size: 12px;
+      letter-spacing: 0.5px;
+      color: $ocean-blue;
+    }
+
     .details-heading {
       background-image: linear-gradient(to left, #29819c, #004666);
       color: $white;
-      padding: 5px;
+      padding: 20px;
       margin-top: 10px;
+      h1 {
+        margin: 0;
+      }
       .details-heading-img {
         width: 17.9px;
+      }
+      .namespace {
+        color: $seafoam;
+        letter-spacing: 0.5px;
       }
     }
 
@@ -31,8 +44,44 @@
         height: 106px;
         border: 1px solid $ocean-blue;
         margin: 10px 5px;
+        padding: 20px;
         h3 {
           letter-spacing: 0.5px;
+          color: $marine-blue;
+          margin: 0;
+        }
+      }
+    }
+
+    .details-desc {
+      .contain-list {
+        .panel-group {
+          .panel-default {
+            padding: 10px;
+            border: 0;
+            border-radius: 0;
+            box-shadow: none;
+            .panel-heading {
+              background-color: $white;
+              h2 {
+                letter-spacing: 0.5px;
+                color: $marine-blue;
+                margin: 0;
+              }
+            }
+            .accordion-toggle {
+              &:hover, &:focus {
+                text-decoration: none;
+              }
+            }
+          }
+
+          .contain-group {
+            .contain-group-item {
+              border-bottom: 1px solid black;
+              padding: 20px;
+            }
+          }
         }
       }
     }
