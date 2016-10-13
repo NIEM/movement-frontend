@@ -29,6 +29,7 @@
       var domain;
       var externalStandard;
       var otherNamespace;
+      var namespacePriority;
 
       // Determine if file is in domains dir or niem-core
       if (path.indexOf('domains') > -1) {
@@ -42,27 +43,33 @@
         });
 
         namespace = domain;
+        namespacePriority = 2;
 
       } else if ( path.indexOf('niem-core') > -1) {
         namespaceType = 'domain';
         domain = 'NIEM Core';
         namespace = domain;
+        namespacePriority = 1;
       } else if ( path.indexOf('codes') > -1 ) {
-        namespaceType = 'external';
+        namespaceType = 'externalStandard';
         externalStandard = pathSlash.split('codes/')[1].split('/')[0];
         namespace = externalStandard;
+        namespacePriority = 3;
       } else if (path.indexOf('external') > -1) {
-        namespaceType = 'external';
+        namespaceType = 'externalStandard';
         externalStandard = pathSlash.split('external/')[1].split('/')[0];
         namespace = externalStandard;
+        namespacePriority = 3;
       } else if( path.indexOf('adapters') > -1) {
-        namespaceType = 'other';
+        namespaceType = 'otherNamespace';
         otherNamespace = pathSlash.split('adapters/')[1].split('/')[0];
         namespace = otherNamespace;
+        namespacePriority = 4;
       } else {
-        namespaceType = 'other';
+        namespaceType = 'otherNamespace';
         otherNamespace = pathSlash.split('niem-xsd/')[1].split('/')[0];
         namespace = otherNamespace;
+        namespacePriority = 4;
       }
       
       if (domain) {
@@ -75,6 +82,7 @@
 
       row.put("namespace", namespace);
       row.put("namespaceType", namespaceType);
+      row.put("namespacePriority", namespacePriority);
 
       return row;
 
