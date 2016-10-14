@@ -11,7 +11,7 @@
           templateUrl: 'app/views/results/results.view.html',
           controller: 'ResultsCtrl',
           controllerAs: 'ResultsCtrl',
-          title: 'results',
+          title: 'CCP Search',
           reloadOnSearch: false
         });
     });

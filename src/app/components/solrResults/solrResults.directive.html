@@ -37,10 +37,11 @@
         <div class="solr-facet-group-tooltip">
           <solr-facet display="Entities" field="entityType"></solr-facet>
         </div>
-        <div class="solr-facet-group-tooltip"
-             uib-popover-template="popovers['namespace'].popoverTemplateUrl"
-             popover-placement="right" popover-is-open="popovers['namespace'].popoverIsOpen"><span
-          class="dotted-underline">Namespace</span>
+        <div class="solr-facet-group-tooltip">
+          <span uib-popover-template="popovers['namespace'].popoverTemplateUrl"
+                popover-placement="right" popover-is-open="popovers['namespace'].popoverIsOpen" class="dotted-underline">
+            Namespace
+          </span>
         </div>
         <div class="solr-facet-subgroup-tooltip">
           <solr-facet display="Domain" field="domain"></solr-facet>

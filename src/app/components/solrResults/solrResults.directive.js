@@ -33,7 +33,7 @@
       }
 
       init();
-      
+
       $rootScope.$on('newSearch', function() {
         init();
       });
@@ -43,7 +43,7 @@
       };
 
       scope.getImagePath = function(entityType) {
-        return 'images/icon_' + entityType.substring(0,1) + '.svg';
+        return 'images/icon_' + entityType.substring(0,1).toLowerCase() + '.svg';
       };
 
       scope.popovers = {
