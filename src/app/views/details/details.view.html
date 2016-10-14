@@ -30,8 +30,11 @@
 
 
     <div class="details-desc">
-      <!--<facet-details></facet-details>-->
-      <div class="contain-list">
+      <div ng-if="!!DetailsCtrl.entity.facets">
+        <facet-details></facet-details>
+      </div>
+
+      <div class="contain-list" ng-if="!DetailsCtrl.entity.facets">
         <niem-accordion></niem-accordion>
         <niem-accordion></niem-accordion>
         <niem-accordion></niem-accordion>
