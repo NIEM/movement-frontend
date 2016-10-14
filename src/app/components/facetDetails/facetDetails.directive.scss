@@ -1,12 +1,31 @@
 .facet-details {
+  .facet-bar {
+    display: block;
+    border-bottom: 1px solid #d1d2d4;
+    padding-bottom: 13px;
+  }
   .facet-heading {
-    border-bottom: 1px solid $body-text-color;
+    display: inline-block;
+    color: $marine-blue;
+    font-size: 14px;
+    letter-spacing: 1px;
+    font-weight: bold;
+    margin-bottom: 0;
   }
   .facet-list {
+    padding-left: 0;
     .facet-item {
       list-style: none;
-      border-bottom: 1px solid $body-text-color;
-      padding: 20px;
+      border-bottom: 1px solid $silver;
+      padding: 20px 0;
+      margin: 0;
+      .facet-item-text {
+        letter-spacing: 0.5px;
+        color: rgba(0,0,0,0.58);
+        div:first-child {
+          padding-left: 20px;
+        }
+      }
     }
   }
 }

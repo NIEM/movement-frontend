@@ -1,6 +1,6 @@
 .details {
   .content {
-    padding: 10px 30px 30px 30px;
+    padding: 12px 30px 30px 30px;
     min-width: $niem-min-width;
     max-width: $niem-max-width;
     margin: 0 auto;
@@ -14,10 +14,11 @@
     .details-heading {
       background-image: linear-gradient(to left, #29819c, #004666);
       color: $white;
-      padding: 20px;
-      margin-top: 10px;
+      padding: 15px 21px 14px 21px;
+      margin-top: 13px;
       h1 {
-        margin: 0;
+        margin: 0 0 2px 0;
+        letter-spacing: 0.5px;
       }
       .details-heading-img {
         width: 17.9px;
@@ -29,32 +30,71 @@
     }
 
     .details-info {
-      padding-top: 30px;
-      padding-bottom: 30px;
+      padding-top: 20px;
+      padding-bottom: 41px;
       display: inline-flex;
       margin: auto;
 
       .details-info-col {
         width: 50%;
         display: inline-block;
+        &:nth-child(odd) {
+          .details-info-content {
+            margin: 0 5px 19px 0;
+          }
+        }
+        &:nth-child(even) {
+          .details-info-content {
+            margin: 0 0 19px 10px;
+          }
+        }
       }
 
       .details-info-content {
         width: 600px;
         height: 106px;
-        border: 1px solid $ocean-blue;
-        margin: 10px 5px;
-        padding: 20px;
-        h3 {
-          letter-spacing: 0.5px;
-          color: $marine-blue;
-          margin: 0;
+        border: 1px solid;
+        border-color: lighten($ocean-blue, 50%);
+        padding-left: 20px;
+        padding-right: 20px;
+        align-items: center;
+        display: flex;
+        .definition-img,
+        .simple-type-img {
+          display: inline-block;
+          height: 44px;
+          width: 44px;
+        }
+        .details-text {
+          display: inline-block;
+          vertical-align: middle;
+          border-left: 1px solid;
+          border-color: lighten($ocean-blue, 50%);
+          padding-left: 15px;
+          margin-left: 15px;
+          max-width: 478px;
+          h3 {
+            letter-spacing: 0.5px;
+            color: $marine-blue;
+            margin: 0;
+            padding-bottom: 8px;
+          }
+          p {
+            margin: 0;
+            letter-spacing: 0.5px;
+            color: rgba(0,0,0,0.58);
+          }
         }
       }
     }
 
     .details-desc {
       .contain-list {
+        niem-accordion:first-child {
+          .niem-accordion-heading {
+            padding-top: 0;
+          }
+        }
         .panel-group {
           .panel-default {
             padding: 10px;

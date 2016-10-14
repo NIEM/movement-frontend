@@ -1,11 +1,14 @@
 <div class="facet-details">
+  <div class="facet-bar">
   <h5 class="facet-heading text-uppercase">
-    Facet, Value, and Description
+    Facet Name, Value, and Description
   </h5>
+    <solr-results-pagination></solr-results-pagination>
+  </div>
   <ul class="facet-list">
     <div ng-repeat="facet in data">
       <li class="facet-item row" ng-repeat="value in facet.data.facetValue track by $index">
-        <div>
+        <div class="facet-item-text">
           <div class="col-sm-3 text-capitalize">{{facet.name}}</div>
           <div class="col-sm-2">"{{value.trim()}}"</div>
           <div class="col-sm-7">{{facet.data.facetDefinition[$index]}}</div>
