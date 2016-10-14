@@ -14,7 +14,7 @@
     .module('dhsniem')
     .directive('solrSearch', solrSearch);
 
-  function solrSearch($location, $state, solrSearch, solrRequest) {
+  function solrSearch($location, $state, solrSearch, solrRequest, $rootScope) {
     return {
       restrict: 'E',
       templateUrl: 'app/components/solrSearch/solrSearch.directive.html',
@@ -43,6 +43,7 @@
         }
 
         var query = scope.searchQuery || '*';
+        $rootScope.query = query;
 
         if (!$state.includes('main.results')) {
           $state.go('main.results', {q: query, selectedFacets: namespaceParam});
