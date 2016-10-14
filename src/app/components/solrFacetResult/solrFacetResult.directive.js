@@ -14,7 +14,7 @@
     .module('dhsniem')
     .directive('solrFacetResult', solrFacetResult);
 
-  function solrFacetResult($location, solrSearch) {
+  function solrFacetResult($location, solrSearch, $rootScope) {
     return {
       restrict: 'E',
       scope: {
@@ -56,6 +56,16 @@
         $location.search('selectedFacets', selectedFacets);
         solrSearch.search();
       };
+
+      function init() {
+        scope.isSelected();
+      }
+
+      init();
+
+      $rootScope.$on('newSearch', function() {
+        init();
+      });
 
     }
 
