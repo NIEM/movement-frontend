@@ -57,6 +57,10 @@
       return $location.search().sortBy || 'namespacePriority asc';
     }
 
+    function getPage() {
+      return $location.search().page || '1';
+    }
+
     function getFacet(facetField) {
       return facets[facetField];
     }
@@ -106,6 +110,7 @@
         selectedFacets.push(exception);
       }
       $location.search('selectedFacets', selectedFacets);
+      $location.search('page', 1);
       search();
     }
 
@@ -127,7 +132,9 @@
         'json.wrf': 'JSON_CALLBACK',
         'json.nl': 'map',
         'facet.field': getFacetFields(),
-        'fq': groupSelectedFacets()
+        'fq': groupSelectedFacets(),
+        'rows': '100',
+        'start': convertPageToStart()
       };
 
       return params;
@@ -188,6 +195,20 @@
       });
 
       return groupedFacets;
+    }
+
+
+    /**
+     * @name convertPageToStart
+     *
+     * @memberof dhsniem.service:solrSearch
+     *
+     * @description Converts the current page number to a solr start index
+     *
+     * @returns start - the start index used for solr search
+     */
+    function convertPageToStart() {
+      return 100*(getPage() - 1);
     }
 
   }
