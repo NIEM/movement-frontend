@@ -33,22 +33,22 @@
 
       scope.search = function search(taItem) {
 
-        var domainParam = '';
+        var namespaceParam = '';
 
-        if (taItem && taItem.taDomain) {
+        if (taItem && taItem.taNS) {
           scope.searchQuery = taItem.query;
-          if (taItem.taDomain !== 'all') {
-            domainParam = 'domain:"' + taItem.taDomain + '"';
+          if (taItem.taNS !== 'all') {
+            namespaceParam = taItem.taNSType + ':"' + taItem.taNS + '"';
           }
         }
 
         var query = scope.searchQuery || '*';
 
         if (!$state.includes('main.results')) {
-          $state.go('main.results', {q: query, selectedFacets: domainParam});
+          $state.go('main.results', {q: query, selectedFacets: namespaceParam});
         } else {
           $location.search('q', query);
-          solrSearch.clearAllFilters(domainParam);
+          solrSearch.clearAllFilters(namespaceParam);
         }
 
       };
@@ -63,13 +63,13 @@
           'json.nl': 'map'
         };
 
-        var domainArray = [{'name': query + ' in All Domains', 'taDomain': 'all', 'query': query}, {'name': query + ' in NIEM Core', 'taDomain': 'NIEM Core', 'query': query}];
+        var domainArray = [{'name': query + ' in All Domains', 'taNS': 'all', 'query': query}, {'name': query + ' in NIEM Core', 'taNS': 'NIEM Core', 'query': query, 'taNSType': 'domain'}];
 
         return solrRequest.makeSolrRequest(params).then(function(data) {
           if (data.response.docs.length > 0) {
             var topNamespace = data.response.docs[0].namespace;
             var topNamespaceType = data.response.docs[0].namespaceType;
-            domainArray.push({'name': query + ' in ' + topNamespace, 'taDomain': topNamespace, 'query': query});
+            domainArray.push({'name': query + ' in ' + topNamespace, 'taNS': topNamespace, 'query': query, 'taNSType': topNamespaceType});
             return domainArray.concat(data.response.docs);
           }
         });
