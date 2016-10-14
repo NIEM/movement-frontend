@@ -14,7 +14,7 @@
     .module('dhsniem')
     .controller('DetailsCtrl', DetailsCtrl);
 
-  function DetailsCtrl(solrRequest, $location) {
+  function DetailsCtrl(solrRequest, $location, $window) {
 
     var vm = this;
 
@@ -219,6 +219,17 @@
       return !!vm.entity.facets;
     }
 
+
+    /**
+     * @name goBack
+     *
+     * @memberof dhsniem.controller:DetailsCtrl
+     *
+     * @description Navigates back to the search results page with previous search params
+     */
+    vm.goBack = function() {
+      $window.history.back();
+    };
 
     init();
 

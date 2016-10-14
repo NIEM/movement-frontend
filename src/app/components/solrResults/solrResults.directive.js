@@ -30,6 +30,7 @@
         scope.docs = solrSearch.getDocs();
         scope.numFound = solrSearch.getNumFound();
         scope.query = solrSearch.getQuery();
+        scope.totalPages = Math.ceil( scope.numFound / 100);
       }
 
       init();

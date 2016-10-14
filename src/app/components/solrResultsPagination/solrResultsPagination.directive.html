@@ -1,8 +1,8 @@
 <div class="solr-pagination">
   Pages
-  <a><<</a>
-  <!--Insert current page number here-->
+  <a ng-click="prevPage()"><<</a>
+  {{currentPage}}
   of
-  <!--Insert total number of pages here-->
-  <a>>></a>
+  {{totalPages}}
+  <a ng-click="nextPage()">>></a>
 </div>
