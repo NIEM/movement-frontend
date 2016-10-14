@@ -18,7 +18,6 @@
 
     var docs;
     var numFound;
-    var selectedFacets = getSelectedFacetsFromLocation();
 
     var facets = {
       'entityType': {},
@@ -63,6 +62,14 @@
     }
 
     function getSelectedFacets() {
+      var selected = $location.search().selectedFacets;
+      var selectedFacets = [];
+
+      if (angular.isArray(selected)) {
+        selectedFacets = selected;
+      } else if (selected) {
+        selectedFacets.push(selected);
+      }
       return selectedFacets;
     }
 
@@ -75,17 +82,11 @@
      * @description Performs the solr search via call to the http method. On success, sets response data to the service variables.
      */
     function search() {
-
       solrRequest.makeSolrRequest(buildSearchParams()).then(function(data) {
-        
         docs = data.response.docs;
         numFound = data.response.numFound;
-
         facets = data.facet_counts.facet_fields;
-        selectedFacets = getSelectedFacetsFromLocation();
-
         $rootScope.$emit('newSearch');
-
       });
     }
 
@@ -96,9 +97,14 @@
      * @memberof dhsniem.service:solrSearch
      *
      * @description Clears any selected facets (filters) and calls a new search.
+     *
+     * @param exception - a filter to keep for use with typeahead
      */
-    function clearAllFilters() {
-      selectedFacets = [];
+    function clearAllFilters(exception) {
+      var selectedFacets = [];
+      if (exception) {
+        selectedFacets.push(exception);
+      }
       $location.search('selectedFacets', selectedFacets);
       search();
     }
@@ -120,12 +126,9 @@
         'wt': 'json',
         'json.wrf': 'JSON_CALLBACK',
         'json.nl': 'map',
-        'facet.field': getFacetFields()
+        'facet.field': getFacetFields(),
+        'fq': groupSelectedFacets()
       };
-
-      if (selectedFacets) {
-        params['fq'] = groupSelectedFacets();
-      }
 
       return params;
     }
@@ -168,7 +171,7 @@
       var groupedFacets = [];
       var groupedFacetString;
 
-      selectedFacets.forEach(function(selectedFacet) {
+      getSelectedFacets().forEach(function(selectedFacet) {
         facetKey = selectedFacet.split(':')[0];
         facetVal = selectedFacet.split(':')[1];
 
@@ -185,19 +188,6 @@
       });
 
       return groupedFacets;
-    }
-
-
-    function getSelectedFacetsFromLocation() {
-      var selected = $location.search().selectedFacets;
-      var selectedFacets = [];
-
-      if (angular.isArray(selected)) {
-        selectedFacets = selected;
-      } else if (selected) {
-        selectedFacets.push(selected);
-      }
-      return selectedFacets;
     }
 
   }

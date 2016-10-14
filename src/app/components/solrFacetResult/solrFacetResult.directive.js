@@ -14,7 +14,7 @@
     .module('dhsniem')
     .directive('solrFacetResult', solrFacetResult);
 
-  function solrFacetResult($location, solrSearch) {
+  function solrFacetResult($location, solrSearch, $rootScope) {
     return {
       restrict: 'E',
       scope: {
@@ -29,7 +29,7 @@
     /**
      *  Defines variables and functions within solrFacetResult scope
      */
-    function link(scope, element, attrs, ctrl) {
+    function link(scope, element, attrs) {
 
       scope.facetString = function(){
         return scope.field + ':"' + scope.key + '"';
@@ -56,6 +56,16 @@
         $location.search('selectedFacets', selectedFacets);
         solrSearch.search();
       };
+
+      function init() {
+        scope.isSelected();
+      }
+
+      init();
+
+      $rootScope.$on('newSearch', function() {
+        init();
+      });
 
     }
 

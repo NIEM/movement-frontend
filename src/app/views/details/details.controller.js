@@ -35,39 +35,38 @@
         vm.entity = data.response.docs[0];
 
         if (!!vm.entity.facets) {
-          vm.entity.facets.enumerations = JSON.parse(vm.entity.facets[0]);
+          var newFacets = vm.entity.facets;
+          vm.entity.facets = [];
+          for (var i = 0; i < newFacets.length; i++) {
+            var data = JSON.parse(newFacets[i]);
 
-          if (!!vm.entity.facets.enumerations.enumeration.facetValue) {
-            var facetValueData = vm.entity.facets.enumerations.enumeration.facetValue.split(',');
-            var lastValue = facetValueData[facetValueData.length - 1];
+            //if data is an array, use regular for loop
 
-            //remove the braces from the first and last strings
-            facetValueData[0] = facetValueData[0].substring(1);
-            facetValueData[facetValueData.length - 1] = lastValue.substring(0, lastValue.length - 1);
+            var fieldDataArray;
+            var lastValue;
+            //if data is an object, use for-in loop
+            if (typeof(data) === 'object') {
 
-            //trim out any unneeded spaces
-            for (var i = 0; i < facetValueData.length; i++) {
-              facetValueData[i].trim();
+              for (var facet in data) {
+
+                for (var fieldName in data[facet]) {
+
+                  fieldDataArray = data[facet][fieldName].split(',');
+                  lastValue = fieldDataArray[fieldDataArray.length - 1];
+
+                  //trim off brackets from original string, as well as unneccesary whitespace
+                  fieldDataArray[0] = fieldDataArray[0].substring(1);
+                  fieldDataArray[fieldDataArray.length - 1] = lastValue.substring(0, lastValue.length - 1);
+                  data[facet][fieldName] = fieldDataArray;
+                }
+                //vm.entity.facets[facet] = data[facet];
+                vm.entity.facets.push({
+                  name: facet,
+                  data: data[facet]
+                });
+              }
             }
 
-            //finally add new data
-            vm.entity.facets.enumerations.enumeration.facetValuesData = facetValueData;
-          }
-
-          if (!!vm.entity.facets.enumerations.enumeration.facetDefinition) {
-            var facetDefinitionData = vm.entity.facets.enumerations.enumeration.facetDefinition.split(',');
-            var lastDefinition = facetDefinitionData[facetDefinitionData.length - 1];
-
-            //remove the braces from the first and last strings
-            facetDefinitionData[0] = facetDefinitionData[0].substring(1);
-            facetDefinitionData[facetDefinitionData.length - 1] = lastDefinition.substring(0, lastDefinition.length - 1);
-
-            //trim out any unneeded spaces
-            for (var i = 0; i < facetDefinitionData.length; i++) {
-              facetDefinitionData[i].trim();
-            }
-
-            vm.entity.facets.enumerations.enumeration.facetDefinitionsData = facetDefinitionData;
           }
         }
 
