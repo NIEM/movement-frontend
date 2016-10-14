@@ -33,7 +33,6 @@
 
       solrRequest.makeSolrRequest(getSearchParams(query)).then(function(data) {
         vm.entity = data.response.docs[0];
-        console.log(vm.entity);
 
         if (!!vm.entity.facets) {
           vm.entity.facets.enumerations = JSON.parse(vm.entity.facets[0]);
@@ -136,13 +135,39 @@
      * @description Returns the full type object for an element's type field
      *
      * @param element
-     *
-     * @return The full Type document referenced from the Element type field
      */
     function getTypeObject(element) {
       var query = 'name:' + element.type.split(':')[1];
       solrRequest.makeSolrRequest(getSearchParams(query)).then(function(data) {
         element.type = data.response.docs[0];
+      });
+    }
+
+
+    /**
+     * @name getElementsOfType
+     *
+     * @memberof dhsniem.controller:DetailsCtrl
+     *
+     * @description Returns the Element docs that are of a certain type and sets each one's type to the full type object. Sets the tree on vm.propertiesOfType.
+     *
+     * @param type
+     *
+     * @example If vm.entity.entityType === 'Type' (and more specifically ComplexType), then call getElementsOfType(vm.entity);
+     */
+    function getElementsofType(type) {
+      var query = 'type:*' + type.name;
+      solrRequest.makeSolrRequest(getSearchParams(query)).then(function(data) {
+        vm.propertiesOfType = data.response.docs;
+
+        vm.propertiesOfType.forEach(function(element) {
+          if (element.type) {
+            getTypeObject(element);
+          } else {
+            element.type = 'abstract';
+          }
+        });
+
       });
     }
 
