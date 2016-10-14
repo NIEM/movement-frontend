@@ -14,7 +14,7 @@
     .module('dhsniem')
     .directive('solrFacet', solrFacet);
 
-  function solrFacet(solrSearch) {
+  function solrFacet(solrSearch, $rootScope) {
     return {
       restrict: 'E',
       scope: {
@@ -30,7 +30,17 @@
      *  Defines variables and functions within solrFacet scope
      */
     function link(scope, element, attrs) {
-      solrSearch.setFacet(scope);
+
+      function setFacetResults() {
+        scope.results = solrSearch.getFacet(scope.field);
+      }
+
+      setFacetResults();
+
+      $rootScope.$on('newSearch', function() {
+        setFacetResults();
+      });
+
       scope.popoverIsOpen =  false;
       scope.popoverTemplateUrl = 'app/components/solrFacet/custom-popover-template.html';
 
@@ -47,6 +57,7 @@
       scope.getTooltipText = function(display) {
         return scope.tooltipText[display];
       }
+
     }
 
   }

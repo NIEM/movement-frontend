@@ -1,0 +1,18 @@
+<div class="niem-accordion">
+  <div class="niem-accordion-heading">
+    <!--<i class="pull-left glyphicon" ng-class="{'glyphicon-triangle-bottom': isOpen, 'glyphicon-triangle-right': !isOpen}" ng-click="isOpen = !isOpen"></i>-->
+    <img src="images/ic_carot.svg" class="carot-img float-left" ng-class="{'caret-down': isOpen}" ng-click="isOpen = !isOpen">
+    <h2>
+      <span class="contain-title">Contain title</span>
+      <span class="contain-type">Contain type</span>
+    </h2>
+  </div>
+
+  <div class="niem-accordion-list" ng-show="isOpen">
+    <div class="niem-accordion-item">
+      <span class="item-name">Item Name</span>
+      <span class="item-type">Item Type</span>
+    </div>
+    <!--<niem-child-accordion></niem-child-accordion>-->
+  </div>
+</div>

@@ -1,0 +1,33 @@
+.niem-accordion {
+  .niem-accordion-heading {
+    padding: 20px;
+    border-bottom: 1px solid $silver;
+    h2 {
+      letter-spacing: 0.5px;
+      color: $marine-blue;
+      display: inline-block;
+      margin: 0;
+      .contain-type {
+        color: $ocean-blue;
+      }
+    }
+
+    .carot-img {
+      display: inline-block;
+      padding-right: 20px;
+
+      &.caret-down {
+        transform: rotate(90deg);
+        padding-left: 20px;
+      }
+    }
+  }
+
+  .niem-accordion-list {
+    .niem-accordion-item {
+      .item-name {
+
+      }
+    }
+  }
+}
