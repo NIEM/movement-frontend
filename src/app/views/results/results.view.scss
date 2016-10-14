@@ -37,6 +37,7 @@
           display: inline-block;
           .legend-img {
             width: 12px;
+            height: 14.1px;
             opacity: 0.3;
             display: inline-block;
           }
@@ -149,6 +150,7 @@
               padding: 0 5px;
               .item-img {
                 width: 12px;
+                height: 14.1px;
                 opacity: 0.3;
               }
             }
@@ -159,6 +161,10 @@
               letter-spacing: 0.5px;
               &:hover {
                 text-decoration: underline;
+              }
+              @media (max-width: 1024px) {
+                max-width: 424px;
+                overflow-wrap: break-word;
               }
             }
             .item-description {

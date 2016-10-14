@@ -11,7 +11,7 @@
           templateUrl: 'app/views/details/details.view.html',
           controller: 'DetailsCtrl',
           controllerAs: 'DetailsCtrl',
-          title: 'details'
+          title: 'CCP Details'
         });
     });
 

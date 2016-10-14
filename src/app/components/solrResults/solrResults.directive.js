@@ -33,7 +33,7 @@
       }
 
       init();
-      
+
       $rootScope.$on('newSearch', function() {
         init();
       });
@@ -43,29 +43,30 @@
       };
 
       scope.getImagePath = function(entityType) {
-        return 'images/icon_' + entityType.substring(0,1) + '.svg';
+        return 'images/icon_' + entityType.substring(0,1).toLowerCase() + '.svg';
       };
 
-      scope.corePopoverIsOpen =  false;
-      scope.namespacePopoverIsOpen =  false;
-      scope.elementPopoverIsOpen = false;
-      scope.typePopoverIsOpen = false;
-      scope.corePopoverTemplateUrl = 'app/components/solrResults/corePopoverTemplate.html'
-      scope.namespacePopoverTemplateUrl = 'app/components/solrResults/namespacePopoverTemplate.html';
-      scope.elementPopoverTemplateUrl = 'app/components/solrResults/elementPopoverTemplate.html';
-      scope.typePopoverTemplateUrl = 'app/components/solrResults/typePopoverTemplate.html';
+      scope.popovers = {
+        'core': {
+          'popoverIsOpen': false,
+          'popoverTemplateUrl': 'app/components/solrResults/corePopoverTemplate.html'
+        },
+        'namespace': {
+          'popoverIsOpen': false,
+          'popoverTemplateUrl': 'app/components/solrResults/namespacePopoverTemplate.html'
+        },
+        'element': {
+          'popoverIsOpen': false,
+          'popoverTemplateUrl': 'app/components/solrResults/elementPopoverTemplate.html'
+        },
+        'type': {
+          'popoverIsOpen': false,
+          'popoverTemplateUrl': 'app/components/solrResults/typePopoverTemplate.html'
+        }
+      };
 
       scope.closePopover = function(type) {
-        if(type === 'namespace') {
-          scope.namespacePopoverIsOpen = false;
-        } else if (type === 'core') {
-          scope.corePopoverIsOpen = false;
-        } else if (type === 'type') {
-          scope.typePopoverIsOpen = false;
-        }
-        else if( type === 'element') {
-          scope.elementPopoverIsOpen = false;
-        }
+        scope.popovers[type].popoverIsOpen = false;
       };
 
       scope.tooltipText = {
