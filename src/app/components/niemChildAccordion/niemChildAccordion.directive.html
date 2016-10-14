@@ -1,3 +1,23 @@
-<div class="niem-child-accordion">
-
+<div class="niem-child-accordion" ng-style="{'padding-left': 20 * treeLevel + 'px'}">
+  <div class="niem-child-accordion-heading">
+    <img src="images/ic_carot.svg" class="carot-img float-left" ng-class="{'caret-down': isOpen}" ng-click="onClick()">
+    <div class="niem-child-accordion-heading-text">
+      <span class="child-heading-title">Child item title</span>
+      <span class="child-heading-type">Child item type</span>
+    </div>
+  </div>
+  <div class="niem-accordion-list" ng-show="isOpen">
+    <div class="niem-accordion-item">
+      <span class="item-name">Item Name</span>
+      <span class="item-type">Item Type</span>
+    </div>
+    <div class="niem-accordion-item">
+      <span class="item-name">Item Name</span>
+      <span class="item-type">Item Type</span>
+    </div>
+    <div class="niem-accordion-item">
+      <span class="item-name">Item Name</span>
+      <span class="item-type">Item Type</span>
+    </div>
+  </div>
 </div>
