@@ -67,8 +67,9 @@
 
         return solrRequest.makeSolrRequest(params).then(function(data) {
           if (data.response.docs.length > 0) {
-            scope.topNamespace = data.response.docs[0].namespace;
-            domainArray.push({'name': query + ' in ' + scope.topNamespace, 'taDomain':scope.topNamespace, 'query': query});
+            var topNamespace = data.response.docs[0].namespace;
+            var topNamespaceType = data.response.docs[0].namespaceType;
+            domainArray.push({'name': query + ' in ' + topNamespace, 'taDomain': topNamespace, 'query': query});
             return domainArray.concat(data.response.docs);
           }
         });
