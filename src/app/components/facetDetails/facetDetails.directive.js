@@ -18,6 +18,9 @@
     return {
       restrict: 'E',
       templateUrl: 'app/components/facetDetails/facetDetails.directive.html',
+      scope: {
+        data: '='
+      },
       link: link
     };
 

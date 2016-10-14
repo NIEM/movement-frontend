@@ -3,15 +3,14 @@
     Facet, Value, and Description
   </h5>
   <ul class="facet-list">
-    <li class="facet-item row">
-      <div class="col-sm-3">Enumeration</div>
-      <div class="col-sm-2">"value"</div>
-      <div class="col-sm-7">definition data</div>
-    </li>
-    <li class="facet-item row">
-      <div class="col-sm-3">Enumeration</div>
-      <div class="col-sm-2">"value"</div>
-      <div class="col-sm-7">definition data</div>
-    </li>
+    <div ng-repeat="facet in data">
+      <li class="facet-item row" ng-repeat="value in facet.data.facetValue track by $index">
+        <div>
+          <div class="col-sm-3 text-capitalize">{{facet.name}}</div>
+          <div class="col-sm-2">"{{value.trim()}}"</div>
+          <div class="col-sm-7">{{facet.data.facetDefinition[$index]}}</div>
+        </div>
+      </li>
+    </div>
   </ul>
 </div>

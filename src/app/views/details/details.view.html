@@ -31,7 +31,7 @@
 
     <div class="details-desc">
       <div ng-if="!!DetailsCtrl.entity.facets">
-        <facet-details></facet-details>
+        <facet-details data="DetailsCtrl.entity.facets"></facet-details>
       </div>
 
       <div class="contain-list" ng-if="!DetailsCtrl.entity.facets">
