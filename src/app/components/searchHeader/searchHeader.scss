@@ -1,15 +1,15 @@
 .search-header {
-  padding: 0 30px;
+  //padding: 0 30px;
   height: 200px;
   background: url(../../images/mainbg.svg);
   background-size: cover;
 
 
   .header-search {
-    padding-top: 23px;
-    padding-bottom: 20px;
-    min-width: 768px;
-    max-width: 1280px;
+    //padding-top: 23px;
+    //padding-bottom: 20px;
+    padding: 23px 30px 20px 30px;
+    min-width: $niem-min-width;
     margin: 0 auto;
   }
 

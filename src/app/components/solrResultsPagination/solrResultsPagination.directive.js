@@ -14,7 +14,7 @@
     .module('dhsniem')
     .directive('solrResultsPagination', solrResultsPagination);
 
-  function solrResultsPagination() {
+  function solrResultsPagination(solrSearch, $location, $rootScope) {
     return {
       restrict: 'E',
       templateUrl: 'app/components/solrResultsPagination/solrResultsPagination.directive.html',
@@ -25,6 +25,28 @@
      *  Defines variables and functions within solrResultsPagination scope
      */
     function link(scope) {
+
+      scope.currentPage = 1;
+
+      $rootScope.$on('newSearch', function() {
+        scope.currentPage = $location.search().page;
+      });
+
+      scope.nextPage = function() {
+        if (scope.currentPage < scope.totalPages) {
+          scope.currentPage++;
+          $location.search('page', scope.currentPage);
+          solrSearch.search();
+        }
+      };
+
+      scope.prevPage = function() {
+        if (scope.currentPage > 1) {
+          scope.currentPage--;
+          $location.search('page', scope.currentPage);
+          solrSearch.search();
+        }
+      };
 
     }
 

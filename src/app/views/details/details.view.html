@@ -2,7 +2,7 @@
   <search-header></search-header>
 
   <section class="content">
-    <a href="#/results" class="back-link">&#060; Back to search results for "Card"</a>
+    <a ng-click="DetailsCtrl.goBack()" class="back-link" ng-show="query">&#060; Back to search results for "{{query}}"</a>
 
     <div class="details-heading">
       <h1>{{DetailsCtrl.entity.name}}

@@ -44,11 +44,13 @@
         .active > a,
         .active > a:hover,
         .active > a:focus {
-          background-color: lighten($ocean-blue, 20%);
+          background-color: lighten($warm-grey, 30%);
         }
         a {
           color: $marine-blue;
           padding: 3px 10px;
+          overflow: hidden;
+          text-overflow: ellipsis;
         }
       }
     }
@@ -61,6 +63,7 @@
     border: none;
     img {
       width: 22.5px;
+      height: 23.85px;
     }
   }
 }
