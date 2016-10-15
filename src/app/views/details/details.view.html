@@ -1,4 +1,4 @@
-<div class="details">
+<div class="details" ng-cloak>
   <search-header></search-header>
 
   <section class="content">
@@ -6,8 +6,8 @@
 
     <div class="details-heading">
       <h1>{{DetailsCtrl.entity.name}}
-        <img class="details-heading-img" src="images/icon_e.svg" ng-if="DetailsCtrl.isElement()"/>
-        <img class="details-heading-img" src="images/icon_t.svg" ng-if="!DetailsCtrl.isElement()"/>
+        <img class="details-heading-img" src="images/icon_e.svg" ng-if="DetailsCtrl.entity.entityType === 'Element'"/>
+        <img class="details-heading-img" src="images/icon_t.svg" ng-if="!(DetailsCtrl.entity.entityType === 'Element')"/>
       </h1>
       <div class="namespace text-uppercase">Namespace: {{DetailsCtrl.entity.namespace}} </div>
     </div>
@@ -35,9 +35,13 @@
       </div>
 
       <div class="contain-list" ng-if="!DetailsCtrl.entity.facets">
-        <niem-accordion></niem-accordion>
-        <niem-accordion></niem-accordion>
-        <niem-accordion></niem-accordion>
+        <div ng-repeat="containingType in DetailsCtrl.containingTypes" ng-if="DetailsCtrl.entity.entityType === 'Element'">
+          <niem-accordion data="containingType" title="'Contained In: '" click-handler="DetailsCtrl.getElementObjects" get-containing-types="DetailsCtrl.getContainingTypes"></niem-accordion>
+        </div>
+
+        <div ng-if="!(DetailsCtrl.entity.entityType === 'Element') && !DetailsCtrl.entity.facets">
+          <niem-accordion></niem-accordion>
+        </div>
       </div>
     </div>
   </section>

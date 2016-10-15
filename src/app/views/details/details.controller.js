@@ -30,6 +30,8 @@
 
       var id = $location.search().entityID;
       var query = 'id:' + id.split(':')[0] + '\\:' + id.split(':')[1];
+      vm.getElementObjects = getElementObjects;
+      vm.getContainingTypes = getContainingTypes;
 
       solrRequest.makeSolrRequest(getSearchParams(query)).then(function(data) {
         vm.entity = data.response.docs[0];
@@ -59,7 +61,6 @@
                   fieldDataArray[fieldDataArray.length - 1] = lastValue.substring(0, lastValue.length - 1);
                   data[facet][fieldName] = fieldDataArray;
                 }
-                //vm.entity.facets[facet] = data[facet];
                 vm.entity.facets.push({
                   name: facet,
                   data: data[facet]
@@ -90,12 +91,13 @@
       var query = 'elements:*' + vm.entity.name + '*';
       solrRequest.makeSolrRequest(getSearchParams(query)).then(function(data) {
         vm.containingTypes = data.response.docs;
-
+        console.log(vm.containingTypes);
+        //return vm.containingTypes;
         // Example code to return the first iteration of nested structure
-        if (vm.containingTypes) {
+        /*if (vm.containingTypes) {
           getElementObjects(vm.containingTypes[0]);
           console.log(vm.containingTypes);
-        }
+        }*/
       });
     }
 
@@ -192,33 +194,6 @@
 
       return params;
     }
-
-    /**
-     * @name isElement
-     *
-     * @memberof dhsniem.controller:DetailsCtrl
-     *
-     * @description Determines if details page contains an element
-     *
-     * * @returns boolean
-     */
-    function isElement() {
-      return !!vm.entity.type && !!vm.entity.abstract;
-    }
-
-    /**
-     * @name isSimpleType
-     *
-     * @memberof dhsniem.controller:DetailsCtrl
-     *
-     * @description Determines if details page contains a simple type
-     *
-     * * @returns boolean
-     */
-    function isSimpleType() {
-      return !!vm.entity.facets;
-    }
-
 
     init();
 

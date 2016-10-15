@@ -1,23 +1,20 @@
-<div class="niem-child-accordion" ng-style="{'padding-left': 20 * treeLevel + 'px'}">
+<div class="niem-child-accordion">
   <div class="niem-child-accordion-heading">
     <img src="images/ic_carot.svg" class="carot-img float-left" ng-class="{'caret-down': isOpen}" ng-click="onClick()">
     <div class="niem-child-accordion-heading-text">
-      <span class="child-heading-title">Child item title</span>
-      <span class="child-heading-type">Child item type</span>
+      <span class="child-heading-title">{{elementData.name}}</span>
+      <span class="child-heading-type">({{elementData.type.type || elementData.type.parentSimpleType || elementData.type.parentTypeName}})</span>
     </div>
   </div>
   <div class="niem-accordion-list" ng-show="isOpen">
-    <div class="niem-accordion-item">
-      <span class="item-name">Item Name</span>
-      <span class="item-type">Item Type</span>
-    </div>
-    <div class="niem-accordion-item">
-      <span class="item-name">Item Name</span>
-      <span class="item-type">Item Type</span>
-    </div>
-    <div class="niem-accordion-item">
-      <span class="item-name">Item Name</span>
-      <span class="item-type">Item Type</span>
+    <div ng-repeat="currElement in elementData.type.elements">
+      <div class="niem-accordion-item" ng-if="!currElement.type.elements">
+        <span class="item-name">{{currElement.name}}</span>
+        <span class="item-type">({{currElement.type.type || currElement.type.parentSimpleType || currElement.type.parentTypeName}})</span>
+      </div>
+      <div ng-if="!!currElement.type.elements">
+        <niem-child-accordion tree-level="nextLevel" element-data="elementData.type.elements[$index]" click-handler="clickHandler"></niem-child-accordion>
+      </div>
     </div>
   </div>
 </div>
