@@ -20,10 +20,19 @@
         </div>
       </div>
 
-      <div class="details-info-col" ng-if="!!DetailsCtrl.entity.entityType">
+      <div class="details-info-col">
+        <div class="details-info-content" ng-if="DetailsCtrl.entity.type || DetailsCtrl.entity.parentSimpleType || DetailsCtrl.entity.parentTypeName">
+          <h3 ng-if="!(DetailsCtrl.entity.entityType ==='Type' && !Details.entity.facets)">Simple Content Type</h3>
+          <h3 ng-if="DetailsCtrl.entity.entityType ==='Type' && !Details.entity.facets">Base Type</h3>
+          <p>{{DetailsCtrl.entity.type || DetailsCtrl.entity.parentSimpleType || DetailsCtrl.entity.parentTypeName}}</p>
+        </div>
+      </div>
+    </div>
+    <div class="details-info row" ng-if="!!DetailsCtrl.entity.contentStyle">
+      <div class="details-info-col">
         <div class="details-info-content">
-          <h3>Simple Content Type</h3>
-          <p>{{DetailsCtrl.entity.entityType}}</p>
+          <h3>Content Style</h3>
+          <p>{{DetailsCtrl.entity.contentStyle}}</p>
         </div>
       </div>
     </div>
