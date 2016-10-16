@@ -49,7 +49,7 @@
         </div>
 
         <div ng-if="DetailsCtrl.entity.entityType !== 'Element'">
-          <niem-accordion data="DetailsCtrl.propertiesOfType" entity-type="DetailsCtrl.entity.entityType" title="'Contains'" click-handler="DetailsCtrl.getElementObjects"></niem-accordion>
+          <niem-accordion data="DetailsCtrl.entity" entity-type="DetailsCtrl.entity.entityType" title="'Contains'" click-handler="DetailsCtrl.getElementObjects"></niem-accordion>
 
           <!--<niem-accordion data="DetailsCtrl.propertiesOfType" entity-type="DetailsCtrl.entity.entityType" title="'Properties that are of ' + DetailsCtrl.entity.name" click-handler="DetailsCtrl.getElementsofType"></niem-accordion>-->
         </div>

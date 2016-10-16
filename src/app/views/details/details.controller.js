@@ -108,7 +108,6 @@
      * @param typeDoc - type object (document)
      */
     function getElementObjects(typeDoc) {
-      var element = typeDoc.element;
       typeDoc.elements.forEach(function(element, index, arr) {
         var query = 'name:' + element.split(':')[1];
         solrRequest.makeSolrRequest(getSearchParams(query)).then(function(data) {
@@ -209,9 +208,5 @@
     init();
 
   }
-
-  //})();
-
-  //}
 
 })();

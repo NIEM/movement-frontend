@@ -25,10 +25,6 @@
         entityType: '='
       },
       link: function(scope, element) {
-        scope.$watch('data', function(data) {
-          //scope.data = data;
-          //console.log(scope.data);
-        })
         scope.isOpen = false;
         scope.dataFound = false;
 
@@ -40,10 +36,8 @@
               if (scope.entityType === 'Element') {
                 scope.clickHandler(scope.data);
               } else {
-                for (var i = 0; i < scope.data.length; i++) {
-                  if (!!scope.data[i].type.elements) {
-                    scope.clickHandler(scope.data[i].type);
-                  }
+                if (!!scope.data.elements) {
+                  scope.clickHandler(scope.data);
                 }
               }
             }
