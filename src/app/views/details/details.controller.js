@@ -30,9 +30,12 @@
 
       var id = $location.search().entityID;
       var query = 'id:' + id.split(':')[0] + '\\:' + id.split(':')[1];
+      vm.getElementObjects = getElementObjects;
+      vm.getElementsofType = getElementsofType;
 
       solrRequest.makeSolrRequest(getSearchParams(query)).then(function(data) {
         vm.entity = data.response.docs[0];
+        console.log(vm.entity);
 
         if (!!vm.entity.facets) {
           var newFacets = vm.entity.facets;
@@ -59,19 +62,19 @@
                   fieldDataArray[fieldDataArray.length - 1] = lastValue.substring(0, lastValue.length - 1);
                   data[facet][fieldName] = fieldDataArray;
                 }
-                //vm.entity.facets[facet] = data[facet];
                 vm.entity.facets.push({
                   name: facet,
                   data: data[facet]
                 });
+
               }
             }
-
+            console.log(vm.entity);
           }
-        }
-
-        if (vm.entity.entityType === 'Element') {
+        } else if (vm.entity.entityType === 'Element') {
           getContainingTypes();
+        } else {
+          getElementsofType(vm.entity);
         }
 
       });
@@ -90,12 +93,7 @@
       var query = 'elements:*' + vm.entity.name + '*';
       solrRequest.makeSolrRequest(getSearchParams(query)).then(function(data) {
         vm.containingTypes = data.response.docs;
-
-        // Example code to return the first iteration of nested structure
-        if (vm.containingTypes) {
-          getElementObjects(vm.containingTypes[0]);
-          console.log(vm.containingTypes);
-        }
+        console.log(vm.containingTypes);
       });
     }
 
@@ -110,6 +108,7 @@
      * @param typeDoc - type object (document)
      */
     function getElementObjects(typeDoc) {
+      var element = typeDoc.element;
       typeDoc.elements.forEach(function(element, index, arr) {
         var query = 'name:' + element.split(':')[1];
         solrRequest.makeSolrRequest(getSearchParams(query)).then(function(data) {
@@ -120,7 +119,7 @@
           } else {
             arr[index].type = 'abstract';
           }
-
+          arr[index].element = element; //preserves the original string
         });
       });
     }
@@ -167,6 +166,9 @@
           }
         });
 
+        console.log(vm.propertiesOfType);
+
+
       });
     }
 
@@ -194,33 +196,6 @@
     }
 
     /**
-     * @name isElement
-     *
-     * @memberof dhsniem.controller:DetailsCtrl
-     *
-     * @description Determines if details page contains an element
-     *
-     * * @returns boolean
-     */
-    function isElement() {
-      return !!vm.entity.type && !!vm.entity.abstract;
-    }
-
-    /**
-     * @name isSimpleType
-     *
-     * @memberof dhsniem.controller:DetailsCtrl
-     *
-     * @description Determines if details page contains a simple type
-     *
-     * * @returns boolean
-     */
-    function isSimpleType() {
-      return !!vm.entity.facets;
-    }
-
-
-    /**
      * @name goBack
      *
      * @memberof dhsniem.controller:DetailsCtrl
@@ -234,5 +209,9 @@
     init();
 
   }
+
+  //})();
+
+  //}
 
 })();

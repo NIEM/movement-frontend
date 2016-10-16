@@ -1,4 +1,4 @@
-<div class="details">
+<div class="details" ng-cloak>
   <search-header></search-header>
 
   <section class="content">
@@ -6,8 +6,8 @@
 
     <div class="details-heading">
       <h1>{{DetailsCtrl.entity.name}}
-        <img class="details-heading-img" src="images/icon_e.svg" ng-if="DetailsCtrl.isElement()"/>
-        <img class="details-heading-img" src="images/icon_t.svg" ng-if="!DetailsCtrl.isElement()"/>
+        <img class="details-heading-img" src="images/icon_e.svg" ng-if="DetailsCtrl.entity.entityType === 'Element'"/>
+        <img class="details-heading-img" src="images/icon_t.svg" ng-if="!(DetailsCtrl.entity.entityType === 'Element')"/>
       </h1>
       <div class="namespace text-uppercase">Namespace: {{DetailsCtrl.entity.namespace}} </div>
     </div>
@@ -20,10 +20,19 @@
         </div>
       </div>
 
-      <div class="details-info-col" ng-if="!!DetailsCtrl.entity.entityType">
+      <div class="details-info-col">
+        <div class="details-info-content" ng-if="DetailsCtrl.entity.type || DetailsCtrl.entity.parentSimpleType || DetailsCtrl.entity.parentTypeName">
+          <h3 ng-if="!(DetailsCtrl.entity.entityType ==='Type' && !Details.entity.facets)">Simple Content Type</h3>
+          <h3 ng-if="DetailsCtrl.entity.entityType ==='Type' && !Details.entity.facets">Base Type</h3>
+          <p>{{DetailsCtrl.entity.type || DetailsCtrl.entity.parentSimpleType || DetailsCtrl.entity.parentTypeName}}</p>
+        </div>
+      </div>
+    </div>
+    <div class="details-info row" ng-if="!!DetailsCtrl.entity.contentStyle">
+      <div class="details-info-col">
         <div class="details-info-content">
-          <h3>Simple Content Type</h3>
-          <p>{{DetailsCtrl.entity.entityType}}</p>
+          <h3>Content Style</h3>
+          <p>{{DetailsCtrl.entity.contentStyle}}</p>
         </div>
       </div>
     </div>
@@ -35,9 +44,15 @@
       </div>
 
       <div class="contain-list" ng-if="!DetailsCtrl.entity.facets">
-        <niem-accordion></niem-accordion>
-        <niem-accordion></niem-accordion>
-        <niem-accordion></niem-accordion>
+        <div ng-repeat="containingType in DetailsCtrl.containingTypes" ng-if="DetailsCtrl.entity.entityType === 'Element'">
+          <niem-accordion data="containingType" entity-type="DetailsCtrl.entity.entityType" title="'Contained In: '" click-handler="DetailsCtrl.getElementObjects"></niem-accordion>
+        </div>
+
+        <div ng-if="DetailsCtrl.entity.entityType !== 'Element'">
+          <niem-accordion data="DetailsCtrl.propertiesOfType" entity-type="DetailsCtrl.entity.entityType" title="'Contains'" click-handler="DetailsCtrl.getElementObjects"></niem-accordion>
+
+          <!--<niem-accordion data="DetailsCtrl.propertiesOfType" entity-type="DetailsCtrl.entity.entityType" title="'Properties that are of ' + DetailsCtrl.entity.name" click-handler="DetailsCtrl.getElementsofType"></niem-accordion>-->
+        </div>
       </div>
     </div>
   </section>
