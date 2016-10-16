@@ -20,9 +20,8 @@
       templateUrl: 'app/components/niemChildAccordion/niemChildAccordion.directive.html',
       scope: {
         treeLevel: '=',
-        data: '=',
         elementData: '=',
-        getContainingTypes: '=',
+        entityType: '=',
         clickHandler: '='
       },
       link: function(scope, element) {
@@ -31,7 +30,7 @@
         scope.onClick = function() {
           scope.isOpen = !scope.isOpen;
           scope.nextLevel = parseInt(scope.treeLevel, 10) + 1;
-          if (scope.isOpen && scope.dataFound === false) {
+          if (scope.isOpen && scope.dataFound === false && scope.entityType === 'Element') {
             scope.clickHandler(scope.elementData.type);
             console.log(scope.elementData);
             scope.dataFound = true;

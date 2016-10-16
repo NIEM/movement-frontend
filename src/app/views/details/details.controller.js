@@ -31,10 +31,11 @@
       var id = $location.search().entityID;
       var query = 'id:' + id.split(':')[0] + '\\:' + id.split(':')[1];
       vm.getElementObjects = getElementObjects;
-      vm.getContainingTypes = getContainingTypes;
+      vm.getElementsofType = getElementsofType;
 
       solrRequest.makeSolrRequest(getSearchParams(query)).then(function(data) {
         vm.entity = data.response.docs[0];
+        console.log(vm.entity);
 
         if (!!vm.entity.facets) {
           var newFacets = vm.entity.facets;
@@ -65,14 +66,15 @@
                   name: facet,
                   data: data[facet]
                 });
+
               }
             }
-
+            console.log(vm.entity);
           }
-        }
-
-        if (vm.entity.entityType === 'Element') {
+        } else if (vm.entity.entityType === 'Element') {
           getContainingTypes();
+        } else {
+          getElementsofType(vm.entity);
         }
 
       });
@@ -92,12 +94,6 @@
       solrRequest.makeSolrRequest(getSearchParams(query)).then(function(data) {
         vm.containingTypes = data.response.docs;
         console.log(vm.containingTypes);
-        //return vm.containingTypes;
-        // Example code to return the first iteration of nested structure
-        /*if (vm.containingTypes) {
-          getElementObjects(vm.containingTypes[0]);
-          console.log(vm.containingTypes);
-        }*/
       });
     }
 
@@ -112,6 +108,7 @@
      * @param typeDoc - type object (document)
      */
     function getElementObjects(typeDoc) {
+      var element = typeDoc.element;
       typeDoc.elements.forEach(function(element, index, arr) {
         var query = 'name:' + element.split(':')[1];
         solrRequest.makeSolrRequest(getSearchParams(query)).then(function(data) {
@@ -122,7 +119,7 @@
           } else {
             arr[index].type = 'abstract';
           }
-
+          arr[index].element = element; //preserves the original string
         });
       });
     }
@@ -169,6 +166,9 @@
           }
         });
 
+        console.log(vm.propertiesOfType);
+
+
       });
     }
 
@@ -209,5 +209,9 @@
     init();
 
   }
+
+  //})();
+
+  //}
 
 })();
