@@ -8,11 +8,12 @@
   }
 
   .niem-accordion-heading {
-    padding: 20px;
+    padding-bottom: 18px;
+    padding-top: 17px;
     border-bottom: 1px solid $silver;
     h2 {
       letter-spacing: 0.5px;
-      padding-left: 20px;
+      padding-left: 18px;
       color: $marine-blue;
       display: inline-block;
       margin: 0;
@@ -22,14 +23,13 @@
       }
     }
 
-
   }
 
   .niem-accordion-list {
     padding-left: 40px;
 
     .niem-accordion-item {
-      padding: 20px;
+      padding: 20px 0 20px 30px;
       letter-spacing: 0.5px;
       border-bottom: 1px solid $silver;
         .item-name {
@@ -41,6 +41,15 @@
 
       .item-type {
         color: $body-text-color;
+      }
+      &.additional-elements-link {
+        background-color: rgba(209, 210, 212, 0.1);
+        color: $ocean-blue;
+        font-size: 14px;
+        letter-spacing: 1px;
+        text-align: right;
+        padding-right: 10px;
+        cursor: pointer;
       }
     }
   }

@@ -32,6 +32,13 @@
       var query = 'id:' + id.split(':')[0] + '\\:' + id.split(':')[1];
       vm.getElementObjects = getElementObjects;
 
+      var popovers = {
+        'simple-content-type': {
+          'popoverIsOpen': false,
+          'popoverTemplateUrl': 'app/views/details/simpleContentTypePopoverTemplate.html'
+        }
+      };
+
       solrRequest.makeSolrRequest(getSearchParams(query)).then(function(data) {
         vm.entity = data.response.docs[0];
         console.log(vm.entity);
@@ -80,6 +87,15 @@
 
     }
 
+
+    /**
+     * @name closePopover
+     *
+     * @param type
+     */
+    function closePopover(type) {
+      popovers[type].popoverIsOpen = false;
+    };
 
     /**
      * @name getContainingTypes

@@ -13,6 +13,12 @@
   border: none;
 }
 
+.popover.top {
+  height: inherit;
+  background-color: $silver;
+  border: none;
+}
+
 .popover-inner .popover-content,
 .popover-content {
   background-color: $silver;
@@ -35,6 +41,11 @@
   &:after {
     border-bottom-color: $silver;
   }
+}
+
+.popover.top > .arrow,
+.popover.top > .arrow:after {
+  border-top-color: $silver;
 }
 
 .tooltip-exit {
