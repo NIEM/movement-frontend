@@ -97,6 +97,9 @@
     .details-desc {
       padding-top: 37px;
       .contain-list {
+        .has-none {
+          padding-left: 20px;
+        }
         .panel-group {
           .panel-default {
             padding: 10px;
@@ -118,12 +121,6 @@
             }
           }
 
-          .contain-group {
-            .contain-group-item {
-              border-bottom: 1px solid black;
-              padding: 20px;
-            }
-          }
         }
       }
     }

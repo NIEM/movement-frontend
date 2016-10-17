@@ -19,6 +19,7 @@
       margin: 0;
       .contain-type {
         color: $ocean-blue;
+        display: inline-block;
       }
     }
 
@@ -31,9 +32,13 @@
       padding: 20px 0 20px 30px;
       letter-spacing: 0.5px;
       border-bottom: 1px solid $silver;
-      .item-name {
-        color: $ocean-blue;
+        .item-name {
+          color: $ocean-blue;
+          h3 {
+            margin: 0;
+          }
       }
+
       .item-type {
         color: $body-text-color;
       }
