@@ -48,10 +48,9 @@
           <niem-accordion data="containingType" entity-type="DetailsCtrl.entity.entityType" title="'Contained In: '" click-handler="DetailsCtrl.getElementObjects"></niem-accordion>
         </div>
 
-        <div ng-if="DetailsCtrl.entity.entityType !== 'Element'">
+        <div ng-if="DetailsCtrl.entity.entityType === 'Type'">
           <niem-accordion data="DetailsCtrl.entity" entity-type="DetailsCtrl.entity.entityType" title="'Contains'" click-handler="DetailsCtrl.getElementObjects"></niem-accordion>
-
-          <!--<niem-accordion data="DetailsCtrl.propertiesOfType" entity-type="DetailsCtrl.entity.entityType" title="'Properties that are of ' + DetailsCtrl.entity.name" click-handler="DetailsCtrl.getElementsofType"></niem-accordion>-->
+          <niem-accordion data="DetailsCtrl.propertiesOfType" entity-type="DetailsCtrl.entity.entityType" title="'Properties that are of ' + DetailsCtrl.entity.name" click-handler="DetailsCtrl.getElementObjects" is-properties="true"></niem-accordion>
         </div>
       </div>
     </div>

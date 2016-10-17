@@ -22,6 +22,10 @@
         <span class="item-name">{{currElement.element}}</span>
         <span class="item-type" ng-if="!!currElement.type.type || !!currElement.type.parentSimpleType || !!currElement.type.parentTypeName">({{currElement.type.type || currElement.type.parentSimpleType || currElement.type.parentTypeName}})</span>
       </div>
+
+      <div ng-if="!!currElement.type.elements">
+        <niem-child-accordion tree-level="nextLevel" element-data="elementData.type.elements[$index]" click-handler="clickHandler" entity-type="entityType"></niem-child-accordion>
+      </div>
     </div>
 
   </div>

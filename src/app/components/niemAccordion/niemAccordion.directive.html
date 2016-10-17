@@ -20,13 +20,23 @@
     </div>
 
 
-    <div ng-if="entityType === 'Type'" ng-repeat="item in data.elements">
+    <div ng-if="entityType === 'Type' && isProperties !== true" ng-repeat="item in data.elements">
       <div class="niem-accordion-item" ng-if="!item.type.elements">
         <span class="item-name">{{item.name}}</span>
         <span class="item-type" ng-if="!!item.type || !!item.parentSimpleType || !!item.parentTypeName">({{item.type || item.parentSimpleType || item.parentTypeName}})</span>
       </div>
       <div ng-if="!!item.type.elements">
         <niem-child-accordion tree-level="1" element-data="item" click-handler="clickHandler" entity-type="entityType"></niem-child-accordion>
+      </div>
+    </div>
+
+    <div ng-if="entityType === 'Type' && isProperties === true" ng-repeat="item in data">
+      <div class="niem-accordion-item" ng-if="!item.type.elements">
+        <span class="item-name">{{item.name}}</span>
+        <span class="item-type" ng-if="!!item.type.type || !!item.type.parentSimpleType || !!item.type.parentTypeName">({{item.type.type || item.type.parentSimpleType || item.type.parentTypeName}})</span>
+      </div>
+      <div ng-if="!!item.type.elements">
+        <niem-child-accordion tree-level="1" element-data="item" click-handler="clickHandler" entity-type="entityType" is-properties="true"></niem-child-accordion>
       </div>
     </div>
 
