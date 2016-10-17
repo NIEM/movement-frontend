@@ -19,6 +19,9 @@ label.filter-group-option {
     .checked-image {
       height: 22px;
       width: 22px;
+      position: relative;
+      bottom: 1px;
+      right: 1px;
     }
   }
   input[type="checkbox"] {

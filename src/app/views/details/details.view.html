@@ -28,36 +28,8 @@
         </div>
       </div>
 
-      <!--<div class="details-info-col" ng-if="DetailsCtrl.entity.entityType === 'Element'">-->
-      <!--<div class="details-info-content">-->
-      <!--<div class="simple-type-img">-->
-      <!--<img src="images/ic-typeofproperty.svg" alt="Type of Property symbol">-->
-      <!--</div>-->
-      <!--<div class="details-text">-->
-      <!--<h3>Type of Property</h3>-->
-      <!--<p>{{DetailsCtrl.entity.entityType}}</p>-->
-      <!--</div>-->
-      <!--</div>-->
-      <!--</div>-->
-
-      <!--<div class="details-info-col" ng-if="!(DetailsCtrl.entity.entityType === 'Element')">-->
-      <!--<div class="details-info-content">-->
-      <!--<div class="simple-type-img">-->
-      <!--<img src="images/ic_simpletype.svg" alt="Simple Content Type symbol">-->
-      <!--</div>-->
-      <!--<div class="details-text">-->
-      <!--<h3>-->
-      <!--<span uib-popover-template="DetailsCtrl.popovers['simple-content-type'].popoverTemplateUrl"-->
-      <!--popover-placement="right" popover-is-open="DetailsCtrl.popovers['simple-content-type'].popoverIsOpen">-->
-      <!--Simple Content Type-->
-      <!--</span>-->
-      <!--</h3>-->
-      <!--<p>{{DetailsCtrl.entity.entityType}}</p>-->
-      <!--</div>-->
-
       <div class="details-info-col">
-        <div class="details-info-content"
-             ng-if="DetailsCtrl.entity.type || DetailsCtrl.entity.parentSimpleType || DetailsCtrl.entity.parentTypeName">
+        <div class="details-info-content" ng-if="DetailsCtrl.entity.type || DetailsCtrl.entity.parentSimpleType || DetailsCtrl.entity.parentTypeName">
           <div ng-if="!(DetailsCtrl.entity.entityType === 'Type' && !Details.entity.facets)" class="auto-height">
             <div class="symbol-div simple-type-img">
               <img ng-if="DetailsCtrl.entity.entityType === 'Element'" src="images/ic-typeofproperty.svg"
@@ -85,7 +57,7 @@
               </h3>
               <p>{{DetailsCtrl.entity.type || DetailsCtrl.entity.parentSimpleType ||
                 DetailsCtrl.entity.parentTypeName}}</p>
-              </div>
+            </div>
           </div>
           <div ng-if="DetailsCtrl.entity.entityType ==='Type' && !Details.entity.facets" class="auto-height">
             <div class="symbol-div base-type-img">
