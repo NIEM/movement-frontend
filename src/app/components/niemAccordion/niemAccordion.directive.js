@@ -22,13 +22,11 @@
         data: '=',
         title: '=',
         clickHandler: '=',
-        entityType: '='
+        entityType: '=',
+        isProperties: '=',
+        selectedEntityName: '='
       },
       link: function(scope, element) {
-        scope.$watch('data', function(data) {
-          //scope.data = data;
-          //console.log(scope.data);
-        })
         scope.isOpen = false;
         scope.dataFound = false;
 
@@ -40,11 +38,24 @@
               if (scope.entityType === 'Element') {
                 scope.clickHandler(scope.data);
               } else {
-                for (var i = 0; i < scope.data.length; i++) {
-                  if (!!scope.data[i].type.elements) {
-                    scope.clickHandler(scope.data[i].type);
+                //for Type Contains
+                if (scope.isProperties === true) {
+                  //for Type Properties
+                  for (var i = 0; i < scope.data.length; i++) {
+                    if (!!scope.data[i].type.elements) {
+                      scope.clickHandler(scope.data[i].type);
+                    }
+                  }
+                } else {
+                  if (!!scope.data.elements) {
+                    scope.clickHandler(scope.data);
                   }
                 }
+
+
+
+                console.log(scope.data);
+
               }
             }
           }
@@ -53,30 +64,5 @@
     };
 
   }
-
-  /**
-   *  Defines variables and functions within niemAccordion scope
-   *
-   */
-  /*function link(scope, element) {
-    scope.isOpen = false;
-
-    scope.toggleAccordion = function() {
-      scope.isOpen = !scope.isOpen;
-
-      //if (scope.isOpen) {
-
-      //  console.log(scope.data);
-      scope.clickHandler(scope.data);
-
-      //element.append('<div ng-include="app/components/niemAccordion/niemAccordionList.html"></div>');
-
-      element.append('<div ng-include="' + 'app/components/niemAccordion/niemAccordionList.html' + '"></div>');
-      $compile(element.contents())(scope);
-      console.log(scope.data);
-      //}
-
-    };
-  }*/
 
 })();

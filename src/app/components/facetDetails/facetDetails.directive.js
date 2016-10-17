@@ -30,6 +30,13 @@
    *  Defines variables and functions within facetDetails scope
    *
    */
-  function link(scope) {}
+  function link(scope) {
+
+    scope.showData = function(pageInfo) {
+      scope.minIdx = (pageInfo.currentPageNum - 1) * pageInfo.numPerPage;
+      scope.maxIdx = (pageInfo.currentPageNum * pageInfo.numPerPage) - 1;
+    };
+
+  }
 
 })();

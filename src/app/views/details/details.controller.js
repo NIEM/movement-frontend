@@ -31,7 +31,6 @@
       var id = $location.search().entityID;
       var query = 'id:' + id.split(':')[0] + '\\:' + id.split(':')[1];
       vm.getElementObjects = getElementObjects;
-      vm.getElementsofType = getElementsofType;
 
       solrRequest.makeSolrRequest(getSearchParams(query)).then(function(data) {
         vm.entity = data.response.docs[0];
@@ -108,7 +107,6 @@
      * @param typeDoc - type object (document)
      */
     function getElementObjects(typeDoc) {
-      var element = typeDoc.element;
       typeDoc.elements.forEach(function(element, index, arr) {
         var query = 'name:' + element.split(':')[1];
         solrRequest.makeSolrRequest(getSearchParams(query)).then(function(data) {
@@ -209,9 +207,5 @@
     init();
 
   }
-
-  //})();
-
-  //}
 
 })();

@@ -14,6 +14,7 @@ $ugly-blue:       #288b91;
 $marine-blue:     #004666;
 $ocean-blue:      #0073b2;
 $seafoam:         #58cba9;
+$seafoam-light:   rgba(88,203,169, 0.1);
 $evergreen:       #062434;
 $warm-grey:       #9b9b9b;
 $silver:          #d1d2d4;
@@ -132,6 +133,7 @@ h6 {
 // injector
 @import '../app/components/ccpFooter/ccpFooter.directive.scss';
 @import '../app/components/ccpHeader/ccpHeader.directive.scss';
+@import '../app/components/detailsPagination/detailsPagination.directive.scss';
 @import '../app/components/facetDetails/facetDetails.directive.scss';
 @import '../app/components/niemAccordion/niemAccordion.directive.scss';
 @import '../app/components/niemChildAccordion/niemChildAccordion.directive.scss';

@@ -22,17 +22,23 @@
         treeLevel: '=',
         elementData: '=',
         entityType: '=',
-        clickHandler: '='
+        clickHandler: '=',
+        selectedEntityName: '='
       },
       link: function(scope, element) {
         scope.dataFound = false;
+        scope.isOpen = false;
+        scope.seeMore = false;
+
+        scope.showMore = function() {
+          scope.seeMore = !scope.seeMore;
+        };
 
         scope.onClick = function() {
           scope.isOpen = !scope.isOpen;
           scope.nextLevel = parseInt(scope.treeLevel, 10) + 1;
           if (scope.isOpen && scope.dataFound === false && scope.entityType === 'Element') {
             scope.clickHandler(scope.elementData.type);
-            console.log(scope.elementData);
             scope.dataFound = true;
 
           }
