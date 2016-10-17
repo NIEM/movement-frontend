@@ -31,8 +31,19 @@
      */
     function link(scope, element, attrs) {
 
+      scope.sortByName = function(result) {
+        if (result === 'NIEM Core') {
+          return -1;
+        } else {
+          return result;
+        }
+      };
+
       function setFacetResults() {
         scope.results = solrSearch.getFacet(scope.field);
+        scope.keys = function(results) {
+          return results ? Object.keys(results) : [];
+        };
       }
 
       setFacetResults();
@@ -46,17 +57,17 @@
 
       scope.closePopover = function() {
         scope.popoverIsOpen = false;
-      }
+      };
 
       scope.tooltipText = {
         'Entities': 'A physical thing, document, abstract concept, number, or string',
         'External Standards': 'Unmodified schema sources on the internet not encompassed by NIEM',
         'Domain': 'Communities of interest (COI) that are formally established, with an executive steward, to officially manage and govern a portion of the NIEM data model'
-      }
+      };
 
       scope.getTooltipText = function(display) {
         return scope.tooltipText[display];
-      }
+      };
 
     }
 
