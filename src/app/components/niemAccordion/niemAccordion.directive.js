@@ -23,7 +23,8 @@
         title: '=',
         clickHandler: '=',
         entityType: '=',
-        isProperties: '='
+        isProperties: '=',
+        selectedEntityName: '='
       },
       link: function(scope, element) {
         scope.isOpen = false;

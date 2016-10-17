@@ -1,5 +1,5 @@
 <div class="niem-child-accordion">
-  <div class="niem-child-accordion-heading">
+  <div class="niem-child-accordion-heading" ng-class="{'currently-selected': elementData.name === selectedEntityName}">
     <img src="images/ic_carot.svg" class="carot-img float-left" ng-class="{'caret-down': isOpen}" ng-click="onClick()">
     <div class="niem-child-accordion-heading-text">
       <span class="child-heading-title">{{elementData.name}}</span>
@@ -9,7 +9,7 @@
   <div class="niem-accordion-list" ng-show="isOpen">
     <div ng-if="entityType === 'Element'">
       <div ng-repeat="currElement in elementData.type.elements" ng-if="nextLevel < 3">
-        <div class="niem-accordion-item" ng-if="!currElement.type.elements">
+        <div class="niem-accordion-item" ng-if="!currElement.type.elements" ng-class="{'currently-selected': currElement.name === selectedEntityName}">
           <span class="item-name">{{currElement.name}}</span>
           <span class="item-type" ng-if="!!currElement.type.type || !!currElement.type.parentSimpleType || !!currElement.type.parentTypeName">({{currElement.type.type || currElement.type.parentSimpleType || currElement.type.parentTypeName}})</span>
           <span class="item-type" ng-if="!(!!currElement.type.type || !!currElement.type.parentSimpleType || !!currElement.type.parentTypeName)">({{currElement.type}})</span>
@@ -21,7 +21,7 @@
       </div>
 
       <div ng-if="nextLevel >= 3">
-        <div class="niem-accordion-item" ng-if="!elementData.type.elements[0].type.elements">
+        <div class="niem-accordion-item" ng-if="!elementData.type.elements[0].type.elements" ng-class="{'currently-selected': currElement.name === selectedEntityName}">
           <span class="item-name">{{elementData.type.elements[0].name}}</span>
           <span class="item-type" ng-if="!!elementData.type.elements[0].type.type || !!elementData.type.elements[0].type.parentSimpleType || !!elementData.type.elements[0].type.parentTypeName">({{elementData.type.elements[0].type.type || elementData.type.elements[0].type.parentSimpleType || elementData.type.elements[0].type.parentTypeName}})</span>
           <span class="item-type" ng-if="!(!!elementData.type.elements[0].type.type || !!elementData.type.elements[0].type.parentSimpleType || !!elementData.type.elements[0].type.parentTypeName)">({{elementData.type.elements[0].type}})</span>
@@ -35,7 +35,7 @@
         <div ng-show="seeMore">
           <div ng-repeat="currElement in elementData.type.elements">
             <div ng-if="$index > 0">
-              <div class="niem-accordion-item" ng-if="!currElement.type.elements">
+              <div class="niem-accordion-item" ng-if="!currElement.type.elements" ng-class="{'currently-selected': currElement.name === selectedEntityName}">
                 <span class="item-name">{{currElement.name}}</span>
                 <span class="item-type" ng-if="!!currElement.type.type || !!currElement.type.parentSimpleType || !!currElement.type.parentTypeName">({{currElement.type.type || currElement.type.parentSimpleType || currElement.type.parentTypeName}})</span>
                 <span class="item-type" ng-if="!(!!currElement.type.type || !!currElement.type.parentSimpleType || !!currElement.type.parentTypeName)">({{currElement.type}})</span>

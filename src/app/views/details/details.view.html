@@ -45,7 +45,7 @@
 
       <div class="contain-list" ng-if="!DetailsCtrl.entity.facets">
         <div ng-repeat="containingType in DetailsCtrl.containingTypes" ng-if="DetailsCtrl.entity.entityType === 'Element'">
-          <niem-accordion data="containingType" entity-type="DetailsCtrl.entity.entityType" title="'Contained In: '" click-handler="DetailsCtrl.getElementObjects"></niem-accordion>
+          <niem-accordion data="containingType" entity-type="DetailsCtrl.entity.entityType" title="'Contained In: '" click-handler="DetailsCtrl.getElementObjects" selected-entity-name='DetailsCtrl.entity.name'></niem-accordion>
         </div>
 
         <div ng-if="DetailsCtrl.entity.entityType === 'Type'">

@@ -22,7 +22,8 @@
         treeLevel: '=',
         elementData: '=',
         entityType: '=',
-        clickHandler: '='
+        clickHandler: '=',
+        selectedEntityName: '='
       },
       link: function(scope, element) {
         scope.dataFound = false;

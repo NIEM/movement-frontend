@@ -16,7 +16,7 @@
 
       </div>
       <div ng-if="!!element.type.elements">
-        <niem-child-accordion tree-level="1" element-data="element" click-handler="clickHandler" entity-type="entityType"></niem-child-accordion>
+        <niem-child-accordion tree-level="1" element-data="element" click-handler="clickHandler" entity-type="entityType" selected-entity-name='selectedEntityName'></niem-child-accordion>
       </div>
     </div>
 
@@ -25,7 +25,7 @@
       <div class="niem-accordion-item" ng-if="!item.type.elements">
         <span class="item-name">{{item.name}}</span>
         <span class="item-type" ng-if="!!item.type.type || !!item.type.parentSimpleType || !!item.type.parentTypeName">({{item.type.type || item.type.parentSimpleType || item.type.parentTypeName}})</span>
-        <span class="item-type" ng-if="!(item.type.type || item.type.parentSimpleType || item.type.parentTypeName)">({{item.type}})</span>
+        <span class="item-type" ng-if="item.type.toString()">({{item.type}})</span>
       </div>
       <div ng-if="!!item.type.elements">
         <niem-child-accordion tree-level="1" element-data="item" click-handler="clickHandler" entity-type="entityType"></niem-child-accordion>
