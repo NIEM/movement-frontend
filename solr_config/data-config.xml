@@ -22,6 +22,70 @@
         surfaceTransportation: 'Surface Transportation'
       };
 
+      var namespaceLookup = {
+        'aamva_d20': 'aamva_d20',
+        'apco_event': 'apco',
+        'atf': 'atf',
+        'canada_post': 'can',
+        'cbrncl': 'cbrncl',
+        'ogc': 'ogc',
+        'fbi_ndex': 'ndex',
+        'have': 'have',
+        'mmucc': 'mmucc',
+        'fbi_ncic': 'ncic',
+        'fbi_ucr': 'ucr',
+        'it_': 'itcodes',
+        'edxl_have': 'have-codes',
+        'core_misc': 'core_misc',
+        'unece_rec20': 'unece',
+        'de': 'de',
+        'census_commodity': 'commodity',
+        'jp3-52': 'jp3-52',
+        'pmise_sar': 'sar',
+        'dea_ctlsub': 'dea',
+        'nlets': 'nlets',
+        'jc3iedm': 'jc3iedm',
+        'edxl_rm': 'edxl_rm',
+        'fips_5-2': 'fips_5-2',
+        'nga_datum': 'nga',
+        'occs_facility': 'occs',
+        'cap': 'cap',
+        'dod_jcs-pub2.0': 'dod_jcs-pub2.0',
+        'fips_10-4': 'fips_10-4',
+        'nga_genc': 'genc',
+        'hl7': 'hl7',
+        'iso_3166-1': 'iso_3166',
+        'iso_4217': 'iso_4217',
+        'usps_states': 'usps',
+        'xCard': 'xCard',
+        'census_uscounty': 'census',
+        'dol_soc': 'dol',
+        'dot_hazmat': 'hazmat',
+        'fips_6-4': 'fips_6-4',
+        'iso_639-3': 'iso639-3',
+        'proxy': 'niem-xs',
+        'geospatial': 'geo',
+        'structures': 'structures',
+        'edxl-cap': 'edxl-cap',
+        'edxl-de': 'edxl-de',
+        'edxl-have': 'edxl-have',
+        'biometrics': 'biom',
+        'cbrn': 'cbrn',
+        'cyfs': 'cyfs',
+        'emergencyManagement': 'em',
+        'humanServices': 'hs',
+        'immigration': 'im',
+        'infrastructureProtection': 'ip',
+        'intelligence': 'intel',
+        'internationalTrade': 'it',
+        'jxdm': 'j',
+        'maritime': 'm',
+        'militaryOperations': 'mo',
+        'screening': 'scr',
+        'surfaceTransportation': 'st',
+        'NIEM Core': 'nc'     
+      }
+
       var path = row.get("fileAbsolutePath");
       var pathSlash = path.replace(/\\/g,"/");
       var namespaceType;
@@ -30,6 +94,7 @@
       var externalStandard;
       var otherNamespace;
       var namespacePriority;
+      var namespacePrefix;
 
       // Determine if file is in domains dir or niem-core
       if (path.indexOf('domains') > -1) {
@@ -39,6 +104,7 @@
         Object.keys(domainLookup).forEach(function(key) {
           if (path.indexOf(key) > -1) {
             domain = domainLookup[key];
+            namespacePrefix = namespaceLookup[key];
           }
         });
 
@@ -49,26 +115,31 @@
         namespaceType = 'domain';
         domain = 'NIEM Core';
         namespace = domain;
+        namespacePrefix = namespaceLookup[namespace];
         namespacePriority = 1;
       } else if ( path.indexOf('codes') > -1 ) {
         namespaceType = 'externalStandard';
         externalStandard = pathSlash.split('codes/')[1].split('/')[0];
         namespace = externalStandard;
+        namespacePrefix = namespaceLookup[namespace];
         namespacePriority = 3;
       } else if (path.indexOf('external') > -1) {
         namespaceType = 'externalStandard';
         externalStandard = pathSlash.split('external/')[1].split('/')[0];
         namespace = externalStandard;
+        namespacePrefix = namespaceLookup[namespace];
         namespacePriority = 3;
       } else if( path.indexOf('adapters') > -1) {
         namespaceType = 'otherNamespace';
         otherNamespace = pathSlash.split('adapters/')[1].split('/')[0];
         namespace = otherNamespace;
+        namespacePrefix = namespaceLookup[namespace];
         namespacePriority = 4;
       } else {
         namespaceType = 'otherNamespace';
         otherNamespace = pathSlash.split('niem-xsd/')[1].split('/')[0];
         namespace = otherNamespace;
+        namespacePrefix = namespaceLookup[namespace];
         namespacePriority = 4;
       }
       
@@ -82,6 +153,7 @@
 
       row.put("namespace", namespace);
       row.put("namespaceType", namespaceType);
+      row.put("namespacePrefix", namespacePrefix);
       row.put("namespacePriority", namespacePriority);
 
       return row;
@@ -168,10 +240,10 @@
               transformer="TemplateTransformer"
               forEach="/schema/element" >
 
-        <field column ="id"               template="${f.namespace}:${element.name}" />
+        <field column ="id"               template="${f.namespacePrefix}:${element.name}" />
         <field column="name"              xpath="/schema/element/@name"                        boost="5.0" />            
         <field column="entityType"        template="Element" />
-        <field column="definition"        xpath="/schema/element/annotation/documentation"     boost="2.0" />
+        <field column="definition"        xpath="/schema/element/annotation/documentation" />
         <field column="type"              xpath="/schema/element/@type" />
         <field column="abstract"          xpath="/schema/element/@abstract" />
       </entity>
@@ -184,9 +256,9 @@
               transformer="TemplateTransformer,script:getContentStyle"                      
               forEach="/schema/complexType" >
 
-        <field column ="id"               template="${f.namespace}:${complexType.name}" />
+        <field column ="id"               template="${f.namespacePrefix}:${complexType.name}" />
         <field column="name"              xpath="/schema/complexType/@name"                        boost="5.0" />            
-        <field column="definition"        xpath="/schema/complexType/annotation/documentation"     boost="2.0" />
+        <field column="definition"        xpath="/schema/complexType/annotation/documentation" />
         <field column="entityType"        template="Type" />
 
         <field column="complexContent"    xpath="/schema/complexType/complexContent" />
@@ -209,9 +281,9 @@
               forEach="/schema/simpleType" >
 
 
-        <field column ="id"           template="${f.namespace}:${simpleType.name}" />
+        <field column ="id"           template="${f.namespacePrefix}:${simpleType.name}" />
         <field column="name"          xpath="/schema/simpleType/@name"                        boost="5.0" />            
-        <field column="definition"    xpath="/schema/simpleType/annotation/documentation"     boost="2.0" />
+        <field column="definition"    xpath="/schema/simpleType/annotation/documentation" />
         <field column="entityType"    template="Type" />
 
         <field column="facetValue_enumeration"        xpath="/schema/simpleType/restriction/enumeration/@value" />
