@@ -190,7 +190,12 @@
       });
 
       Object.keys(facetGroups).forEach(function(key) {
-        groupedFacetString = '{!tag=' + key + 'tag}' + key + ':' + facetGroups[key];
+        // Combine the exclude tag for all namespace types
+        if (key === 'domain' || key === 'externalStandard' || key === 'otherNamespace') {
+          groupedFacetString = '{!tag=domaintag,otherNamespacetag,externalStandardtag}' + key + ':' + facetGroups[key];
+        } else {
+          groupedFacetString = '{!tag=' + key + 'tag}' + key + ':' + facetGroups[key];
+        }
         groupedFacets.push(groupedFacetString);
       });
 

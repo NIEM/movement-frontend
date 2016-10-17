@@ -15,7 +15,7 @@ angular
     'ngTouch',
     'ui.bootstrap'
   ])
-  .constant('SOLR_URL', 'http://localhost:8983/solr/niem-test-xsd/select')
+  .constant('SOLR_URL', 'http://54.187.126.248:8983/solr/niem-test-xsd/select')
   .config(function($urlRouterProvider) {
     $urlRouterProvider.when('', '/'); // redirect to root if the state is ''
 
