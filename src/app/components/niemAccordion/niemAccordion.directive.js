@@ -14,23 +14,54 @@
     .module('dhsniem')
     .directive('niemAccordion', niemAccordion);
 
-  function niemAccordion() {
+  function niemAccordion($compile) {
     return {
       restrict: 'E',
       templateUrl: 'app/components/niemAccordion/niemAccordion.directive.html',
-      scope: {},
-      link: link
+      scope: {
+        data: '=',
+        title: '=',
+        clickHandler: '=',
+        entityType: '=',
+        isProperties: '=',
+        selectedEntityName: '='
+      },
+      link: function(scope, element) {
+        scope.isOpen = false;
+        scope.dataFound = false;
+
+        scope.toggleAccordion = function() {
+          scope.isOpen = !scope.isOpen;
+          if (scope.isOpen && scope.dataFound === false) {
+            scope.dataFound = true;
+            if (!!scope.data) {
+              if (scope.entityType === 'Element') {
+                scope.clickHandler(scope.data);
+              } else {
+                //for Type Contains
+                if (scope.isProperties === true) {
+                  //for Type Properties
+                  for (var i = 0; i < scope.data.length; i++) {
+                    if (!!scope.data[i].type.elements) {
+                      scope.clickHandler(scope.data[i].type);
+                    }
+                  }
+                } else {
+                  if (!!scope.data.elements) {
+                    scope.clickHandler(scope.data);
+                  }
+                }
+
+
+
+                console.log(scope.data);
+
+              }
+            }
+          }
+        };
+      }
     };
-
-  }
-
-  /**
-   *  Defines variables and functions within niemAccordion scope
-   *
-   */
-  function link(scope) {
-    scope.isOpen = false;
-
 
   }
 

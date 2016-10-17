@@ -1,13 +1,15 @@
 <div class="facet-details">
-  <div class="facet-bar">
+  <details-pagination data="data" num-per-page="20" show-action="showData"></details-pagination>
   <h5 class="facet-heading text-uppercase">
-    Facet Name, Value, and Description
+    <span uib-popover-template="popoverTemplateUrl" popover-placement="top" popover-is-open="popoverIsOpen">
+      Facet Name,
+    </span>
+    Value, and Description
   </h5>
-    <solr-results-pagination></solr-results-pagination>
-  </div>
   <ul class="facet-list">
     <div ng-repeat="facet in data">
-      <li class="facet-item row" ng-repeat="value in facet.data.facetValue track by $index">
+      <li class="facet-item row" ng-repeat="value in facet.data.facetValue track by $index"
+          ng-if="$index >= minIdx && $index <= maxIdx">
         <div class="facet-item-text">
           <div class="col-sm-3 text-capitalize">{{facet.name}}</div>
           <div class="col-sm-2">"{{value.trim()}}"</div>

@@ -9,6 +9,7 @@
       font-size: 12px;
       letter-spacing: 0.5px;
       color: $ocean-blue;
+      cursor: pointer;
     }
 
     .details-heading {
@@ -16,6 +17,7 @@
       color: $white;
       padding: 15px 21px 14px 21px;
       margin-top: 13px;
+      margin-bottom: 5px;
       h1 {
         margin: 0 0 2px 0;
         letter-spacing: 0.5px;
@@ -30,22 +32,20 @@
     }
 
     .details-info {
-      padding-top: 20px;
-      padding-bottom: 41px;
       display: inline-flex;
       margin: auto;
-
+      margin-bottom: 6px;
       .details-info-col {
         width: 50%;
         display: inline-block;
         &:nth-child(odd) {
           .details-info-content {
-            margin: 0 5px 19px 0;
+            margin: 0 5px 0 0;
           }
         }
         &:nth-child(even) {
           .details-info-content {
-            margin: 0 0 19px 10px;
+            margin: 0 0 0 10px;
           }
         }
       }
@@ -59,19 +59,26 @@
         padding-right: 20px;
         align-items: center;
         display: flex;
-        .definition-img,
-        .simple-type-img {
-          display: inline-block;
-          height: 44px;
-          width: 44px;
+        .auto-height {
+          height: auto;
         }
+        .symbol-div {
+          display: inline-block;
+          height: 66px;
+          border-right: 1px solid;
+          border-color: lighten($ocean-blue, 50%);
+          padding-right: 15px;
+          img {
+            margin-top: 11px;
+            height: 44px;
+            width: 44px;
+          }
+        }
+
         .details-text {
           display: inline-block;
           vertical-align: middle;
-          border-left: 1px solid;
-          border-color: lighten($ocean-blue, 50%);
-          padding-left: 15px;
-          margin-left: 15px;
+          margin-left: 20px;
           max-width: 478px;
           h3 {
             letter-spacing: 0.5px;
@@ -82,19 +89,15 @@
           p {
             margin: 0;
             letter-spacing: 0.5px;
-            color: rgba(0,0,0,0.58);
+            color: rgba(0, 0, 0, 0.58);
           }
         }
       }
     }
 
     .details-desc {
+      padding-top: 37px;
       .contain-list {
-        niem-accordion:first-child {
-          .niem-accordion-heading {
-            padding-top: 0;
-          }
-        }
         .panel-group {
           .panel-default {
             padding: 10px;

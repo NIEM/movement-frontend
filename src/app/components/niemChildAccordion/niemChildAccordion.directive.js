@@ -14,29 +14,35 @@
     .module('dhsniem')
     .directive('niemChildAccordion', niemChildAccordion);
 
-  function niemChildAccordion($compile) {
+  function niemChildAccordion($compile, solrRequest) {
     return {
       restrict: 'E',
       templateUrl: 'app/components/niemChildAccordion/niemChildAccordion.directive.html',
       scope: {
-        isInnerChild: '@',
-        treeLevel: '@'
+        treeLevel: '=',
+        elementData: '=',
+        entityType: '=',
+        clickHandler: '=',
+        selectedEntityName: '='
       },
       link: function(scope, element) {
+        scope.dataFound = false;
+        scope.isOpen = false;
+        scope.seeMore = false;
+
+        scope.showMore = function() {
+          scope.seeMore = !scope.seeMore;
+        };
+
         scope.onClick = function() {
           scope.isOpen = !scope.isOpen;
           scope.nextLevel = parseInt(scope.treeLevel, 10) + 1;
+          if (scope.isOpen && scope.dataFound === false && scope.entityType === 'Element') {
+            scope.clickHandler(scope.elementData.type);
+            scope.dataFound = true;
 
-          //keep this - will be used for items with children
-          /*if (scope.isOpen) {
-            element.append('<niem-child-accordion is-inner-child="true" tree-level="{{nextLevel}}"></niem-child-accordion>');
-            $compile(element.contents())(scope);
-          } else {
-            //test
-          }*/
+          }
         };
-
-
       }
     };
   }

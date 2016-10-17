@@ -14,7 +14,7 @@
     .module('dhsniem')
     .controller('DetailsCtrl', DetailsCtrl);
 
-  function DetailsCtrl(solrRequest, $location) {
+  function DetailsCtrl(solrRequest, $location, $window) {
 
     var vm = this;
 
@@ -30,6 +30,7 @@
 
       var id = $location.search().entityID;
       var query = 'id:' + id.split(':')[0] + '\\:' + id.split(':')[1];
+      vm.getElementObjects = getElementObjects;
 
       var popovers = {
         'simple-content-type': {
@@ -40,6 +41,7 @@
 
       solrRequest.makeSolrRequest(getSearchParams(query)).then(function(data) {
         vm.entity = data.response.docs[0];
+        console.log(vm.entity);
 
         if (!!vm.entity.facets) {
           var newFacets = vm.entity.facets;
@@ -66,19 +68,19 @@
                   fieldDataArray[fieldDataArray.length - 1] = lastValue.substring(0, lastValue.length - 1);
                   data[facet][fieldName] = fieldDataArray;
                 }
-                //vm.entity.facets[facet] = data[facet];
                 vm.entity.facets.push({
                   name: facet,
                   data: data[facet]
                 });
+
               }
             }
-
+            console.log(vm.entity);
           }
-        }
-
-        if (vm.entity.entityType === 'Element') {
+        } else if (vm.entity.entityType === 'Element') {
           getContainingTypes();
+        } else {
+          getElementsofType(vm.entity);
         }
 
       });
@@ -106,12 +108,7 @@
       var query = 'elements:*' + vm.entity.name + '*';
       solrRequest.makeSolrRequest(getSearchParams(query)).then(function(data) {
         vm.containingTypes = data.response.docs;
-
-        // Example code to return the first iteration of nested structure
-        if (vm.containingTypes) {
-          getElementObjects(vm.containingTypes[0]);
-          console.log(vm.containingTypes);
-        }
+        console.log(vm.containingTypes);
       });
     }
 
@@ -136,7 +133,7 @@
           } else {
             arr[index].type = 'abstract';
           }
-
+          arr[index].element = element; //preserves the original string
         });
       });
     }
@@ -183,6 +180,9 @@
           }
         });
 
+        console.log(vm.propertiesOfType);
+
+
       });
     }
 
@@ -210,31 +210,15 @@
     }
 
     /**
-     * @name isElement
+     * @name goBack
      *
      * @memberof dhsniem.controller:DetailsCtrl
      *
-     * @description Determines if details page contains an element
-     *
-     * * @returns boolean
+     * @description Navigates back to the search results page with previous search params
      */
-    function isElement() {
-      return !!vm.entity.type && !!vm.entity.abstract;
-    }
-
-    /**
-     * @name isSimpleType
-     *
-     * @memberof dhsniem.controller:DetailsCtrl
-     *
-     * @description Determines if details page contains a simple type
-     *
-     * * @returns boolean
-     */
-    function isSimpleType() {
-      return !!vm.entity.facets;
-    }
-
+    vm.goBack = function() {
+      $window.history.back();
+    };
 
     init();
 
