@@ -3,7 +3,7 @@
     <img src="images/ic_carot.svg" class="carot-img float-left" ng-class="{'caret-down': isOpen}" ng-click="onClick()">
     <div class="niem-child-accordion-heading-text">
       <span class="child-heading-title">{{elementData.name}}</span>
-      <span class="child-heading-type" ng-if="!!elementDataElement.type.type || !!elementData.type.parentSimpleType || !!elementData.type.parentTypeName">({{elementData.type.type || elementData.type.parentSimpleType || elementData.type.parentTypeName}})</span>
+      <span class="child-heading-type" ng-if="(!!elementDataElement.type.type || !!elementData.type.parentSimpleType || !!elementData.type.parentTypeName)">({{elementData.type.type || elementData.type.parentSimpleType || elementData.type.parentTypeName}})</span>
     </div>
   </div>
   <div class="niem-accordion-list" ng-show="isOpen">
