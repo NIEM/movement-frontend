@@ -3,14 +3,18 @@
     <img src="images/ic_carot.svg" class="carot-img float-left" ng-class="{'caret-down': isOpen}" ng-click="toggleAccordion()">
     <h2>
       <span class="contain-title">{{title}}</span>
-      <span class="contain-type" ng-if="entityType === 'Element'">{{data.name}}</span>
+      <span class="contain-type" ng-if="entityType === 'Element'">
+        <a ui-sref="main.details({ entityID: data.id })">{{data.name}}</a>
+      </span>
     </h2>
   </div>
 
   <div class="niem-accordion-list" ng-if="isOpen">
     <div ng-repeat="element in data.elements" ng-if="entityType === 'Element'">
       <div class="niem-accordion-item" ng-if="!element.type.elements">
-        <span class="item-name">{{element.name}}</span>
+        <span class="item-name">
+          <a ui-sref="main.details({ entityID: element.id })">{{element.name}}</a>
+        </span>
         <span class="item-type" ng-if="!!element.type.name">({{element.type.name}})</span>
         <span class="item-type" ng-if="element.type === 'abstract'">({{element.type}})</span>
       </div>
@@ -22,7 +26,9 @@
 
     <div ng-if="entityType === 'Type' && isProperties !== true" ng-repeat="item in data.elements">
       <div class="niem-accordion-item" ng-if="!item.type.elements">
-        <span class="item-name">{{item.name}}</span>
+        <span class="item-name">
+          <a ui-sref="main.details({ entityID: item.id })">{{item.name}}</a>
+        </span>
         <span class="item-type" ng-if="!!item.type.name">({{item.type.name}})</span>
         <span class="item-type" ng-if="item.type === 'abstract'">({{item.type}})</span>
       </div>
@@ -33,7 +39,9 @@
 
     <div ng-if="entityType === 'Type' && isProperties === true" ng-repeat="item in data">
       <div class="niem-accordion-item" ng-if="!item.type.elements">
-        <span class="item-name">{{item.name}}</span>
+        <span class="item-name">
+          <a ui-sref="main.details({ entityID: item.id })">{{item.name}}</a>
+        </span>
         <span class="item-type" ng-if="!!item.type.name">({{item.type.name}})</span>
         <span class="item-type" ng-if="item.type === 'abstract'">({{item.type}})</span>
       </div>

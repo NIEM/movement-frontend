@@ -2,7 +2,9 @@
   <div class="niem-child-accordion-heading" ng-class="{'currently-selected': elementData.name === selectedEntityName}">
     <img src="images/ic_carot.svg" class="carot-img float-left" ng-class="{'caret-down': isOpen}" ng-click="onClick()">
     <div class="niem-child-accordion-heading-text">
-      <span class="child-heading-title">{{elementData.name}}</span>
+      <span class="child-heading-title">
+        <a ui-sref="main.details({ entityID: elementData.id })">{{elementData.name}}</a>
+      </span>
       <span class="child-heading-type" ng-if="!!elementData.type.name">({{elementData.type.name}})</span>
       <span class="child-heading-type" ng-if="elementData.type === 'abstract'">({{elementData.type}})</span>
     </div>
@@ -11,7 +13,9 @@
     <div ng-if="entityType === 'Element'">
       <div ng-repeat="currElement in elementData.type.elements" ng-if="nextLevel < 3">
         <div class="niem-accordion-item" ng-if="!currElement.type.elements" ng-class="{'currently-selected': currElement.name === selectedEntityName}">
-          <span class="item-name">{{currElement.name}}</span>
+          <span class="item-name">
+            <a ui-sref="main.details({ entityID: currElement.id })">{{currElement.name}}</a>
+          </span>
           <span class="item-type" ng-if="!!currElement.type.name">({{currElement.type.name}})</span>
           <span class="item-type" ng-if="currElement.type === 'abstract'">({{currElement.type}})</span>
         </div>
@@ -22,7 +26,11 @@
 
       <div ng-if="nextLevel >= 3">
         <div class="niem-accordion-item" ng-if="!elementData.type.elements[0].type.elements" ng-class="{'currently-selected': elementData.type.elements[0].name === selectedEntityName}">
-          <span class="item-name">{{elementData.type.elements[0].name}}</span>
+          <span class="item-name">
+            <span class="item-name">
+              <a ui-sref="main.details({ entityID: elementData.id })">{{elementData.type.elements[0].name}}</a>
+            </span>
+          </span>
           <span class="item-type" ng-if="!!elementData.type.elements[0].type.name">({{elementData.type.elements[0].type.name}})</span>
           <span class="item-type" ng-if="elementData.type.elements[0].type === 'abstract'">({{elementData.type.elements[0].type}})</span> </div>
         <div ng-if="!!elementData.type.elements[0].type.elements">
@@ -35,7 +43,9 @@
           <div ng-repeat="currElement in elementData.type.elements">
             <div ng-if="$index > 0">
               <div class="niem-accordion-item" ng-if="!currElement.type.elements" ng-class="{'currently-selected': currElement.name === selectedEntityName}">
-                <span class="item-name">{{currElement.name}}</span>
+                <span class="item-name">
+                  <a ui-sref="main.details({ entityID: currElement.id })">{{currElement.name}}</a>
+                </span>
                 <span class="item-type" ng-if="!!currElement.type.name">({{currElement.type.name}})</span>
                 <span class="item-type" ng-if="currElement.type === 'abstract'">({{currElement.type}})</span>
 
@@ -51,7 +61,9 @@
 
     <div ng-repeat="currElement in elementData.type.elements" ng-if="entityType === 'Type'">
       <div class="niem-accordion-item" ng-if="!currElement.type.elements">
-        <span class="item-name">{{currElement.element}}</span>
+        <span class="item-name">
+          <a ui-sref="main.details({ entityID: currElement.id })">{{currElement.name}}</a>
+        </span>
         <span class="item-type" ng-if="!!currElement.type.name">({{currElement.type.name}})</span>
         <span class="item-type" ng-if="currElement.type === 'abstract'">({{currElement.type}})</span>
       </div>
