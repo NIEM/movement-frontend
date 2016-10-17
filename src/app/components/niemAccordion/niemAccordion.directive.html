@@ -12,7 +12,8 @@
     <div ng-repeat="element in data.elements" ng-if="entityType === 'Element'">
       <div class="niem-accordion-item" ng-if="!element.type.elements">
         <span class="item-name">{{element.name}}</span>
-        <span class="item-type" ng-if="!!item.type.type || !!item.type.parentSimpleType || !!item.type.parentTypeName">({{element.type.type || element.type.parentSimpleType || element.type.parentTypeName}})</span>
+        <span class="item-type" ng-if="!!element.type.type || !!element.type.parentSimpleType || !!element.type.parentTypeName">({{element.type.type || element.type.parentSimpleType || element.type.parentTypeName}})</span>
+
       </div>
       <div ng-if="!!element.type.elements">
         <niem-child-accordion tree-level="1" element-data="element" click-handler="clickHandler" entity-type="entityType"></niem-child-accordion>

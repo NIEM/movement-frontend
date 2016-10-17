@@ -29,6 +29,10 @@
         scope.isOpen = false;
         scope.seeMore = false;
 
+        scope.showMore = function() {
+          scope.seeMore = !scope.seeMore;
+        };
+
         scope.onClick = function() {
           scope.isOpen = !scope.isOpen;
           scope.nextLevel = parseInt(scope.treeLevel, 10) + 1;
