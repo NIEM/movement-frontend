@@ -118,17 +118,16 @@
          If you don't need it, consider removing it and the corresponding copyField directive.
     -->
 
-    <!-- TODO: For NIEM prod, remove _text_ field -->
     <field name="id"                type="string"       indexed="true" stored="true" required="true" multiValued="false" />
     <field name="_version_"         type="long"         indexed="true" stored="false" />
     <field name="_root_"            type="string"       indexed="true" stored="false" docValues="false" />
-    <field name="_text_"            type="text_general" indexed="true" stored="false" multiValued="true"/>
+    <field name="_text_"            type="text"         indexed="true" stored="false" multiValued="true"/>
 
     <!-- Global NIEM fields -->
-    <field name="name"              type="text_general" indexed="true"  stored="true" multiValued="false" omitNorms="false" />
-    <field name="definition"        type="text_general" indexed="true"  stored="true" multiValued="false" omitNorms="false" />
+    <field name="name"              type="text_general" indexed="true"  stored="true"  multiValued="false" omitNorms="false" />
+    <field name="definition"        type="text_general" indexed="false" stored="true"  multiValued="false" />
 
-    <!-- All fields used for faceting should be string -->
+    <!-- All fields used for faceting should be string/int and indexed -->
     <field name="entityType"        type="string"       indexed="true"  stored="true" multiValued="false" />
     <field name="namespaceType"     type="string"       indexed="true"  stored="true" multiValued="false" />
     <field name="namespace"         type="string"       indexed="true"  stored="true" multiValued="false" />
@@ -136,34 +135,42 @@
     <field name="externalStandard"  type="string"       indexed="true"  stored="true" multiValued="false" />
     <field name="otherNamespace"    type="string"       indexed="true"  stored="true" multiValued="false" />
     <field name="namespacePriority" type="int"          indexed="true"  stored="true" multiValued="false" />
+    <field name="namespacePrefix"   type="string"       indexed="false" stored="false" multiValued="false" />    
 
 
     <!-- Element fields -->
-    <field name="type"              type="string" indexed="true"  stored="true" multiValued="false" />
+    <field name="type"              type="text_general" indexed="true"  stored="true" multiValued="false" />
     <!-- TODO: Eliminate this field and instead populate type field with value 'abstract'. Or use default value on type field -->
     <field name="abstract"          type="string" indexed="false" stored="true" multiValued="false" />
 
-    <!-- Type fields -->
+    <!-- ComplexType fields -->
     <field name="contentStyle"      type="string" indexed="false" stored="true" multiValued="false" />
     <field name="complexContent"    type="string" indexed="false" stored="false" multiValued="false" />
     <field name="simpleContent"     type="string" indexed="false" stored="false" multiValued="false" />
 
     <!-- Complex CCC Type fields -->
-    <field name="parentTypeName"    type="string" indexed="true" stored="true" multiValued="false" />
+    <field name="parentTypeName"    type="string" indexed="false" stored="true" multiValued="false" />
     <field name="elements"          type="string" indexed="true" stored="true" multiValued="true" />
 
     <!-- Complex CSC Type fields -->
-    <field name="parentSimpleType"  type="string" indexed="true" stored="true" multiValued="false" />
+    <field name="parentSimpleType"  type="string" indexed="false" stored="true" multiValued="false" />
 
     <!-- SimpleType fields -->
-    <field name="facets"                    type="string" indexed="true" stored="true" multiValued="true" />  
+    <field name="facets"                    type="string" indexed="false" stored="true" multiValued="true" />  
     <dynamicField name="facetValue_*"       type="string" indexed="false" stored="false"  multiValued="true" />
     <dynamicField name="facetDefinition_*"  type="string" indexed="false" stored="false"  multiValued="true" />
 
 
     <!-- Only enabled in the "schemaless" data-driven example (assuming the client
          does not know what fields may be searched) because it's very expensive to index everything twice. -->
-    <!-- <copyField source="*" dest="_text_"/> -->
+    <!-- copyfields for default search -->
+    <copyField source="name"              dest="_text_"/>
+    <copyField source="definition"        dest="_text_"/>
+    <copyField source="type"              dest="_text_"/>
+    <copyField source="parentTypeName"    dest="_text_"/>
+    <copyField source="elements"          dest="_text_"/>
+    <copyField source="parentSimpleType"  dest="_text_"/>
+    <copyField source="facets"            dest="_text_"/>
 
     <!-- Dynamic field definitions allow using convention over configuration
        for fields via the specification of patterns to match field names. 
@@ -242,7 +249,7 @@
        standard package such as org.apache.solr.analysis
     -->
 
-
+    <!-- Field type used for partial string matching -->
     <fieldType name="text" class="solr.TextField" omitNorms="false">
       <analyzer type="index">
         <tokenizer class="solr.StandardTokenizerFactory"/>
@@ -250,7 +257,7 @@
         <filter class="solr.StandardFilterFactory"/>
         <filter class="solr.LowerCaseFilterFactory"/>
         <filter class="solr.PorterStemFilterFactory"/>
-        <filter class="solr.EdgeNGramFilterFactory" minGramSize="2" maxGramSize="15" side="front"/>
+        <filter class="solr.NGramFilterFactory" minGramSize="3" maxGramSize="15" />
       </analyzer>
       <analyzer type="query">
         <tokenizer class="solr.StandardTokenizerFactory"/>
@@ -276,8 +283,8 @@
     <!-- sortMissingLast and sortMissingFirst attributes are optional attributes are
          currently supported on types that are sorted internally as strings
          and on numeric types.
-	     This includes "string","boolean", and, as of 3.5 (and 4.x),
-	     int, float, long, date, double, including the "Trie" variants.
+       This includes "string","boolean", and, as of 3.5 (and 4.x),
+       int, float, long, date, double, including the "Trie" variants.
        - If sortMissingLast="true", then a sort on this field will cause documents
          without the field to come after documents with the field,
          regardless of the requested sort order (asc or desc).
@@ -402,10 +409,10 @@
 
     <!-- A general text field that has reasonable, generic
          cross-language defaults: it tokenizes with StandardTokenizer,
-	       removes stop words from case-insensitive "stopwords.txt"
-	       (empty by default), and down cases.  At query time only, it
-	       also applies synonyms.
-	  -->
+         removes stop words from case-insensitive "stopwords.txt"
+         (empty by default), and down cases.  At query time only, it
+         also applies synonyms.
+    -->
     <fieldType name="text_general" class="solr.TextField" positionIncrementGap="100" multiValued="true">
       <analyzer type="index">
         <tokenizer class="solr.StandardTokenizerFactory"/>
@@ -446,7 +453,7 @@
         <filter class="solr.KeywordMarkerFilterFactory" protected="protwords.txt"/>
         <!-- Optionally you may want to use this less aggressive stemmer instead of PorterStemFilterFactory:
         <filter class="solr.EnglishMinimalStemFilterFactory"/>
-	      -->
+        -->
         <filter class="solr.PorterStemFilterFactory"/>
       </analyzer>
       <analyzer type="query">
@@ -461,7 +468,7 @@
         <filter class="solr.KeywordMarkerFilterFactory" protected="protwords.txt"/>
         <!-- Optionally you may want to use this less aggressive stemmer instead of PorterStemFilterFactory:
         <filter class="solr.EnglishMinimalStemFilterFactory"/>
-	      -->
+        -->
         <filter class="solr.PorterStemFilterFactory"/>
       </analyzer>
     </fieldType>
@@ -526,7 +533,7 @@
     </fieldType>
 
     <!-- Just like text_general except it reverses the characters of
-	       each token, to enable more efficient leading wildcard queries.
+         each token, to enable more efficient leading wildcard queries.
     -->
     <dynamicField name="*_txt_rev" type="text_general_rev"  indexed="true"  stored="true"/>
     <fieldType name="text_general_rev" class="solr.TextField" positionIncrementGap="100">
