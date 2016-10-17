@@ -5,7 +5,7 @@
       <span class="child-heading-title">
         <a ui-sref="main.details({ entityID: elementData.id })">{{elementData.name}}</a>
       </span>
-      <span class="child-heading-type" ng-if="!!elementData.type.name">({{elementData.type.name}})</span>
+      <span class="child-heading-type" ng-if="!!elementData.type.name">({{elementData.type.id}})</span>
       <span class="child-heading-type" ng-if="elementData.type === 'abstract'">({{elementData.type}})</span>
     </div>
   </div>

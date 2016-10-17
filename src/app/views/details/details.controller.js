@@ -89,7 +89,9 @@
      * @description Retrieves the containing type documents for an element
      */
     function getContainingTypes() {
-      var query = 'elements:*' + vm.entity.name + '*';
+      var id = $location.search().entityID;
+      var query = 'elements:' + id.split(':')[0] + '\\:' + id.split(':')[1];
+      // var query = 'elements:' + id;
       solrRequest.makeSolrRequest(getSearchParams(query)).then(function(data) {
         vm.containingTypes = data.response.docs;
         console.log(vm.containingTypes);
