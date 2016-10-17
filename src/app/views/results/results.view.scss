@@ -169,8 +169,14 @@
             }
             .item-description {
               color: $body-text-color;
-              margin-bottom: 16px;
+              margin-bottom: 15px;
               letter-spacing: 0.5px;
+            }
+            .item-namespace {
+              font-size: 14px;
+              letter-spacing: 0.5px;
+              color: $marine-blue;
+              margin-bottom: 13px;
             }
             &:last-child {
               border-bottom: none;
