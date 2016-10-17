@@ -53,6 +53,9 @@
 
     .details-desc {
       .contain-list {
+        .has-none {
+          padding-left: 20px;
+        }
         .panel-group {
           .panel-default {
             padding: 10px;
@@ -74,12 +77,14 @@
             }
           }
 
-          .contain-group {
+          /*.contain-list {
             .contain-group-item {
               border-bottom: 1px solid black;
               padding: 20px;
             }
-          }
+          }*/
+
+
         }
       }
     }
