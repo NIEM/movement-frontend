@@ -29,7 +29,7 @@
       scope.currentPage = 1;
 
       $rootScope.$on('newSearch', function() {
-        scope.currentPage = $location.search().page;
+        scope.currentPage = $location.search().page || 1;
       });
 
       scope.nextPage = function() {
