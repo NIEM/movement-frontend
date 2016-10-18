@@ -32,7 +32,7 @@
     function link(scope, element, attrs) {
 
       scope.sortByName = function(result) {
-        if (result === 'NIEM Core') {
+        if (result === 'Core') {
           return -1;
         } else {
           return result;
