@@ -1,21 +1,19 @@
 <div class="results">
   <search-header></search-header>
-
   <section class="content">
-
     <div class="legend row">
       <div class="pull-right">
         <h6 class="legend-heading">Legend</h6>
         <div class="legend-symbols">
           <div class="legend-symbol">
             <img class="legend-img" src="images/icon_t.svg">
-            <h6 class="legend-title type-legend" uib-popover-template="popovers['type'].popoverTemplateUrl"
-                popover-placement="bottom" popover-is-open="popovers['type'].popoverIsOpen">Type</h6>
+            <h6 ng-click="closeOtherPopovers('type')" class="legend-title type-legend" uib-popover-template="popovers['type'].popoverTemplateUrl"
+                popover-placement="bottom" popover-is-open="popovers['type'].popoverIsOpen"><span class="dotted-underline">Type</span></h6>
           </div>
           <div class="legend-symbol">
             <img class="legend-img" src="images/icon_e.svg">
-            <h6 class="legend-title" uib-popover-template="popovers['element'].popoverTemplateUrl"
-                popover-placement="bottom" popover-is-open="popovers['element'].popoverIsOpen">Element</h6>
+            <h6 ng-click="closeOtherPopovers('element')" class="legend-title" uib-popover-template="popovers['element'].popoverTemplateUrl"
+                popover-placement="bottom" popover-is-open="popovers['element'].popoverIsOpen"><span class="dotted-underline">Element</span></h6>
           </div>
         </div>
       </div>
@@ -38,7 +36,7 @@
           <solr-facet display="Entities" field="entityType"></solr-facet>
         </div>
         <div class="solr-facet-group-tooltip">
-          <span uib-popover-template="popovers['namespace'].popoverTemplateUrl"
+          <span ng-click="closeOtherPopovers('namespace')" uib-popover-template="popovers['namespace'].popoverTemplateUrl"
                 popover-placement="right" popover-is-open="popovers['namespace'].popoverIsOpen" class="dotted-underline">
             Namespace
           </span>
@@ -61,7 +59,7 @@
         <div class="result">
           <div class="result-item" ng-repeat="doc in docs">
             <h2 class="result-heading" ng-show="isFirstOfNamespace(docs[$index - 1].namespace, doc)">
-              <span uib-popover-template="popovers['core'].popoverTemplateUrl" popover-placement="right"
+              <span ng-click="closeOtherPopovers('core')" uib-popover-template="popovers['core'].popoverTemplateUrl" popover-placement="right"
                     popover-is-open="popovers['core'].popoverIsOpen"
                     popover-enable="doc.namespace == 'Core'">
                 {{doc.namespace}} ({{doc.namespaceCount}})
@@ -80,9 +78,7 @@
           </div>
         </div>
       </div>
-
     </div>
-
   </section>
   <ccp-footer></ccp-footer>
 </div>

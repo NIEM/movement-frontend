@@ -15,6 +15,7 @@
     #solr-search-input {
       color: $marine-blue;
       height: 39px;
+      border: none;
       +.dropdown-menu {
         border-radius: 0;
         width: 361px;

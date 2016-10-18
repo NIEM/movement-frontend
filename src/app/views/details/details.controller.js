@@ -31,6 +31,7 @@
       var id = $location.search().entityID;
       var query = 'id:' + id.split(':')[0] + '\\:' + id.split(':')[1];
       vm.getElementObjects = getElementObjects;
+      vm.closePopover = closePopover;
 
       vm.popovers = {
         'simple-content-type': {
@@ -103,10 +104,7 @@
      * @param type - String
      */
     function closePopover(type) {
-      console.log('in close popover function');
-      console.log(vm.popovers[type].popoverIsOpen);
       vm.popovers[type].popoverIsOpen = false;
-      console.log(vm.popovers[type].popoverIsOpen);
     }
 
     /**
