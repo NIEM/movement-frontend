@@ -6,7 +6,7 @@
 </h3>
 </div>
 <ul class="list-unstyled">
-  <li ng-repeat="(k, v) in results">
-    <solr-facet-result field="{{field}}" key="{{k}}" count="{{v}}"></solr-facet-result>
+  <li ng-repeat="key in keys(results) | orderBy:sortByName">
+    <solr-facet-result field="{{field}}" key="{{key}}" count="{{results[key]}}"></solr-facet-result>
   </li>
 </ul>
