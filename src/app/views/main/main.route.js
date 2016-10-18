@@ -10,8 +10,7 @@
           url         : '',
           templateUrl : 'app/views/main/main.view.html',
           controller  : 'MainCtrl',
-          controllerAs: 'MainCtrl',
-          title       : 'main'
+          controllerAs: 'MainCtrl'
         });
     });
 

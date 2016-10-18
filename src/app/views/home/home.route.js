@@ -10,8 +10,7 @@
           url         : '/',
           templateUrl : 'app/views/home/home.view.html',
           controller  : 'HomeCtrl',
-          controllerAs: 'HomeCtrl',
-          title       : 'CCP - Data Information Exchange Tool'
+          controllerAs: 'HomeCtrl'
         });
     });
 

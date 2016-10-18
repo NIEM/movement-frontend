@@ -14,8 +14,8 @@
     .module('dhsniem')
     .controller('HomeCtrl', HomeCtrl);
 
-  function HomeCtrl() {
-
+  function HomeCtrl($window) {
+    $window.document.title = 'CCP - Data Information Exchange Tool';
   }
 
 })();

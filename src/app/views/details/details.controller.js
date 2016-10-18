@@ -14,7 +14,7 @@
     .module('dhsniem')
     .controller('DetailsCtrl', DetailsCtrl);
 
-  function DetailsCtrl(solrRequest, $location, $window) {
+  function DetailsCtrl(solrRequest, $location, $window, $rootScope) {
 
     var vm = this;
 
@@ -41,6 +41,7 @@
 
       solrRequest.makeSolrRequest(getSearchParams(query)).then(function(data) {
         vm.entity = data.response.docs[0];
+        $window.document.title = vm.entity.name + ' - CCP Details';
         console.log(vm.entity);
 
         if (!!vm.entity.facets) {

@@ -14,7 +14,7 @@
     .module('dhsniem')
     .factory('solrSearch', solrSearch);
 
-  function solrSearch($location, $rootScope, solrRequest) {
+  function solrSearch($location, $rootScope, solrRequest, $window) {
 
     var docs;
     var numFound;
@@ -92,6 +92,7 @@
         facets = data.facet_counts.facet_fields;
         $rootScope.$emit('newSearch');
       });
+      $window.document.title = getQuery() + ' - CCP Search';
     }
 
 
