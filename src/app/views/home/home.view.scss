@@ -2,8 +2,14 @@
   .content {
     min-width: $niem-min-width;
     width: 100%;
-    background: url(../../images/mainbg.svg);
+    background-image: url(../../images/mainbg.svg);
     background-size: cover;
+    filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(
+    src='images/logo.gif',
+    sizingMethod='scale');
+    -ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(
+    src='images/logo.gif',
+    sizingMethod='scale')";
 
     .welcome {
       width: 768px;
