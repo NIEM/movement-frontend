@@ -85,6 +85,16 @@
         }
         return false;
       };
+
+      scope.isFirstOfAlphabet = function(previousName, currentDoc) {
+        if (solrSearch.getSort() === 'name asc') {
+          if (currentDoc.name.substring(0,1).toUpperCase() !== previousName.substring(0,1).toUpperCase()) {
+            return true;
+          }
+        }
+        return false;
+      };
+
     }
   }
 })();

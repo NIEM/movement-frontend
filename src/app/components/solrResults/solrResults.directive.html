@@ -67,6 +67,10 @@
                 {{doc.namespace}} ({{doc.namespaceCount}})
               </span>
             </h2>
+            <h2 class="result-heading" ng-show="isFirstOfAlphabet(docs[$index - 1].name, doc)">
+                {{doc.name.substring(0,1).toUpperCase()}}
+              </span>
+            </h2>
             <div class="result-content">
               <a ui-sref="main.details({ entityID: doc.id })">
                 <h3 class="item-title">{{doc.name}}</h3>
