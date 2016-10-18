@@ -83,7 +83,7 @@
         'militaryOperations': 'mo',
         'screening': 'scr',
         'surfaceTransportation': 'st',
-        'NIEM Core': 'nc'     
+        'Core': 'nc'     
       }
 
       var path = row.get("fileAbsolutePath");
@@ -113,7 +113,7 @@
 
       } else if ( path.indexOf('niem-core') > -1) {
         namespaceType = 'domain';
-        domain = 'NIEM Core';
+        domain = 'Core';
         namespace = domain;
         namespacePrefix = namespaceLookup[namespace];
         namespacePriority = 1;
