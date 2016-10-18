@@ -19,7 +19,7 @@
       restrict: 'E',
       templateUrl: 'app/components/facetDetails/facetDetails.directive.html',
       scope: {
-        data: '='
+        data: '=',
       },
       link: link
     };
@@ -31,13 +31,13 @@
    *
    */
   function link(scope) {
-
+    scope.currentPage = 1;
     scope.showData = function(pageInfo) {
       scope.minIdx = (pageInfo.currentPageNum - 1) * pageInfo.numPerPage;
       scope.maxIdx = (pageInfo.currentPageNum * pageInfo.numPerPage) - 1;
     };
 
-    scope.popoverIsOpen =  false;
+    scope.popoverIsOpen = false;
     scope.popoverTemplateUrl = 'app/components/facetDetails/facetNamePopoverTemplate.html';
 
     scope.closePopover = function() {
