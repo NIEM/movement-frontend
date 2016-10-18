@@ -3,6 +3,7 @@
     .search-heading {
       padding: 0 20px;
       background-image: linear-gradient(to left, $teal-gradient, $marine-blue);
+      filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#29819c', endColorstr='#004666');/*For IE7-8-9*/
       color: $white;
       margin: 0 29px 0 30px;
       letter-spacing: 0.5px;
@@ -169,8 +170,14 @@
             }
             .item-description {
               color: $body-text-color;
-              margin-bottom: 16px;
+              margin-bottom: 15px;
               letter-spacing: 0.5px;
+            }
+            .item-namespace {
+              font-size: 14px;
+              letter-spacing: 0.5px;
+              color: $marine-blue;
+              margin-bottom: 13px;
             }
             &:last-child {
               border-bottom: none;

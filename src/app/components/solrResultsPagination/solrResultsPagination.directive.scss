@@ -5,6 +5,9 @@
   color: $marine-blue;
   text-transform: none;
   margin-top: 5px;
+  &.details-pagination {
+   margin-top: 0;
+  }
   a {
     letter-spacing: 1px;
     color: $marine-blue;

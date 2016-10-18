@@ -5,7 +5,7 @@
       <span class="child-heading-title">
         <a ui-sref="main.details({ entityID: elementData.id })">{{elementData.name}}</a>
       </span>
-      <span class="child-heading-type" ng-if="!!elementData.type.name">({{elementData.type.name}})</span>
+      <span class="child-heading-type" ng-if="!!elementData.type.name">({{elementData.type.id}})</span>
       <span class="child-heading-type" ng-if="elementData.type === 'abstract'">({{elementData.type}})</span>
     </div>
   </div>
@@ -36,7 +36,7 @@
         <div ng-if="!!elementData.type.elements[0].type.elements">
           <niem-child-accordion tree-level="nextLevel" element-data="elementData.type.elements[0].type.elements[$index]" click-handler="clickHandler" entity-type="entityType"></niem-child-accordion>
         </div>
-        <div class="niem-accordion-item text-uppercase text-right" ng-click="showMore()" ng-if="elementData.type.elements.length > 1">
+        <div class="niem-accordion-item additional-elements-link text-uppercase text-right" ng-click="showMore()" ng-if="elementData.type.elements.length > 1">
           Show additional elements in "{{elementData.name}}"
         </div>
         <div ng-show="seeMore">

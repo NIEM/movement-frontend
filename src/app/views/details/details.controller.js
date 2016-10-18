@@ -14,7 +14,7 @@
     .module('dhsniem')
     .controller('DetailsCtrl', DetailsCtrl);
 
-  function DetailsCtrl(solrRequest, $location, $window) {
+  function DetailsCtrl(solrRequest, $location, $window, $rootScope) {
 
     var vm = this;
 
@@ -32,8 +32,16 @@
       var query = 'id:' + id.split(':')[0] + '\\:' + id.split(':')[1];
       vm.getElementObjects = getElementObjects;
 
+      var popovers = {
+        'simple-content-type': {
+          'popoverIsOpen': false,
+          'popoverTemplateUrl': 'app/views/details/simpleContentTypePopoverTemplate.html'
+        }
+      };
+
       solrRequest.makeSolrRequest(getSearchParams(query)).then(function(data) {
         vm.entity = data.response.docs[0];
+        $window.document.title = vm.entity.name + ' - CCP Details';
         console.log(vm.entity);
 
         if (!!vm.entity.facets) {
@@ -82,6 +90,15 @@
 
 
     /**
+     * @name closePopover
+     *
+     * @param type
+     */
+    function closePopover(type) {
+      popovers[type].popoverIsOpen = false;
+    };
+
+    /**
      * @name getContainingTypes
      *
      * @memberof dhsniem.controller:DetailsCtrl
@@ -89,7 +106,8 @@
      * @description Retrieves the containing type documents for an element
      */
     function getContainingTypes() {
-      var query = 'elements:*' + vm.entity.name + '*';
+      var id = $location.search().entityID;
+      var query = 'elements:' + id.split(':')[0] + '\\:' + id.split(':')[1];
       solrRequest.makeSolrRequest(getSearchParams(query)).then(function(data) {
         vm.containingTypes = data.response.docs;
         console.log(vm.containingTypes);

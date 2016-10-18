@@ -64,7 +64,7 @@
           'json.nl': 'map'
         };
 
-        var domainArray = [{'name': query + ' in All Domains', 'taNS': 'all', 'query': query}, {'name': query + ' in NIEM Core', 'taNS': 'NIEM Core', 'query': query, 'taNSType': 'domain'}];
+        var domainArray = [{'name': query + ' in All Domains', 'taNS': 'all', 'query': query}, {'name': query + ' in NIEM Core', 'taNS': 'Core', 'query': query, 'taNSType': 'domain'}];
 
         return solrRequest.makeSolrRequest(params).then(function(data) {
           if (data.response.docs.length > 0) {

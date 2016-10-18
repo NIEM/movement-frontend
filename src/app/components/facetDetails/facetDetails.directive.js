@@ -37,6 +37,12 @@
       scope.maxIdx = (pageInfo.currentPageNum * pageInfo.numPerPage) - 1;
     };
 
+    scope.popoverIsOpen =  false;
+    scope.popoverTemplateUrl = 'app/components/facetDetails/facetNamePopoverTemplate.html';
+
+    scope.closePopover = function() {
+      scope.popoverIsOpen = false;
+    }
   }
 
 })();

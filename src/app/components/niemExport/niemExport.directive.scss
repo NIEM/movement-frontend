@@ -1,6 +1,6 @@
 .niem-export {
   background: $darkest-blue;
-  height: 190px;
+  height: 180px;
   color: $white;
   width: 100%;
 
@@ -8,7 +8,7 @@
     width: $niem-min-width;
     height: 100%;
     margin: 0 auto;
-    padding: 44px 20px;
+    padding: 35px 30px;
     .export-top-img {
       display: inline-block;
       img {
@@ -39,6 +39,7 @@
         color: $white;
         text-decoration: none;
         text-transform: uppercase;
+        letter-spacing: 2px;
         &:hover {
           text-decoration: underline;
         }

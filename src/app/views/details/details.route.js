@@ -10,8 +10,7 @@
           url: '/details?entityID',
           templateUrl: 'app/views/details/details.view.html',
           controller: 'DetailsCtrl',
-          controllerAs: 'DetailsCtrl',
-          title: 'CCP Details'
+          controllerAs: 'DetailsCtrl'
         });
     });
 

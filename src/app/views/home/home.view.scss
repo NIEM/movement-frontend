@@ -2,18 +2,26 @@
   .content {
     min-width: $niem-min-width;
     width: 100%;
-    background: url(../../images/mainbg.svg);
+    background-image: url(../../images/mainbg.svg);
     background-size: cover;
+    filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(
+    src='images/logo.gif',
+    sizingMethod='scale');
+    -ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(
+    src='images/logo.gif',
+    sizingMethod='scale')";
 
     .welcome {
-      width: 100%;
-      min-height: calc(100vh - 118px - 391px);
+      width: 768px;
+      margin: 0 auto;
+      min-height: calc(100vh - 118px - 332px);
       .welcome-items {
-        padding: 0 30px 92px 30px;
         .welcome-main {
-          width: 70%;
-          margin: auto;
-          padding-top: 58px;
+          margin: 0 auto;
+          padding: 40px 30px;
+          .row {
+            margin: 0;
+          }
           .welcome-text-heading {
             font-size: 36px;
             letter-spacing: 1.4px;
