@@ -124,7 +124,7 @@
     <field name="_text_"            type="text"         indexed="true" stored="false" multiValued="true"/>
 
     <!-- Global NIEM fields -->
-    <field name="name"              type="string" indexed="true"  stored="true"  multiValued="false" omitNorms="false" />
+    <field name="name"              type="string_name" indexed="true"  stored="true"  multiValued="false" omitNorms="false" />
     <field name="definition"        type="text_general" indexed="false" stored="true"  multiValued="false" />
 
     <!-- All fields used for faceting should be string/int and indexed -->
@@ -267,6 +267,17 @@
         <filter class="solr.PorterStemFilterFactory"/>
       </analyzer>
     </fieldType>
+
+    <!-- field user for name -->
+    <fieldType name="string_name" class="solr.TextField"
+        sortMissingLast="true">
+        <analyzer>
+          <tokenizer class="solr.KeywordTokenizerFactory"/>           
+          <filter class="solr.LowerCaseFilterFactory" />
+          <filter class="solr.PatternReplaceFilterFactory" pattern="^(_)" replacement="" replace="all"/>
+        </analyzer>
+    </fieldType>
+
 
     <!-- The StrField type is not analyzed, but indexed/stored verbatim.
        It supports doc values but in that case the field needs to be
