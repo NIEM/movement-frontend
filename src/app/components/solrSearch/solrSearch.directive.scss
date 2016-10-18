@@ -65,5 +65,9 @@
       width: 22.5px;
       height: 23.85px;
     }
+
+    &:hover {
+      background-color: $blue;
+    }
   }
 }
