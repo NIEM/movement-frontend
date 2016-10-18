@@ -64,7 +64,13 @@
               <img src="images/ic_basetype.svg" alt="Base Type symbol">
             </div>
             <div class="details-text">
-              <h3>Base Type</h3>
+              <h3>
+                <span uib-popover-template="DetailsCtrl.popovers['base-type'].popoverTemplateUrl"
+                                        popover-placement="right"
+                                        popover-is-open="DetailsCtrl.popovers['base-type'].popoverIsOpen">
+                     Base Type
+                </span>
+              </h3>
               <p>{{DetailsCtrl.entity.type || DetailsCtrl.entity.parentSimpleType ||
                 DetailsCtrl.entity.parentTypeName}}</p>
             </div>
