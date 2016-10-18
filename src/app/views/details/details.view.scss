@@ -14,6 +14,7 @@
 
     .details-heading {
       background-image: linear-gradient(to left, #29819c, #004666);
+      filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#29819c', endColorstr='#004666');/*For IE7-8-9*/
       color: $white;
       padding: 15px 21px 14px 21px;
       margin-top: 13px;
