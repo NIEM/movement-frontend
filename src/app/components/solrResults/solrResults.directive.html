@@ -58,6 +58,7 @@
     <div class="search-results col-sm-8">
       <solr-sort></solr-sort>
       <div class="results-list row">
+        <div class="result no-result" ng-show="numFound === 0">The term "{{query}}" has returned no results. Please try a different term or variation.</div>
         <div class="result">
           <div class="result-item" ng-repeat="doc in docs">
             <h2 class="result-heading" ng-show="isFirstOfNamespace(docs[$index - 1].namespace, doc)">
