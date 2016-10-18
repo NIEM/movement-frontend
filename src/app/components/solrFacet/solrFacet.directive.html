@@ -1,6 +1,7 @@
 <div>
   <h3 class="filter-group">
-  <span class="dotted-underline" popover-enable="display != 'Others'" uib-popover-template="popoverTemplateUrl" popover-placement="right" popover-is-open="popoverIsOpen">
+  <span ng-click="closeOtherPopovers(display)" class="dotted-underline" popover-enable="display != 'Others'" uib-popover-template="popoverTemplateUrl" popover-placement="right" popover-is-open="popovers[display].popoverIsOpen">
+
   {{display}}
     </span>
 </h3>

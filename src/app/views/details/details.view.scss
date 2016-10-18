@@ -85,6 +85,10 @@
             color: $marine-blue;
             margin: 0;
             padding-bottom: 8px;
+            .dotted-underline {
+              border-bottom: 1px dashed;
+
+            }
           }
           p {
             margin: 0;

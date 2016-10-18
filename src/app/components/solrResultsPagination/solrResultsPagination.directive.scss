@@ -14,5 +14,8 @@
     &:active {
       color: $ocean-blue;
     }
+    &.selectable {
+      color: $ocean-blue;
+    }
   }
 }

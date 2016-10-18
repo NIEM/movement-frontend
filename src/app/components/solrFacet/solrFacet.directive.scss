@@ -4,7 +4,6 @@
   width: 225px;
   background-color: $silver;
   border: none;
-  left: 212px !important;
 }
 
 .popover.bottom {
@@ -30,9 +29,12 @@
   font-weight: normal;
 }
 
-.popover.right > .arrow:after,
 .popover.right > .arrow {
   border-right-color: $silver;
+  left: -10px;
+  &:after {
+    border-right-color: $silver;
+  }
 }
 
 .popover.bottom > .arrow {
@@ -54,4 +56,8 @@
   right: 5px;
   font-size: 14px;
   color: $ocean-blue;
+  cursor: pointer;
+  &:hover {
+    color: $dark-ocean;
+  }
 }

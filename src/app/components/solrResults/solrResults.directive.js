@@ -71,10 +71,12 @@
         scope.popovers[type].popoverIsOpen = false;
       };
 
-      scope.tooltipText = {
-        'Entities': 'A physical thing, document, abstract concept, number, or string',
-        'External Standards': 'Unmodified schema sources on the internet not encompassed by NIEM',
-        'Domain': 'Communities of interest (COI) that are formally established, with an executive steward, to officially manage and govern a portion of the NIEM data model'
+      scope.closeOtherPopovers = function(type) {
+        angular.forEach(scope.popovers, function(value, key) {
+          if(key !== type) {
+            scope.popovers[key].popoverIsOpen = false;
+          }
+        });
       };
 
       scope.isFirstOfNamespace = function(previousNamespace, currentDoc) {

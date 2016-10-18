@@ -46,10 +46,12 @@
             margin-left: 6.1px;
             display: inline-block;
             text-transform: uppercase;
-            text-decoration: underline;
             font-size: 12px;
             letter-spacing: 0.5px;
-            color: $ocean-blue;
+            color: $marine-blue;
+            .dotted-underline {
+              border-bottom: 1px dashed;
+            }
             &.type-legend {
               padding-right: 15px;
             }
@@ -78,6 +80,7 @@
     .search-filter {
       background: $white;
       padding-left: 32px;
+      padding-bottom: 40px;
       .filter-heading {
         display: inline-block;
         margin: 0;
@@ -97,6 +100,10 @@
           padding-top: 8px;
           letter-spacing: 0.5px;
           font-size: 14px;
+
+          &:hover {
+            text-decoration: underline;
+          }
         }
       }
       .filter-details {

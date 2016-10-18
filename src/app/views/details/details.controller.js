@@ -31,11 +31,16 @@
       var id = $location.search().entityID;
       var query = 'id:' + id.split(':')[0] + '\\:' + id.split(':')[1];
       vm.getElementObjects = getElementObjects;
+      vm.closePopover = closePopover;
 
-      var popovers = {
+      vm.popovers = {
         'simple-content-type': {
           'popoverIsOpen': false,
           'popoverTemplateUrl': 'app/views/details/simpleContentTypePopoverTemplate.html'
+        },
+        'base-type': {
+          'popoverIsOpen': false,
+          'popoverTemplateUrl': 'app/views/details/baseTypePopoverTemplate.html'
         }
       };
 
@@ -92,11 +97,15 @@
     /**
      * @name closePopover
      *
-     * @param type
+     * @memberOf dhsniem.controller:DetailsCtrl
+     *
+     * @description Updates the tooltip's popoverIsOpen variable in order to close the tooltip when 'X' is clicked
+     *
+     * @param type - String
      */
     function closePopover(type) {
-      popovers[type].popoverIsOpen = false;
-    };
+      vm.popovers[type].popoverIsOpen = false;
+    }
 
     /**
      * @name getContainingTypes
