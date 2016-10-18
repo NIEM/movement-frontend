@@ -1,6 +1,6 @@
 <div class="niem-child-accordion">
-  <div class="niem-child-accordion-heading" ng-class="{'currently-selected': elementData.name === selectedEntityName}">
-    <img src="images/ic_carot.svg" class="carot-img float-left" ng-class="{'caret-down': isOpen}" ng-click="onClick()">
+  <div class="niem-child-accordion-heading" ng-class="{'currently-selected': elementData.name === selectedEntityName}" ng-click="onClick()">
+    <img src="images/ic_carot.svg" class="carot-img float-left" ng-class="{'caret-down': isOpen}">
     <div class="niem-child-accordion-heading-text">
       <span class="child-heading-title">
         <a ui-sref="main.details({ entityID: elementData.id })">{{elementData.name}}</a>
