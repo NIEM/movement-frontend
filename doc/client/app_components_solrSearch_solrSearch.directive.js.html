@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: directive: NiemExport</title>
+    <title>JSDoc: Source: app/components/solrSearch/solrSearch.directive.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -18,125 +18,101 @@
 
 <div id="main">
 
-    <h1 class="page-title">directive: NiemExport</h1>
+    <h1 class="page-title">Source: app/components/solrSearch/solrSearch.directive.js</h1>
 
     
 
 
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>'use strict';
 
-<section>
+/**
+ * @ngdoc directive
+ *
+ * @name solrSearch
+ *
+ * @description
+ * Search input for solr
+ */
+(function() {
 
-<header>
-    <h2>
-    NiemExport
-    </h2>
-    
-</header>
+  angular
+    .module('dhsniem')
+    .directive('solrSearch', solrSearch);
 
-<article>
-    <div class="container-overview">
-    
+  function solrSearch($location, $state, solrSearch, solrRequest, $rootScope) {
+    return {
+      restrict: 'E',
+      templateUrl: 'app/components/solrSearch/solrSearch.directive.html',
+      scope: {
+        hasLabel: '='
+      },
+      link: link
+    };
 
-    
-        
-<dt>
-    
-    
-    
+    /**
+     *  Defines variables and functions within solrSearch scope
+     */
+    function link(scope, element, attrs) {
 
-    
-</dt>
-<dd>
+      scope.searchQuery = $location.search().q;
 
-    
-    <div class="description">
-        <p>Export section for NIEM model</p>
-    </div>
-    
+      scope.search = function search(taItem) {
 
-    
+        var namespaceParam = '';
 
-    
+        if (taItem &amp;&amp; taItem.taNS) {
+          scope.searchQuery = taItem.query;
+          if (taItem.taNS !== 'all') {
+            namespaceParam = taItem.taNSType + ':"' + taItem.taNS + '"';
+          }
+        }
 
-    
+        var query = scope.searchQuery || '*';
+        $rootScope.query = query;
 
-    
-<dl class="details">
-    
+        if (!$state.includes('main.results')) {
+          $state.go('main.results', {q: query, selectedFacets: namespaceParam});
+        } else {
+          $location.search('q', query);
+          solrSearch.clearAllFilters(namespaceParam);
+        }
 
-    
+      };
 
-    
+      scope.getTypeaheadResults = function(query) {
 
-    
+        var params = {
+          'q': 'name:*' + query + '*',
+          'rows': 5,
+          'wt': 'json',
+          'json.wrf': 'JSON_CALLBACK',
+          'json.nl': 'map'
+        };
 
-    
+        var domainArray = [{'name': query + ' in All Domains', 'taNS': 'all', 'query': query}, {'name': query + ' in NIEM Core', 'taNS': 'Core', 'query': query, 'taNSType': 'domain'}];
 
-    
+        return solrRequest.makeSolrRequest(params).then(function(data) {
+          if (data.response.docs.length > 0) {
+            var topNamespace = data.response.docs[0].namespace;
+            var topNamespaceType = data.response.docs[0].namespaceType;
+            domainArray.push({'name': query + ' in ' + topNamespace, 'taNS': topNamespace, 'query': query, 'taNSType': topNamespaceType});
+            return domainArray.concat(data.response.docs);
+          }
+        });
 
-    
+      };
 
-    
+    }
 
-    
+  }
 
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="app_components_niemExport_niemExport.directive.js.html">app/components/niemExport/niemExport.directive.js</a>, <a href="app_components_niemExport_niemExport.directive.js.html#line3">line 3</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dd>
-
-    
-    </div>
-
-    
-
-    
-
-    <!--
-    
-    -->
-
-    
-
-     
-
-    
-
-    
-
-    
-
-    
-
-    
-</article>
-
-</section>
+})();
+</code></pre>
+        </article>
+    </section>
 
 
 

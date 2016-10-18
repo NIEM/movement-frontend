@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: directive: NiemExport</title>
+    <title>JSDoc: Source: app/components/solrSort/solrSort.directive.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -18,125 +18,56 @@
 
 <div id="main">
 
-    <h1 class="page-title">directive: NiemExport</h1>
+    <h1 class="page-title">Source: app/components/solrSort/solrSort.directive.js</h1>
 
     
 
 
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>'use strict';
 
-<section>
+/**
+ * @ngdoc directive
+ *
+ * @name solrSort
+ *
+ * @description
+ * Sort bar on results page
+ */
+(function() {
 
-<header>
-    <h2>
-    NiemExport
-    </h2>
-    
-</header>
+  angular
+    .module('dhsniem')
+    .directive('solrSort', solrSort);
 
-<article>
-    <div class="container-overview">
-    
+  function solrSort(solrSearch, $location) {
+    return {
+      restrict: 'E',
+      templateUrl: 'app/components/solrSort/solrSort.directive.html',
+      link: link
+    };
 
-    
-        
-<dt>
-    
-    
-    
+    /**
+     *  Defines variables and functions within solrSort scope
+     */
+    function link(scope) {
+      scope.sortOption = solrSearch.getSort();
 
-    
-</dt>
-<dd>
+      scope.sortBy = function() {
+        $location.search('sortBy', scope.sortOption);
+        solrSearch.search();
+      };
 
-    
-    <div class="description">
-        <p>Export section for NIEM model</p>
-    </div>
-    
+    }
 
-    
+  }
 
-    
-
-    
-
-    
-<dl class="details">
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="app_components_niemExport_niemExport.directive.js.html">app/components/niemExport/niemExport.directive.js</a>, <a href="app_components_niemExport_niemExport.directive.js.html#line3">line 3</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dd>
-
-    
-    </div>
-
-    
-
-    
-
-    <!--
-    
-    -->
-
-    
-
-     
-
-    
-
-    
-
-    
-
-    
-
-    
-</article>
-
-</section>
+})();
+</code></pre>
+        </article>
+    </section>
 
 
 

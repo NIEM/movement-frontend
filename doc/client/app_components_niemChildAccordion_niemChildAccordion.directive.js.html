@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: directive: NiemExport</title>
+    <title>JSDoc: Source: app/components/niemChildAccordion/niemChildAccordion.directive.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -18,125 +18,78 @@
 
 <div id="main">
 
-    <h1 class="page-title">directive: NiemExport</h1>
+    <h1 class="page-title">Source: app/components/niemChildAccordion/niemChildAccordion.directive.js</h1>
 
     
 
 
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>'use strict';
 
-<section>
+/**
+ * @ngdoc directive
+ *
+ * @name NiemChildAccordion
+ *
+ * @description
+ * ChildAccordion section for NIEM model
+ */
+(function() {
 
-<header>
-    <h2>
-    NiemExport
-    </h2>
-    
-</header>
+  angular
+    .module('dhsniem')
+    .directive('niemChildAccordion', niemChildAccordion);
 
-<article>
-    <div class="container-overview">
-    
+  function niemChildAccordion($compile, solrRequest) {
+    return {
+      restrict: 'E',
+      templateUrl: 'app/components/niemChildAccordion/niemChildAccordion.directive.html',
+      scope: {
+        treeLevel: '=',
+        elementData: '=',
+        entityType: '=',
+        clickHandler: '=',
+        selectedEntityName: '='
+      },
+      link: function(scope, element) {
+        scope.dataFound = false;
+        scope.isOpen = false;
+        scope.seeMore = false;
 
-    
-        
-<dt>
-    
-    
-    
+        scope.showMore = function() {
+          scope.seeMore = !scope.seeMore;
+        };
 
-    
-</dt>
-<dd>
+        scope.onClick = function() {
+          scope.isOpen = !scope.isOpen;
+          scope.nextLevel = parseInt(scope.treeLevel, 10) + 1;
+          if (scope.isOpen &amp;&amp; scope.dataFound === false &amp;&amp; scope.entityType === 'Element') {
+            scope.clickHandler(scope.elementData.type);
+            scope.dataFound = true;
 
-    
-    <div class="description">
-        <p>Export section for NIEM model</p>
-    </div>
-    
+          }
+        };
+      }
+    };
+  }
 
-    
+  /**
+   *  Defines variables and functions within niemChildAccordion scope
+   *
+   */
+  /*function link(scope, element) {
+    scope.onClick = function() {
+      element.append("&lt;niem-child-accordion>&lt;/niem-child-accordion>");
+      $compile(element.contents())(scope);
+    };
+  }*/
 
-    
-
-    
-
-    
-<dl class="details">
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="app_components_niemExport_niemExport.directive.js.html">app/components/niemExport/niemExport.directive.js</a>, <a href="app_components_niemExport_niemExport.directive.js.html#line3">line 3</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dd>
-
-    
-    </div>
-
-    
-
-    
-
-    <!--
-    
-    -->
-
-    
-
-     
-
-    
-
-    
-
-    
-
-    
-
-    
-</article>
-
-</section>
+})();
+</code></pre>
+        </article>
+    </section>
 
 
 

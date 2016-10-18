@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: directive: NiemExport</title>
+    <title>JSDoc: Source: app/components/detailsPagination/detailsPagination.directive.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -18,125 +18,92 @@
 
 <div id="main">
 
-    <h1 class="page-title">directive: NiemExport</h1>
+    <h1 class="page-title">Source: app/components/detailsPagination/detailsPagination.directive.js</h1>
 
     
 
 
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>'use strict';
 
-<section>
+/**
+ * @ngdoc directive
+ *
+ * @name detailsPagination
+ *
+ * @description
+ * Pagination widget in sort bar on results page
+ */
+(function() {
 
-<header>
-    <h2>
-    NiemExport
-    </h2>
-    
-</header>
+  angular
+    .module('dhsniem')
+    .directive('detailsPagination', detailsPagination);
 
-<article>
-    <div class="container-overview">
-    
+  function detailsPagination(solrSearch, $location) {
+    return {
+      restrict: 'E',
+      templateUrl: 'app/components/detailsPagination/detailsPagination.directive.html',
+      scope: {
+        data: '=',
+        numPerPage: '=',
+        showAction: '=',
+        currentPage: '='
+      },
+      link: link
+    };
 
-    
-        
-<dt>
-    
-    
-    
+    /**
+     *  Defines variables and functions within detailsPagination scope
+     */
+    function link(scope) {
+      var init = function() {
+        scope.numItems = 0;
 
-    
-</dt>
-<dd>
+        for (var i = 0; i &lt; scope.data.length; i++) {
+          scope.numItems += scope.data[i].data.facetValue.length;
+        }
 
-    
-    <div class="description">
-        <p>Export section for NIEM model</p>
-    </div>
-    
+        scope.totalPages = Math.ceil(scope.numItems / scope.numPerPage);
+        scope.showAction(getPageInfo());
+      };
 
-    
+      var getPageInfo = function() {
+        return {
+          currentPageNum: scope.currentPage,
+          maxPageNum: scope.totalPages,
+          numItems: scope.numItems,
+          numPerPage: scope.numPerPage
+        };
 
-    
+      };
 
-    
+      scope.nextPage = function() {
+        if (scope.currentPage &lt; scope.totalPages) {
+          scope.currentPage += 1;
+          scope.showAction(getPageInfo());
+        }
+      };
 
-    
-<dl class="details">
-    
+      scope.prevPage = function() {
+        if (scope.currentPage > 1) {
+          scope.currentPage -= 1;
+          scope.showAction(getPageInfo());
+        }
+      };
 
-    
+      init();
 
-    
+    }
 
-    
+  }
 
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="app_components_niemExport_niemExport.directive.js.html">app/components/niemExport/niemExport.directive.js</a>, <a href="app_components_niemExport_niemExport.directive.js.html#line3">line 3</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dd>
-
-    
-    </div>
-
-    
-
-    
-
-    <!--
-    
-    -->
-
-    
-
-     
-
-    
-
-    
-
-    
-
-    
-
-    
-</article>
-
-</section>
+})();
+</code></pre>
+        </article>
+    </section>
 
 
 

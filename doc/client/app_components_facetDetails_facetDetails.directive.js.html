@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: directive: NiemExport</title>
+    <title>JSDoc: Source: app/components/facetDetails/facetDetails.directive.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -18,125 +18,65 @@
 
 <div id="main">
 
-    <h1 class="page-title">directive: NiemExport</h1>
+    <h1 class="page-title">Source: app/components/facetDetails/facetDetails.directive.js</h1>
 
     
 
 
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>'use strict';
 
-<section>
+/**
+ * @ngdoc directive
+ *
+ * @name facetDetails
+ *
+ * @description
+ * Sort bar on results page
+ */
+(function() {
 
-<header>
-    <h2>
-    NiemExport
-    </h2>
-    
-</header>
+  angular
+    .module('dhsniem')
+    .directive('facetDetails', facetDetails);
 
-<article>
-    <div class="container-overview">
-    
+  function facetDetails() {
+    return {
+      restrict: 'E',
+      templateUrl: 'app/components/facetDetails/facetDetails.directive.html',
+      scope: {
+        data: '=',
+      },
+      link: link
+    };
 
-    
-        
-<dt>
-    
-    
-    
+  }
 
-    
-</dt>
-<dd>
+  /**
+   *  Defines variables and functions within facetDetails scope
+   *
+   */
+  function link(scope) {
+    scope.currentPage = 1;
+    scope.showData = function(pageInfo) {
+      scope.minIdx = (pageInfo.currentPageNum - 1) * pageInfo.numPerPage;
+      scope.maxIdx = (pageInfo.currentPageNum * pageInfo.numPerPage) - 1;
+    };
 
-    
-    <div class="description">
-        <p>Export section for NIEM model</p>
-    </div>
-    
+    scope.popoverIsOpen = false;
+    scope.popoverTemplateUrl = 'app/components/facetDetails/facetNamePopoverTemplate.html';
 
-    
+    scope.closePopover = function() {
+      scope.popoverIsOpen = false;
+    }
+  }
 
-    
-
-    
-
-    
-<dl class="details">
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="app_components_niemExport_niemExport.directive.js.html">app/components/niemExport/niemExport.directive.js</a>, <a href="app_components_niemExport_niemExport.directive.js.html#line3">line 3</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dd>
-
-    
-    </div>
-
-    
-
-    
-
-    <!--
-    
-    -->
-
-    
-
-     
-
-    
-
-    
-
-    
-
-    
-
-    
-</article>
-
-</section>
+})();
+</code></pre>
+        </article>
+    </section>
 
 
 

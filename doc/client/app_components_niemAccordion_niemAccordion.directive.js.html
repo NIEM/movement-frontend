@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: directive: NiemExport</title>
+    <title>JSDoc: Source: app/components/niemAccordion/niemAccordion.directive.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -18,125 +18,85 @@
 
 <div id="main">
 
-    <h1 class="page-title">directive: NiemExport</h1>
+    <h1 class="page-title">Source: app/components/niemAccordion/niemAccordion.directive.js</h1>
 
     
 
 
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>'use strict';
 
-<section>
+/**
+ * @ngdoc directive
+ *
+ * @name NiemAccordion
+ *
+ * @description
+ * Accordion section for NIEM model
+ */
+(function() {
 
-<header>
-    <h2>
-    NiemExport
-    </h2>
-    
-</header>
+  angular
+    .module('dhsniem')
+    .directive('niemAccordion', niemAccordion);
 
-<article>
-    <div class="container-overview">
-    
+  function niemAccordion($compile) {
+    return {
+      restrict: 'E',
+      templateUrl: 'app/components/niemAccordion/niemAccordion.directive.html',
+      scope: {
+        data: '=',
+        title: '=',
+        clickHandler: '=',
+        entityType: '=',
+        isProperties: '=',
+        selectedEntityName: '='
+      },
+      link: function(scope, element) {
+        scope.isOpen = false;
+        scope.dataFound = false;
 
-    
-        
-<dt>
-    
-    
-    
-
-    
-</dt>
-<dd>
-
-    
-    <div class="description">
-        <p>Export section for NIEM model</p>
-    </div>
-    
-
-    
-
-    
-
-    
-
-    
-<dl class="details">
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="app_components_niemExport_niemExport.directive.js.html">app/components/niemExport/niemExport.directive.js</a>, <a href="app_components_niemExport_niemExport.directive.js.html#line3">line 3</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
+        scope.toggleAccordion = function() {
+          scope.isOpen = !scope.isOpen;
+          if (scope.isOpen &amp;&amp; scope.dataFound === false) {
+            scope.dataFound = true;
+            if (!!scope.data) {
+              if (scope.entityType === 'Element') {
+                scope.clickHandler(scope.data);
+              } else {
+                //for Type Contains
+                if (scope.isProperties === true) {
+                  //for Type Properties
+                  for (var i = 0; i &lt; scope.data.length; i++) {
+                    if (!!scope.data[i].type.elements) {
+                      scope.clickHandler(scope.data[i].type);
+                    }
+                  }
+                } else {
+                  if (!!scope.data.elements) {
+                    scope.clickHandler(scope.data);
+                  }
+                }
 
 
-    
 
-    
+                console.log(scope.data);
 
-    
+              }
+            }
+          }
+        };
+      }
+    };
 
-    
+  }
 
-    
-
-    
-
-    
-</dd>
-
-    
-    </div>
-
-    
-
-    
-
-    <!--
-    
-    -->
-
-    
-
-     
-
-    
-
-    
-
-    
-
-    
-
-    
-</article>
-
-</section>
+})();
+</code></pre>
+        </article>
+    </section>
 
 
 

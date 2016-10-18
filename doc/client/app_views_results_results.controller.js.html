@@ -34,7 +34,7 @@
  * @name ResultsCtrl
  *
  * @description
- * Controller for Search Results Page of dhsniem app
+ * Controller for dhsniem
  */
 (function() {
 
@@ -42,217 +42,16 @@
     .module('dhsniem')
     .controller('ResultsCtrl', ResultsCtrl);
 
-  function ResultsCtrl($http, $location, solrSearch) {
+  function ResultsCtrl(solrSearch) {
 
-    var vm = this;
-
-    vm.facets = {};
-    vm.facetFields = {};
-    vm.selectedFacets = [];
-    vm.selectedFacets = getSelectedFacets();
-
-
-    /**
-     * @name getQuery
-     *
-     * @memberof dhsniem.controller:ResultsCtrl
-     *
-     * @description Returns the query (q) param from $location
-     */
-    function getQuery() {
-      return $location.search().q || '*';
+    function init() {
+      solrSearch.search();
     }
 
-
-    /**
-     * @name buildSearchParams
-     *
-     * @memberof dhsniem.controller:ResultsCtrl
-     *
-     * @description Dynamically builds the search params for a jsonp $http request to the solr instance.
-     */
-    function buildSearchParams() {
-      var params = {
-        'q': getQuery(),
-        'facet': 'on',
-        'facet.mincount': '1',
-        'wt': 'json',
-        'json.wrf': 'JSON_CALLBACK',
-        'json.nl': 'map'
-      };
-
-      if (vm.selectedFacets) {
-        params['fq'] = groupSelectedFacets();
-      }
-
-      if (vm.facetGroup) {
-        params['facet.field'] = listFields();
-      }
-
-      return params;
-
-    }
-
-
-    /**
-     * @name search
-     *
-     * @memberof dhsniem.controller:ResultsCtrl
-     *
-     * @description Performs the solr search via solrSearch service. On success, sets response data to the vm.
-     */
-    vm.search = function() {
-
-      solrSearch.search(vm.solrUrl, buildSearchParams()).then(function(data) {
-
-        vm.docs = data.response.docs;
-        vm.numFound = data.response.numFound;
-
-        vm.facetFields = data.facet_counts.facet_fields;
-        vm.selectedFacets = getSelectedFacets();
-
-      });
-
-    };
-
-
-    /**
-     * @name setFacetGroup
-     *
-     * @memberof dhsniem.controller:ResultsCtrl
-     *
-     * @description Sets the facet group to the scope of the solrFacetGroup directive.
-     *
-     * @param newGroup
-     */
-    vm.setFacetGroup = function(newGroup) {
-      vm.facetGroup = newGroup;
-    };
-
-
-    /**
-     * @name registerFacet
-     *
-     * @memberof dhsniem.controller:ResultsCtrl
-     *
-     * @description Sets the vm.facets object with a key and value of a facet field and its scope from the solrFacet directive, respectively.
-     *
-     * @param facet
-     */
-    vm.registerFacet = function(facet) {
-      vm.facets[facet.field] = facet;
-    };
-
-
-    /**
-     * @name getFacets
-     *
-     * @memberof dhsniem.controller:ResultsCtrl
-     *
-     * @description Returns the vm.facets object.
-     *
-     * @retursn vm.facets
-     */
-    vm.getFacets = function() {
-      return vm.facets;
-    };
-
-
-    /**
-     * @name setFacetResult
-     *
-     * @memberof dhsniem.controller:ResultsCtrl
-     *
-     * @description Sets the results (possible filter values) to the respective facet field name on the vm.facets object.
-     */
-    vm.setFacetResult = function(facetKey, facetResults) {
-      for (var key in vm.facets) {
-        if (vm.facets[key].field === facetKey) {
-          vm.facets[key].results = facetResults;
-        }
-      }
-    };
-
-
-    /**
-     * @name listFields
-     *
-     * @memberof dhsniem.controller:ResultsCtrl
-     *
-     * @description Iterates over the vm.facets object to return an array of the fields to be used as facets.
-     *
-     * @returns fields - an array of the facet fields
-     */
-    function listFields() {
-      var fields = [];
-      var excludeTag;
-      for (var k in vm.facets) {
-        excludeTag = '{!ex=' + vm.facets[k].field + 'tag}';
-        fields.push(excludeTag + vm.facets[k].field);
-      }
-      return fields;
-    }
-
-
-    /**
-     * @name groupSelectedFacets
-     *
-     * @memberof dhsniem.controller:ResultsCtrl
-     *
-     * @description Loops through the selected facets and groups the same facet values under the same facet name. Adds the exclude tag to make the array ready for the solr search param, fq.
-     *
-     * @returns groupedFacets - an array of the facet values grouped by facet name in query with exclude format, e.g. ['{!tag=domaintag}domain:Biometrics Justice Intelligence']
-     */
-    function groupSelectedFacets() {
-
-      var facetGroups = {};
-      var facetKey;
-      var facetVal;
-      var groupedFacets = [];
-      var groupedFacetString;
-
-      vm.selectedFacets.forEach(function(selectedFacet) {
-        facetKey = selectedFacet.split(':')[0];
-        facetVal = selectedFacet.split(':')[1];
-
-        if (facetGroups[facetKey]) {
-          facetGroups[facetKey] = facetGroups[facetKey].concat(' ').concat(facetVal);
-        } else {
-          facetGroups[facetKey] = facetVal;
-        }
-      });
-
-      Object.keys(facetGroups).forEach(function(key) {
-        //groupedFacetString = '{!tag=' + key + 'tag}' + key + ':' + facetGroups[key];
-        //groupedFacets.push(groupedFacetString);
-      });
-
-      return groupedFacets;
-    }
-
-
-    /**
-     * @name getSelectedFacets
-     *
-     * @memberof dhsniem.controller:ResultsCtrl
-     *
-     * @description Returns an array of the selected facets from $location selected_facets param(s)
-     *
-     * @returns selectedFacets - an array of the facets
-     */
-    function getSelectedFacets() {
-      var selected = $location.search().selectedFacets;
-      var selectedFacets = [];
-
-      if (angular.isArray(selected)) {
-        selectedFacets = selected;
-      } else if (selected) {
-        selectedFacets.push(selected);
-      }
-      return selectedFacets;
-    }
+    init();
 
   }
+
 
 })();
 </code></pre>
@@ -265,13 +64,13 @@
 </div>
 
 <nav>
-    <h2><a href="index.html">Index</a></h2><h3>Modules</h3><ul><li><a href="module-dhsniem.html">dhsniem</a></li></ul><h3>controller</h3><ul><li><a href="AppCtrl.html">AppCtrl</a></li><li><a href="HomeCtrl.html">HomeCtrl</a></li><li><a href="MainCtrl.html">MainCtrl</a></li><li><a href="ResultsCtrl.html">ResultsCtrl</a></li></ul><h3>directive</h3><ul><li><a href="ccp.html">ccp</a></li><li><a href="ccpHeader.html">ccpHeader</a></li><li><a href="NiemExport.html">NiemExport</a></li><li><a href="NiemSearch.html">NiemSearch</a></li><li><a href="searchHeader.html">searchHeader</a></li><li><a href="solr.html">solr</a></li><li><a href="solrFacet.html">solrFacet</a></li><li><a href="solrFacetGroup.html">solrFacetGroup</a></li><li><a href="solrFacetResult.html">solrFacetResult</a></li></ul><h3>factory</h3><ul><li><a href="solrSearch.html">solrSearch</a></li></ul>
+    <h2><a href="index.html">Index</a></h2><h3>Modules</h3><ul><li><a href="module-dhsniem.html">dhsniem</a></li></ul><h3>controller</h3><ul><li><a href="AppCtrl.html">AppCtrl</a></li><li><a href="DetailsCtrl.html">DetailsCtrl</a></li><li><a href="HomeCtrl.html">HomeCtrl</a></li><li><a href="MainCtrl.html">MainCtrl</a></li><li><a href="ResultsCtrl.html">ResultsCtrl</a></li></ul><h3>directive</h3><ul><li><a href="ccp.html">ccp</a></li><li><a href="ccpHeader.html">ccpHeader</a></li><li><a href="detailsPagination.html">detailsPagination</a></li><li><a href="facetDetails.html">facetDetails</a></li><li><a href="NiemAccordion.html">NiemAccordion</a></li><li><a href="NiemChildAccordion.html">NiemChildAccordion</a></li><li><a href="NiemExport.html">NiemExport</a></li><li><a href="searchHeader.html">searchHeader</a></li><li><a href="solrFacet.html">solrFacet</a></li><li><a href="solrFacetResult.html">solrFacetResult</a></li><li><a href="solrResults.html">solrResults</a></li><li><a href="solrResultsPagination.html">solrResultsPagination</a></li><li><a href="solrSearch.html">solrSearch</a></li><li><a href="solrSort.html">solrSort</a></li></ul><h3>factory</h3><ul><li><a href="solrRequest.html">solrRequest</a></li></ul>
 </nav>
 
 <br clear="both">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.1</a> 
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.3</a> 
     using <a href="https://github.com/allenhwkim/angular-jsdoc">Angular-JSDoc template </a> 
 </footer>
 
