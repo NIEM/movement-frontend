@@ -52,11 +52,25 @@
         setFacetResults();
       });
 
-      scope.popoverIsOpen =  false;
+      // scope.popoverIsOpen =  false;
       scope.popoverTemplateUrl = 'app/components/solrFacet/custom-popover-template.html';
 
-      scope.closePopover = function() {
-        scope.popoverIsOpen = false;
+      scope.popovers = {
+        'Entities': {'popoverIsOpen': false},
+        'External Standards': {'popoverIsOpen': false},
+        'Domain': {'popoverIsOpen': false}
+      };
+
+      scope.closePopover = function(type) {
+        scope.popovers[type].popoverIsOpen = false;
+      };
+
+      scope.closeOtherPopovers = function(type) {
+        angular.forEach(scope.popovers, function(value, key) {
+          if(key !== type) {
+            scope.popovers[key].popoverIsOpen = false;
+          }
+        });
       };
 
       scope.tooltipText = {
