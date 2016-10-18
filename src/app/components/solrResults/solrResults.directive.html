@@ -56,6 +56,7 @@
     <div class="search-results col-sm-8">
       <solr-sort></solr-sort>
       <div class="results-list row">
+        <div class="result no-result" ng-show="numFound === 0">The term "{{query}}" has returned no results. Please try a different term or variation.</div>
         <div class="result">
           <div class="result-item" ng-repeat="doc in docs">
             <h2 class="result-heading" ng-show="isFirstOfNamespace(docs[$index - 1].namespace, doc)">
@@ -63,6 +64,10 @@
                     popover-is-open="popovers['core'].popoverIsOpen"
                     popover-enable="doc.namespace == 'Core'">
                 {{doc.namespace}} ({{doc.namespaceCount}})
+              </span>
+            </h2>
+            <h2 class="result-heading" ng-show="isFirstOfAlphabet(docs[$index - 1].name, doc)">
+                {{doc.name.substring(0,1).toUpperCase()}}
               </span>
             </h2>
             <div class="result-content">

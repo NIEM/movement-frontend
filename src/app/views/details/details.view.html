@@ -32,15 +32,14 @@
         <div class="details-info-content" ng-if="DetailsCtrl.entity.type || DetailsCtrl.entity.parentSimpleType || DetailsCtrl.entity.parentTypeName">
           <div ng-if="!(DetailsCtrl.entity.entityType === 'Type' && !Details.entity.facets)" class="auto-height">
             <div class="symbol-div simple-type-img">
-              <img ng-if="DetailsCtrl.entity.entityType === 'Element'" src="images/ic-typeofproperty.svg"
-                   alt="Type of Property symbol">
+              <img ng-if="DetailsCtrl.entity.entityType === 'Element'" src="images/ic-typeofproperty.svg" alt="Type of Property symbol">
             </div>
             <div class="details-text">
               <h3 ng-if="DetailsCtrl.entity.entityType === 'Element'">
                 Type of Property
               </h3>
-              <p>{{DetailsCtrl.entity.type || DetailsCtrl.entity.parentSimpleType ||
-                DetailsCtrl.entity.parentTypeName}}</p>
+              <p>{{DetailsCtrl.entity.type || DetailsCtrl.entity.parentSimpleType || DetailsCtrl.entity.parentTypeName}}
+              </p>
             </div>
           </div>
           <div ng-if="DetailsCtrl.entity.entityType ==='Type' && !!Details.entity.facets">
@@ -55,8 +54,8 @@
                       Simple Content Type
                 </span>
               </h3>
-              <p>{{DetailsCtrl.entity.type || DetailsCtrl.entity.parentSimpleType ||
-                DetailsCtrl.entity.parentTypeName}}</p>
+              <p>{{DetailsCtrl.entity.type || DetailsCtrl.entity.parentSimpleType || DetailsCtrl.entity.parentTypeName}}
+              </p>
             </div>
           </div>
           <div ng-if="DetailsCtrl.entity.entityType ==='Type' && !Details.entity.facets" class="auto-height">
@@ -71,8 +70,8 @@
                      Base Type
                 </span>
               </h3>
-              <p>{{DetailsCtrl.entity.type || DetailsCtrl.entity.parentSimpleType ||
-                DetailsCtrl.entity.parentTypeName}}</p>
+              <p>{{DetailsCtrl.entity.type || DetailsCtrl.entity.parentSimpleType || DetailsCtrl.entity.parentTypeName}}
+              </p>
             </div>
           </div>
         </div>
@@ -99,18 +98,21 @@
       </div>
 
       <div class="contain-list" ng-if="!DetailsCtrl.entity.facets">
-        <div ng-repeat="containingType in DetailsCtrl.containingTypes"
-             ng-if="DetailsCtrl.entity.entityType === 'Element'">
-          <niem-accordion data="containingType" entity-type="DetailsCtrl.entity.entityType" title="'Contained In: '"
-                          click-handler="DetailsCtrl.getElementObjects"
-                          selected-entity-name='DetailsCtrl.entity.name'></niem-accordion>
+        <div ng-if="DetailsCtrl.containingTypes.length === 0 && DetailsCtrl.entity.entityType === 'Element'" class="has-none">
+          <h3>{{DetailsCtrl.entity.name}} is not contained within any other entities.</h3>
+        </div>
+        <div ng-repeat="containingType in DetailsCtrl.containingTypes" ng-if="DetailsCtrl.entity.entityType === 'Element'">
+          <niem-accordion data="containingType" entity-type="DetailsCtrl.entity.entityType" title="'Contained In: '" click-handler="DetailsCtrl.getElementObjects" selected-entity-name='DetailsCtrl.entity.name'></niem-accordion>
         </div>
 
         <div ng-if="DetailsCtrl.entity.entityType === 'Type'">
-          <niem-accordion data="DetailsCtrl.entity" entity-type="DetailsCtrl.entity.entityType" title="'Contains'" click-handler="DetailsCtrl.getElementObjects" ng-if="!!DetailsCtrl.entity.elements && DetailsCtrl.entity.elements.length > 0"></niem-accordion>
           <div ng-if="!DetailsCtrl.entity.elements" class="has-none">
             <h3>{{DetailsCtrl.entity.name}} does not contain any entities.</h3>
           </div>
+          <div ng-if="!DetailsCtrl.propertiesOfType  || DetailsCtrl.propertiesOfType.length === 0" class="has-none">
+            <h3>{{DetailsCtrl.entity.name}} does not contain any properties.</h3>
+          </div>
+          <niem-accordion data="DetailsCtrl.entity" entity-type="DetailsCtrl.entity.entityType" title="'Contains'" click-handler="DetailsCtrl.getElementObjects" ng-if="!!DetailsCtrl.entity.elements && DetailsCtrl.entity.elements.length > 0"></niem-accordion>
           <niem-accordion data="DetailsCtrl.propertiesOfType" entity-type="DetailsCtrl.entity.entityType" title="'Properties that are of ' + DetailsCtrl.entity.name" click-handler="DetailsCtrl.getElementObjects" is-properties="true"></niem-accordion>
         </div>
       </div>

@@ -133,6 +133,10 @@
       padding: 0 43px;
       .results-list {
         .result {
+          &.no-result {
+            padding-top: 10px;
+            font-size: 16px;
+          }
           .result-item {
             border-bottom: 1px solid $silver;
             .result-heading {
