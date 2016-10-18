@@ -33,9 +33,9 @@
           }
         }
         li:nth-child(3) {
+          border-bottom: 1px solid #d1d2d4;
+          padding-bottom: 11px;
           a {
-            border-bottom: 1px solid #d1d2d4;
-            padding-bottom: 11px;
             padding-left: 0;
             strong {
               margin: 0 0 0 10px;
@@ -65,6 +65,10 @@
     img {
       width: 22.5px;
       height: 23.85px;
+    }
+
+    &:hover {
+      background-color: $dark-ocean;
     }
   }
 }

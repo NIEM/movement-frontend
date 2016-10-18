@@ -1,8 +1,8 @@
 <div class="solr-pagination">
   Pages
-  <a ng-click="prevPage()"><<</a>
+  <a ng-click="prevPage()" ng-class="{'selectable': (currentPage > 1)}"><<</a>
   {{currentPage}}
   of
   {{totalPages}}
-  <a ng-click="nextPage()">>></a>
+  <a ng-click="nextPage()" ng-class="{'selectable': (currentPage < totalPages)}">>></a>
 </div>
