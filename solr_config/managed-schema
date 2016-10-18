@@ -124,7 +124,7 @@
     <field name="_text_"            type="text"         indexed="true" stored="false" multiValued="true"/>
 
     <!-- Global NIEM fields -->
-    <field name="name"              type="text_general" indexed="true"  stored="true"  multiValued="false" omitNorms="false" />
+    <field name="name"              type="string" indexed="true"  stored="true"  multiValued="false" omitNorms="false" />
     <field name="definition"        type="text_general" indexed="false" stored="true"  multiValued="false" />
 
     <!-- All fields used for faceting should be string/int and indexed -->
@@ -257,7 +257,7 @@
         <filter class="solr.StandardFilterFactory"/>
         <filter class="solr.LowerCaseFilterFactory"/>
         <filter class="solr.PorterStemFilterFactory"/>
-        <filter class="solr.NGramFilterFactory" minGramSize="3" maxGramSize="15" />
+        <filter class="solr.NGramFilterFactory" minGramSize="3" maxGramSize="80" />
       </analyzer>
       <analyzer type="query">
         <tokenizer class="solr.StandardTokenizerFactory"/>
