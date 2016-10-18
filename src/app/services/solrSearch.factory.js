@@ -148,8 +148,6 @@
      * @memberof dhsniem.service:solrSearch
      *
      * @description Iterates over the facets object to return an array of the fields to be used as facets.
-     *
-     * @returns fields - an array of the facet fields with exclude tags
      */
     function getFacetFields() {
       var fields = [];
@@ -168,8 +166,6 @@
      * @memberof dhsniem.service:solrSearch
      *
      * @description Loops through the selected facets and groups the same facet values under the same facet name. Adds the exclude tag to make the array ready for the solr search param, fq.
-     *
-     * @returns groupedFacets - an array of the facet values grouped by facet name in query with exclude format, e.g. ['{!tag=domaintag}domain:Biometrics Justice Intelligence']
      */
     function groupSelectedFacets() {
 
@@ -210,8 +206,6 @@
      * @memberof dhsniem.service:solrSearch
      *
      * @description Converts the current page number to a solr start index
-     *
-     * @returns start - the start index used for solr search
      */
     function convertPageToStart() {
       return 100*(getPage() - 1);
