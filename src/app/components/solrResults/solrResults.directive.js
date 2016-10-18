@@ -31,6 +31,7 @@
         scope.numFound = solrSearch.getNumFound();
         scope.query = solrSearch.getQuery();
         scope.totalPages = Math.ceil( scope.numFound / 100);
+        scope.sort = solrSearch.getSort();
       }
 
       init();
@@ -77,7 +78,7 @@
       };
 
       scope.isFirstOfNamespace = function(previousNamespace, currentDoc) {
-        if (solrSearch.getSort() === 'namespacePriority asc') {
+        if (scope.sort === 'namespacePriority asc') {
           if (currentDoc.namespace !== previousNamespace) {
             currentDoc.namespaceCount = solrSearch.getFacet(currentDoc.namespaceType)[currentDoc.namespace];
             return true;
@@ -87,7 +88,7 @@
       };
 
       scope.isFirstOfAlphabet = function(previousName, currentDoc) {
-        if (solrSearch.getSort() === 'name asc') {
+        if (scope.sort === 'name asc') {
           if (currentDoc.name.substring(0,1).toUpperCase() !== previousName.substring(0,1).toUpperCase()) {
             return true;
           }
