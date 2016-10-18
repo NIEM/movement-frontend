@@ -21,7 +21,8 @@
       scope: {
         data: '=',
         numPerPage: '=',
-        showAction: '='
+        showAction: '=',
+        currentPage: '='
       },
       link: link
     };
@@ -31,7 +32,6 @@
      */
     function link(scope) {
       var init = function() {
-        scope.currentPage = 1;
         scope.numItems = 0;
 
         for (var i = 0; i < scope.data.length; i++) {

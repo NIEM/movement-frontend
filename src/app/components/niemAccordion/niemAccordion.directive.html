@@ -1,6 +1,6 @@
 <div class="niem-accordion">
-  <div class="niem-accordion-heading">
-    <img src="images/ic_carot.svg" class="carot-img float-left" ng-class="{'caret-down': isOpen}" ng-click="toggleAccordion()">
+  <div class="niem-accordion-heading" ng-click="toggleAccordion()">
+    <img src="images/ic_carot.svg" class="carot-img float-left" ng-class="{'caret-down': isOpen}">
     <h2>
       <span class="contain-title">{{title}}</span>
       <span class="contain-type" ng-if="entityType === 'Element'">

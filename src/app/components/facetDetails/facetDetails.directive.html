@@ -1,5 +1,5 @@
 <div class="facet-details">
-  <details-pagination data="data" num-per-page="20" show-action="showData"></details-pagination>
+  <details-pagination data="data" num-per-page="20" show-action="showData" current-page="currentPage"></details-pagination>
   <h5 class="facet-heading text-uppercase">
     <span uib-popover-template="popoverTemplateUrl" popover-placement="top" popover-is-open="popoverIsOpen">
       Facet Name,
@@ -8,8 +8,7 @@
   </h5>
   <ul class="facet-list">
     <div ng-repeat="facet in data">
-      <li class="facet-item row" ng-repeat="value in facet.data.facetValue track by $index"
-          ng-if="$index >= minIdx && $index <= maxIdx">
+      <li class="facet-item row" ng-repeat="value in facet.data.facetValue track by $index" ng-if="$index >= minIdx && $index <= maxIdx">
         <div class="facet-item-text">
           <div class="col-sm-3 text-capitalize">{{facet.name}}</div>
           <div class="col-sm-2">"{{value.trim()}}"</div>
@@ -18,4 +17,5 @@
       </li>
     </div>
   </ul>
+  <details-pagination data="data" num-per-page="20" show-action="showData" current-page="currentPage"></details-pagination>
 </div>
