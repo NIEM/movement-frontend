@@ -26,7 +26,7 @@
      */
     function link(scope) {
 
-      scope.currentPage = 1;
+      scope.currentPage = $location.search().page || 1;
 
       $rootScope.$on('newSearch', function() {
         scope.currentPage = $location.search().page || 1;
