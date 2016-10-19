@@ -51,6 +51,7 @@
             color: $marine-blue;
             .dotted-underline {
               border-bottom: 1px dashed;
+              cursor: pointer;
             }
             &.type-legend {
               padding-right: 15px;
