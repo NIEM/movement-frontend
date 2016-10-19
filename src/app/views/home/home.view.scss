@@ -4,12 +4,8 @@
     width: 100%;
     background-image: url(../../images/mainbg.svg);
     background-size: cover;
-    filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(
-    src='images/logo.gif',
-    sizingMethod='scale');
-    -ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(
-    src='images/logo.gif',
-    sizingMethod='scale')";
+    filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../../images/mainbg.svg',sizingMethod='scale');
+    -ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../../images/mainbg.svg',sizingMethod='scale')";
 
     .welcome {
       width: 768px;
