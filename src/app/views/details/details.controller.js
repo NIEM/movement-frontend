@@ -107,7 +107,6 @@
      */
     function transformNamespaceText(text) {
       var transformedText = '';
-      console.log(text);
       switch (text) {
         case 'domain':
           transformedText = 'Domain';
