@@ -8,7 +8,7 @@
  * @description
  * Controller for Search Results Page of dhsniem app
  */
-(function() {
+(function () {
 
   angular
     .module('dhsniem')
@@ -32,6 +32,7 @@
       var query = 'id:' + id.split(':')[0] + '\\:' + id.split(':')[1];
       vm.getElementObjects = getElementObjects;
       vm.closePopover = closePopover;
+      vm.transformNamespaceText = transformNamespaceText;
 
       vm.popovers = {
         'simple-content-type': {
@@ -44,7 +45,7 @@
         }
       };
 
-      solrRequest.makeSolrRequest(getSearchParams(query)).then(function(data) {
+      solrRequest.makeSolrRequest(getSearchParams(query)).then(function (data) {
         vm.entity = data.response.docs[0];
         $window.document.title = vm.entity.name + ' - CCP Details';
         console.log(vm.entity);
@@ -93,6 +94,35 @@
 
     }
 
+    /**
+     * @name transformNamespaceText
+     *
+     * @memberOf dhsniem.controller:DetailsCtrl
+     *
+     * @description transform the Namespace type returned into readadble text
+     *
+     * @param text - String representing the type of Namespace
+     *
+     * @returns {string}
+     */
+    function transformNamespaceText(text) {
+      var transformedText = '';
+      console.log(text);
+      switch (text) {
+        case 'domain':
+          transformedText = 'Domain';
+          break;
+        case 'otherNamespace':
+          transformedText = 'Other';
+          break;
+        case 'externalStandard':
+          transformedText = 'External Standard';
+          break;
+        default:
+          break;
+      }
+      return transformedText;
+    }
 
     /**
      * @name closePopover
@@ -117,7 +147,7 @@
     function getContainingTypes() {
       var id = $location.search().entityID;
       var query = 'elements:' + id.split(':')[0] + '\\:' + id.split(':')[1];
-      solrRequest.makeSolrRequest(getSearchParams(query)).then(function(data) {
+      solrRequest.makeSolrRequest(getSearchParams(query)).then(function (data) {
         vm.containingTypes = data.response.docs;
         console.log(vm.containingTypes);
       });
@@ -134,9 +164,9 @@
      * @param typeDoc - type object (document)
      */
     function getElementObjects(typeDoc) {
-      typeDoc.elements.forEach(function(element, index, arr) {
+      typeDoc.elements.forEach(function (element, index, arr) {
         var query = 'name:' + element.split(':')[1];
-        solrRequest.makeSolrRequest(getSearchParams(query)).then(function(data) {
+        solrRequest.makeSolrRequest(getSearchParams(query)).then(function (data) {
           arr[index] = data.response.docs[0];
 
           if (arr[index].type) {
@@ -161,7 +191,7 @@
      */
     function getTypeObject(element) {
       var query = 'name:' + element.type.split(':')[1];
-      solrRequest.makeSolrRequest(getSearchParams(query)).then(function(data) {
+      solrRequest.makeSolrRequest(getSearchParams(query)).then(function (data) {
         element.type = data.response.docs[0];
       });
     }
@@ -180,10 +210,10 @@
      */
     function getElementsofType(type) {
       var query = 'type:*' + type.name;
-      solrRequest.makeSolrRequest(getSearchParams(query)).then(function(data) {
+      solrRequest.makeSolrRequest(getSearchParams(query)).then(function (data) {
         vm.propertiesOfType = data.response.docs;
 
-        vm.propertiesOfType.forEach(function(element) {
+        vm.propertiesOfType.forEach(function (element) {
           if (element.type) {
             getTypeObject(element);
           } else {
@@ -227,7 +257,7 @@
      *
      * @description Navigates back to the search results page with previous search params
      */
-    vm.goBack = function() {
+    vm.goBack = function () {
       $window.history.back();
     };
 

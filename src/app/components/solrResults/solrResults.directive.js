@@ -53,10 +53,6 @@
           'popoverIsOpen': false,
           'popoverTemplateUrl': 'app/components/solrResults/corePopoverTemplate.html'
         },
-        'namespace': {
-          'popoverIsOpen': false,
-          'popoverTemplateUrl': 'app/components/solrResults/namespacePopoverTemplate.html'
-        },
         'element': {
           'popoverIsOpen': false,
           'popoverTemplateUrl': 'app/components/solrResults/elementPopoverTemplate.html'
