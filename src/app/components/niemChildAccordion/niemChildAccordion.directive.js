@@ -37,7 +37,7 @@
         scope.onClick = function() {
           scope.isOpen = !scope.isOpen;
           scope.nextLevel = parseInt(scope.treeLevel, 10) + 1;
-          if (scope.isOpen && scope.dataFound === false && scope.entityType === 'Element') {
+          if (scope.isOpen && scope.dataFound === false) {
             scope.clickHandler(scope.elementData.type);
             scope.dataFound = true;
 
@@ -47,15 +47,5 @@
     };
   }
 
-  /**
-   *  Defines variables and functions within niemChildAccordion scope
-   *
-   */
-  /*function link(scope, element) {
-    scope.onClick = function() {
-      element.append("<niem-child-accordion></niem-child-accordion>");
-      $compile(element.contents())(scope);
-    };
-  }*/
 
 })();
