@@ -14,11 +14,11 @@
 
     .details-heading {
       background-image: linear-gradient(to left, #29819c, #004666);
-      filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#29819c', endColorstr='#004666');/*For IE7-8-9*/
+      filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0, startColorstr='#29819c', endColorstr='#004666'); /*For IE7-8-9*/
       color: $white;
       padding: 15px 21px 14px 21px;
       margin-top: 13px;
-      margin-bottom: 5px;
+      margin-bottom: 20px;
       h1 {
         margin: 0 0 2px 0;
         letter-spacing: 0.5px;
@@ -36,8 +36,9 @@
       display: inline-flex;
       margin: auto;
       margin-bottom: 6px;
+      width: 100%;
       .details-info-col {
-        width: 50%;
+        width: calc(50% - 5px);
         display: inline-block;
         &:nth-child(odd) {
           .details-info-content {
@@ -52,8 +53,8 @@
       }
 
       .details-info-content {
-        width: 600px;
-        min-height: 106px;
+        width: 100%;
+        min-height: 114px;
         border: 1px solid;
         border-color: lighten($ocean-blue, 50%);
         padding: 20px;
@@ -79,7 +80,8 @@
           display: inline-block;
           vertical-align: middle;
           margin-left: 20px;
-          max-width: 478px;
+          max-width: 474px;
+          overflow-wrap: break-word;
           h3 {
             letter-spacing: 0.5px;
             color: $marine-blue;
@@ -94,6 +96,12 @@
             margin: 0;
             letter-spacing: 0.5px;
             color: rgba(0, 0, 0, 0.58);
+          }
+        }
+        @media (max-width: 1024px) {
+          .details-text {
+            max-width: 350px;
+            overflow-wrap: break-word;
           }
         }
       }
