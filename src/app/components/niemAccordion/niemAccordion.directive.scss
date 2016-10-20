@@ -1,12 +1,10 @@
 .niem-accordion {
   .carot-img {
     display: inline-block;
-
     &.caret-down {
       transform: rotate(90deg);
     }
   }
-
   .niem-accordion-heading {
     padding-bottom: 18px;
     padding-top: 17px;
@@ -23,23 +21,19 @@
         display: inline-block;
       }
     }
-
   }
-
   .niem-accordion-list {
     padding-left: 40px;
-
     .niem-accordion-item {
       padding: 20px 0 20px 30px;
       letter-spacing: 0.5px;
       border-bottom: 1px solid $silver;
-        .item-name {
-          color: $ocean-blue;
-          h3 {
-            margin: 0;
-          }
+      .item-name {
+        color: $ocean-blue;
+        h3 {
+          margin: 0;
+        }
       }
-
       .item-type {
         color: $body-text-color;
       }
@@ -54,5 +48,4 @@
       }
     }
   }
-
 }

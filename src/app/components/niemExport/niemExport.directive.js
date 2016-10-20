@@ -8,7 +8,7 @@
  * @description
  * Export section for NIEM model
  */
-(function() {
+(function () {
 
   angular
     .module('dhsniem')

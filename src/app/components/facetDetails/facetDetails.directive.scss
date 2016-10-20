@@ -16,7 +16,7 @@
   .facet-list {
     padding-left: 0;
     border-top: 1px solid;
-    border-color: rgba(209,210,212, 0.68);
+    border-color: rgba(209, 210, 212, 0.68);
     margin-top: 13px;
     .facet-item {
       list-style: none;
@@ -25,11 +25,16 @@
       margin: 0;
       .facet-item-text {
         letter-spacing: 0.5px;
-        color: rgba(0,0,0,0.58);
+        color: rgba(0, 0, 0, 0.58);
         div:first-child {
           padding-left: 20px;
         }
       }
+    }
+  }
+  details-pagination.bottom-pagination {
+    .details-pagination {
+      padding-bottom: 37px;
     }
   }
 }

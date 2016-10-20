@@ -48,8 +48,6 @@
       solrRequest.makeSolrRequest(getSearchParams(query)).then(function (data) {
         vm.entity = data.response.docs[0];
         $window.document.title = vm.entity.name + ' - CCP Details';
-        console.log(vm.entity);
-
         if (!!vm.entity.facets) {
           var newFacets = vm.entity.facets;
           vm.entity.facets = [];
@@ -148,7 +146,6 @@
       var query = 'elements:' + id.split(':')[0] + '\\:' + id.split(':')[1];
       solrRequest.makeSolrRequest(getSearchParams(query)).then(function (data) {
         vm.containingTypes = data.response.docs;
-        console.log(vm.containingTypes);
       });
     }
 
@@ -211,7 +208,6 @@
       var query = 'type:*' + type.name;
       solrRequest.makeSolrRequest(getSearchParams(query)).then(function (data) {
         vm.propertiesOfType = data.response.docs;
-
         vm.propertiesOfType.forEach(function (element) {
           if (element.type) {
             getTypeObject(element);
@@ -219,10 +215,6 @@
             element.type = 'abstract';
           }
         });
-
-        console.log(vm.propertiesOfType);
-
-
       });
     }
 

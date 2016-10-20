@@ -39,6 +39,13 @@
         }
       };
 
+      /**
+       * @name setFacetResults
+       *
+       * @description
+       *
+       * @returns
+       */
       function setFacetResults() {
         scope.results = solrSearch.getFacet(scope.field);
         scope.keys = function(results) {
@@ -52,25 +59,16 @@
         setFacetResults();
       });
 
-      // scope.popoverIsOpen =  false;
+      scope.popoverIsOpen =  false;
       scope.popoverTemplateUrl = 'app/components/solrFacet/custom-popover-template.html';
 
-      scope.popovers = {
-        'Entities': {'popoverIsOpen': false},
-        'External Standards': {'popoverIsOpen': false},
-        'Domain': {'popoverIsOpen': false}
-      };
-
-      scope.closePopover = function(type) {
-        scope.popovers[type].popoverIsOpen = false;
-      };
-
-      scope.closeOtherPopovers = function(type) {
-        angular.forEach(scope.popovers, function(value, key) {
-          if(key !== type) {
-            scope.popovers[key].popoverIsOpen = false;
-          }
-        });
+      /**
+       * @name closePopover
+       *
+       * @description Closes the selected tooltip popver in the filter column
+       */
+      scope.closePopover = function() {
+        scope.popoverIsOpen = false;
       };
 
       scope.tooltipText = {
@@ -79,12 +77,14 @@
         'Domain': 'Communities of interest (COI) that are formally established, with an executive steward, to officially manage and govern a portion of the NIEM data model'
       };
 
+      /**
+       * @name getTooltipText
+       * @param display
+       * @returns {String} the text that should be displayed in the selected tooltip
+       */
       scope.getTooltipText = function(display) {
         return scope.tooltipText[display];
       };
-
     }
-
   }
-
 })();
