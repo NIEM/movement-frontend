@@ -41,10 +41,10 @@
         width: calc(50% - 5px);
         display: inline-block;
         &:nth-child(odd) {
-          .details-info-content {
-            margin: 0 5px 0 0;
-          }
-        }
+           .details-info-content {
+             margin: 0 5px 0 0;
+           }
+         }
         &:nth-child(even) {
           .details-info-content {
             margin: 0 0 0 10px;
