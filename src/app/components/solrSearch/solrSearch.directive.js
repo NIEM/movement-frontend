@@ -31,6 +31,13 @@
 
       scope.searchQuery = $location.search().q;
 
+      /**
+       * @name search
+       *
+       * @description
+       *
+       * @param taItem
+       */
       scope.search = function search(taItem) {
 
         var namespaceParam = '';
@@ -54,6 +61,15 @@
 
       };
 
+      /**
+       * @name getTypeaheadResults
+       *
+       * @description
+       *
+       * @param query
+       *
+       * @returns {*}
+       */
       scope.getTypeaheadResults = function(query) {
 
         var params = {
@@ -74,11 +90,7 @@
             return domainArray.concat(data.response.docs);
           }
         });
-
       };
-
     }
-
   }
-
 })();

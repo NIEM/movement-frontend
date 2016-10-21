@@ -30,10 +30,20 @@
         scope.isOpen = false;
         scope.seeMore = false;
 
+        /**
+         * @name showMore
+         *
+         * @description
+         */
         scope.showMore = function() {
           scope.seeMore = !scope.seeMore;
         };
 
+        /**
+         * @name onClick
+         *
+         * @description
+         */
         scope.onClick = function() {
           scope.isOpen = !scope.isOpen;
           scope.nextLevel = parseInt(scope.treeLevel, 10) + 1;
@@ -46,6 +56,4 @@
       }
     };
   }
-
-
 })();

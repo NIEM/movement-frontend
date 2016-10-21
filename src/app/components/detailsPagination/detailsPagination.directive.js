@@ -42,6 +42,13 @@
         scope.showAction(getPageInfo());
       };
 
+      /**
+       * @name getPageInfo
+       *
+       * @description Retrieves information regarding the pagination feature on the details page
+       *
+       * @returns {{currentPageNum: string, maxPageNum: (number|*), numItems: (*|number), numPerPage: string}}
+       */
       var getPageInfo = function() {
         return {
           currentPageNum: scope.currentPage,
@@ -52,6 +59,11 @@
 
       };
 
+      /**
+       * @name nextPage
+       *
+       * @description Shows the next page of results if there are more pages
+       */
       scope.nextPage = function() {
         if (scope.currentPage < scope.totalPages) {
           scope.currentPage += 1;
@@ -59,6 +71,11 @@
         }
       };
 
+      /**
+       * @name prevPage
+       *
+       * @description Shows the previous page of results if there is one
+       */
       scope.prevPage = function() {
         if (scope.currentPage > 1) {
           scope.currentPage -= 1;

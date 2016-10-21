@@ -31,10 +31,24 @@
      */
     function link(scope, element, attrs) {
 
+      /**
+       * @name facetString
+       *
+       * @description
+       *
+       * @returns {string}
+       */
       scope.facetString = function(){
         return scope.field + ':"' + scope.key + '"';
       };
 
+      /**
+       * @name isSelected
+       *
+       * @description
+       *
+       * @returns {boolean}
+       */
       scope.isSelected = function(){
         var selectedFacets = solrSearch.getSelectedFacets();
         var facetString = scope.facetString();
@@ -46,6 +60,12 @@
         return false;
       };
 
+      /**
+       * @name addRemoveFacet
+       *
+       * @description
+       *
+       */
       scope.addRemoveFacet = function() {
         var selectedFacets = solrSearch.getSelectedFacets();
         if(!scope.isSelected()) {
@@ -67,9 +87,6 @@
       $rootScope.$on('newSearch', function() {
         init();
       });
-
     }
-
   }
-
 })();

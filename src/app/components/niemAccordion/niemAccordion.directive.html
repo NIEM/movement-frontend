@@ -19,10 +19,10 @@
         <span class="item-type" ng-if="element.type === 'abstract'">({{element.type}})</span>
       </div>
       <div ng-if="!!element.type.elements">
-        <niem-child-accordion tree-level="1" element-data="element" click-handler="clickHandler" entity-type="entityType" selected-entity-name='selectedEntityName'></niem-child-accordion>
+        <niem-child-accordion tree-level="1" element-data="element" click-handler="clickHandler"
+                              entity-type="entityType" selected-entity-name='selectedEntityName'></niem-child-accordion>
       </div>
     </div>
-
 
     <div ng-if="entityType === 'Type' && isProperties !== true" ng-repeat="item in data.elements">
       <div class="niem-accordion-item" ng-if="!item.type.elements">
@@ -33,7 +33,8 @@
         <span class="item-type" ng-if="item.type === 'abstract'">({{item.type}})</span>
       </div>
       <div ng-if="!!item.type.elements">
-        <niem-child-accordion tree-level="1" element-data="item" click-handler="clickHandler" entity-type="entityType"></niem-child-accordion>
+        <niem-child-accordion tree-level="1" element-data="item" click-handler="clickHandler"
+                              entity-type="entityType"></niem-child-accordion>
       </div>
     </div>
 
@@ -46,9 +47,9 @@
         <span class="item-type" ng-if="item.type === 'abstract'">({{item.type}})</span>
       </div>
       <div ng-if="!!item.type.elements">
-        <niem-child-accordion tree-level="1" element-data="item" click-handler="clickHandler" entity-type="entityType" is-properties="true"></niem-child-accordion>
+        <niem-child-accordion tree-level="1" element-data="item" click-handler="clickHandler" entity-type="entityType"
+                              is-properties="true"></niem-child-accordion>
       </div>
     </div>
-
   </div>
 </div>

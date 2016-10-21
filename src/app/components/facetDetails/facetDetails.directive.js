@@ -40,6 +40,11 @@
     scope.popoverIsOpen = false;
     scope.popoverTemplateUrl = 'app/components/facetDetails/facetNamePopoverTemplate.html';
 
+    /**
+     * @name closePopover
+     *
+     * @description Closes the tooltip popover on 'Facet Name'
+     */
     scope.closePopover = function() {
       scope.popoverIsOpen = false;
     }

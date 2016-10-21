@@ -48,7 +48,6 @@
                 </span>
                 <span class="item-type" ng-if="!!currElement.type.name">({{currElement.type.name}})</span>
                 <span class="item-type" ng-if="currElement.type === 'abstract'">({{currElement.type}})</span>
-
               </div>
               <div ng-if="!!currElement.type.elements">
                 <niem-child-accordion tree-level="nextLevel" element-data="elementData.type.elements[$index]" click-handler="clickHandler" entity-type="entityType"></niem-child-accordion>
@@ -60,5 +59,4 @@
     </div>
   </div>
 
-</div>
 </div>
