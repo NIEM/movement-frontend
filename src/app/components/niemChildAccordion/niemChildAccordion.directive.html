@@ -1,5 +1,5 @@
 <div class="niem-child-accordion">
-  <div class="niem-child-accordion-heading" ng-class="{'currently-selected': elementData.name === selectedEntityName}" ng-click="onClick()">
+  <div class="niem-child-accordion-heading" ng-class="{'currently-selected': elementData.name === selectedEntityName}" ng-click="onClick()" ng-cloak>
     <img src="images/ic_carot.svg" class="carot-img float-left" ng-class="{'caret-down': isOpen}">
     <div class="niem-child-accordion-heading-text">
       <span class="child-heading-title">
@@ -10,7 +10,7 @@
     </div>
   </div>
   <div class="niem-accordion-list" ng-show="isOpen">
-    <div ng-if="entityType === 'Element'">
+    <div>
       <div ng-repeat="currElement in elementData.type.elements" ng-if="nextLevel < 3">
         <div class="niem-accordion-item" ng-if="!currElement.type.elements" ng-class="{'currently-selected': currElement.name === selectedEntityName}">
           <span class="item-name">
@@ -57,18 +57,6 @@
         </div>
       </div>
     </div>
-
-    <div ng-repeat="currElement in elementData.type.elements" ng-if="entityType === 'Type'">
-      <div class="niem-accordion-item" ng-if="!currElement.type.elements">
-        <span class="item-name">
-          <a ui-sref="main.details({ entityID: currElement.id })">{{currElement.name}}</a>
-        </span>
-        <span class="item-type" ng-if="!!currElement.type.name">({{currElement.type.name}})</span>
-        <span class="item-type" ng-if="currElement.type === 'abstract'">({{currElement.type}})</span>
-      </div>
-      <div ng-if="!!currElement.type.elements">
-        <niem-child-accordion tree-level="nextLevel" element-data="elementData.type.elements[$index]" click-handler="clickHandler" entity-type="entityType"></niem-child-accordion>
-      </div>
-    </div>
   </div>
+
 </div>

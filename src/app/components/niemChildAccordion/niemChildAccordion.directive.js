@@ -47,7 +47,7 @@
         scope.onClick = function() {
           scope.isOpen = !scope.isOpen;
           scope.nextLevel = parseInt(scope.treeLevel, 10) + 1;
-          if (scope.isOpen && scope.dataFound === false && scope.entityType === 'Element') {
+          if (scope.isOpen && scope.dataFound === false) {
             scope.clickHandler(scope.elementData.type);
             scope.dataFound = true;
 
