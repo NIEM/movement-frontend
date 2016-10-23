@@ -1,0 +1,333 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for ./src/app/components/solrSearch/solrSearch.directive.js</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../../../../prettify.css">
+    <link rel="stylesheet" href="../../../../base.css">
+    <style type='text/css'>
+        div.coverage-summary .sorter {
+            background-image: url(../../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class="header low">
+    <h1>Code coverage report for <span class="entity">./src/app/components/solrSearch/solrSearch.directive.js</span></h1>
+    <h2>
+        Statements: <span class="metric">14.81% <small>(4 / 27)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Branches: <span class="metric">0% <small>(0 / 12)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Functions: <span class="metric">16.67% <small>(1 / 6)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Lines: <span class="metric">14.81% <small>(4 / 27)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Ignored: <span class="metric"><span class="ignore-none">none</span></span> &nbsp;&nbsp;&nbsp;&nbsp;
+    </h2>
+    <div class="path"><a href="../../../../index.html">All files</a> &#187; <a href="index.html">./src/app/components/solrSearch/</a> &#187; solrSearch.directive.js</div>
+</div>
+<div class="body">
+<pre><table class="coverage">
+<tr><td class="line-count">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97</td><td class="line-coverage"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">'use strict';
+&nbsp;
+/**
+ * @ngdoc directive
+ *
+ * @name solrSearch
+ *
+ * @description
+ * Search input for solr
+ */
+(function() {
+&nbsp;
+  angular
+    .module('dhsniem')
+    .directive('solrSearch', solrSearch);
+&nbsp;
+<span class="fstat-no" title="function not covered" >  function solrSearch($location, $state, solrSearch, solrRequest, $rootScope) {</span>
+<span class="cstat-no" title="statement not covered" >    return {</span>
+      restrict: 'E',
+      templateUrl: 'app/components/solrSearch/solrSearch.directive.html',
+      scope: {
+        hasLabel: '='
+      },
+      link: link
+    };
+&nbsp;
+    /**
+     *  Defines variables and functions within solrSearch scope
+     */
+<span class="fstat-no" title="function not covered" >    function link(scope, element, attrs) {</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      scope.searchQuery = $location.search().q;</span>
+&nbsp;
+      /**
+       * @name search
+       *
+       * @description
+       *
+       * @param taItem
+       */
+<span class="cstat-no" title="statement not covered" >      scope.search = <span class="fstat-no" title="function not covered" >function search(taItem) {</span></span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        var namespaceParam = '';</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        if (taItem &amp;&amp; taItem.taNS) {</span>
+<span class="cstat-no" title="statement not covered" >          scope.searchQuery = taItem.query;</span>
+<span class="cstat-no" title="statement not covered" >          if (taItem.taNS !== 'all') {</span>
+<span class="cstat-no" title="statement not covered" >            namespaceParam = taItem.taNSType + ':"' + taItem.taNS + '"';</span>
+          }
+        }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        var query = scope.searchQuery || '*';</span>
+<span class="cstat-no" title="statement not covered" >        $rootScope.query = query;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        if (!$state.includes('main.results')) {</span>
+<span class="cstat-no" title="statement not covered" >          $state.go('main.results', {q: query, selectedFacets: namespaceParam});</span>
+        } else {
+<span class="cstat-no" title="statement not covered" >          $location.search('q', query);</span>
+<span class="cstat-no" title="statement not covered" >          solrSearch.clearAllFilters(namespaceParam);</span>
+        }
+&nbsp;
+      };
+&nbsp;
+      /**
+       * @name getTypeaheadResults
+       *
+       * @description
+       *
+       * @param query
+       *
+       * @returns {*}
+       */
+<span class="cstat-no" title="statement not covered" >      scope.getTypeaheadResults = <span class="fstat-no" title="function not covered" >function(query) {</span></span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        var params = {</span>
+          'q': 'name:*' + query + '*',
+          'rows': 5,
+          'wt': 'json',
+          'json.wrf': 'JSON_CALLBACK',
+          'json.nl': 'map'
+        };
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        var domainArray = [{'name': query + ' in All Domains', 'taNS': 'all', 'query': query}, {'name': query + ' in NIEM Core', 'taNS': 'Core', 'query': query, 'taNSType': 'domain'}];</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        return solrRequest.makeSolrRequest(params).then(<span class="fstat-no" title="function not covered" >function(data) {</span></span>
+<span class="cstat-no" title="statement not covered" >          if (data.response.docs.length &gt; 0) {</span>
+<span class="cstat-no" title="statement not covered" >            var topNamespace = data.response.docs[0].namespace;</span>
+<span class="cstat-no" title="statement not covered" >            var topNamespaceType = data.response.docs[0].namespaceType;</span>
+<span class="cstat-no" title="statement not covered" >            domainArray.push({'name': query + ' in ' + topNamespace, 'taNS': topNamespace, 'query': query, 'taNSType': topNamespaceType});</span>
+<span class="cstat-no" title="statement not covered" >            return domainArray.concat(data.response.docs);</span>
+          }
+        });
+      };
+    }
+  }
+})();
+&nbsp;</pre></td></tr>
+</table></pre>
+
+</div>
+<div class="footer">
+    <div class="meta">Generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Sun Oct 23 2016 14:51:53 GMT-0400 (Eastern Daylight Time)</div>
+</div>
+<script src="../../../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../../../sorter.js"></script>
+</body>
+</html>

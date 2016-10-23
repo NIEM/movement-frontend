@@ -13,7 +13,7 @@ describe('Controller: AppCtrl', function () {
   }));
 
   it('should display a default title', function () {
-    expect(AppCtrl.title).toBe('My App');
+    expect(AppCtrl.title).toBe('DHS NIEM');
   });
 
 });
