@@ -30,7 +30,7 @@
       /**
        * @name sortBy
        *
-       * @description
+       * @description Sets the sortBy parameter on the $location service and calls a new solr search.
        */
       scope.sortBy = function() {
         $location.search('sortBy', scope.sortOption);

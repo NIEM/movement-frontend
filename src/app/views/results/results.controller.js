@@ -16,6 +16,11 @@
 
   function ResultsCtrl(solrSearch) {
 
+    /**
+     * @name init
+     *
+     * @description On page load, calls solr search
+     */
     function init() {
       solrSearch.search();
     }

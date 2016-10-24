@@ -31,6 +31,13 @@
      */
     function link(scope, element, attrs) {
 
+      /**
+       * @name sortByName
+       *
+       * @description Sorting function used to boost the NIEM Core facet to the top of the filter list
+       *
+       * @returns {(string|number)}
+       */
       scope.sortByName = function(result) {
         if (result === 'Core') {
           return -1;
@@ -39,12 +46,13 @@
         }
       };
 
+
       /**
        * @name setFacetResults
        *
-       * @description
+       * @description Sets the scope results from the the solr request, including teh facet fields and their counts. Then, converts that object to an array of the keys to be used for the view.
        *
-       * @returns
+       * @returns {string[]}
        */
       function setFacetResults() {
         scope.results = solrSearch.getFacet(scope.field);
@@ -62,6 +70,7 @@
       scope.popoverIsOpen =  false;
       scope.popoverTemplateUrl = 'app/components/solrFacet/custom-popover-template.html';
 
+
       /**
        * @name closePopover
        *
@@ -77,10 +86,11 @@
         'Domain': 'Communities of interest (COI) that are formally established, with an executive steward, to officially manage and govern a portion of the NIEM data model'
       };
 
+
       /**
        * @name getTooltipText
        * @param display
-       * @returns {String} the text that should be displayed in the selected tooltip
+       * @returns {string} the text that should be displayed in the selected tooltip
        */
       scope.getTooltipText = function(display) {
         return scope.tooltipText[display];
