@@ -12,13 +12,13 @@
     </style>
 </head>
 <body>
-<div class="header low">
+<div class="header medium">
     <h1>Code coverage report for <span class="entity">./src/app/components/solrResultsPagination/solrResultsPagination.directive.js</span></h1>
     <h2>
-        Statements: <span class="metric">22.22% <small>(4 / 18)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
-        Branches: <span class="metric">0% <small>(0 / 8)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
-        Functions: <span class="metric">16.67% <small>(1 / 6)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
-        Lines: <span class="metric">22.22% <small>(4 / 18)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Statements: <span class="metric">50% <small>(9 / 18)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Branches: <span class="metric">25% <small>(2 / 8)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Functions: <span class="metric">50% <small>(3 / 6)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Lines: <span class="metric">50% <small>(9 / 18)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         Ignored: <span class="metric"><span class="ignore-none">none</span></span> &nbsp;&nbsp;&nbsp;&nbsp;
     </h2>
     <div class="path"><a href="../../../../index.html">All files</a> &#187; <a href="index.html">./src/app/components/solrResultsPagination/</a> &#187; solrResultsPagination.directive.js</div>
@@ -104,7 +104,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -115,21 +115,9 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -138,8 +126,20 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -165,8 +165,8 @@
     .module('dhsniem')
     .directive('solrResultsPagination', solrResultsPagination);
 &nbsp;
-<span class="fstat-no" title="function not covered" >  function solrResultsPagination(solrSearch, $location, $rootScope) {</span>
-<span class="cstat-no" title="statement not covered" >    return {</span>
+  function solrResultsPagination(solrSearch, $location, $rootScope) {
+    return {
       restrict: 'E',
       templateUrl: 'app/components/solrResultsPagination/solrResultsPagination.directive.html',
       link: link
@@ -175,11 +175,11 @@
     /**
      *  Defines variables and functions within solrResultsPagination scope
      */
-<span class="fstat-no" title="function not covered" >    function link(scope) {</span>
+    function link(scope) {
 &nbsp;
-<span class="cstat-no" title="statement not covered" >      scope.currentPage = $location.search().page || 1;</span>
+      scope.currentPage = $location.search().page || 1;
 &nbsp;
-<span class="cstat-no" title="statement not covered" >      $rootScope.$on('newSearch', <span class="fstat-no" title="function not covered" >function() {</span></span>
+      $rootScope.$on('newSearch', <span class="fstat-no" title="function not covered" >function() {</span>
 <span class="cstat-no" title="statement not covered" >        scope.currentPage = $location.search().page || 1;</span>
       });
 &nbsp;
@@ -188,7 +188,7 @@
        *
        * @description Loads the next page of results if there is one
        */
-<span class="cstat-no" title="statement not covered" >      scope.nextPage = <span class="fstat-no" title="function not covered" >function() {</span></span>
+      scope.nextPage = <span class="fstat-no" title="function not covered" >function() {</span>
 <span class="cstat-no" title="statement not covered" >        if (scope.currentPage &lt; scope.totalPages) {</span>
 <span class="cstat-no" title="statement not covered" >          scope.currentPage++;</span>
 <span class="cstat-no" title="statement not covered" >          $location.search('page', scope.currentPage);</span>
@@ -201,7 +201,7 @@
        *
        * @description Loads the previous page of results if there is one
        */
-<span class="cstat-no" title="statement not covered" >      scope.prevPage = <span class="fstat-no" title="function not covered" >function() {</span></span>
+      scope.prevPage = <span class="fstat-no" title="function not covered" >function() {</span>
 <span class="cstat-no" title="statement not covered" >        if (scope.currentPage &gt; 1) {</span>
 <span class="cstat-no" title="statement not covered" >          scope.currentPage--;</span>
 <span class="cstat-no" title="statement not covered" >          $location.search('page', scope.currentPage);</span>
@@ -216,7 +216,7 @@
 
 </div>
 <div class="footer">
-    <div class="meta">Generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Mon Oct 24 2016 11:28:53 GMT-0400 (Eastern Daylight Time)</div>
+    <div class="meta">Generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Mon Oct 24 2016 18:23:43 GMT-0400 (Eastern Daylight Time)</div>
 </div>
 <script src="../../../../prettify.js"></script>
 <script>

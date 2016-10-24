@@ -27,8 +27,8 @@ module.exports = function (config) {
       'bower_components/angular-bootstrap/ui-bootstrap.js',
       src + '/*.html',
       src + '/*.js',
-      src + '/app/{views,components}/**/*.{js,html}',
-      src + '/app/services/**/*.js'
+      src + '/app/services/**/*.js',
+      src + '/app/{views,components}/**/*.{js,html}'
     ],
 
     // list of files / patterns to exclude

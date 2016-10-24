@@ -12,13 +12,13 @@
     </style>
 </head>
 <body>
-<div class="header low">
+<div class="header medium">
     <h1>Code coverage report for <span class="entity">./src/app/components/solrFacet/solrFacet.directive.js</span></h1>
     <h2>
-        Statements: <span class="metric">21.74% <small>(5 / 23)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
-        Branches: <span class="metric">0% <small>(0 / 4)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
-        Functions: <span class="metric">11.11% <small>(1 / 9)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
-        Lines: <span class="metric">21.74% <small>(5 / 23)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Statements: <span class="metric">73.91% <small>(17 / 23)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Branches: <span class="metric">25% <small>(1 / 4)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Functions: <span class="metric">55.56% <small>(5 / 9)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Lines: <span class="metric">73.91% <small>(17 / 23)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         Ignored: <span class="metric"><span class="ignore-none">none</span></span> &nbsp;&nbsp;&nbsp;&nbsp;
     </h2>
     <div class="path"><a href="../../../../index.html">All files</a> &#187; <a href="index.html">./src/app/components/solrFacet/</a> &#187; solrFacet.directive.js</div>
@@ -132,7 +132,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -148,7 +148,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">4</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -164,33 +164,31 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-yes">12</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">4</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">4</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-yes">4</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -199,7 +197,9 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -221,8 +221,8 @@
     .module('dhsniem')
     .directive('solrFacet', solrFacet);
 &nbsp;
-<span class="fstat-no" title="function not covered" >  function solrFacet(solrSearch, $rootScope) {</span>
-<span class="cstat-no" title="statement not covered" >    return {</span>
+  function solrFacet(solrSearch, $rootScope) {
+    return {
       restrict: 'E',
       scope: {
         display: '@',
@@ -236,9 +236,9 @@
     /**
      *  Defines variables and functions within solrFacet scope
      */
-<span class="fstat-no" title="function not covered" >    function link(scope, element, attrs) {</span>
+    function link(scope, element, attrs) {
 &nbsp;
-<span class="cstat-no" title="statement not covered" >      scope.sortByName = <span class="fstat-no" title="function not covered" >function(result) {</span></span>
+      scope.sortByName = <span class="fstat-no" title="function not covered" >function(result) {</span>
 <span class="cstat-no" title="statement not covered" >        if (result === 'Core') {</span>
 <span class="cstat-no" title="statement not covered" >          return -1;</span>
         } else {
@@ -253,32 +253,32 @@
        *
        * @returns
        */
-<span class="fstat-no" title="function not covered" >      function setFacetResults() {</span>
-<span class="cstat-no" title="statement not covered" >        scope.results = solrSearch.getFacet(scope.field);</span>
-<span class="cstat-no" title="statement not covered" >        scope.keys = <span class="fstat-no" title="function not covered" >function(results) {</span></span>
-<span class="cstat-no" title="statement not covered" >          return results ? Object.keys(results) : [];</span>
+      function setFacetResults() {
+        scope.results = solrSearch.getFacet(scope.field);
+        scope.keys = function(results) {
+          return results ? Object.keys(results) : <span class="branch-1 cbranch-no" title="branch not covered" >[];</span>
         };
       }
 &nbsp;
-<span class="cstat-no" title="statement not covered" >      setFacetResults();</span>
+      setFacetResults();
 &nbsp;
-<span class="cstat-no" title="statement not covered" >      $rootScope.$on('newSearch', <span class="fstat-no" title="function not covered" >function() {</span></span>
+      $rootScope.$on('newSearch', <span class="fstat-no" title="function not covered" >function() {</span>
 <span class="cstat-no" title="statement not covered" >        setFacetResults();</span>
       });
 &nbsp;
-<span class="cstat-no" title="statement not covered" >      scope.popoverIsOpen =  false;</span>
-<span class="cstat-no" title="statement not covered" >      scope.popoverTemplateUrl = 'app/components/solrFacet/custom-popover-template.html';</span>
+      scope.popoverIsOpen =  false;
+      scope.popoverTemplateUrl = 'app/components/solrFacet/custom-popover-template.html';
 &nbsp;
       /**
        * @name closePopover
        *
        * @description Closes the selected tooltip popver in the filter column
        */
-<span class="cstat-no" title="statement not covered" >      scope.closePopover = <span class="fstat-no" title="function not covered" >function() {</span></span>
+      scope.closePopover = <span class="fstat-no" title="function not covered" >function() {</span>
 <span class="cstat-no" title="statement not covered" >        scope.popoverIsOpen = false;</span>
       };
 &nbsp;
-<span class="cstat-no" title="statement not covered" >      scope.tooltipText = {</span>
+      scope.tooltipText = {
         'Entities': 'A physical thing, document, abstract concept, number, or string',
         'External Standards': 'Unmodified schema sources on the internet not encompassed by NIEM',
         'Domain': 'Communities of interest (COI) that are formally established, with an executive steward, to officially manage and govern a portion of the NIEM data model'
@@ -289,7 +289,7 @@
        * @param display
        * @returns {String} the text that should be displayed in the selected tooltip
        */
-<span class="cstat-no" title="statement not covered" >      scope.getTooltipText = <span class="fstat-no" title="function not covered" >function(display) {</span></span>
+      scope.getTooltipText = <span class="fstat-no" title="function not covered" >function(display) {</span>
 <span class="cstat-no" title="statement not covered" >        return scope.tooltipText[display];</span>
       };
     }
@@ -300,7 +300,7 @@
 
 </div>
 <div class="footer">
-    <div class="meta">Generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Mon Oct 24 2016 11:28:53 GMT-0400 (Eastern Daylight Time)</div>
+    <div class="meta">Generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Mon Oct 24 2016 18:23:43 GMT-0400 (Eastern Daylight Time)</div>
 </div>
 <script src="../../../../prettify.js"></script>
 <script>
