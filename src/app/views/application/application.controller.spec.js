@@ -5,7 +5,7 @@ describe('Controller: AppCtrl', function () {
   // load the controller's module
   beforeEach(module('dhsniem'));
 
-  var scope, AppCtrl, createController;
+  var AppCtrl;
 
   // Initialize the controller and a mock scope
   beforeEach(inject(function ($injector) {
