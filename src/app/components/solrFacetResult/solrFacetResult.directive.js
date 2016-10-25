@@ -42,10 +42,11 @@
         return scope.field + ':"' + scope.key + '"';
       };
 
+
       /**
        * @name isSelected
        *
-       * @description
+       * @description Determines if a given facet field (value) is selected by examining the $location.
        *
        * @returns {boolean}
        */
@@ -60,11 +61,11 @@
         return false;
       };
 
+
       /**
        * @name addRemoveFacet
        *
-       * @description
-       *
+       * @description Adds or removes a facet from the $location service, calls a new search based on updated selected facets, and resets page number to 1.
        */
       scope.addRemoveFacet = function() {
         var selectedFacets = solrSearch.getSelectedFacets();
@@ -77,6 +78,7 @@
         $location.search('page', 1);
         solrSearch.search();
       };
+
 
       function init() {
         scope.isSelected();

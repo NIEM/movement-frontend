@@ -14,7 +14,7 @@
     .module('dhsniem')
     .controller('DetailsCtrl', DetailsCtrl);
 
-  function DetailsCtrl(solrRequest, $location, $window, $rootScope) {
+  function DetailsCtrl(solrRequest, $location, $window) {
 
     var vm = this;
 
@@ -80,7 +80,6 @@
 
               }
             }
-            console.log(vm.entity);
           }
         } else if (vm.entity.entityType === 'Element') {
           getContainingTypes();
@@ -91,6 +90,7 @@
       });
 
     }
+
 
     /**
      * @name transformNamespaceText

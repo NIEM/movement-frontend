@@ -26,6 +26,11 @@
      */
     function link(scope, element, attrs, ctrl) {
 
+      /**
+       * @name init
+       *
+       * @description Initializes the view to set scope variables on page load and whenever a new search is triggered.
+       */
       function init() {
         scope.docs = solrSearch.getDocs();
         scope.numFound = solrSearch.getNumFound();
@@ -54,7 +59,7 @@
        *
        * @param entityType
        *
-       * @returns {string} - location of image to display corresponding to entityType
+       * @returns {string} Location of image to display corresponding to entityType
        */
       scope.getImagePath = function(entityType) {
         return 'images/icon_' + entityType.substring(0,1).toLowerCase() + '.svg';
@@ -75,6 +80,7 @@
         }
       };
 
+
       /**
        * @name closePopover
        *
@@ -85,6 +91,7 @@
       scope.closePopover = function(type) {
         scope.popovers[type].popoverIsOpen = false;
       };
+
 
       /**
        * @name closeOtherPopovers
@@ -101,14 +108,15 @@
         });
       };
 
+
       /**
        * @name isFirstOfNamespace
        *
-       * @param previousNamespace
+       * @param previousNamespace - the previous row's (doucment's) namespace
        *
-       * @param currentDoc
+       * @param currentDoc - the current row (document)
        *
-       * @description
+       * @description Determines if a listed row (document) is the first instance of its namespace in order. Used for grouping when the results are sorted by namespace.
        *
        * @returns {boolean}
        */
@@ -122,14 +130,15 @@
         return false;
       };
 
+
       /**
        * @name isFirstOfAlphabet
        *
-       * @description
+       * @description Determines if a listed row (document) is the first instance of its starting letter. Used for grouping when the results are sorted by name (alphabetically).
        *
-       * @param previousName
+       * @param previousName - the previous row's (doucment's) name
        *
-       * @param currentDoc
+       * @param currentDoc - the current row (document)
        *
        * @returns {boolean}
        */
@@ -141,6 +150,7 @@
         }
         return false;
       };
+      
     }
   }
 })();

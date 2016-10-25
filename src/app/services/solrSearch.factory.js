@@ -39,7 +39,7 @@
 
 
     /* 
-    * Getters
+    * Getters - used to extract data from $location service and handle logic.
     */
     function getDocs() {
       return docs;
@@ -122,6 +122,8 @@
      * @memberof dhsniem.service:solrSearch
      *
      * @description Dynamically builds the search params for a jsonp $http request to the solr instance.
+     *
+     * @returns {Object} The params object
      */
     function buildSearchParams() {
       var params = {
@@ -148,6 +150,8 @@
      * @memberof dhsniem.service:solrSearch
      *
      * @description Iterates over the facets object to return an array of the fields to be used as facets.
+     *
+     * @returns {string[]} An array of the facet fields with exclude tags prepended.
      */
     function getFacetFields() {
       var fields = [];
@@ -166,6 +170,8 @@
      * @memberof dhsniem.service:solrSearch
      *
      * @description Loops through the selected facets and groups the same facet values under the same facet name. Adds the exclude tag to make the array ready for the solr search param, fq.
+     *
+     * @returns {string[]} An array of the facets grouped by facet for when multiple facets values (fields) of the same facet are selected. Also includes the exclude tags so filters form a union.
      */
     function groupSelectedFacets() {
 
@@ -206,6 +212,8 @@
      * @memberof dhsniem.service:solrSearch
      *
      * @description Converts the current page number to a solr start index
+     *
+     * @returns {number} The start index for solr
      */
     function convertPageToStart() {
       return 100*(getPage() - 1);
