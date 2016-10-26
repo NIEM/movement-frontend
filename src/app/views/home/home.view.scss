@@ -2,10 +2,10 @@
   .content {
     min-width: $niem-min-width;
     width: 100%;
-    background-image: url(../../images/mainbg.svg);
+    background-image: url(./../images/mainbg.svg);
     background-size: cover;
-    filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../../images/mainbg.svg',sizingMethod='scale');
-    -ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../../images/mainbg.svg',sizingMethod='scale')";
+    filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='./../images/mainbg.svg',sizingMethod='scale');
+    -ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='./../images/mainbg.svg',sizingMethod='scale')";
 
     .welcome {
       width: $niem-min-width;
