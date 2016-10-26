@@ -173,8 +173,10 @@
               color: $marine-blue;
               margin-bottom: 13px;
             }
-            &:last-child {
-              border-bottom: none;
+          }
+          .pagination-bottom {
+            .solr-pagination {
+              padding-top: 15px;
               padding-bottom: 71px;
             }
           }
