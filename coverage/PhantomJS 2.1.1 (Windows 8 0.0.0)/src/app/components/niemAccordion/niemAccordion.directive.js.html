@@ -12,13 +12,13 @@
     </style>
 </head>
 <body>
-<div class="header low">
+<div class="header high">
     <h1>Code coverage report for <span class="entity">./src/app/components/niemAccordion/niemAccordion.directive.js</span></h1>
     <h2>
-        Statements: <span class="metric">15.79% <small>(3 / 19)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
-        Branches: <span class="metric">0% <small>(0 / 14)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
-        Functions: <span class="metric">25% <small>(1 / 4)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
-        Lines: <span class="metric">15.79% <small>(3 / 19)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Statements: <span class="metric">84.21% <small>(16 / 19)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Branches: <span class="metric">57.14% <small>(8 / 14)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Functions: <span class="metric">100% <small>(4 / 4)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Lines: <span class="metric">84.21% <small>(16 / 19)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         Ignored: <span class="metric"><span class="ignore-none">none</span></span> &nbsp;&nbsp;&nbsp;&nbsp;
     </h2>
     <div class="path"><a href="../../../../index.html">All files</a> &#187; <a href="index.html">./src/app/components/niemAccordion/</a> &#187; niemAccordion.directive.js</div>
@@ -108,40 +108,40 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -173,8 +173,8 @@
     .module('dhsniem')
     .directive('niemAccordion', niemAccordion);
 &nbsp;
-<span class="fstat-no" title="function not covered" >  function niemAccordion($compile) {</span>
-<span class="cstat-no" title="statement not covered" >    return {</span>
+  function niemAccordion($compile) {
+    return {
       restrict: 'E',
       templateUrl: 'app/components/niemAccordion/niemAccordion.directive.html',
       scope: {
@@ -185,29 +185,29 @@
         isProperties: '=',
         selectedEntityName: '='
       },
-      link: <span class="fstat-no" title="function not covered" >function (scope, element) {</span>
-<span class="cstat-no" title="statement not covered" >        scope.isOpen = false;</span>
-<span class="cstat-no" title="statement not covered" >        scope.dataFound = false;</span>
+      link: function (scope, element) {
+        scope.isOpen = false;
+        scope.dataFound = false;
 &nbsp;
         /**
          * @name toggleAccordion
          *
          * @description Opens currently closed accordions and closes currently opened accordions when called
          */
-<span class="cstat-no" title="statement not covered" >        scope.toggleAccordion = <span class="fstat-no" title="function not covered" >function () {</span></span>
-<span class="cstat-no" title="statement not covered" >          scope.isOpen = !scope.isOpen;</span>
-<span class="cstat-no" title="statement not covered" >          if (scope.isOpen &amp;&amp; scope.dataFound === false) {</span>
-<span class="cstat-no" title="statement not covered" >            scope.dataFound = true;</span>
-<span class="cstat-no" title="statement not covered" >            if (!!scope.data) {</span>
-<span class="cstat-no" title="statement not covered" >              if (scope.entityType === 'Element') {</span>
+        scope.toggleAccordion = function () {
+          scope.isOpen = !scope.isOpen;
+          if (scope.isOpen &amp;&amp; scope.dataFound === false) {
+            scope.dataFound = true;
+            <span class="missing-if-branch" title="else path not taken" >E</span>if (!!scope.data) {
+              <span class="missing-if-branch" title="if path not taken" >I</span>if (scope.entityType === 'Element') {
 <span class="cstat-no" title="statement not covered" >                scope.clickHandler(scope.data);</span>
               } else {
                 //for Type Contains
-<span class="cstat-no" title="statement not covered" >                if (scope.isProperties === true) {</span>
+                <span class="missing-if-branch" title="else path not taken" >E</span>if (scope.isProperties === true) {
                   //for Type Properties
-<span class="cstat-no" title="statement not covered" >                  for (var i = 0; i &lt; scope.data.length; i++) {</span>
-<span class="cstat-no" title="statement not covered" >                    if (!!scope.data[i].type.elements) {</span>
-<span class="cstat-no" title="statement not covered" >                      scope.clickHandler(scope.data[i].type);</span>
+                  for (var i = 0; i &lt; scope.data.length; i++) {
+                    <span class="missing-if-branch" title="else path not taken" >E</span>if (!!scope.data[i].type.elements) {
+                      scope.clickHandler(scope.data[i].type);
                     }
                   }
                 } else {
@@ -228,7 +228,7 @@
 
 </div>
 <div class="footer">
-    <div class="meta">Generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Wed Oct 26 2016 09:56:34 GMT-0400 (Eastern Daylight Time)</div>
+    <div class="meta">Generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Wed Oct 26 2016 11:55:40 GMT-0400 (Eastern Daylight Time)</div>
 </div>
 <script src="../../../../prettify.js"></script>
 <script>

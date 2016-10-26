@@ -6,15 +6,17 @@ describe('directive:detailsPagination', function () {
   beforeEach(module('dhsniem'));
   beforeEach(module('templates'));
 
-  var element, scope, elScope, $compile;
+  var element, scope, elScope, $compile, $location;
 
   // Initialize a mock scope
   beforeEach(inject(function ($injector) {
 
     scope = $injector.get('$rootScope').$new();
     $compile = $injector.get('$compile');
+    $location = $injector.get('$location');
 
-    element = angular.element('<details-pagination></details-pagination>');
+    element = angular.element('<details-pagination show-action="showData"></details-pagination>');
+    scope.showData = function(pageInfo) {return true;}
     element = $compile(element)(scope);
     scope.$apply();
     elScope = element.isolateScope();
@@ -23,7 +25,6 @@ describe('directive:detailsPagination', function () {
 
 
   it('should go to next page', function () {
-    elScope.data = {};
     elScope.totalPages = 10;
     elScope.currentPage = 10;
     elScope.nextPage();
@@ -35,7 +36,6 @@ describe('directive:detailsPagination', function () {
 
 
   it('should go to previous page', function () {
-    elScope.data = {};    
     elScope.totalPages = 10;
     elScope.currentPage = 1;
     elScope.prevPage();

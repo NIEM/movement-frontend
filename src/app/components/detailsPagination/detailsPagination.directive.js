@@ -34,8 +34,10 @@
       var init = function() {
         scope.numItems = 0;
 
-        for (var i = 0; i < scope.data.length; i++) {
-          scope.numItems += scope.data[i].data.facetValue.length;
+        if (scope.data) {
+          for (var i = 0; i < scope.data.length; i++) {
+            scope.numItems += scope.data[i].data.facetValue.length;
+          }
         }
 
         scope.totalPages = Math.ceil(scope.numItems / scope.numPerPage);
