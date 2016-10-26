@@ -36,18 +36,12 @@
           <solr-facet display="Entities" field="entityType"></solr-facet>
         </div>
         <div class="solr-facet-group-tooltip">
-          <span ng-click="closeOtherPopovers('namespace')" uib-popover-template="popovers['namespace'].popoverTemplateUrl"
-                popover-placement="right" popover-is-open="popovers['namespace'].popoverIsOpen" class="dotted-underline">
-            Namespace
-          </span>
-        </div>
-        <div class="solr-facet-subgroup-tooltip">
           <solr-facet display="Domain" field="domain"></solr-facet>
         </div>
-        <div class="solr-facet-subgroup-tooltip">
+        <div class="solr-facet-group-tooltip">
           <solr-facet display="External Standards" field="externalStandard"></solr-facet>
         </div>
-        <div class="solr-facet-subgroup-tooltip">
+        <div class="solr-facet-group-tooltip">
           <solr-facet display="Others" field="otherNamespace"></solr-facet>
         </div>
       </div>

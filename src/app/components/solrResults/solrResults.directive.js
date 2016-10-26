@@ -26,6 +26,11 @@
      */
     function link(scope, element, attrs, ctrl) {
 
+      /**
+       * @name init
+       *
+       * @description Initializes the view to set scope variables on page load and whenever a new search is triggered.
+       */
       function init() {
         scope.docs = solrSearch.getDocs();
         scope.numFound = solrSearch.getNumFound();
@@ -40,10 +45,22 @@
         init();
       });
 
+      /**
+       * @name clearAllFilters
+       *
+       * @description Unselects all filters and adjusts displayed results accordingly
+       */
       scope.clearAllFilters = function() {
         solrSearch.clearAllFilters();
       };
 
+      /**
+       * @name getImagePath
+       *
+       * @param entityType
+       *
+       * @returns {string} Location of image to display corresponding to entityType
+       */
       scope.getImagePath = function(entityType) {
         return 'images/icon_' + entityType.substring(0,1).toLowerCase() + '.svg';
       };
@@ -52,10 +69,6 @@
         'core': {
           'popoverIsOpen': false,
           'popoverTemplateUrl': 'app/components/solrResults/corePopoverTemplate.html'
-        },
-        'namespace': {
-          'popoverIsOpen': false,
-          'popoverTemplateUrl': 'app/components/solrResults/namespacePopoverTemplate.html'
         },
         'element': {
           'popoverIsOpen': false,
@@ -67,10 +80,26 @@
         }
       };
 
+
+      /**
+       * @name closePopover
+       *
+       * @param type
+       *
+       * @description Closes the popover related to the specified type
+       */
       scope.closePopover = function(type) {
         scope.popovers[type].popoverIsOpen = false;
       };
 
+
+      /**
+       * @name closeOtherPopovers
+       *
+       * @description Opens the specifed popover tooltip and closes any other open tooltip
+       *
+       * @param type
+       */
       scope.closeOtherPopovers = function(type) {
         angular.forEach(scope.popovers, function(value, key) {
           if(key !== type) {
@@ -79,6 +108,18 @@
         });
       };
 
+
+      /**
+       * @name isFirstOfNamespace
+       *
+       * @param previousNamespace - the previous row's (doucment's) namespace
+       *
+       * @param currentDoc - the current row (document)
+       *
+       * @description Determines if a listed row (document) is the first instance of its namespace in order. Used for grouping when the results are sorted by namespace.
+       *
+       * @returns {boolean}
+       */
       scope.isFirstOfNamespace = function(previousNamespace, currentDoc) {
         if (scope.sort === 'namespacePriority asc') {
           if (currentDoc.namespace !== previousNamespace) {
@@ -89,6 +130,18 @@
         return false;
       };
 
+
+      /**
+       * @name isFirstOfAlphabet
+       *
+       * @description Determines if a listed row (document) is the first instance of its starting letter. Used for grouping when the results are sorted by name (alphabetically).
+       *
+       * @param previousName - the previous row's (doucment's) name
+       *
+       * @param currentDoc - the current row (document)
+       *
+       * @returns {boolean}
+       */
       scope.isFirstOfAlphabet = function(previousName, currentDoc) {
         if (scope.sort === 'name asc') {
           if (currentDoc.name.substring(0,1).toUpperCase() !== previousName.substring(0,1).toUpperCase()) {
@@ -97,7 +150,7 @@
         }
         return false;
       };
-
+      
     }
   }
 })();

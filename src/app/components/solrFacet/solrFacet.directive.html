@@ -1,10 +1,11 @@
 <div>
   <h3 class="filter-group">
-  <span ng-click="closeOtherPopovers(display)" class="dotted-underline" popover-enable="display != 'Others'" uib-popover-template="popoverTemplateUrl" popover-placement="right" popover-is-open="popovers[display].popoverIsOpen">
-
+  <span class="dotted-underline" popover-enable="display != 'Others'"
+        uib-popover-template="popoverTemplateUrl" popover-placement="right"
+        popover-is-open="popoverIsOpen">
   {{display}}
     </span>
-</h3>
+  </h3>
 </div>
 <ul class="list-unstyled">
   <li ng-repeat="key in keys(results) | orderBy:sortByName">

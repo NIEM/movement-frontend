@@ -27,13 +27,15 @@
     function link(scope) {
       scope.sortOption = solrSearch.getSort();
 
+      /**
+       * @name sortBy
+       *
+       * @description Sets the sortBy parameter on the $location service and calls a new solr search.
+       */
       scope.sortBy = function() {
         $location.search('sortBy', scope.sortOption);
         solrSearch.search();
       };
-
     }
-
   }
-
 })();

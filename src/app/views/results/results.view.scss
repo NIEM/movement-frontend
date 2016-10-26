@@ -19,7 +19,6 @@
         text-transform: uppercase;
       }
     }
-
     .legend {
       margin: 0 30px 0 0;
       .legend-heading {
@@ -51,6 +50,7 @@
             color: $marine-blue;
             .dotted-underline {
               border-bottom: 1px dashed;
+              cursor: pointer;
             }
             &.type-legend {
               padding-right: 15px;
@@ -59,24 +59,20 @@
         }
       }
     }
-
     .search-heading {
       padding: 0 20px;
       background-image: linear-gradient(to left, $teal-gradient, $marine-blue);
       color: $white;
     }
-
     background-color: $white;
     position: relative;
     min-width: $niem-min-width;
     max-width: $niem-max-width;
     height: calc(100% - 373px);
     margin: 0 auto;
-
     h2 {
       color: $black;
     }
-
     .search-filter {
       background: $white;
       padding-left: 32px;
@@ -100,7 +96,6 @@
           padding-top: 8px;
           letter-spacing: 0.5px;
           font-size: 14px;
-
           &:hover {
             text-decoration: underline;
           }
@@ -116,22 +111,10 @@
           margin-top: 18px;
           .dotted-underline {
             border-bottom: 1px dashed;
-          }
-        }
-        .solr-facet-subgroup-tooltip {
-          .filter-group {
-            font-size: 14px;
-            letter-spacing: 0.5px;
-            color: $seafoam;
-            text-transform: uppercase;
-            margin-top: 11px;
-            .dotted-underline {
-              border-bottom: 1px dashed;
-            }
+            cursor: pointer;
           }
         }
       }
-
     }
     .search-results {
       padding: 0 43px;

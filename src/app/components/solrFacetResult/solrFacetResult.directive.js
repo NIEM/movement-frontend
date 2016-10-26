@@ -31,10 +31,25 @@
      */
     function link(scope, element, attrs) {
 
+      /**
+       * @name facetString
+       *
+       * @description
+       *
+       * @returns {string}
+       */
       scope.facetString = function(){
         return scope.field + ':"' + scope.key + '"';
       };
 
+
+      /**
+       * @name isSelected
+       *
+       * @description Determines if a given facet field (value) is selected by examining the $location.
+       *
+       * @returns {boolean}
+       */
       scope.isSelected = function(){
         var selectedFacets = solrSearch.getSelectedFacets();
         var facetString = scope.facetString();
@@ -46,6 +61,12 @@
         return false;
       };
 
+
+      /**
+       * @name addRemoveFacet
+       *
+       * @description Adds or removes a facet from the $location service, calls a new search based on updated selected facets, and resets page number to 1.
+       */
       scope.addRemoveFacet = function() {
         var selectedFacets = solrSearch.getSelectedFacets();
         if(!scope.isSelected()) {
@@ -58,6 +79,7 @@
         solrSearch.search();
       };
 
+
       function init() {
         scope.isSelected();
       }
@@ -67,9 +89,6 @@
       $rootScope.$on('newSearch', function() {
         init();
       });
-
     }
-
   }
-
 })();

@@ -8,7 +8,7 @@
     -ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../../images/mainbg.svg',sizingMethod='scale')";
 
     .welcome {
-      width: 768px;
+      width: $niem-min-width;
       margin: 0 auto;
       min-height: calc(100vh - 118px - 332px);
       .welcome-items {

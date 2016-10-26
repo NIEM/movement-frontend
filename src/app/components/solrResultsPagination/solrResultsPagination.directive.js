@@ -26,12 +26,17 @@
      */
     function link(scope) {
 
-      scope.currentPage = 1;
+      scope.currentPage = $location.search().page || 1;
 
       $rootScope.$on('newSearch', function() {
         scope.currentPage = $location.search().page || 1;
       });
 
+      /**
+       * @name nextPage
+       *
+       * @description Loads the next page of results if there is one
+       */
       scope.nextPage = function() {
         if (scope.currentPage < scope.totalPages) {
           scope.currentPage++;
@@ -40,6 +45,11 @@
         }
       };
 
+      /**
+       * @name prevPage
+       *
+       * @description Loads the previous page of results if there is one
+       */
       scope.prevPage = function() {
         if (scope.currentPage > 1) {
           scope.currentPage--;
@@ -47,9 +57,6 @@
           solrSearch.search();
         }
       };
-
     }
-
   }
-
 })();
