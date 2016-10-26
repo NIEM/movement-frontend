@@ -14,7 +14,7 @@
     .module('dhsniem')
     .directive('detailsPagination', detailsPagination);
 
-  function detailsPagination(solrSearch, $location) {
+  function detailsPagination() {
     return {
       restrict: 'E',
       templateUrl: 'app/components/detailsPagination/detailsPagination.directive.html',

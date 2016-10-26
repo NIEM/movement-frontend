@@ -3,7 +3,7 @@
 /**
  * @ngdoc directive
  *
- * @name solrSearch
+ * @name solrSearchInput
  *
  * @description
  * Search input for solr
@@ -12,12 +12,12 @@
 
   angular
     .module('dhsniem')
-    .directive('solrSearch', solrSearch);
+    .directive('solrSearchInput', solrSearchInput);
 
-  function solrSearch($location, $state, solrSearch, solrRequest, $rootScope) {
+  function solrSearchInput($location, $state, solrSearch, solrRequest, $rootScope) {
     return {
       restrict: 'E',
-      templateUrl: 'app/components/solrSearch/solrSearch.directive.html',
+      templateUrl: 'app/components/solrSearchInput/solrSearchInput.directive.html',
       scope: {
         hasLabel: '='
       },
@@ -25,7 +25,7 @@
     };
 
     /**
-     *  Defines variables and functions within solrSearch scope
+     *  Defines variables and functions within solrSearchInput scope
      */
     function link(scope, element, attrs) {
 

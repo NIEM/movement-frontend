@@ -1,6 +1,6 @@
 'use strict';
 
-describe('directive:solrSearch', function () {
+describe('directive:solrSearchInput', function () {
 
   // load the controller's module
   beforeEach(module('dhsniem'));
@@ -20,7 +20,7 @@ describe('directive:solrSearch', function () {
 
     $httpBackend.whenGET(new RegExp('\\' + 'uib/template')).respond(200, {});
 
-    element = angular.element('<solr-search></solr-search>');
+    element = angular.element('<solr-search-input></solr-search-input>');
     element = $compile(element)(scope);
     scope.$apply();
     elScope = element.isolateScope();
