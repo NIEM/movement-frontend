@@ -65,6 +65,7 @@
         return 'images/icon_' + entityType.substring(0,1).toLowerCase() + '.svg';
       };
 
+
       scope.popovers = {
         'core': {
           'popoverIsOpen': false,
@@ -78,6 +79,12 @@
           'popoverIsOpen': false,
           'popoverTemplateUrl': 'app/components/solrResults/typePopoverTemplate.html'
         }
+      };
+
+      scope.namespaceTypes = {
+        'domain': 'Domain',
+        'externalStandard': 'External Standard',
+        'otherNamespace': 'Other Namespace'
       };
 
 
