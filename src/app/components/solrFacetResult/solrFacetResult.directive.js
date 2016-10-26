@@ -18,7 +18,7 @@
     return {
       restrict: 'E',
       scope: {
-        field:'@',
+        field: '@',
         key: '@',
         count: '@',
       },
@@ -34,11 +34,11 @@
       /**
        * @name facetString
        *
-       * @description
+       * @description Gets string value of result
        *
        * @returns {string}
        */
-      scope.facetString = function(){
+      scope.facetString = function() {
         return scope.field + ':"' + scope.key + '"';
       };
 
@@ -50,10 +50,10 @@
        *
        * @returns {boolean}
        */
-      scope.isSelected = function(){
+      scope.isSelected = function() {
         var selectedFacets = solrSearch.getSelectedFacets();
         var facetString = scope.facetString();
-        for (var i in selectedFacets){
+        for (var i in selectedFacets) {
           if (selectedFacets[i] === facetString) {
             return true;
           }
@@ -69,7 +69,7 @@
        */
       scope.addRemoveFacet = function() {
         var selectedFacets = solrSearch.getSelectedFacets();
-        if(!scope.isSelected()) {
+        if (!scope.isSelected()) {
           selectedFacets.push(scope.facetString());
         } else {
           selectedFacets.splice(selectedFacets.indexOf(scope.facetString()), 1);
@@ -79,7 +79,11 @@
         solrSearch.search();
       };
 
-
+      /**
+       * @name init
+       *
+       * @description Initializes the values within the controller
+       */
       function init() {
         scope.isSelected();
       }

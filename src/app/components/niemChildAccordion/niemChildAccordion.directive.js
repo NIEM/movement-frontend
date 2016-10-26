@@ -33,7 +33,7 @@
         /**
          * @name showMore
          *
-         * @description
+         * @description Shows the next level of accordion data
          */
         scope.showMore = function() {
           scope.seeMore = !scope.seeMore;
@@ -42,7 +42,7 @@
         /**
          * @name onClick
          *
-         * @description
+         * @description Handler for selection of accordion item
          */
         scope.onClick = function() {
           scope.isOpen = !scope.isOpen;
