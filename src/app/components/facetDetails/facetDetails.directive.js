@@ -25,7 +25,7 @@
     };
 
   }
-
+  
   /**
    *  Defines variables and functions within facetDetails scope
    *
@@ -47,7 +47,7 @@
      */
     scope.closePopover = function() {
       scope.popoverIsOpen = false;
-    }
+    };
   }
 
 })();
