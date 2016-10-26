@@ -86,7 +86,7 @@
      * @description Performs the solr search via call to the http method. On success, sets response data to the service variables.
      */
     function search() {
-      solrRequest.makeSolrRequest(buildSearchParams()).then(function(data) {
+      solrRequest.makeSolrRequest().then(function(data) {
         docs = data.response.docs;
         numFound = data.response.numFound;
         facets = data.facet_counts.facet_fields;

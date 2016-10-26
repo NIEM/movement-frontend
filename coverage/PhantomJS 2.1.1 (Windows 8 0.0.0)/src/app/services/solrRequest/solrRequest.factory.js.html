@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <title>Code coverage report for ./src/app/components/niemExport/niemExport.directive.js</title>
+    <title>Code coverage report for ./src/app/services/solrRequest/solrRequest.factory.js</title>
     <meta charset="utf-8">
     <link rel="stylesheet" href="../../../../prettify.css">
     <link rel="stylesheet" href="../../../../base.css">
@@ -13,15 +13,15 @@
 </head>
 <body>
 <div class="header high">
-    <h1>Code coverage report for <span class="entity">./src/app/components/niemExport/niemExport.directive.js</span></h1>
+    <h1>Code coverage report for <span class="entity">./src/app/services/solrRequest/solrRequest.factory.js</span></h1>
     <h2>
-        Statements: <span class="metric">100% <small>(5 / 5)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Statements: <span class="metric">90% <small>(9 / 10)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         Branches: <span class="metric">100% <small>(0 / 0)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
-        Functions: <span class="metric">100% <small>(3 / 3)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
-        Lines: <span class="metric">100% <small>(5 / 5)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Functions: <span class="metric">80% <small>(4 / 5)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Lines: <span class="metric">90% <small>(9 / 10)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         Ignored: <span class="metric"><span class="ignore-none">none</span></span> &nbsp;&nbsp;&nbsp;&nbsp;
     </h2>
-    <div class="path"><a href="../../../../index.html">All files</a> &#187; <a href="index.html">./src/app/components/niemExport/</a> &#187; niemExport.directive.js</div>
+    <div class="path"><a href="../../../../index.html">All files</a> &#187; <a href="index.html">./src/app/services/solrRequest/</a> &#187; solrRequest.factory.js</div>
 </div>
 <div class="body">
 <pre><table class="coverage">
@@ -60,7 +60,19 @@
 33
 34
 35
-36</td><td class="line-coverage"><span class="cline-any cline-neutral">&nbsp;</span>
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48</td><td class="line-coverage"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -77,7 +89,9 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1</span>
-<span class="cline-any cline-yes">8</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">36</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -91,6 +105,16 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">13</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">13</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">13</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -98,39 +122,51 @@
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">'use strict';
 &nbsp;
 /**
- * @ngdoc directive
+ * @ngdoc factory
  *
- * @name NiemExport
+ * @name solrRequest
  *
  * @description
- * Export section for NIEM model
+ * Factory for Solr Request
  */
 (function () {
 &nbsp;
   angular
     .module('dhsniem')
-    .directive('niemExport', niemExport);
+    .factory('solrRequest', solrRequest);
 &nbsp;
-  function niemExport() {
+  function solrRequest($q, $http, SOLR_URL) {
+&nbsp;
     return {
-      restrict: 'E',
-      templateUrl: 'app/components/niemExport/niemExport.directive.html',
-      scope: {},
-      link: link
+      makeSolrRequest: makeSolrRequest,
     };
 &nbsp;
+&nbsp;
+    /**
+     * @name makeSolrRequest
+     *
+     * @memberof dhsniem.service:solrRequest
+     *
+     * @description Makes http jsonp call to the SOLR_URL and returns a promise.
+     *
+     * @returns deferred.promise
+     */
+    function makeSolrRequest(params) {
+&nbsp;
+      var deferred = $q.defer();
+&nbsp;
+      $http.jsonp(SOLR_URL, {params: params}).then(function(response) {
+        deferred.resolve(response.data);
+      }).catch(<span class="fstat-no" title="function not covered" >function(error) {</span>
+<span class="cstat-no" title="statement not covered" >        console.log('Error: ', error);</span>
+      });
+&nbsp;
+      return deferred.promise;
+    }
+&nbsp;
   }
 &nbsp;
-  /**
-   *  Defines variables and functions within niemExport scope
-   *
-   */
-  function link(scope) {
-&nbsp;
-  }
-&nbsp;
-})();
-&nbsp;</pre></td></tr>
+})();</pre></td></tr>
 </table></pre>
 
 </div>
