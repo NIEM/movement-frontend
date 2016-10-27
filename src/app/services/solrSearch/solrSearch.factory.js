@@ -185,23 +185,31 @@
         facetKey = selectedFacet.split(':')[0];
         facetVal = selectedFacet.split(':')[1];
 
-        if (facetGroups[facetKey]) {
-          facetGroups[facetKey] = facetGroups[facetKey].concat(' ').concat(facetVal);
+        if (facetKey === 'domain' || facetKey === 'externalStandard' || facetKey === 'otherNamespace') {
+          if (facetGroups['namespace']) {
+            facetGroups['namespace'] = facetGroups['namespace'].concat(' ').concat(facetVal);
+          } else {
+            facetGroups['namespace'] = facetVal;
+          }
         } else {
-          facetGroups[facetKey] = facetVal;
+          if (facetGroups[facetKey]) {
+            facetGroups[facetKey] = facetGroups[facetKey].concat(' ').concat(facetVal);
+          } else {
+            facetGroups[facetKey] = facetVal;
+          }
         }
+
       });
 
       Object.keys(facetGroups).forEach(function(key) {
         // Combine the exclude tag for all namespace types
-        if (key === 'domain' || key === 'externalStandard' || key === 'otherNamespace') {
-          groupedFacetString = '{!tag=domaintag,otherNamespacetag,externalStandardtag}' + key + ':' + facetGroups[key];
+        if (key === 'namespace') {
+          groupedFacetString = '{!tag=domaintag,otherNamespacetag,externalStandardtag}namespace:(' + facetGroups[key] + ')';
         } else {
-          groupedFacetString = '{!tag=' + key + 'tag}' + key + ':' + facetGroups[key];
+          groupedFacetString = '{!tag=' + key + 'tag}' + key + ':(' + facetGroups[key] + ')';
         }
         groupedFacets.push(groupedFacetString);
       });
-
       return groupedFacets;
     }
 
