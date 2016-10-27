@@ -30,7 +30,7 @@ describe('directive:solrFacet', function () {
     var coreSort = elScope.sortByName('Core');
     var otherSort = elScope.sortByName('Emergency Management');
     expect(coreSort).toBe(-1);
-    expect(otherSort).toBe(otherSort);
+    expect(otherSort).toBe('Emergency Management');
   });
 
   it('should provide tooltip text', function () {

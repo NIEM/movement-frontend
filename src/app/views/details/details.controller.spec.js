@@ -26,8 +26,4 @@ describe('Controller: DetailsCtrl', function() {
     expect(DetailsCtrl.transformNamespaceText('domain')).toBe('Domain');
   });
 
-  it('should go back', function () {
-    // TODO
-  });
-
 });
