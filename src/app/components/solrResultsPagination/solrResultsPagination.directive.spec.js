@@ -6,7 +6,7 @@ describe('directive:solrResultsPagination', function () {
   beforeEach(module('dhsniem'));
   beforeEach(module('templates'));
 
-  var element, scope, elScope, $compile, $location;
+  var element, scope, elScope, $compile, $location, $rootScope;
 
   // Initialize a mock scope
   beforeEach(inject(function ($injector) {
@@ -14,6 +14,7 @@ describe('directive:solrResultsPagination', function () {
     scope = $injector.get('$rootScope').$new();
     $compile = $injector.get('$compile');
     $location = $injector.get('$location');
+    $rootScope = $injector.get('$rootScope');
 
     element = angular.element('<solr-results-pagination></solr-results-pagination>');
     element = $compile(element)(scope);
@@ -44,6 +45,15 @@ describe('directive:solrResultsPagination', function () {
     elScope.prevPage();
     expect(elScope.currentPage).toEqual(3);
     expect($location.search().page).toEqual(3);
+  });
+
+
+  it('should update on a new search', function () {
+    $rootScope.$emit('newSearch');
+    expect(elScope.currentPage).toEqual(1);
+    $location.search('page', 5);
+    $rootScope.$emit('newSearch');
+    expect(elScope.currentPage).toEqual(5);
   });
 
 

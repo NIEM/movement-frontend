@@ -6,7 +6,7 @@ describe('directive:solrResults', function () {
   beforeEach(module('dhsniem'));
   beforeEach(module('templates'));
 
-  var element, scope, elScope, solrSearch, $compile, $location, $httpBackend, SOLR_URL;
+  var element, scope, elScope, solrSearch, $compile, $location, $httpBackend, SOLR_URL, $rootScope;
 
   // Initialize a mock scope
   beforeEach(inject(function ($injector) {
@@ -15,6 +15,7 @@ describe('directive:solrResults', function () {
     $compile = $injector.get('$compile');
     $location = $injector.get('$location');
     $httpBackend = $injector.get('$httpBackend');
+    $rootScope = $injector.get('$rootScope');
 
     solrSearch = $injector.get('solrSearch');
     SOLR_URL = $injector.get('SOLR_URL');
@@ -59,7 +60,6 @@ describe('directive:solrResults', function () {
     expect(elementPopover).toEqual(false);
   });
 
-
   it('should be first of namespace', function () {
     elScope.sort = '';
     var isFirst = elScope.isFirstOfNamespace('Core',{namespace:'Emergency Management', namespaceType:'domain'});
@@ -71,7 +71,6 @@ describe('directive:solrResults', function () {
     expect(isFirst).toEqual(true);
   });
 
-
   it('should be first of alphabet', function () {
     elScope.sort = '';
     var isFirst = elScope.isFirstOfAlphabet('Alert',{name:'Card'});
@@ -81,6 +80,12 @@ describe('directive:solrResults', function () {
     expect(isFirst).toEqual(false); // for when names are the same
     isFirst = elScope.isFirstOfAlphabet('Alert',{name:'Card'});
     expect(isFirst).toEqual(true);
+  });
+
+  it('should update on a new search', function () {
+    spyOn(solrSearch, 'getSort');
+    $rootScope.$emit('newSearch');
+    expect(solrSearch.getSort).toHaveBeenCalled();
   });
 
 });
