@@ -15,7 +15,7 @@ angular
     'ngTouch',
     'ui.bootstrap'
   ])
-  .constant('SOLR_URL', 'http://192.168.99.101:8983/solr/dhsniem/select')
+  .constant('SOLR_URL', 'http://35.164.75.93:8983/solr/dhsniem/select')
   .config(function($urlRouterProvider) {
     $urlRouterProvider.when('', '/'); // redirect to root if the state is ''
 
