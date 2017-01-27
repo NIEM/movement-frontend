@@ -6,7 +6,7 @@ describe('directive:solrFacetResult', function () {
   beforeEach(module('dhsniem'));
   beforeEach(module('templates'));
 
-  var element, scope, elScope, $compile, $location, $httpBackend;
+  var element, scope, elScope, $compile, $location, $httpBackend, $rootScope;
 
   // Initialize a mock scope
   beforeEach(inject(function ($injector) {
@@ -15,6 +15,7 @@ describe('directive:solrFacetResult', function () {
     $compile = $injector.get('$compile');
     $location = $injector.get('$location');
     $httpBackend = $injector.get('$httpBackend');
+    $rootScope = $injector.get('$rootScope');
 
     $httpBackend.whenGET(new RegExp('\\' + 'uib/template')).respond(200, {});
 
@@ -36,6 +37,8 @@ describe('directive:solrFacetResult', function () {
     elScope.field = 'domain';
     elScope.key = 'Core';
     expect(elScope.isSelected()).toBe(false);
+    $location.search('selectedFacets', 'domain:"Emergency Management"');
+    expect(elScope.isSelected()).toBe(false);
     $location.search('selectedFacets', 'domain:"Core"');
     expect(elScope.isSelected()).toBe(true);
   });
@@ -53,6 +56,12 @@ describe('directive:solrFacetResult', function () {
     elScope.key = 'Core';
     elScope.addRemoveFacet();
     expect($location.search().selectedFacets.length).toBe(1);
+  });
+
+  it('should update on new search', function () {
+    spyOn(elScope, 'isSelected');
+    $rootScope.$emit('newSearch');
+    expect(elScope.isSelected).toHaveBeenCalled();
   });
 
 });

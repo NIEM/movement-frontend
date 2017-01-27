@@ -40,6 +40,8 @@ describe('directive:niemChildAccordion', function () {
     expect(elScope.isOpen).toBe(true);
     expect(elScope.nextLevel).toBe(3);
     expect(elScope.dataFound).toBe(true);
+    elScope.onClick();
+    expect(elScope.dataFound).toBe(true);
   });
 
 
