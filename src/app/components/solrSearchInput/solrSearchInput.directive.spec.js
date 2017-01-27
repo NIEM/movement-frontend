@@ -6,7 +6,7 @@ describe('directive:solrSearchInput', function () {
   beforeEach(module('dhsniem'));
   beforeEach(module('templates'));
 
-  var element, scope, elScope, $compile, $location, $httpBackend, $rootScope, $state;
+  var element, scope, elScope, $compile, $location, $httpBackend, $rootScope, $state, solrRequest, solrSearch;
 
   // Initialize a mock scope
   beforeEach(inject(function ($injector) {
@@ -17,6 +17,8 @@ describe('directive:solrSearchInput', function () {
     $httpBackend = $injector.get('$httpBackend');
     $rootScope = $injector.get('$rootScope');
     $state = $injector.get('$state');
+    solrRequest = $injector.get('solrRequest');
+    solrSearch = $injector.get('solrSearch');
 
     $httpBackend.whenGET(new RegExp('\\' + 'uib/template')).respond(200, {});
 
@@ -35,7 +37,6 @@ describe('directive:solrSearchInput', function () {
     expect($state.go).toHaveBeenCalledWith('main.results', {q:'*', selectedFacets:''});
   });
 
-
   it('should search a specific text', function () {
     spyOn($state, 'go');
     elScope.searchQuery = 'Card';
@@ -44,13 +45,34 @@ describe('directive:solrSearchInput', function () {
     expect($state.go).toHaveBeenCalledWith('main.results', {q:'Card', selectedFacets:''});
   });
 
-
-  it('should search from a typeahead item click', function () {
+  it('should search for a specific domain from typeahead', function () {
     spyOn($state, 'go');
     elScope.search({'name': 'Card' + ' in NIEM Core', 'taNS': 'Core', 'query': 'Card', 'taNSType': 'domain'});
     expect($rootScope.query).toEqual('Card');
     expect($state.go).toHaveBeenCalledWith('main.results', {q:'Card', selectedFacets:'domain:"Core"'});
   });
 
+  it('should search for all domains from typeahead', function () {
+    spyOn($state, 'go');
+    elScope.search({'name': 'Card' + ' in All Domains', 'taNS': 'all', 'query': 'Card'});
+    expect($rootScope.query).toEqual('Card');
+    expect($state.go).toHaveBeenCalledWith('main.results', {q:'Card', selectedFacets:''});
+  });
+
+  it('should get typeahead results', function () {
+    spyOn(solrRequest, 'makeSolrRequest').and.callThrough();
+    elScope.getTypeaheadResults('Card');
+    expect(solrRequest.makeSolrRequest).toHaveBeenCalled();
+  });
+
+
+  it('should clear all filters if on search results page', function () {
+    $state.go('main.results');
+    $rootScope.$digest();
+    spyOn(solrSearch, 'clearAllFilters');
+    elScope.searchQuery = 'Card';
+    elScope.search();
+    expect(solrSearch.clearAllFilters).toHaveBeenCalled();
+  });
 
 });

@@ -6,7 +6,7 @@ describe('directive:solrFacet', function () {
   beforeEach(module('dhsniem'));
   beforeEach(module('templates'));
 
-  var element, scope, elScope, $compile, $location, $httpBackend;
+  var element, scope, elScope, $compile, $location, $httpBackend, $rootScope, solrSearch;
 
   // Initialize a mock scope
   beforeEach(inject(function ($injector) {
@@ -15,6 +15,8 @@ describe('directive:solrFacet', function () {
     $compile = $injector.get('$compile');
     $location = $injector.get('$location');
     $httpBackend = $injector.get('$httpBackend');
+    $rootScope = $injector.get('$rootScope');
+    solrSearch = $injector.get('solrSearch');
 
     $httpBackend.whenGET(new RegExp('\\' + 'uib/template')).respond(200, {});
 
@@ -44,5 +46,10 @@ describe('directive:solrFacet', function () {
     elScope.closePopover();
   });
 
+  it('should update on a new search', function () {
+    spyOn(solrSearch, 'getFacet');
+    $rootScope.$emit('newSearch');
+    expect(solrSearch.getFacet).toHaveBeenCalled();
+  });
 
 });
