@@ -8,3 +8,4 @@ es5/doc/client
 es5/client/test/visual/results
 .DS_Store
 ._.DS_Store
+src/app/env.js

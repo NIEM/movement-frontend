@@ -37,6 +37,17 @@
         scope.query = solrSearch.getQuery();
         scope.totalPages = Math.ceil( scope.numFound / 100);
         scope.sort = solrSearch.getSort();
+        scope.namespaceTypes = {
+          'domain': 'Domain',
+          'externalStandard': 'External Standard',
+          'otherNamespace': 'Other Namespace'
+        };
+        scope.popovers = {
+          'core': {
+            'popoverIsOpen': false,
+            'popoverTemplateUrl': 'app/components/solrResults/corePopoverTemplate.html'
+          }
+        };
       }
 
       init();
@@ -52,39 +63,6 @@
        */
       scope.clearAllFilters = function() {
         solrSearch.clearAllFilters();
-      };
-
-      /**
-       * @name getImagePath
-       *
-       * @param entityType
-       *
-       * @returns {string} Location of image to display corresponding to entityType
-       */
-      scope.getImagePath = function(entityType) {
-        return 'images/icon_' + entityType.substring(0,1).toLowerCase() + '.svg';
-      };
-
-
-      scope.popovers = {
-        'core': {
-          'popoverIsOpen': false,
-          'popoverTemplateUrl': 'app/components/solrResults/corePopoverTemplate.html'
-        },
-        'element': {
-          'popoverIsOpen': false,
-          'popoverTemplateUrl': 'app/components/solrResults/elementPopoverTemplate.html'
-        },
-        'type': {
-          'popoverIsOpen': false,
-          'popoverTemplateUrl': 'app/components/solrResults/typePopoverTemplate.html'
-        }
-      };
-
-      scope.namespaceTypes = {
-        'domain': 'Domain',
-        'externalStandard': 'External Standard',
-        'otherNamespace': 'Other Namespace'
       };
 
 
@@ -157,7 +135,7 @@
         }
         return false;
       };
-      
+
     }
   }
 })();
