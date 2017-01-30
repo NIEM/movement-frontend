@@ -38,14 +38,7 @@ describe('directive:solrResults', function () {
     selectedFacets = solrSearch.getSelectedFacets();
     expect(selectedFacets.length).toEqual(0);
   });
-
-
-  it('should get image path', function () {
-    var iPath = elScope.getImagePath('element');
-    expect(iPath).toEqual('images/icon_e.svg');
-  });
-
-
+  
   it('should close a popover', function () {
     var corePopover = elScope.popovers.core.popoverIsOpen;
     elScope.popovers.core.popoverIsOpen = true;
