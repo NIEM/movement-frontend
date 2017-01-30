@@ -1,6 +1,17 @@
 <div class="solr-search form-horizontal">
   <div class="form-group row">
     <form ng-submit="search()" class="form-inline">
+      <div class="btn-group" uib-dropdown is-open="status.isopen" ng-show="!hasLabel">
+        <button id="single-button" type="button" class="btn btn-primary" uib-dropdown-toggle ng-disabled="disabled">
+          {{selectedDomain}} <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
+          <li role="menuitem"><a href="#" ng-click="domainSelect('All Domains')">All Domains</a></li>
+          <li role="menuitem"><a href="#" ng-click="domainSelect('Biometrics')">Biometrics</a></li>
+          <li role="menuitem"><a href="#" ng-click="domainSelect('Chemical, Biological, Radiological, Nuclear')">Chemical, Biological, Radiological, Nuclear</a></li>
+          <li role="menuitem"><a href="#" ng-click="domainSelect('Justice')">Justice</a></li>
+        </ul>
+      </div>
       <label for="solr-search-input" ng-show="!!hasLabel && hasLabel">Search Model</label>
       <div class="input-group search-group">
         <input type="text" id="solr-search-input" class="form-control" aria-label="Enter keyword" ng-model="searchQuery"
