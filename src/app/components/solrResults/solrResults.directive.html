@@ -1,24 +1,6 @@
 <div class="results">
   <search-header></search-header>
   <section class="content">
-    <div class="legend row">
-      <div class="pull-right">
-        <h6 class="legend-heading">Legend</h6>
-        <div class="legend-symbols">
-          <div class="legend-symbol">
-            <img class="legend-img" src="images/icon_t.svg">
-            <h6 ng-click="closeOtherPopovers('type')" class="legend-title type-legend" uib-popover-template="popovers['type'].popoverTemplateUrl"
-                popover-placement="bottom" popover-is-open="popovers['type'].popoverIsOpen"><span class="dotted-underline">Type</span></h6>
-          </div>
-          <div class="legend-symbol">
-            <img class="legend-img" src="images/icon_e.svg">
-            <h6 ng-click="closeOtherPopovers('element')" class="legend-title" uib-popover-template="popovers['element'].popoverTemplateUrl"
-                popover-placement="bottom" popover-is-open="popovers['element'].popoverIsOpen"><span class="dotted-underline">Element</span></h6>
-          </div>
-        </div>
-      </div>
-    </div>
-
     <div class="search-heading row">
       <h1 class="keyword-search-text">
         You searched for "{{query}}"
@@ -32,9 +14,6 @@
         <button class="clear-button pull-right text-uppercase" ng-click="clearAllFilters()">Clear All</button>
       </div>
       <div class="filter-details row">
-        <div class="solr-facet-group-tooltip">
-          <solr-facet display="Entities" field="entityType"></solr-facet>
-        </div>
         <div class="solr-facet-group-tooltip">
           <solr-facet display="Domain" field="domain"></solr-facet>
         </div>
@@ -68,9 +47,6 @@
               <a ui-sref="main.details({ entityID: doc.id })">
                 <h3 class="item-title">{{doc.name}}</h3>
               </a>
-              <div class="item-img-section">
-                <img class="item-img" ng-src="{{getImagePath(doc.entityType)}}">
-              </div>
               <p class="item-description">{{doc.definition}}</p>
               <p class="item-namespace">{{namespaceTypes[doc.namespaceType]}}: {{doc.namespace}}</p>
             </div>
