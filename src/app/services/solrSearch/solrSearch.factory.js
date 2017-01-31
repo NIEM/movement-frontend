@@ -168,48 +168,24 @@
      *
      * @memberof dhsniem.service:solrSearch
      *
-     * @description Loops through the selected facets and groups the same facet values under the same facet name. Adds the exclude tag to make the array ready for the solr search param, fq.
+     * @description Loops through the selected facets and groups the same facet values under the same facet name. Adds the exclude tag to make the array ready for the solr search param, fq. Modified from Release 1 to now only account for once facet group: namespace.
      *
-     * @returns {string[]} An array of the facets grouped by facet for when multiple facets values (fields) of the same facet are selected. Also includes the exclude tags so filters form a union.
+     * @returns {string} An string of the facets grouped by facet for when multiple facets values (fields) of the same facet are selected. Also includes the exclude tags so filters form a union.
      */
     function groupSelectedFacets() {
 
-      var facetGroups = {};
-      var facetKey;
-      var facetVal;
-      var groupedFacets = [];
-      var groupedFacetString;
+      var groupedFacetString = '';
+      var selectedFacets = getSelectedFacets();
 
-      getSelectedFacets().forEach(function(selectedFacet) {
-        facetKey = selectedFacet.split(':')[0];
-        facetVal = selectedFacet.split(':')[1];
+      if (selectedFacets.length > 0) {
+        var selectedFacetValues = selectedFacets.map(function(selectedFacet) {
+          return selectedFacet.split(':')[1];
+        }).join(' ');
 
-        if (facetKey === 'domain' || facetKey === 'externalStandard' || facetKey === 'otherNamespace') {
-          if (facetGroups['namespace']) {
-            facetGroups['namespace'] = facetGroups['namespace'].concat(' ').concat(facetVal);
-          } else {
-            facetGroups['namespace'] = facetVal;
-          }
-        } else {
-          if (facetGroups[facetKey]) {
-            facetGroups[facetKey] = facetGroups[facetKey].concat(' ').concat(facetVal);
-          } else {
-            facetGroups[facetKey] = facetVal;
-          }
-        }
+        groupedFacetString = '{!tag=domaintag,otherNamespacetag,externalStandardtag}namespace:(' + selectedFacetValues + ')';
+      }
 
-      });
-
-      Object.keys(facetGroups).forEach(function(key) {
-        // Combine the exclude tag for all namespace types
-        if (key === 'namespace') {
-          groupedFacetString = '{!tag=domaintag,otherNamespacetag,externalStandardtag}namespace:(' + facetGroups[key] + ')';
-        } else {
-          groupedFacetString = '{!tag=' + key + 'tag}' + key + ':(' + facetGroups[key] + ')';
-        }
-        groupedFacets.push(groupedFacetString);
-      });
-      return groupedFacets;
+      return groupedFacetString;
     }
 
 
