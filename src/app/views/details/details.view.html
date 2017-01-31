@@ -7,12 +7,7 @@
       "{{query}}"</a>
 
     <div class="details-heading">
-      <h1>{{DetailsCtrl.entity.name}}
-        <img class="details-heading-img" src="images/icon_e_white.svg"
-             ng-if="DetailsCtrl.entity.entityType === 'Element'"/>
-        <img class="details-heading-img" src="images/icon_t_white.svg"
-             ng-if="!(DetailsCtrl.entity.entityType === 'Element')"/>
-      </h1>
+      <h1>{{DetailsCtrl.entity.name}}</h1>
       <div class="namespace text-uppercase">{{DetailsCtrl.transformNamespaceText(DetailsCtrl.entity.namespaceType)}}: {{DetailsCtrl.entity.namespace}}</div>
     </div>
 
