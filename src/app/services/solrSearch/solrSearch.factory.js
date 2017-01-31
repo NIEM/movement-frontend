@@ -20,7 +20,6 @@
     var numFound;
 
     var facets = {
-      'entityType': {},
       'domain': {},
       'externalStandard': {},
       'otherNamespace': {}
