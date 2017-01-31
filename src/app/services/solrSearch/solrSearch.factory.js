@@ -168,13 +168,13 @@
      *
      * @memberof dhsniem.service:solrSearch
      *
-     * @description Loops through the selected facets and groups the same facet values under the same facet name. Adds the exclude tag to make the array ready for the solr search param, fq. Modified from Release 1 to now only account for once facet group: namespace.
+     * @description Loops through the selected facets and groups the same facet values under the same facet name. Adds the exclude tag to make the array ready for the solr search param, fq. Modified from Release 1 to now only account for once facet group: namespace. Static fq applied to only include business glossary (bg) terms.
      *
-     * @returns {string} An string of the facets grouped by facet for when multiple facets values (fields) of the same facet are selected. Also includes the exclude tags so filters form a union.
+     * @returns {string[]} A array of strings of the facets grouped by facet for when multiple facets values (fields) of the same facet are selected. Also includes the exclude tags so filters form a union.
      */
     function groupSelectedFacets() {
 
-      var groupedFacetString = '';
+      var groupedFacets = ['isBG:(1)']; // Hard-coded to always only include BG terms. While we could put this as part of the query param, it is more efficient to use in fq.
       var selectedFacets = getSelectedFacets();
 
       if (selectedFacets.length > 0) {
@@ -182,10 +182,10 @@
           return selectedFacet.split(':')[1];
         }).join(' ');
 
-        groupedFacetString = '{!tag=domaintag,otherNamespacetag,externalStandardtag}namespace:(' + selectedFacetValues + ')';
+        groupedFacets.push('{!tag=domaintag,otherNamespacetag,externalStandardtag}namespace:(' + selectedFacetValues + ')');
       }
 
-      return groupedFacetString;
+      return groupedFacets;
     }
 
 
