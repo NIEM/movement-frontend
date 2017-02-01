@@ -30,52 +30,54 @@
 
       var id = $location.search().entityID;
       var query = 'id:' + id.split(':')[0] + '\\:' + id.split(':')[1];
+
       vm.getElementObjects = getElementObjects;
       vm.transformNamespaceText = transformNamespaceText;
 
 
 
       solrRequest.makeSolrRequest(getSearchParams(query)).then(function (data) {
+
+        // Current entity is first (and should be only) item returned
         vm.entity = data.response.docs[0];
+        
         $window.document.title = vm.entity.name + ' - CCP Details';
-        if (!!vm.entity.facets) {
-          var newFacets = vm.entity.facets;
-          vm.entity.facets = [];
-          for (var i = 0; i < newFacets.length; i++) {
-            var data = JSON.parse(newFacets[i]);
 
-            //if data is an array, use regular for loop
+        
+        // if (!!vm.entity.facets) {
+        //   var newFacets = vm.entity.facets;
+        //   vm.entity.facets = [];
+        //   for (var i = 0; i < newFacets.length; i++) {
+        //     var data = JSON.parse(newFacets[i]);
 
-            var fieldDataArray;
-            var lastValue;
-            //if data is an object, use for-in loop
-            if (typeof(data) === 'object') {
+        //     //if data is an array, use regular for loop
 
-              for (var facet in data) {
+        //     var fieldDataArray;
+        //     var lastValue;
+        //     //if data is an object, use for-in loop
+        //     if (typeof(data) === 'object') {
 
-                for (var fieldName in data[facet]) {
+        //       for (var facet in data) {
 
-                  fieldDataArray = data[facet][fieldName].split(',');
-                  lastValue = fieldDataArray[fieldDataArray.length - 1];
+        //         for (var fieldName in data[facet]) {
 
-                  //trim off brackets from original string, as well as unneccesary whitespace
-                  fieldDataArray[0] = fieldDataArray[0].substring(1);
-                  fieldDataArray[fieldDataArray.length - 1] = lastValue.substring(0, lastValue.length - 1);
-                  data[facet][fieldName] = fieldDataArray;
-                }
-                vm.entity.facets.push({
-                  name: facet,
-                  data: data[facet]
-                });
+        //           fieldDataArray = data[facet][fieldName].split(',');
+        //           lastValue = fieldDataArray[fieldDataArray.length - 1];
 
-              }
-            }
-          }
-        } else if (vm.entity.entityType === 'Element') {
-          getContainingTypes();
-        } else {
-          getElementsofType(vm.entity);
-        }
+        //           //trim off brackets from original string, as well as unneccesary whitespace
+        //           fieldDataArray[0] = fieldDataArray[0].substring(1);
+        //           fieldDataArray[fieldDataArray.length - 1] = lastValue.substring(0, lastValue.length - 1);
+        //           data[facet][fieldName] = fieldDataArray;
+        //         }
+        //         vm.entity.facets.push({
+        //           name: facet,
+        //           data: data[facet]
+        //         });
+
+        //       }
+        //     }
+        //   }
+        // }
 
       });
 
@@ -87,7 +89,7 @@
      *
      * @memberOf dhsniem.controller:DetailsCtrl
      *
-     * @description transform the Namespace type returned into readadble text
+     * @description transform the Namespace type returned into readable text
      *
      * @param text - String representing the type of Namespace
      *

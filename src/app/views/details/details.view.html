@@ -49,15 +49,11 @@
 
       <div class="contain-list" ng-if="!DetailsCtrl.entity.facets">
 
-        <div ng-if="DetailsCtrl.entity.entityType === 'Type'">
-          <div ng-if="!DetailsCtrl.entity.elements" class="has-none">
-            <h3>{{DetailsCtrl.entity.name}} does not contain any entities.</h3>
-          </div>
+<!--         <div ng-if="!DetailsCtrl.entity.elements" class="has-none">
+          <h3>{{DetailsCtrl.entity.name}} does not contain any entities.</h3>
+        </div> -->
 
-          <niem-accordion data="DetailsCtrl.entity" entity-type="DetailsCtrl.entity.entityType" title="'Contains'" click-handler="DetailsCtrl.getElementObjects" ng-if="!!DetailsCtrl.entity.elements && DetailsCtrl.entity.elements.length > 0"></niem-accordion>
-
-        </div>
-
+        <niem-accordion data="DetailsCtrl.entity" entity-type="DetailsCtrl.entity.entityType" title="DetailsCtrl.entity.name" click-handler="DetailsCtrl.getElementObjects" ng-if="!!DetailsCtrl.entity.elements && DetailsCtrl.entity.elements.length > 0"></niem-accordion>
 
       </div>
     </div>
