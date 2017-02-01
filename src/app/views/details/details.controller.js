@@ -31,19 +31,9 @@
       var id = $location.search().entityID;
       var query = 'id:' + id.split(':')[0] + '\\:' + id.split(':')[1];
       vm.getElementObjects = getElementObjects;
-      vm.closePopover = closePopover;
       vm.transformNamespaceText = transformNamespaceText;
 
-      vm.popovers = {
-        'simple-content-type': {
-          'popoverIsOpen': false,
-          'popoverTemplateUrl': 'app/views/details/simpleContentTypePopoverTemplate.html'
-        },
-        'base-type': {
-          'popoverIsOpen': false,
-          'popoverTemplateUrl': 'app/views/details/baseTypePopoverTemplate.html'
-        }
-      };
+
 
       solrRequest.makeSolrRequest(getSearchParams(query)).then(function (data) {
         vm.entity = data.response.docs[0];
@@ -104,49 +94,14 @@
      * @returns {string}
      */
     function transformNamespaceText(text) {
-      var transformedText = '';
-      switch (text) {
-        case 'domain':
-          transformedText = 'Domain';
-          break;
-        case 'otherNamespace':
-          transformedText = 'Other';
-          break;
-        case 'externalStandard':
-          transformedText = 'External Standard';
-          break;
-        default:
-          break;
-      }
-      return transformedText;
-    }
 
-    /**
-     * @name closePopover
-     *
-     * @memberOf dhsniem.controller:DetailsCtrl
-     *
-     * @description Updates the tooltip's popoverIsOpen variable in order to close the tooltip when 'X' is clicked
-     *
-     * @param type - String
-     */
-    function closePopover(type) {
-      vm.popovers[type].popoverIsOpen = false;
-    }
+      var nsMapping = {
+        'domain': 'Domain',
+        'otherNamespace': 'Other',
+        'externalStandard': 'External Standard'
+      };
 
-    /**
-     * @name getContainingTypes
-     *
-     * @memberof dhsniem.controller:DetailsCtrl
-     *
-     * @description Retrieves the containing type documents for an element
-     */
-    function getContainingTypes() {
-      var id = $location.search().entityID;
-      var query = 'elements:' + id.split(':')[0] + '\\:' + id.split(':')[1];
-      solrRequest.makeSolrRequest(getSearchParams(query)).then(function (data) {
-        vm.containingTypes = data.response.docs;
-      });
+      return nsMapping[text];
     }
 
 
