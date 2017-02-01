@@ -14,7 +14,7 @@
     .module('dhsniem')
     .controller('DetailsCtrl', DetailsCtrl);
 
-  function DetailsCtrl(solrRequest, $location, $window) {
+  function DetailsCtrl(solrRequest, $location, $window, $q) {
 
     var vm = this;
 
@@ -32,10 +32,15 @@
       vm.getElementObjects = getElementObjects;
 
       solrRequest.makeSolrRequest(getSearchParams(query)).then(function (data) {
-
         vm.entity = data.response.docs[0];
         vm.formattedNamespaceType = formatNamespaceType(vm.entity.namespaceType);
-        getTypeObject(vm.entity);
+
+        getTypeObject(vm.entity).then(function (data) {
+          vm.entity.type = data;
+          if (data.elements) {
+            getElementObjects(vm.entity.type);
+          }
+        });
         
         $window.document.title = vm.entity.name + ' - CCP Details';
       });
@@ -80,11 +85,12 @@
           arr[index] = data.response.docs[0];
 
           if (arr[index].type) {
-            getTypeObject(arr[index]);
+            getTypeObject(arr[index]).then(function (data) {
+              arr[index].type = data;
+            });
           } else {
             arr[index].type = 'abstract';
           }
-          arr[index].element = element; //preserves the original string
         });
       });
     }
@@ -100,10 +106,14 @@
      * @param element
      */
     function getTypeObject(element) {
+      var deferred = $q.defer();
       var query = 'name:' + element.type.split(':')[1];
+
       solrRequest.makeSolrRequest(getSearchParams(query)).then(function (data) {
-        element.type = data.response.docs[0];
+        deferred.resolve(data.response.docs[0]);
       });
+
+      return deferred.promise;
     }
 
 

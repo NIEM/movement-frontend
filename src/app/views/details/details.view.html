@@ -3,49 +3,83 @@
 
   <section class="content">
     <div class="details-content">
-    <a ng-click="DetailsCtrl.goBack()" class="back-link" ng-show="query">&#060; Back to search results for "{{query}}"</a>
+      <a ng-click="DetailsCtrl.goBack()" class="back-link" ng-show="query">&#060; Back to search results for "{{query}}"</a>
 
-    <div class="details-heading">
-      <h1>{{DetailsCtrl.entity.name}}</h1>
-      <div class="namespace text-uppercase">{{DetailsCtrl.formattedNamespaceType}}: {{DetailsCtrl.entity.namespace}}</div>
-    </div>
-
-    <div class="details-info row">
-      <div class="details-info-col" ng-if="!!DetailsCtrl.entity.definition">
-        <div class="details-info-content">
-          <div class="symbol-div definition-img">
-            <img src="images/ic_definition.svg" alt="Definition symbol">
-          </div>
-          <div class="details-text">
-            <h3>Definition</h3>
-            <p>{{DetailsCtrl.entity.definition}}</p>
-          </div>
-        </div>
+      <div class="details-heading">
+        <h1>{{DetailsCtrl.entity.name}}</h1>
+        <div class="namespace text-uppercase">{{DetailsCtrl.formattedNamespaceType}}: {{DetailsCtrl.entity.namespace}}</div>
       </div>
-      <div class="details-info-col">
-        <div class="details-info-content" ng-if="DetailsCtrl.entity.type">
-          <div class="auto-height">
-            <div class="symbol-div simple-type-img">
-              <img src="images/ic-typeofproperty.svg" alt="Type of Property symbol">
+
+      <div class="details-info row">
+        <div class="details-info-col" ng-if="!!DetailsCtrl.entity.definition">
+          <div class="details-info-content">
+            <div class="symbol-div definition-img">
+              <img src="images/ic_definition.svg" alt="Definition symbol">
             </div>
             <div class="details-text">
-              <h3>Type of Property</h3>
-              <p>{{DetailsCtrl.entity.type.name}}</p>
+              <h3>Definition</h3>
+              <p>{{DetailsCtrl.entity.definition}}</p>
+            </div>
+          </div>
+        </div>
+        <div class="details-info-col">
+          <div class="details-info-content" ng-if="DetailsCtrl.entity.type">
+            <div class="auto-height">
+              <div class="symbol-div simple-type-img">
+                <img src="images/ic-typeofproperty.svg" alt="Type of Property symbol">
+              </div>
+              <div class="details-text">
+                <h3>Type of Property</h3>
+                <p>{{DetailsCtrl.entity.type.name}}</p>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
 
+      <div class="details-desc">
+        <div class="contain-list">
 
-    <div class="details-desc">
-      <div class="contain-list">
-        <niem-accordion ng-if="DetailsCtrl.entity.type" data="DetailsCtrl.entity.type" entity-type="DetailsCtrl.entity.entityType" title="DetailsCtrl.entity.name" click-handler="DetailsCtrl.getElementObjects"></niem-accordion>
+          <div class="niem-accordion">
+            <div class="niem-accordion-heading">
+              <h2>
+                <span class="contain-title">{{DetailsCtrl.entity.name}}
+                <span ng-if="DetailsCtrl.entity.type">({{DetailsCtrl.entity.type.namespacePrefix}}:{{DetailsCtrl.entity.type.name}})</span>
+                <span ng-if="!DetailsCtrl.entity.type">(abstract)</span>
+                </span>
+              </h2>
+            </div>
 
-        <div ng-if="!DetailsCtrl.entity.type.elements" class="has-none">
-          <h3>{{DetailsCtrl.entity.name}} does not contain any child elements.</h3>
+            <div ng-if="!DetailsCtrl.entity.type.elements" class="has-none">
+              <h3>{{DetailsCtrl.entity.name}} does not contain any child elements.</h3>
+            </div>
+
+            <div class="niem-accordion-list">
+              <div ng-repeat="item in DetailsCtrl.entity.type.elements">
+
+                <div class="niem-accordion-item" ng-if="!item.type.elements">
+                  <span class="item-name">
+                    <a ui-sref="main.details({ entityID: item.id })">{{item.name}}</a>
+                  </span>
+                  <span class="item-type" ng-if="!!item.type.name">({{item.type.name}})</span>
+                  <span class="item-type" ng-if="item.type === 'abstract'">({{item.type}})</span>
+                </div>
+
+                <div ng-if="!!item.type.elements">
+                  <niem-child-accordion element-data="item" click-handler="DetailsCtrl.getElementObjects"></niem-child-accordion>
+                </div>
+
+              </div>
+
+            </div>
+          </div>
         </div>
       </div>
+
+
+
+
+
     </div>
   </section>
 
