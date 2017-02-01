@@ -29,8 +29,29 @@
      */
     function link(scope, element, attrs) {
 
-      scope.searchQuery = $location.search().q;
-      scope.selectedDomain = 'All Domains';
+      function init () {
+        scope.searchQuery = $location.search().q;
+        scope.selectedDomain = 'All Domains';
+        getFacets();
+      }
+
+      init();
+
+      /**
+       * @name getFacets
+       *
+       * @description Gets a list of domain names for the domain dropdown, and stores them for reuse.
+       */
+      function getFacets() {
+        if (!$rootScope.rootDomain) {
+          solrSearch.getFacetName().then(function(data) {
+            $rootScope.rootDomain = Object.keys(data.domain);
+            scope.domainNames = $rootScope.rootDomain;
+          });
+        } else if ($rootScope.rootDomain && !scope.hasLabel) {
+          scope.domainNames = $rootScope.rootDomain;
+        }
+      }
 
 
       /**

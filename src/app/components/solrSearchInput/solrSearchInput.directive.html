@@ -7,9 +7,7 @@
         </button>
         <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
           <li role="menuitem"><a href="#" ng-click="domainSelect('All Domains')">All Domains</a></li>
-          <li role="menuitem"><a href="#" ng-click="domainSelect('Biometrics')">Biometrics</a></li>
-          <li role="menuitem"><a href="#" ng-click="domainSelect('Chemical, Biological, Radiological, Nuclear')">Chemical, Biological, Radiological, Nuclear</a></li>
-          <li role="menuitem"><a href="#" ng-click="domainSelect('Justice')">Justice</a></li>
+          <li role="menuitem" ng-repeat="domain in domainNames | orderBy:sortByName"><a href="#" ng-click="domainSelect(domain)">{{domain}}</a></li>
         </ul>
       </div>
       <label for="solr-search-input" ng-show="!!hasLabel && hasLabel">Search Model</label>
