@@ -30,35 +30,67 @@
     function link(scope, element, attrs) {
 
       scope.searchQuery = $location.search().q;
+      scope.selectedDomain = 'All Domains';
+
+
+      /**
+       * @name domainSelect
+       *
+       * @description Sets the domain name in the domain search dropdown.
+       *
+       * @param domain - A parameter passed from the view that indicates the intended domain for search.
+       */
+      scope.domainSelect = function(domain) {
+        scope.selectedDomain = domain;
+      };
+
 
       /**
        * @name search
        *
-       * @description Handles logic to determine the query and selected facet (namespace) to send to solr to make a full search and navigate the user to the results page.
+       * @description Handles logic to determine the query to send to solr to make a full search and navigate the user to the results page.
        *
        * @param taItem - An optional parameter used if the user clicks on an item in the typeahead suggested terms.
        */
       scope.search = function search(taItem) {
 
-        var namespaceParam = '';
-
-        if (taItem && taItem.taNS) {
-          scope.searchQuery = taItem.query;
-          if (taItem.taNS !== 'all') {
-            namespaceParam = taItem.taNSType + ':"' + taItem.taNS + '"';
-          }
-        }
+        scope.setNamespace(taItem);
 
         var query = scope.searchQuery || '*';
         $rootScope.query = query;
 
         if (!$state.includes('main.results')) {
-          $state.go('main.results', {q: query, selectedFacets: namespaceParam});
+          $state.go('main.results', {q: query, selectedFacets: scope.namespaceParam});
         } else {
           $location.search('q', query);
-          solrSearch.clearAllFilters(namespaceParam);
+          solrSearch.clearAllFilters(scope.namespaceParam);
         }
+      };
 
+
+      /**
+       * @name setNamespace
+       *
+       * @description Handles logic to determine the selected facet (namespace) that will be used as a parameter in the search function.
+       *
+       * @param taItem - An optional parameter passed from the search function and used if the user clicks on an item in the typeahead suggested terms.
+       */
+      scope.setNamespace = function setTaNS(taItem) {
+
+        if (taItem && taItem.taNS) {
+          scope.searchQuery = taItem.query;
+          if (taItem.taNS !== 'all') {
+            scope.namespaceParam = taItem.taNSType + ':"' + taItem.taNS + '"';
+          }
+        } else {
+          if (scope.selectedDomain !== 'All Domains') {
+            var taNSparams = {'taNSType': 'domain', 'taNS': scope.selectedDomain};
+            scope.namespaceParam = taNSparams.taNSType + ':"' + taNSparams.taNS + '"';
+          }
+          else {
+            scope.namespaceParam = undefined;
+          }
+        }
       };
 
 
@@ -81,13 +113,16 @@
           'json.nl': 'map'
         };
 
-        var domainArray = [{'name': query + ' in All Domains', 'taNS': 'all', 'query': query}, {'name': query + ' in NIEM Core', 'taNS': 'Core', 'query': query, 'taNSType': 'domain'}];
-
         return solrRequest.makeSolrRequest(params).then(function(data) {
           if (data.response.docs.length > 0) {
             var topNamespace = data.response.docs[0].namespace;
             var topNamespaceType = data.response.docs[0].namespaceType;
-            domainArray.push({'name': query + ' in ' + topNamespace, 'taNS': topNamespace, 'query': query, 'taNSType': topNamespaceType});
+            if (scope.selectedDomain == 'All Domains') {
+              var domainArray = [{'name': query + ' in All Domains', 'taNS': 'all', 'query': query}, {'name': query + ' in NIEM Core', 'taNS': 'Core', 'query': query, 'taNSType': 'domain'}];
+              domainArray.push({'name': query + ' in ' + topNamespace, 'taNS': topNamespace, 'query': query, 'taNSType': topNamespaceType});
+            } else {
+              var domainArray = [{'name': query + ' in ' + scope.selectedDomain, 'taNS': scope.selectedDomain, 'query': query, 'taNSType': 'domain'}];
+            }
             return domainArray.concat(data.response.docs);
           }
         });
