@@ -13,7 +13,7 @@
 
   <div class="niem-accordion-list" ng-show="isOpen">
     <div ng-repeat="currElement in elementData.type.elements">
-      <div class="niem-accordion-item" ng-if="!currElement.type.elements" ng-class="{'currently-selected': currElement.name === selectedEntityName}">
+      <div class="niem-accordion-item" ng-if="!currElement.type.elements">
         <span class="item-name">
           <a ui-sref="main.details({ entityID: currElement.id })">{{currElement.name}}</a>
         </span>

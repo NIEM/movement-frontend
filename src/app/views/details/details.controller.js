@@ -18,7 +18,6 @@
 
     var vm = this;
 
-
     /**
      * @name init
      *
@@ -27,33 +26,24 @@
      * @description Initializes controller, retrieves data for the specific entity
      */
     function init() {
-
       var id = $location.search().entityID;
       var query = 'id:' + id.split(':')[0] + '\\:' + id.split(':')[1];
 
       vm.getElementObjects = getElementObjects;
-      vm.transformNamespaceText = transformNamespaceText;
-      vm.getTypeObject = getTypeObject;
-
 
       solrRequest.makeSolrRequest(getSearchParams(query)).then(function (data) {
 
-        // Current entity is first (and should be only) item returned
         vm.entity = data.response.docs[0];
+        vm.formattedNamespaceType = formatNamespaceType(vm.entity.namespaceType);
+        vm.getTypeObject(vm.entity);
         
         $window.document.title = vm.entity.name + ' - CCP Details';
-
-        // convert type property string to object
-        vm.getTypeObject(vm.entity);
-        console.log('new vm entity', vm.entity);
-
       });
-
     }
 
 
     /**
-     * @name transformNamespaceText
+     * @name formatNamespaceType
      *
      * @memberOf dhsniem.controller:DetailsCtrl
      *
@@ -63,15 +53,14 @@
      *
      * @returns {string}
      */
-    function transformNamespaceText(text) {
-
-      var nsMapping = {
+    function formatNamespaceType(namespaceType) {
+      var mapping = {
         'domain': 'Domain',
         'otherNamespace': 'Other',
         'externalStandard': 'External Standard'
       };
 
-      return nsMapping[text];
+      return mapping[namespaceType];
     }
 
 
