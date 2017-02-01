@@ -149,32 +149,6 @@
 
 
     /**
-     * @name getElementsOfType
-     *
-     * @memberof dhsniem.controller:DetailsCtrl
-     *
-     * @description Returns the Element docs that are of a certain type and sets each one's type to the full type object. Sets the tree on vm.propertiesOfType.
-     *
-     * @param type
-     *
-     * @example If vm.entity.entityType === 'Type' (and more specifically ComplexType), then call getElementsOfType(vm.entity);
-     */
-    function getElementsofType(type) {
-      var query = 'type:*' + type.name;
-      solrRequest.makeSolrRequest(getSearchParams(query)).then(function (data) {
-        vm.propertiesOfType = data.response.docs;
-        vm.propertiesOfType.forEach(function (element) {
-          if (element.type) {
-            getTypeObject(element);
-          } else {
-            element.type = 'abstract';
-          }
-        });
-      });
-    }
-
-
-    /**
      * @name getSearchParams
      *
      * @memberof dhsniem.controller:DetailsCtrl
