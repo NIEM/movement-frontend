@@ -21,7 +21,6 @@
       scope: {
         treeLevel: '=',
         elementData: '=',
-        entityType: '=',
         clickHandler: '='
       },
       link: function(scope, element) {

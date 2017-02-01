@@ -21,9 +21,7 @@
       scope: {
         data: '=',
         title: '=',
-        clickHandler: '=',
-        entityType: '=',
-        isProperties: '='
+        clickHandler: '='
       },
       link: function (scope, element) {
         scope.isOpen = false;
@@ -39,26 +37,11 @@
           if (scope.isOpen && scope.dataFound === false) {
             scope.dataFound = true;
             if (!!scope.data) {
-              if (scope.entityType === 'Element') {
-                scope.clickHandler(scope.data);
-              } else {
-                //for Type Contains
-                if (scope.isProperties === true) {
-                  //for Type Properties
-                  for (var i = 0; i < scope.data.length; i++) {
-                    if (!!scope.data[i].type.elements) {
-                      scope.clickHandler(scope.data[i].type);
-                    }
-                  }
-                } else {
-                  if (!!scope.data.elements) {
-                    scope.clickHandler(scope.data);
-                  }
-                }
-              }
+              scope.clickHandler(scope.data);
             }
           }
         };
+
       }
     };
   }

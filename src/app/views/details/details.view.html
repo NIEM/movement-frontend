@@ -3,8 +3,7 @@
 
   <section class="content">
     <div class="details-content">
-    <a ng-click="DetailsCtrl.goBack()" class="back-link" ng-show="query">&#060; Back to search results for
-      "{{query}}"</a>
+    <a ng-click="DetailsCtrl.goBack()" class="back-link" ng-show="query">&#060; Back to search results for "{{query}}"</a>
 
     <div class="details-heading">
       <h1>{{DetailsCtrl.entity.name}}</h1>
@@ -12,7 +11,6 @@
     </div>
 
     <div class="details-info row">
-      
       <div class="details-info-col" ng-if="!!DetailsCtrl.entity.definition">
         <div class="details-info-content">
           <div class="symbol-div definition-img">
@@ -24,7 +22,6 @@
           </div>
         </div>
       </div>
-
       <div class="details-info-col">
         <div class="details-info-content" ng-if="DetailsCtrl.entity.type">
           <div class="auto-height">
@@ -38,23 +35,17 @@
           </div>
         </div>
       </div>
-
     </div>
 
 
     <div class="details-desc">
-
-
-      <div class="contain-list" ng-if="!DetailsCtrl.entity.facets">
+      <div class="contain-list">
+        <niem-accordion ng-if="DetailsCtrl.entity.type" data="DetailsCtrl.entity.type" entity-type="DetailsCtrl.entity.entityType" title="DetailsCtrl.entity.name" click-handler="DetailsCtrl.getElementObjects"></niem-accordion>
 
         <div ng-if="!DetailsCtrl.entity.type.elements" class="has-none">
           <h3>{{DetailsCtrl.entity.name}} does not contain any child elements.</h3>
         </div>
-
-        <niem-accordion data="DetailsCtrl.entity.type" entity-type="DetailsCtrl.entity.entityType" title="DetailsCtrl.entity.name" click-handler="DetailsCtrl.getElementObjects" ng-if="DetailsCtrl.entity.type"></niem-accordion>
-
       </div>
-    </div>
     </div>
   </section>
 

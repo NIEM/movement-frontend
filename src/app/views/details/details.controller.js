@@ -35,7 +35,7 @@
 
         vm.entity = data.response.docs[0];
         vm.formattedNamespaceType = formatNamespaceType(vm.entity.namespaceType);
-        vm.getTypeObject(vm.entity);
+        getTypeObject(vm.entity);
         
         $window.document.title = vm.entity.name + ' - CCP Details';
       });
