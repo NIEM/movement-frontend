@@ -97,7 +97,7 @@
       /**
        * @name getTypeaheadResults
        *
-       * @description Returns the top five results, if they exist, for when the typeahead functionality is triggered in the search bar. For each result, the object contains the solr object if it is a natural result from solr. Otherwise, returns a custom object that is hard-coded for the first three results displayed in typeahead.
+       * @description Returns the top five results, if they exist, for when the typeahead functionality is triggered in the search bar. For each result, the object contains the solr object if it is a natural result from solr. Otherwise, when domain is not specified in the dropdown, returns a custom object that is hard-coded for the first three results displayed in typeahead.
        *
        * @param query - the query of the typeahead search
        *
@@ -105,12 +105,19 @@
        */
       scope.getTypeaheadResults = function(query) {
 
+        if (scope.selectedDomain == 'All Domains') {
+          var facet = undefined;
+        } else {
+          var facet = '{!tag=domaintag,otherNamespacetag,externalStandardtag}namespace:("' + scope.selectedDomain + '")';
+        }
+
         var params = {
           'q': 'name:*' + query + '*',
           'rows': 5,
           'wt': 'json',
           'json.wrf': 'JSON_CALLBACK',
-          'json.nl': 'map'
+          'json.nl': 'map',
+          'fq': facet
         };
 
         return solrRequest.makeSolrRequest(params).then(function(data) {
