@@ -33,7 +33,7 @@
             </div>
             <div class="details-text">
               <h3>Type of Property</h3>
-              <p>{{DetailsCtrl.entity.type}}</p>
+              <p>{{DetailsCtrl.entity.type.name}}</p>
             </div>
           </div>
         </div>
@@ -43,19 +43,15 @@
 
 
     <div class="details-desc">
-<!--       <div ng-if="!!DetailsCtrl.entity.facets">
-        <facet-details data="DetailsCtrl.entity.facets"></facet-details>
-      </div> -->
+
 
       <div class="contain-list" ng-if="!DetailsCtrl.entity.facets">
 
-<!--         <div ng-if="!DetailsCtrl.entity.elements" class="has-none">
-          <h3>{{DetailsCtrl.entity.name}} does not contain any entities.</h3>
-        </div> -->
+        <div ng-if="!DetailsCtrl.entity.type.elements" class="has-none">
+          <h3>{{DetailsCtrl.entity.name}} does not contain any child elements.</h3>
+        </div>
 
-        <niem-accordion data="DetailsCtrl.entity.type" entity-type="DetailsCtrl.entity.entityType" title="DetailsCtrl.entity.name" click-handler="DetailsCtrl.getElementObjects(DetailsCtrl.getTypeObject(DetailsCtrl.entity.type))" ng-if="DetailsCtrl.entity.type"></niem-accordion>
-        <!-- <niem-accordion data="DetailsCtrl.entity.type" entity-type="DetailsCtrl.entity.entityType" title="DetailsCtrl.entity.name" click-handler="DetailsCtrl.getElementObjects" ng-if="!!DetailsCtrl.entity.elements && DetailsCtrl.entity.elements.length > 0"></niem-accordion> -->
-
+        <niem-accordion data="DetailsCtrl.entity.type" entity-type="DetailsCtrl.entity.entityType" title="DetailsCtrl.entity.name" click-handler="DetailsCtrl.getElementObjects" ng-if="DetailsCtrl.entity.type"></niem-accordion>
 
       </div>
     </div>

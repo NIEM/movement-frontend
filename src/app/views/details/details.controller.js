@@ -36,7 +36,6 @@
       vm.getTypeObject = getTypeObject;
 
 
-
       solrRequest.makeSolrRequest(getSearchParams(query)).then(function (data) {
 
         // Current entity is first (and should be only) item returned
@@ -44,41 +43,9 @@
         
         $window.document.title = vm.entity.name + ' - CCP Details';
 
-        
-        // if (!!vm.entity.facets) {
-        //   var newFacets = vm.entity.facets;
-        //   vm.entity.facets = [];
-        //   for (var i = 0; i < newFacets.length; i++) {
-        //     var data = JSON.parse(newFacets[i]);
-
-        //     //if data is an array, use regular for loop
-
-        //     var fieldDataArray;
-        //     var lastValue;
-        //     //if data is an object, use for-in loop
-        //     if (typeof(data) === 'object') {
-
-        //       for (var facet in data) {
-
-        //         for (var fieldName in data[facet]) {
-
-        //           fieldDataArray = data[facet][fieldName].split(',');
-        //           lastValue = fieldDataArray[fieldDataArray.length - 1];
-
-        //           //trim off brackets from original string, as well as unneccesary whitespace
-        //           fieldDataArray[0] = fieldDataArray[0].substring(1);
-        //           fieldDataArray[fieldDataArray.length - 1] = lastValue.substring(0, lastValue.length - 1);
-        //           data[facet][fieldName] = fieldDataArray;
-        //         }
-        //         vm.entity.facets.push({
-        //           name: facet,
-        //           data: data[facet]
-        //         });
-
-        //       }
-        //     }
-        //   }
-        // }
+        // convert type property string to object
+        vm.getTypeObject(vm.entity);
+        console.log('new vm entity', vm.entity);
 
       });
 
