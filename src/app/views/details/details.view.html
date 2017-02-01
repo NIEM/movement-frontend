@@ -53,7 +53,9 @@
           <h3>{{DetailsCtrl.entity.name}} does not contain any entities.</h3>
         </div> -->
 
-        <niem-accordion data="DetailsCtrl.entity" entity-type="DetailsCtrl.entity.entityType" title="DetailsCtrl.entity.name" click-handler="DetailsCtrl.getElementObjects" ng-if="!!DetailsCtrl.entity.elements && DetailsCtrl.entity.elements.length > 0"></niem-accordion>
+        <niem-accordion data="DetailsCtrl.entity.type" entity-type="DetailsCtrl.entity.entityType" title="DetailsCtrl.entity.name" click-handler="DetailsCtrl.getElementObjects(DetailsCtrl.getTypeObject(DetailsCtrl.entity.type))" ng-if="DetailsCtrl.entity.type"></niem-accordion>
+        <!-- <niem-accordion data="DetailsCtrl.entity.type" entity-type="DetailsCtrl.entity.entityType" title="DetailsCtrl.entity.name" click-handler="DetailsCtrl.getElementObjects" ng-if="!!DetailsCtrl.entity.elements && DetailsCtrl.entity.elements.length > 0"></niem-accordion> -->
+
 
       </div>
     </div>

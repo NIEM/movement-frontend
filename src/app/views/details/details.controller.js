@@ -33,6 +33,7 @@
 
       vm.getElementObjects = getElementObjects;
       vm.transformNamespaceText = transformNamespaceText;
+      vm.getTypeObject = getTypeObject;
 
 
 

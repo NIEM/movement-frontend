@@ -24,38 +24,6 @@
         </div>
       </div>
 
-      <div ng-if="nextLevel >= 3">
-        <div class="niem-accordion-item" ng-if="!elementData.type.elements[0].type.elements" ng-class="{'currently-selected': elementData.type.elements[0].name === selectedEntityName}">
-          <span class="item-name">
-            <span class="item-name">
-              <a ui-sref="main.details({ entityID: elementData.id })">{{elementData.type.elements[0].name}}</a>
-            </span>
-          </span>
-          <span class="item-type" ng-if="!!elementData.type.elements[0].type.name">({{elementData.type.elements[0].type.name}})</span>
-          <span class="item-type" ng-if="elementData.type.elements[0].type === 'abstract'">({{elementData.type.elements[0].type}})</span> </div>
-        <div ng-if="!!elementData.type.elements[0].type.elements">
-          <niem-child-accordion tree-level="nextLevel" element-data="elementData.type.elements[0].type.elements[$index]" click-handler="clickHandler" entity-type="entityType"></niem-child-accordion>
-        </div>
-        <div class="niem-accordion-item additional-elements-link text-uppercase text-right" ng-click="showMore()" ng-if="elementData.type.elements.length > 1">
-          Show additional elements in "{{elementData.name}}"
-        </div>
-        <div ng-show="seeMore">
-          <div ng-repeat="currElement in elementData.type.elements">
-            <div ng-if="$index > 0">
-              <div class="niem-accordion-item" ng-if="!currElement.type.elements" ng-class="{'currently-selected': currElement.name === selectedEntityName}">
-                <span class="item-name">
-                  <a ui-sref="main.details({ entityID: currElement.id })">{{currElement.name}}</a>
-                </span>
-                <span class="item-type" ng-if="!!currElement.type.name">({{currElement.type.name}})</span>
-                <span class="item-type" ng-if="currElement.type === 'abstract'">({{currElement.type}})</span>
-              </div>
-              <div ng-if="!!currElement.type.elements">
-                <niem-child-accordion tree-level="nextLevel" element-data="elementData.type.elements[$index]" click-handler="clickHandler" entity-type="entityType"></niem-child-accordion>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
   </div>
 

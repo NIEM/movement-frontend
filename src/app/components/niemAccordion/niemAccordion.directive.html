@@ -10,6 +10,7 @@
   </div>
 
   <div class="niem-accordion-list" ng-if="isOpen">
+    
     <div ng-repeat="element in data.elements" ng-if="entityType === 'Element'">
       <div class="niem-accordion-item" ng-if="!element.type.elements">
         <span class="item-name">
