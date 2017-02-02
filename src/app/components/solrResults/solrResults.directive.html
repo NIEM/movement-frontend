@@ -54,13 +54,7 @@
               <p class="item-description">{{doc.definition}}</p>
               <p class="item-namespace">{{namespaceTypes[doc.namespaceType]}}: {{doc.namespace}}</p>
             </div>
-            <div class="result-content item-button">
-              <button class="light-blue-button text-uppercase">
-                <a>
-                  Add to Schema
-                </a>
-              </button>
-            </div>
+            <schema-add-to-schema></schema-add-to-schema>
           </div>
           <solr-results-pagination ng-hide="numFound === 0" class="pagination-bottom"></solr-results-pagination>
         </div>
