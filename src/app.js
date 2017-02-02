@@ -8,7 +8,7 @@
  */
 angular
   .module('dhsniem', [
-    // 'ngAnimate',
+    'ngAnimate',
     'ngCookies',
     'ui.router',
     'ngSanitize',
