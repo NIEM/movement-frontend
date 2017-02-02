@@ -1,9 +1,12 @@
 <div class="solr-search form-horizontal">
   <div class="form-group row">
     <form ng-submit="search()" class="form-inline">
-      <div class="btn-group" uib-dropdown is-open="status.isopen" ng-show="!hasLabel">
-        <button id="single-button" type="button" class="btn btn-primary" uib-dropdown-toggle ng-disabled="disabled">
-          {{selectedDomain}} <span class="caret"></span>
+      <div class="dropdown-group" uib-dropdown is-open="status.isopen" ng-show="!hasLabel">
+        <button id="domain-button" type="button" class="white-button" uib-dropdown-toggle>
+          <span class="dropdown-text">{{selectedDomain}}</span>
+          <span>
+            <img class="dropdown-caret" src="images/ic_carot.svg" aria-hidden="true">
+          </span>
         </button>
         <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
           <li role="menuitem"><a href="#" ng-click="domainSelect('All Domains')">All Domains</a></li>
@@ -12,7 +15,7 @@
       </div>
       <label for="solr-search-input" ng-show="!!hasLabel && hasLabel">Search Model</label>
       <div class="input-group search-group">
-        <input type="text" id="solr-search-input" class="form-control" aria-label="Enter keyword" ng-model="searchQuery"
+        <input placeholder="Enter Keyword" type="text" id="solr-search-input" class="form-control" aria-label="Enter keyword" ng-model="searchQuery"
                autocomplete="off" uib-typeahead="result.name for result in getTypeaheadResults($viewValue)"
                typeahead-min-length="3" typeahead-on-select="search($item)">
         <div class="input-group-btn">

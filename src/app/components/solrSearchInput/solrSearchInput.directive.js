@@ -148,8 +148,10 @@
             if (scope.selectedDomain == 'All Domains') {
               var domainArray = [{'name': query + ' in All Domains', 'taNS': 'all', 'query': query}, {'name': query + ' in NIEM Core', 'taNS': 'Core', 'query': query, 'taNSType': 'domain'}];
               domainArray.push({'name': query + ' in ' + topNamespace, 'taNS': topNamespace, 'query': query, 'taNSType': topNamespaceType});
+              $rootScope.domainSpecified = false;
             } else {
               var domainArray = [{'name': query + ' in ' + scope.selectedDomain, 'taNS': scope.selectedDomain, 'query': query, 'taNSType': 'domain'}];
+              $rootScope.domainSpecified = true;
             }
             return domainArray.concat(data.response.docs);
           }
