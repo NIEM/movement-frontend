@@ -126,7 +126,7 @@
        */
       scope.getTypeaheadResults = function(query) {
 
-        if (scope.selectedDomain == 'All Domains') {
+        if (scope.selectedDomain === 'All Domains') {
           var facet = undefined;
         } else {
           var facet = '{!tag=domaintag,otherNamespacetag,externalStandardtag}namespace:("' + scope.selectedDomain + '")';
@@ -145,7 +145,7 @@
           if (data.response.docs.length > 0) {
             var topNamespace = data.response.docs[0].namespace;
             var topNamespaceType = data.response.docs[0].namespaceType;
-            if (scope.selectedDomain == 'All Domains') {
+            if (scope.selectedDomain === 'All Domains') {
               var domainArray = [{'name': query + ' in All Domains', 'taNS': 'all', 'query': query}, {'name': query + ' in NIEM Core', 'taNS': 'Core', 'query': query, 'taNSType': 'domain'}];
               domainArray.push({'name': query + ' in ' + topNamespace, 'taNS': topNamespace, 'query': query, 'taNSType': topNamespaceType});
               scope.domainSpecified = 'third-child';
