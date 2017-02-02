@@ -126,10 +126,9 @@
        */
       scope.getTypeaheadResults = function(query) {
 
-        if (scope.selectedDomain === 'All Domains') {
-          var facet = undefined;
-        } else {
-          var facet = '{!tag=domaintag,otherNamespacetag,externalStandardtag}namespace:("' + scope.selectedDomain + '")';
+        var facet = ['isBG:(1)'];
+        if (scope.selectedDomain !== 'All Domains') {
+          facet.push('namespace:("' + scope.selectedDomain + '")');
         }
 
         var params = {
@@ -138,6 +137,7 @@
           'wt': 'json',
           'json.wrf': 'JSON_CALLBACK',
           'json.nl': 'map',
+          'facet': 'on',
           'fq': facet
         };
 
@@ -145,12 +145,13 @@
           if (data.response.docs.length > 0) {
             var topNamespace = data.response.docs[0].namespace;
             var topNamespaceType = data.response.docs[0].namespaceType;
+            var domainArray;
             if (scope.selectedDomain === 'All Domains') {
-              var domainArray = [{'name': query + ' in All Domains', 'taNS': 'all', 'query': query}, {'name': query + ' in NIEM Core', 'taNS': 'Core', 'query': query, 'taNSType': 'domain'}];
+              domainArray = [{'name': query + ' in All Domains', 'taNS': 'all', 'query': query}, {'name': query + ' in NIEM Core', 'taNS': 'Core', 'query': query, 'taNSType': 'domain'}];
               domainArray.push({'name': query + ' in ' + topNamespace, 'taNS': topNamespace, 'query': query, 'taNSType': topNamespaceType});
               scope.domainSpecified = 'third-child';
             } else {
-              var domainArray = [{'name': query + ' in ' + scope.selectedDomain, 'taNS': scope.selectedDomain, 'query': query, 'taNSType': 'domain'}];
+              domainArray = [{'name': query + ' in ' + scope.selectedDomain, 'taNS': scope.selectedDomain, 'query': query, 'taNSType': 'domain'}];
               scope.domainSpecified = 'first-child';
             }
             return domainArray.concat(data.response.docs);
