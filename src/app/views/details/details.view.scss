@@ -135,3 +135,55 @@
     }
   }
 }
+
+.niem-accordion {
+  .carot-img {
+    display: inline-block;
+    &.caret-down {
+      transform: rotate(90deg);
+    }
+  }
+  .niem-accordion-heading {
+    padding-bottom: 18px;
+    padding-top: 17px;
+    border-bottom: 1px solid $silver;
+    cursor: pointer;
+    h2 {
+      letter-spacing: 0.5px;
+      padding-left: 18px;
+      color: $marine-blue;
+      display: inline-block;
+      margin: 0;
+      .contain-type {
+        color: $ocean-blue;
+        display: inline-block;
+      }
+    }
+  }
+  .niem-accordion-list {
+    padding-left: 40px;
+    .niem-accordion-item {
+      padding: 20px 0 20px 30px;
+      letter-spacing: 0.5px;
+      border-bottom: 1px solid $silver;
+      .item-name {
+        color: $ocean-blue;
+        h3 {
+          margin: 0;
+        }
+      }
+      .item-type {
+        color: $body-text-color;
+      }
+      &.additional-elements-link {
+        background-color: rgba(209, 210, 212, 0.1);
+        color: $ocean-blue;
+        font-size: 14px;
+        letter-spacing: 1px;
+        text-align: right;
+        padding-right: 10px;
+        cursor: pointer;
+      }
+    }
+  }
+}
