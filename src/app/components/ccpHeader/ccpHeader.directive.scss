@@ -14,7 +14,7 @@
     }
     .header-link-right {
       color: $white;
-      padding: 30px 0;
+      padding-top: 30px;
       letter-spacing: 2px;
       a {
         color: $white;
@@ -26,6 +26,33 @@
         &:nth-of-type(2) {
           padding-left: 10px;
         }
+      }
+      .header-inline-block {
+        display: inline-block;
+      }
+    }
+  }
+
+  .item-button {
+    color: $marine-blue;
+    font-size: 18px;
+    letter-spacing: 2px;
+    float: right;
+    .dark-blue-button {
+      background-color: $marine-blue;
+      color: $white;
+      padding: 7px;
+      border: none;
+      border-radius: 4px;
+      vertical-align: middle;
+      &:hover {
+        background-color: $evergreen;
+      }
+      a, a:active, a:hover, a:visited {
+        color: $white;
+        font-size: 14px;
+        letter-spacing: 0.9px;
+        text-decoration: none;
       }
     }
   }

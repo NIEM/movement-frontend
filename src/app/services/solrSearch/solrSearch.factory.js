@@ -14,7 +14,7 @@
     .module('dhsniem')
     .factory('solrSearch', solrSearch);
 
-  function solrSearch($location, $rootScope, solrRequest, $window) {
+  function solrSearch($location, $rootScope, solrRequest, $window, $q) {
 
     var docs;
     var numFound;
@@ -33,11 +33,12 @@
       getFacet: getFacet,
       getSelectedFacets: getSelectedFacets,
       search: search,
+      getFacetName: getFacetName,
       clearAllFilters: clearAllFilters
     };
 
 
-    /* 
+    /*
     * Getters - used to extract data from $location service and handle logic.
     */
     function getDocs() {
@@ -94,6 +95,25 @@
       $window.document.title = getQuery() + ' - CCP Search';
     }
 
+    
+    /**
+     * @name getFacetName
+     *
+     * @memberof dhsniem.service:solrSearch
+     *
+     * @description Performs the solr search for facets via call to the http method. On success, sets response data to the service variables.
+     */
+    function getFacetName() {
+      var defer = $q.defer();
+
+      solrRequest.makeFacetSolrRequest(buildSearchParams()).then(function(data) {
+        defer.resolve(data);
+      }).catch(function(error) {
+        console.log('Error: ', error);
+      });
+      return defer.promise;
+    }
+
 
     /**
      * @name clearAllFilters
@@ -114,7 +134,7 @@
       search();
     }
 
- 
+
     /**
      * @name buildSearchParams
      *
