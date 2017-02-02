@@ -2,11 +2,15 @@
   display: inline-block;
   .form-group {
     margin: 0;
+    .form-inline .input-group .form-control {
+      width: 432px;
+      height: 41px;
+    }
   }
+
   .dropdown-group {
     display: inline-block;
     vertical-align: top;
-
     .white-button {
       background-color: $white;
       color: $marine-blue;
@@ -60,69 +64,90 @@
 
   .search-group {
     width: 432px;
-
-    #solr-search-input {
-      color: $marine-blue;
-      height: 39px;
-      border: none;
-
-      + ul {
-        border-radius: 0;
-        width: 361px;
-        border-top: none;
-        margin: 0;
-        .active > a,
-        .active > a:hover,
-        .active > a:focus {
-          background-color: lighten($warm-grey, 30%);
-        }
-        a {
-          color: $marine-blue;
-          padding: 3px 10px;
-          overflow: hidden;
-          text-overflow: ellipsis;
-        }
-      }
-      + ul[class*="thirdChild"] {
-        li:first-child,
-        li:nth-child(2),
-        li:nth-child(3) {
+    .third-child {
+      #solr-search-input {
+        color: $marine-blue;
+        height: 39px;
+        border: none;
+        + ul {
+          border-radius: 0;
+          width: 361px;
+          border-top: none;
+          margin: 0;
+          .active > a,
+          .active > a:hover,
+          .active > a:focus {
+            background-color: lighten($warm-grey, 30%);
+          }
           a {
-            color: $ocean-blue;
-            strong {
-              font-weight: normal;
-              color: $marine-blue;
+            color: $marine-blue;
+            padding: 3px 10px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+          }
+          li:first-child,
+          li:nth-child(2),
+          li:nth-child(3) {
+            a {
+              color: $ocean-blue;
+              strong {
+                font-weight: normal;
+                color: $marine-blue;
+              }
             }
           }
-        }
-        li:nth-child(3) {
-          border-bottom: 1px solid #d1d2d4;
-          padding-bottom: 11px;
-          a {
-            padding-left: 0;
-            strong {
-              margin: 0 0 0 10px;
+          li:nth-child(3) {
+            border-bottom: 1px solid #d1d2d4;
+            padding-bottom: 11px;
+            a {
+              padding-left: 0;
+              strong {
+                margin: 0 0 0 10px;
+              }
             }
           }
         }
       }
-      + ul[class*="firstChild"] {
-        li:first-child {
+    }
+    
+    .first-child {
+      #solr-search-input {
+        color: $marine-blue;
+        height: 39px;
+        border: none;
+        + ul {
+          border-radius: 0;
+          width: 361px;
+          border-top: none;
+          margin: 0;
+          .active > a,
+          .active > a:hover,
+          .active > a:focus {
+            background-color: lighten($warm-grey, 30%);
+          }
           a {
-            color: $ocean-blue;
-            strong {
-              font-weight: normal;
-              color: $marine-blue;
+            color: $marine-blue;
+            padding: 3px 10px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+          }
+          li:first-child {
+            a {
+              color: $ocean-blue;
+              strong {
+                font-weight: normal;
+                color: $marine-blue;
+              }
             }
           }
-        }
-        li:first-child {
-          border-bottom: 1px solid #d1d2d4;
-          padding-bottom: 11px;
-          a {
-            padding-left: 0;
-            strong {
-              margin: 0 0 0 10px;
+          li:first-child {
+            border-bottom: 1px solid #d1d2d4;
+            padding-bottom: 11px;
+            a {
+              padding-left: 0;
+              strong {
+                margin: 0 0 0 10px;
+              }
             }
           }
         }

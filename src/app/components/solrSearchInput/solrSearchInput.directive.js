@@ -148,10 +148,10 @@
             if (scope.selectedDomain == 'All Domains') {
               var domainArray = [{'name': query + ' in All Domains', 'taNS': 'all', 'query': query}, {'name': query + ' in NIEM Core', 'taNS': 'Core', 'query': query, 'taNSType': 'domain'}];
               domainArray.push({'name': query + ' in ' + topNamespace, 'taNS': topNamespace, 'query': query, 'taNSType': topNamespaceType});
-              $rootScope.domainSpecified = false;
+              scope.domainSpecified = 'third-child';
             } else {
               var domainArray = [{'name': query + ' in ' + scope.selectedDomain, 'taNS': scope.selectedDomain, 'query': query, 'taNSType': 'domain'}];
-              $rootScope.domainSpecified = true;
+              scope.domainSpecified = 'first-child';
             }
             return domainArray.concat(data.response.docs);
           }

@@ -10,14 +10,19 @@
         </button>
         <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
           <li role="menuitem"><a href="#" ng-click="domainSelect('All Domains')">All Domains</a></li>
-          <li role="menuitem" ng-repeat="domain in domainNames | orderBy:sortByName"><a href="#" ng-click="domainSelect(domain)">{{domain}}</a></li>
+          <li role="menuitem" ng-repeat="domain in domainNames | orderBy:sortByName">
+            <a href="#" ng-click="domainSelect(domain)">{{domain}}</a>
+          </li>
         </ul>
       </div>
       <label for="solr-search-input" ng-show="!!hasLabel && hasLabel">Search Model</label>
       <div class="input-group search-group">
-        <input placeholder="Enter Keyword" type="text" id="solr-search-input" class="form-control" aria-label="Enter keyword" ng-model="searchQuery"
-               autocomplete="off" uib-typeahead="result.name for result in getTypeaheadResults($viewValue)"
-               typeahead-min-length="3" typeahead-on-select="search($item)">
+        <div ng-class="domainSpecified">
+          <input placeholder="Enter Keyword" type="text" id="solr-search-input" class="form-control"
+                 aria-label="Enter keyword" ng-model="searchQuery"
+                 autocomplete="off" uib-typeahead="result.name for result in getTypeaheadResults($viewValue)"
+                 typeahead-min-length="3" typeahead-on-select="search($item)">
+        </div>
         <div class="input-group-btn">
           <button type="submit" class="search-btn btn" aria-label="Search">
             <img src="images/icon_search.svg" aria-hidden="true">
