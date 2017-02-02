@@ -14,7 +14,7 @@
     .module('dhsniem')
     .directive('schemaMySchemaButton', schemaMySchemaButton);
 
-  function schemaMySchemaButton() {
+  function schemaMySchemaButton($location) {
     return {
       restrict: 'E',
       templateUrl: 'app/components/schemaMySchemaButton/schemaMySchemaButton.directive.html',
@@ -25,7 +25,11 @@
      *  Defines variables and functions within schemaMySchemaButton scope
      */
     function link(scope) {
-
+      console.log($location.$$path);
+        if ($location.$$path == '/results') {
+          console.log('true');
+          scope.resultsPage = true;
+      }
     }
   }
 })();
