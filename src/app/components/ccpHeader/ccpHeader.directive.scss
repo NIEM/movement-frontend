@@ -14,7 +14,7 @@
     }
     .header-link-right {
       color: $white;
-      padding: 30px 0;
+      padding-top: 30px;
       letter-spacing: 2px;
       a {
         color: $white;
@@ -31,27 +31,28 @@
         display: inline-block;
       }
     }
-    .item-button {
-      width: calc(30% - 5px);
-      color: $marine-blue;
-      font-size: 18px;
-      letter-spacing: 2px;
-      .light-blue-button {
-        background-color: $ocean-blue;
+  }
+
+  .item-button {
+    color: $marine-blue;
+    font-size: 18px;
+    letter-spacing: 2px;
+    float: right;
+    .dark-blue-button {
+      background-color: $marine-blue;
+      color: $white;
+      padding: 7px;
+      border: none;
+      border-radius: 4px;
+      vertical-align: middle;
+      &:hover {
+        background-color: $evergreen;
+      }
+      a, a:active, a:hover, a:visited {
         color: $white;
-        padding: 10px;
-        border: none;
-        border-radius: 4px;
-        vertical-align: middle;
-        &:hover {
-          background-color: $dark-ocean;
-        }
-        a, a:active, a:hover, a:visited {
-          color: $white;
-          font-size: 14px;
-          letter-spacing: 0.9px;
-          text-decoration: none;
-        }
+        font-size: 14px;
+        letter-spacing: 0.9px;
+        text-decoration: none;
       }
     }
   }
