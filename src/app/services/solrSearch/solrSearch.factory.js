@@ -14,13 +14,12 @@
     .module('dhsniem')
     .factory('solrSearch', solrSearch);
 
-  function solrSearch($location, $rootScope, solrRequest, $window) {
+  function solrSearch($location, $rootScope, solrRequest, $window, $q) {
 
     var docs;
     var numFound;
 
     var facets = {
-      'entityType': {},
       'domain': {},
       'externalStandard': {},
       'otherNamespace': {}
@@ -34,11 +33,12 @@
       getFacet: getFacet,
       getSelectedFacets: getSelectedFacets,
       search: search,
+      getFacetName: getFacetName,
       clearAllFilters: clearAllFilters
     };
 
 
-    /* 
+    /*
     * Getters - used to extract data from $location service and handle logic.
     */
     function getDocs() {
@@ -95,6 +95,25 @@
       $window.document.title = getQuery() + ' - CCP Search';
     }
 
+    
+    /**
+     * @name getFacetName
+     *
+     * @memberof dhsniem.service:solrSearch
+     *
+     * @description Performs the solr search for facets via call to the http method. On success, sets response data to the service variables.
+     */
+    function getFacetName() {
+      var defer = $q.defer();
+
+      solrRequest.makeFacetSolrRequest(buildSearchParams()).then(function(data) {
+        defer.resolve(data);
+      }).catch(function(error) {
+        console.log('Error: ', error);
+      });
+      return defer.promise;
+    }
+
 
     /**
      * @name clearAllFilters
@@ -115,7 +134,7 @@
       search();
     }
 
- 
+
     /**
      * @name buildSearchParams
      *
@@ -169,47 +188,23 @@
      *
      * @memberof dhsniem.service:solrSearch
      *
-     * @description Loops through the selected facets and groups the same facet values under the same facet name. Adds the exclude tag to make the array ready for the solr search param, fq.
+     * @description Loops through the selected facets and groups the same facet values under the same facet name. Adds the exclude tag to make the array ready for the solr search param, fq. Modified from Release 1 to now only account for once facet group: namespace. Static fq applied to only include business glossary (bg) terms.
      *
-     * @returns {string[]} An array of the facets grouped by facet for when multiple facets values (fields) of the same facet are selected. Also includes the exclude tags so filters form a union.
+     * @returns {string[]} A array of strings of the facets grouped by facet for when multiple facets values (fields) of the same facet are selected. Also includes the exclude tags so filters form a union.
      */
     function groupSelectedFacets() {
 
-      var facetGroups = {};
-      var facetKey;
-      var facetVal;
-      var groupedFacets = [];
-      var groupedFacetString;
+      var groupedFacets = ['isBG:(1)']; // Hard-coded to always only include BG terms. While we could put this as part of the query param, it is more efficient to use in fq.
+      var selectedFacets = getSelectedFacets();
 
-      getSelectedFacets().forEach(function(selectedFacet) {
-        facetKey = selectedFacet.split(':')[0];
-        facetVal = selectedFacet.split(':')[1];
+      if (selectedFacets.length > 0) {
+        var selectedFacetValues = selectedFacets.map(function(selectedFacet) {
+          return selectedFacet.split(':')[1];
+        }).join(' ');
 
-        if (facetKey === 'domain' || facetKey === 'externalStandard' || facetKey === 'otherNamespace') {
-          if (facetGroups['namespace']) {
-            facetGroups['namespace'] = facetGroups['namespace'].concat(' ').concat(facetVal);
-          } else {
-            facetGroups['namespace'] = facetVal;
-          }
-        } else {
-          if (facetGroups[facetKey]) {
-            facetGroups[facetKey] = facetGroups[facetKey].concat(' ').concat(facetVal);
-          } else {
-            facetGroups[facetKey] = facetVal;
-          }
-        }
+        groupedFacets.push('{!tag=domaintag,otherNamespacetag,externalStandardtag}namespace:(' + selectedFacetValues + ')');
+      }
 
-      });
-
-      Object.keys(facetGroups).forEach(function(key) {
-        // Combine the exclude tag for all namespace types
-        if (key === 'namespace') {
-          groupedFacetString = '{!tag=domaintag,otherNamespacetag,externalStandardtag}namespace:(' + facetGroups[key] + ')';
-        } else {
-          groupedFacetString = '{!tag=' + key + 'tag}' + key + ':(' + facetGroups[key] + ')';
-        }
-        groupedFacets.push(groupedFacetString);
-      });
       return groupedFacets;
     }
 

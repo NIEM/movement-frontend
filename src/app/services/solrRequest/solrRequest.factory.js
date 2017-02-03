@@ -18,6 +18,7 @@
 
     return {
       makeSolrRequest: makeSolrRequest,
+      makeFacetSolrRequest: makeFacetSolrRequest
     };
 
 
@@ -42,6 +43,29 @@
 
       return deferred.promise;
     }
+
+    /**
+     * @name makeFacetSolrRequest
+     *
+     * @memberof dhsniem.service:solrRequest
+     *
+     * @description Makes http jsonp call to the SOLR_URL and returns a promise.
+     *
+     * @returns deferred.promise
+     */
+    function makeFacetSolrRequest(params) {
+
+      var deferred = $q.defer();
+
+      $http.jsonp(SOLR_URL, {params: params}).then(function(response) {
+        deferred.resolve(response.data.facet_counts.facet_fields);
+      }).catch(function(error) {
+        console.log('Error: ', error);
+      });
+
+      return deferred.promise;
+    }
+
 
   }
 

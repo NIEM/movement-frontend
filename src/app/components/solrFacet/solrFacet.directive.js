@@ -50,7 +50,7 @@
       /**
        * @name setFacetResults
        *
-       * @description Sets the scope results from the the solr request, including teh facet fields and their counts. Then, converts that object to an array of the keys to be used for the view.
+       * @description Sets the scope results from the the solr request, including the facet fields and their counts. Then, converts that object to an array of the keys to be used for the view.
        *
        * @returns {string[]}
        */
