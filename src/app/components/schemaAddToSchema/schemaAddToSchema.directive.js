@@ -8,7 +8,7 @@
  * @description
  * My Schema button in the header
  */
-(function() {
+(function () {
 
   angular
     .module('dhsniem')
@@ -26,6 +26,21 @@
      */
     function link(scope) {
 
+      scope.downloadSchema = function downloadSchema(doc) {
+
+        console.log(doc);
+
+        var itemsToExport = 'itemsToExport[]=biom:BiometricClassification&itemsToExport[]=biom:DNASample';
+
+
+        var test_node_url = 'http://35.164.75.93:7000/api/jsonschema?';
+        var domain = doc.domain;
+        var name =  doc.name;
+        var param = domain + ':' + name;
+        var url =  test_node_url + param;
+        
+
+      }
     }
   }
 })();
