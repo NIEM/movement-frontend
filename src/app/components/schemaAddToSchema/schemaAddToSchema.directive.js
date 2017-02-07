@@ -14,7 +14,7 @@
     .module('dhsniem')
     .directive('schemaAddToSchema', schemaAddToSchema);
 
-  function schemaAddToSchema() {
+  function schemaAddToSchema(NODE_URL, $window) {
     return {
       restrict: 'E',
       templateUrl: 'app/components/schemaAddToSchema/schemaAddToSchema.directive.html',
@@ -27,19 +27,8 @@
     function link(scope) {
 
       scope.downloadSchema = function downloadSchema(doc) {
-
-        console.log(doc);
-
-        var itemsToExport = 'itemsToExport[]=biom:BiometricClassification&itemsToExport[]=biom:DNASample';
-
-
-        var test_node_url = 'http://35.164.75.93:7000/api/jsonschema?';
-        var domain = doc.domain;
-        var name =  doc.name;
-        var param = domain + ':' + name;
-        var url =  test_node_url + param;
-        
-
+        scope.url =  NODE_URL + 'itemsToExport[]=' + doc.id;
+        $window.open(scope.url, '_blank');
       }
     }
   }

@@ -25,22 +25,6 @@
      *  Defines variables and functions within schemaDownload scope
      */
     function link(scope) {
-    //
-    //   scope.downloadSchema = function downloadSchema() {
-    //     console.log('hello!');
-    //
-    //     scope.exportLink = '';
-    //
-    //
-    //
-    //     nodeRequest.makeNodeRequest(itemsToExport).then(function(data){
-    //       var response = data;
-    //
-    //
-    //     });
-    //
-    //   }
-    //
     }
   }
 })();
