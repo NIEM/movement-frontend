@@ -95,7 +95,7 @@
       $window.document.title = getQuery() + ' - CCP Search';
     }
 
-    
+
     /**
      * @name getFacetName
      *
