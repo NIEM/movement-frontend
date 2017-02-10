@@ -10,16 +10,16 @@
     padding-bottom: 30px;
     border-bottom: 1px solid $white;
     .header-top-img {
-      width: 150px;
+      width: 215px;
     }
     .header-link-right {
-      color: $white;
       padding-top: 30px;
       letter-spacing: 2px;
       a {
-        color: $white;
+        color: $marine-blue;
         text-transform: uppercase;
         text-decoration: none;
+        font-weight: 600;
         &:first-of-type {
           padding-right: 10px;
         }
