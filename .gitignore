@@ -9,3 +9,4 @@ es5/client/test/visual/results
 .DS_Store
 ._.DS_Store
 src/app/env.js
+npm-debug.log
