@@ -1,0 +1,188 @@
+.solr-details {
+  .content {
+    padding: 12px 30px 30px 30px;
+    min-width: $niem-min-width;
+    max-width: $niem-max-width;
+    margin: 0 auto;
+    .details-content {
+      min-height: calc(100vh - 200px - 332px);
+    }
+    .back-link {
+      font-size: 12px;
+      letter-spacing: 0.5px;
+      color: $ocean-blue;
+      cursor: pointer;
+    }
+    .details-heading {
+      background-image: linear-gradient(to left, #29819c, #004666);
+      filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0, startColorstr='#29819c', endColorstr='#004666'); /*For IE7-8-9*/
+      color: $white;
+      padding: 15px 21px 14px 21px;
+      margin-top: 13px;
+      margin-bottom: 20px;
+      h1 {
+        margin: 0 0 2px 0;
+        letter-spacing: 0.5px;
+      }
+      .details-heading-img {
+        width: 17.9px;
+      }
+      .namespace {
+        color: $seafoam;
+        letter-spacing: 0.5px;
+      }
+    }
+    .details-info {
+      display: inline-flex;
+      margin: auto;
+      margin-bottom: 6px;
+      width: 100%;
+      .details-info-col {
+        width: calc(50% - 5px);
+        display: inline-block;
+        &:nth-child(odd) {
+          .details-info-content {
+            margin: 0 5px 0 0;
+          }
+        }
+        &:nth-child(even) {
+          .details-info-content {
+            margin: 0 0 0 10px;
+          }
+        }
+      }
+      .details-info-content {
+        width: 100%;
+        min-height: 114px;
+        border: 1px solid;
+        border-color: lighten($ocean-blue, 50%);
+        padding: 20px;
+        align-items: center;
+        display: flex;
+        .auto-height {
+          height: auto;
+        }
+        .symbol-div {
+          display: inline-block;
+          height: 66px;
+          border-right: 1px solid;
+          border-color: lighten($ocean-blue, 50%);
+          padding-right: 15px;
+          img {
+            margin-top: 11px;
+            height: 44px;
+            width: 44px;
+          }
+        }
+        .details-text {
+          display: inline-block;
+          vertical-align: middle;
+          margin-left: 20px;
+          max-width: 474px;
+          overflow-wrap: break-word;
+          h3 {
+            letter-spacing: 0.5px;
+            color: $marine-blue;
+            margin: 0;
+            padding-bottom: 8px;
+            .dotted-underline {
+              border-bottom: 1px dashed;
+              cursor: pointer;
+            }
+          }
+          p {
+            margin: 0;
+            letter-spacing: 0.5px;
+            color: rgba(0, 0, 0, 0.58);
+          }
+        }
+        @media (max-width: 1024px) {
+          .details-text {
+            max-width: 350px;
+            overflow-wrap: break-word;
+          }
+        }
+      }
+    }
+    .details-desc {
+      padding-top: 37px;
+      .contain-list {
+        .has-none {
+          padding-left: 20px;
+        }
+        .panel-group {
+          .panel-default {
+            padding: 10px;
+            border: 0;
+            border-radius: 0;
+            box-shadow: none;
+            .panel-heading {
+              background-color: $white;
+              h2 {
+                letter-spacing: 0.5px;
+                color: $marine-blue;
+                margin: 0;
+              }
+            }
+            .accordion-toggle {
+              &:hover, &:focus {
+                text-decoration: none;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.niem-accordion {
+  .carot-img {
+    display: inline-block;
+    &.caret-down {
+      transform: rotate(90deg);
+    }
+  }
+  .niem-accordion-heading {
+    padding-bottom: 18px;
+    padding-top: 17px;
+    border-bottom: 1px solid $silver;
+    h2 {
+      letter-spacing: 0.5px;
+      padding-left: 18px;
+      color: $marine-blue;
+      display: inline-block;
+      margin: 0;
+      .contain-type {
+        color: $ocean-blue;
+        display: inline-block;
+      }
+    }
+  }
+  .niem-accordion-list {
+    padding-left: 40px;
+    .niem-accordion-item {
+      padding: 20px 0 20px 30px;
+      letter-spacing: 0.5px;
+      border-bottom: 1px solid $silver;
+      .item-name {
+        color: $ocean-blue;
+        h3 {
+          margin: 0;
+        }
+      }
+      .item-type {
+        color: $body-text-color;
+      }
+      &.additional-elements-link {
+        background-color: rgba(209, 210, 212, 0.1);
+        color: $ocean-blue;
+        font-size: 14px;
+        letter-spacing: 1px;
+        text-align: right;
+        padding-right: 10px;
+        cursor: pointer;
+      }
+    }
+  }
+}
