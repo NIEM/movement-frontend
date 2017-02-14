@@ -26,8 +26,9 @@
      */
     function link(scope) {
 
-      scope.downloadSchema = function downloadSchema(doc) {
-        scope.url =  NODE_URL + 'itemsToExport[]=' + doc.id;
+      scope.downloadSchema = function downloadSchema(searchID) {
+        scope.url =  NODE_URL + 'itemsToExport[]=' + searchID;
+        console.log(searchID);
         $window.open(scope.url);
       }
     }
