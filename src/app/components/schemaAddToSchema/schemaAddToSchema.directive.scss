@@ -3,23 +3,6 @@
     color: $marine-blue;
     font-size: 18px;
     letter-spacing: 2px;
-    .light-blue-button {
-      background-color: $ocean-blue;
-      color: $white;
-      padding: 10px;
-      border: none;
-      border-radius: 4px;
-      vertical-align: middle;
-      &:hover {
-        background-color: $dark-ocean;
-      }
-      a, a:active, a:hover, a:visited {
-        color: $white;
-        font-size: 14px;
-        letter-spacing: 0.9px;
-        text-decoration: none;
-      }
-    }
   }
   .my-schema-button {
     padding: 50px 20px !important;
