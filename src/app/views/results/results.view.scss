@@ -136,9 +136,13 @@
                 padding-top: 28px;
               }
             }
-            .result-content {
-              display: inline-block;
-              padding: 0 30px;
+            .result-content-wrapper {
+              display: flex;
+              align-items: center;
+              .result-content {
+                display: inline-block;
+                padding: 0 30px;
+              }
             }
             .item-img-section {
               display: inline-block;
