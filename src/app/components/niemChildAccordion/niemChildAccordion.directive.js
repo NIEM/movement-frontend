@@ -14,7 +14,7 @@
     .module('dhsniem')
     .directive('niemChildAccordion', niemChildAccordion);
 
-  function niemChildAccordion($compile, solrRequest) {
+  function niemChildAccordion() {
     return {
       restrict: 'E',
       templateUrl: 'app/components/niemChildAccordion/niemChildAccordion.directive.html',
@@ -22,10 +22,11 @@
         elementData: '=',
         clickHandler: '='
       },
-      link: function(scope, element) {
+      link: function(scope) {
         scope.dataFound = false;
         scope.isOpen = false;
 
+        
         /**
          * @name onClick
          *
