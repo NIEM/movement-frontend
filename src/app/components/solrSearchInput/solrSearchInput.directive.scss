@@ -2,24 +2,36 @@
   display: inline-block;
   .form-group {
     margin: 0;
-    .form-inline .input-group .form-control {
-      width: 432px;
-      height: 41px;
+    .form-inline {
+      display: flex;
+      align-items: center;
+      .input-group .form-control {
+        width: 432px;
+        height: 41px;
+      }
     }
   }
 
   .dropdown-group {
     display: inline-block;
     vertical-align: top;
-    .white-button {
+    margin: 2px;
+    .domain-button {
       background-color: $white;
       color: $marine-blue;
       padding: 6px 12px 6px 12px;
-      border: none;
-      border-radius: 4px;
       width: 200px;
-      height: 39px;
+      height: 41px;
       text-align: left;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      &:focus {
+        border: 1px solid #66afe9;
+        box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, .6);
+      }
       a, a:active, a:hover, a:visited {
         color: $white;
         font-size: 14px;
@@ -64,16 +76,14 @@
 
   .search-group {
     width: 432px;
+    margin: 2px;
     .third-child {
       #solr-search-input {
         color: $marine-blue;
-        height: 39px;
         border: none;
         + ul {
-          border-radius: 0;
+          border-radius: 4px;
           width: 361px;
-          border-top: none;
-          margin: 0;
           .active > a,
           .active > a:hover,
           .active > a:focus {
@@ -109,17 +119,13 @@
         }
       }
     }
-    
+
     .first-child {
       #solr-search-input {
         color: $marine-blue;
-        height: 39px;
-        border: none;
         + ul {
-          border-radius: 0;
+          border-radius: 4px;
           width: 361px;
-          border-top: none;
-          margin: 0;
           .active > a,
           .active > a:hover,
           .active > a:focus {
@@ -159,7 +165,7 @@
     background-color: $medium-blue;
     color: $white;
     padding: 7.5px 8.5px 7.5px 8px;
-    border: none;
+    border: 1px solid $medium-blue;
     img {
       width: 22.5px;
       height: 23.85px;
