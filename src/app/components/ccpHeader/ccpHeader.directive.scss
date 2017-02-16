@@ -9,6 +9,9 @@
   .header-top {
     padding-bottom: 30px;
     border-bottom: 1px solid $white;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
     .header-top-img {
       width: 215px;
     }
