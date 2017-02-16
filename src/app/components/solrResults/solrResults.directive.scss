@@ -137,8 +137,7 @@
               }
             }
             .result-content-wrapper {
-              display: flex;
-              align-items: center;
+              @include flex-and-align-center;
               justify-content: space-between;
               .result-content {
                 display: inline-block;
