@@ -14,9 +14,12 @@
       .welcome-items {
         .welcome-main {
           margin: 0 auto;
-          padding: 40px 30px;
+          padding: 90px 30px;
           .row {
             margin: 0;
+            .form-control {
+              width: 436px;
+            }
           }
           .welcome-text-heading {
             font-size: 36px;
@@ -31,7 +34,7 @@
             letter-spacing: 1.3px;
             margin-bottom: 27px;
             margin-top: 20px;
-            max-width: 675px;
+            max-width: 680px;
           }
         }
       }

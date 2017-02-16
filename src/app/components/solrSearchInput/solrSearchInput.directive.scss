@@ -5,11 +5,9 @@
     .form-inline {
       @include flex-and-align-center;
       .form-control {
-        width: 300px;
         height: 41px;
         @include desktop {
-          width: 430px;
-          height: 41px;
+          width: 300px;
         }
       }
     }
@@ -87,13 +85,6 @@
       margin: 2px;
       .third-child {
         #solr-search-input {
-          //width: 300px;
-          //height: 41px;
-          //
-          //@include desktop () {
-          //  width: 430px;
-          //  height: 41px;
-          //};
           color: $marine-blue;
           border: none;
           + ul {
@@ -137,15 +128,6 @@
 
       .first-child {
         #solr-search-input {
-
-          //width: 300px;
-          //height: 41px;
-          //
-          //@include desktop () {
-          //  width: 430px;
-          //  height: 41px;
-          //};
-
           color: $marine-blue;
           + ul {
             border-radius: 4px;

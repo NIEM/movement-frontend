@@ -24,7 +24,7 @@ $mont-regular:    400;
 $mont-semi-bold:  600;
 $niem-min-width:  768px;
 $niem-max-width:  1280px;
-$desktop-min-width: 992px;
+$desktop-md-max-width: 992px;
 
 //Mixins
 @mixin flex-and-align-center {
@@ -32,7 +32,7 @@ $desktop-min-width: 992px;
   align-items: center;
 }
 @mixin desktop {
-  @media only screen and (min-width: $desktop-min-width) {
+  @media only screen and (max-width: $desktop-md-max-width) {
     @content;
   }
 }
