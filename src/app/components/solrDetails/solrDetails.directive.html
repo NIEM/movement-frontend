@@ -1,0 +1,73 @@
+<div class="solr-details">
+  <section class="content">
+    <div class="details-content">
+      <a ng-click="goBack()" class="back-link" ng-show="query">&#060; Back to search results for "{{query}}"</a>
+      <div class="details-heading">
+        <div>
+          <h1>{{entity.name}}</h1>
+          <div class="namespace text-uppercase">{{formattedNamespaceType}}: {{entity.namespace}}</div>
+        </div>
+        <div class="details-heading-button">
+          <schema-add-to-schema></schema-add-to-schema>
+        </div>
+      </div>
+      <div class="details-info row">
+        <div class="details-info-col" ng-if="!!entity.definition">
+          <div class="details-info-content">
+            <div class="symbol-div definition-img">
+              <img src="images/ic_definition.svg" alt="Definition symbol">
+            </div>
+            <div class="details-text">
+              <h3>Definition</h3>
+              <p>{{entity.definition}}</p>
+            </div>
+          </div>
+        </div>
+        <div class="details-info-col">
+          <div class="details-info-content" ng-if="entity.type">
+            <div class="auto-height">
+              <div class="symbol-div simple-type-img">
+                <img src="images/ic-typeofproperty.svg" alt="Type of Property symbol">
+              </div>
+              <div class="details-text">
+                <h3>Type of Property</h3>
+                <p>{{entity.type.name}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="details-desc">
+        <div class="contain-list">
+          <div class="niem-accordion">
+            <div class="niem-accordion-heading">
+              <h2>
+                <span class="contain-title">{{entity.name}}
+                <span ng-if="entity.type">({{entity.type.namespacePrefix}}:{{entity.type.name}})</span>
+                <span ng-if="!entity.type">(abstract)</span>
+                </span>
+              </h2>
+            </div>
+            <div ng-if="!entity.type.elements" class="has-none">
+              <h3>{{entity.name}} does not contain any child elements.</h3>
+            </div>
+            <div class="niem-accordion-list">
+              <div ng-repeat="item in entity.type.elements">
+                <div class="niem-accordion-item" ng-if="!item.type.elements">
+                  <span class="item-name">
+                    <a ui-sref="main.details({ entityID: item.id })">{{item.name}}</a>
+                  </span>
+                  <span class="item-type" ng-if="!!item.type.name">({{item.type.name}})</span>
+                  <span class="item-type" ng-if="item.type === 'abstract'">({{item.type}})</span>
+                </div>
+                <div ng-if="!!item.type.elements">
+                  <niem-child-accordion element-data="item" click-handler="getElementObjects"></niem-child-accordion>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

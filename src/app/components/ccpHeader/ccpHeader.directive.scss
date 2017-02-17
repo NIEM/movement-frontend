@@ -9,11 +9,17 @@
   .header-top {
     padding-bottom: 30px;
     border-bottom: 1px solid $white;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    .header-link-left {
+      display: inline-block;
+      width: 215px;
+    }
     .header-top-img {
-      width: 150px;
+      width: 100%;
     }
     .header-link-right {
-      color: $white;
       padding-top: 30px;
       letter-spacing: 2px;
       a {
@@ -29,6 +35,7 @@
       }
       .header-inline-block {
         display: inline-block;
+        color: $white;
       }
     }
   }

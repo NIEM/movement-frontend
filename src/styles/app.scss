@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat:400,600,700,800');
 
-//Color variables to be used throughout all stylesheets
+//Variables to be used throughout all stylesheets
 $darkest-blue:    #005170;
 $dark-ocean:      #026399;
 $medium-blue:     #007fb9;
@@ -24,6 +24,18 @@ $mont-regular:    400;
 $mont-semi-bold:  600;
 $niem-min-width:  768px;
 $niem-max-width:  1280px;
+$desktop-md-max-width: 992px;
+
+//Mixins
+@mixin flex-and-align-center {
+  display: flex;
+  align-items: center;
+}
+@mixin desktop {
+  @media only screen and (max-width: $desktop-md-max-width) {
+    @content;
+  }
+}
 
 .browsehappy {
   margin: 0.2em 0;
@@ -134,12 +146,13 @@ h6 {
 @import '../app/components/ccpHeader/ccpHeader.directive.scss';
 @import '../app/components/detailsPagination/detailsPagination.directive.scss';
 @import '../app/components/facetDetails/facetDetails.directive.scss';
-@import '../app/components/niemAccordion/niemAccordion.directive.scss';
 @import '../app/components/niemChildAccordion/niemChildAccordion.directive.scss';
 @import '../app/components/niemExport/niemExport.directive.scss';
 @import '../app/components/schemaAddToSchema/schemaAddToSchema.directive.scss';
+@import '../app/components/schemaDownload/schemaDownload.directive.scss';
 @import '../app/components/schemaMySchemaButton/schemaMySchemaButton.directive.scss';
 @import '../app/components/searchHeader/searchHeader.scss';
+@import '../app/components/solrDetails/solrDetails.directive.scss';
 @import '../app/components/solrFacet/solrFacet.directive.scss';
 @import '../app/components/solrFacetResult/solrFacetResult.directive.scss';
 @import '../app/components/solrResults/solrResults.directive.scss';
