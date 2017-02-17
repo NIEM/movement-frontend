@@ -8,8 +8,7 @@
     height: 100%;
     margin: 0 auto;
     padding: 35px 30px;
-    display: flex;
-    align-items: center;
+    @include flex-and-align-center;
     .export-top-img {
       img {
         width: 66px;

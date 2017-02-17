@@ -24,9 +24,8 @@
       width: 200px;
       height: 41px;
       text-align: left;
-      display: flex;
+      @include flex-and-align-center;
       justify-content: space-between;
-      align-items: center;
       border: 1px solid #ccc;
       border-radius: 4px;
       &:focus {
