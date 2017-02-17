@@ -8,7 +8,7 @@
  * @description
  * Solr details
  */
-(function() {
+(function () {
 
   angular
     .module('dhsniem')
@@ -38,18 +38,20 @@
         scope.doc = {
           id: $location.search().entityID
         };
+
         var query = 'id:' + scope.doc.id.split(':')[0] + '\\:' + scope.doc.id.split(':')[1];
 
         solrRequest.makeSolrRequest(getSearchParams(query)).then(function (data) {
           scope.entity = data.response.docs[0];
           scope.formattedNamespaceType = formatNamespaceType(scope.entity.namespaceType);
-          getTypeObject(scope.entity).then(function (data) {
-            scope.entity.type = data;
-            if (data.elements) {
-              scope.getElementObjects(scope.entity.type);
-            }
-          });
-
+          if (scope.entity.type) {
+            getTypeObject(scope.entity).then(function (data) {
+              scope.entity.type = data;
+              if (data.elements) {
+                scope.getElementObjects(scope.entity.type);
+              }
+            });
+          }
           $window.document.title = scope.entity.name + ' - CCP Details';
         });
       }
@@ -101,7 +103,7 @@
             }
           });
         });
-      }
+      };
 
 
       /**
@@ -115,6 +117,7 @@
        */
       function getTypeObject(element) {
         var deferred = $q.defer();
+
         var query = 'name:' + element.type.split(':')[1];
 
         solrRequest.makeSolrRequest(getSearchParams(query)).then(function (data) {
