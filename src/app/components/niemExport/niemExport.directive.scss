@@ -8,15 +8,12 @@
     height: 100%;
     margin: 0 auto;
     padding: 35px 30px;
+    @include flex-and-align-center;
     .export-top-img {
-      display: inline-block;
       img {
         width: 66px;
         height: 66px;
-        display: inline-block;
         margin-right: 33px;
-        position: relative;
-        bottom: 42px;
       }
     }
     .export-top-text {

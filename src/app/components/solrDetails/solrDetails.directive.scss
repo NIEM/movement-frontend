@@ -20,8 +20,7 @@
       padding: 15px 21px 14px 21px;
       margin-top: 13px;
       margin-bottom: 20px;
-      display: flex;
-      align-items: center;
+      @include flex-and-align-center;
       justify-content: space-between;
       h1 {
         margin: 0 0 2px 0;
@@ -76,8 +75,7 @@
         border: 1px solid;
         border-color: lighten($ocean-blue, 50%);
         padding: 20px;
-        align-items: center;
-        display: flex;
+        @include flex-and-align-center;
         .auto-height {
           height: auto;
         }

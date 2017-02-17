@@ -3,11 +3,12 @@
   .form-group {
     margin: 0;
     .form-inline {
-      display: flex;
-      align-items: center;
-      .input-group .form-control {
-        width: 432px;
+      @include flex-and-align-center;
+      .form-control {
         height: 41px;
+        @include desktop {
+          width: 300px;
+        }
       }
     }
   }
@@ -23,14 +24,13 @@
       width: 200px;
       height: 41px;
       text-align: left;
-      display: flex;
+      @include flex-and-align-center;
       justify-content: space-between;
-      align-items: center;
       border: 1px solid #ccc;
       border-radius: 4px;
       &:focus {
         border: 1px solid #66afe9;
-        box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, .6);
+        box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(102, 175, 233, .6);
       }
       a, a:active, a:hover, a:visited {
         color: $white;
@@ -72,87 +72,93 @@
     font-weight: $mont-regular;
     padding-right: 10px;
     letter-spacing: 2.6px;
+    margin: 0;
   }
 
-  .search-group {
-    width: 432px;
-    margin: 2px;
-    .third-child {
-      #solr-search-input {
-        color: $marine-blue;
-        border: none;
-        + ul {
-          border-radius: 4px;
-          width: 361px;
-          .active > a,
-          .active > a:hover,
-          .active > a:focus {
-            background-color: lighten($warm-grey, 30%);
-          }
-          a {
-            color: $marine-blue;
-            padding: 3px 10px;
-            overflow: hidden;
-            text-overflow: ellipsis;
-          }
-          li:first-child,
-          li:nth-child(2),
-          li:nth-child(3) {
+  .input-group {
+    display: flex;
+    align-items: center;
+
+    .search-group {
+      display: flex;
+      margin: 2px;
+      .third-child {
+        #solr-search-input {
+          color: $marine-blue;
+          border: none;
+          + ul {
+            border-radius: 4px;
+            width: 361px;
+            .active > a,
+            .active > a:hover,
+            .active > a:focus {
+              background-color: lighten($warm-grey, 30%);
+            }
             a {
-              color: $ocean-blue;
-              strong {
-                font-weight: normal;
-                color: $marine-blue;
+              color: $marine-blue;
+              padding: 3px 10px;
+              overflow: hidden;
+              text-overflow: ellipsis;
+            }
+            li:first-child,
+            li:nth-child(2),
+            li:nth-child(3) {
+              a {
+                color: $ocean-blue;
+                strong {
+                  font-weight: normal;
+                  color: $marine-blue;
+                }
               }
             }
-          }
-          li:nth-child(3) {
-            border-bottom: 1px solid #d1d2d4;
-            padding-bottom: 11px;
-            a {
-              padding-left: 0;
-              strong {
-                margin: 0 0 0 10px;
+            li:nth-child(3) {
+              border-bottom: 1px solid #d1d2d4;
+              padding-bottom: 11px;
+              a {
+                padding-left: 0;
+                strong {
+                  margin: 0 0 0 10px;
+                }
               }
             }
           }
         }
       }
-    }
 
-    .first-child {
-      #solr-search-input {
-        color: $marine-blue;
-        + ul {
-          border-radius: 4px;
-          width: 361px;
-          .active > a,
-          .active > a:hover,
-          .active > a:focus {
-            background-color: lighten($warm-grey, 30%);
-          }
-          a {
-            color: $marine-blue;
-            padding: 3px 10px;
-            overflow: hidden;
-            text-overflow: ellipsis;
-          }
-          li:first-child {
+      .first-child {
+        #solr-search-input {
+          color: $marine-blue;
+          + ul {
+            border-radius: 4px;
+            width: 361px;
+            .active > a,
+            .active > a:hover,
+            .active > a:focus {
+              background-color: lighten($warm-grey, 30%);
+            }
             a {
-              color: $ocean-blue;
-              strong {
-                font-weight: normal;
-                color: $marine-blue;
+              color: $marine-blue;
+              padding: 3px 10px;
+              overflow: hidden;
+              text-overflow: ellipsis;
+            }
+            li:first-child {
+              a {
+                color: $ocean-blue;
+                strong {
+                  font-weight: normal;
+                  color: $marine-blue;
+                }
               }
             }
-          }
-          li:first-child {
-            border-bottom: 1px solid #d1d2d4;
-            padding-bottom: 11px;
-            a {
-              padding-left: 0;
-              strong {
-                margin: 0 0 0 10px;
+            li:first-child {
+              border-bottom: 1px solid #d1d2d4;
+              padding-bottom: 11px;
+              a {
+                padding-left: 0;
+                strong {
+                  margin: 0 0 0 10px;
+                }
               }
             }
           }

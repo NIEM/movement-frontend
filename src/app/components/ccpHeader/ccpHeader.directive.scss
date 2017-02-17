@@ -19,10 +19,9 @@
       padding-top: 30px;
       letter-spacing: 2px;
       a {
-        color: $marine-blue;
+        color: $white;
         text-transform: uppercase;
         text-decoration: none;
-        font-weight: 600;
         &:first-of-type {
           padding-right: 10px;
         }
@@ -32,6 +31,7 @@
       }
       .header-inline-block {
         display: inline-block;
+        color: $white;
       }
     }
   }
