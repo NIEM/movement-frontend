@@ -1,5 +1,11 @@
 .solr-results {
   .content {
+    background-color: $white;
+    position: relative;
+    min-width: $niem-min-width;
+    max-width: $niem-max-width;
+    height: calc(100% - 373px);
+    margin: 25px auto;
     .search-heading {
       padding: 0 20px;
       background-image: linear-gradient(to left, $teal-gradient, $marine-blue);
@@ -19,57 +25,6 @@
         text-transform: uppercase;
       }
     }
-    .legend {
-      margin: 0 30px 0 0;
-      .legend-heading {
-        padding-right: 7px;
-        display: inline-block;
-        color: $marine-blue;
-        font-size: 12px;
-        font-weight: bold;
-        letter-spacing: 1px;
-        text-transform: uppercase;
-      }
-      .legend-symbols {
-        display: inline-block;
-        color: $ocean-blue;
-        .legend-symbol {
-          display: inline-block;
-          .legend-img {
-            width: 12px;
-            height: 14.1px;
-            opacity: 0.3;
-            display: inline-block;
-          }
-          .legend-title {
-            margin-left: 6.1px;
-            display: inline-block;
-            text-transform: uppercase;
-            font-size: 12px;
-            letter-spacing: 0.5px;
-            color: $marine-blue;
-            .dotted-underline {
-              border-bottom: 1px dashed;
-              cursor: pointer;
-            }
-            &.type-legend {
-              padding-right: 15px;
-            }
-          }
-        }
-      }
-    }
-    .search-heading {
-      padding: 0 20px;
-      background-image: linear-gradient(to left, $teal-gradient, $marine-blue);
-      color: $white;
-    }
-    background-color: $white;
-    position: relative;
-    min-width: $niem-min-width;
-    max-width: $niem-max-width;
-    height: calc(100% - 373px);
-    margin: 25px auto;
     h2 {
       color: $black;
     }

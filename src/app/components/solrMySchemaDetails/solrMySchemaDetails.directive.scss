@@ -1,0 +1,28 @@
+.solr-my-schema-details {
+  .content {
+    background-color: $white;
+    position: relative;
+    min-width: $niem-min-width;
+    max-width: $niem-max-width;
+    height: calc(100% - 373px);
+    margin: 25px auto;
+    .my-schema-heading {
+      padding: 0 20px;
+      background-image: linear-gradient(to left, $teal-gradient, $marine-blue);
+      color: $white;
+      margin: 0 29px 0 30px;
+      letter-spacing: 0.5px;
+      height: 80px;
+      .keyword-search-text {
+        font-size: 27px;
+      }
+      .results-total {
+        font-size: 14px;
+        color: $seafoam;
+        margin-bottom: 11px;
+        text-transform: uppercase;
+      }
+    }
+  }
+}
+
