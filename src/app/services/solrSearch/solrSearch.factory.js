@@ -157,7 +157,7 @@
         'start': convertPageToStart(),
         'defType': 'edismax',
         'bq': 'namespace:Core^2',
-        'qf': 'name^2 name_query^8 def_query^3 type_query'
+        'qf': 'name^2 name_query^8 definition_query^3 type_query'
       };
 
       return params;
