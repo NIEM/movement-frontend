@@ -37,6 +37,23 @@
 
       init();
 
+
+      /**
+       * @name sortByName
+       *
+       * @description Sorting function used to boost the NIEM Core to the top of the dropdown
+       *
+       * @returns {(string|number)}
+       */
+      scope.sortByName = function(result) {
+        if (result === 'Core') {
+          return -1;
+        } else {
+          return result;
+        }
+      };
+
+
       /**
        * @name getFacets
        *
