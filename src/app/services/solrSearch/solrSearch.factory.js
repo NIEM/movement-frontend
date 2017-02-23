@@ -54,7 +54,7 @@
     }
 
     function getSort() {
-      return $location.search().sortBy || 'namespacePriority asc';
+      return $location.search().sortBy || 'score desc';
     }
 
     function getPage() {
