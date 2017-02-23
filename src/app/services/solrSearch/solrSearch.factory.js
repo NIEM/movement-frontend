@@ -147,16 +147,17 @@
     function buildSearchParams() {
       var params = {
         'q': getQuery(),
-        'sort': getSort(),
+        'sort': getSort() + ',score desc,nameLength asc,name asc',
         'facet': 'on',
         'facet.mincount': '1',
-        'wt': 'json',
         'json.wrf': 'JSON_CALLBACK',
         'json.nl': 'map',
         'facet.field': getFacetFields(),
         'fq': groupSelectedFacets(),
-        'rows': '100',
-        'start': convertPageToStart()
+        'start': convertPageToStart(),
+        'defType': 'edismax',
+        'bq': 'namespace:Core^2',
+        'qf': 'name^2 name_query^8 def_query^3 type_query'
       };
 
       return params;
