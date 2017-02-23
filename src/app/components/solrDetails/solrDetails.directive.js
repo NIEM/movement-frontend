@@ -142,7 +142,6 @@
       function getSearchParams(query) {
         var params = {
           'q': query,
-          'wt': 'json',
           'json.wrf': 'JSON_CALLBACK',
           'json.nl': 'map'
         };
