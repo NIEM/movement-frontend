@@ -37,6 +37,23 @@
 
       init();
 
+
+      /**
+       * @name sortByName
+       *
+       * @description Sorting function used to boost the NIEM Core to the top of the dropdown
+       *
+       * @returns {(string|number)}
+       */
+      scope.sortByName = function(result) {
+        if (result === 'Core') {
+          return -1;
+        } else {
+          return result;
+        }
+      };
+
+
       /**
        * @name getFacets
        *
@@ -132,13 +149,16 @@
         }
 
         var params = {
-          'q': 'name:*' + query + '*',
+          'q': query,
           'rows': 5,
-          'wt': 'json',
           'json.wrf': 'JSON_CALLBACK',
           'json.nl': 'map',
           'facet': 'on',
-          'fq': facet
+          'fq': facet,
+          'sort': 'score desc,nameLength asc,name asc',
+          'defType': 'edismax',
+          'bq': 'namespace:Core^2',
+          'qf': 'name^2 name_query^8'
         };
 
         return solrRequest.makeSolrRequest(params).then(function(data) {
