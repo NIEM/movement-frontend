@@ -25,8 +25,8 @@
 
     return {
       addSchema: addSchema,
-      getSchema: getSchema
-      // removeFromSchema: removeFromSchema,
+      getSchema: getSchema,
+      removeFromSchema: removeFromSchema
       // removeAllFromSchema: removeAllFromSchema
 
     };
@@ -51,6 +51,7 @@
 
 
     function removeFromSchema() {
+      localStorage.removeItem('mySchema');
 
     }
 

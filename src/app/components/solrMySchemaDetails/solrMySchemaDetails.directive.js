@@ -151,41 +151,50 @@
 
         scope.mySchemaArrayDetails = [];
 
-        scope.mySchemaArray.forEach(function (element) {
 
-          var query = 'id:' + element.split(':')[0] + '\\:' + element.split(':')[1];
+        if (scope.mySchemaArray) {
 
-          solrRequest.makeSolrRequest(getSearchParams(query)).then(function (data) {
-            scope.entity = data.response.docs[0];
-            console.log(scope.entity);
+          scope.mySchemaArray.forEach(function (element) {
 
-            scope.mySchemaArrayDetails.push(scope.entity);
-            console.log(scope.mySchemaArrayDetails);
+            var query = 'id:' + element.split(':')[0] + '\\:' + element.split(':')[1];
 
-            scope.formattedNamespaceType = formatNamespaceType(scope.entity.namespaceType);
+            solrRequest.makeSolrRequest(getSearchParams(query)).then(function (data) {
+              scope.entity = data.response.docs[0];
+              console.log(scope.entity);
 
-            if (scope.entity.type) {
-              getTypeObject(scope.entity).then(function (data) {
-                scope.entity.type = data;
-                console.log(data);
-                if (data.elements) {
-                  scope.getElementObjects(scope.entity.type);
-                }
-              });
-            }
-            $window.document.title = scope.entity.name + ' - CCP Details';
+              scope.mySchemaArrayDetails.push(scope.entity);
+              console.log(scope.mySchemaArrayDetails);
+
+              scope.formattedNamespaceType = formatNamespaceType(scope.entity.namespaceType);
+
+              if (scope.entity.type) {
+                getTypeObject(scope.entity).then(function (data) {
+                  scope.entity.type = data;
+                  console.log(data);
+                  if (data.elements) {
+                    scope.getElementObjects(scope.entity.type);
+                  }
+                });
+              }
+              $window.document.title = scope.entity.name + ' - CCP Details';
+            });
+
           });
-
-        });
+        }
 
       }
 
 
       scope.downloadSchema = function downloadSchema() {
         var schemaString = 'itemsToExport[]=' + scope.mySchemaArray.join('&itemsToExport[]=');
-        scope.url =  NODE_URL + schemaString;
+        scope.url = NODE_URL + schemaString;
         console.log(scope.url);
         $window.open(scope.url, '_parent');
+      };
+
+      scope.removeSchema = function removeSchema() {
+        mySchemaCart.removeFromSchema();
+        scope.mySchemaArrayDetails = [];
       }
 
 
