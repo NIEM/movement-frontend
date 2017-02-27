@@ -1,4 +1,6 @@
 .solr-my-schema-details {
+  padding: 0 43px;
+
   .content {
     background-color: $white;
     position: relative;
@@ -21,6 +23,103 @@
         color: $seafoam;
         margin-bottom: 11px;
         text-transform: uppercase;
+      }
+    }
+
+    .my-schema-actions {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      border-bottom: 1px solid $teal;
+      margin: 0 30px;
+      padding: 20px 0;
+      .my-schema-count {
+        margin: 0 10px 0 10px;
+        color: $evergreen;
+        letter-spacing: 0.5px;
+      }
+      .remove-from-schema-button {
+        margin: 0 10px 0 10px;
+        background-color: $white;
+        color: $ocean-blue;
+        padding: 10px;
+        border: $medium-blue solid 1px;
+        border-radius: 4px;
+        vertical-align: middle;
+        text-transform: uppercase;
+        &:hover {
+          background-color: $silver;
+        }
+        a, a:active, a:hover, a:visited {
+          color: $ocean-blue;
+          font-size: 14px;
+          letter-spacing: 0.9px;
+          text-decoration: none;
+        }
+      }
+
+      .add-to-schema-button {
+        margin-left: 10px;
+        background-color: $ocean-blue;
+        color: $white;
+        padding: 10px;
+        border: none;
+        border-radius: 4px;
+        vertical-align: middle;
+        white-space: nowrap;
+        text-transform: uppercase;
+        &:hover {
+          background-color: $dark-ocean;
+        }
+        a, a:active, a:hover, a:visited {
+          color: $white;
+          font-size: 14px;
+          letter-spacing: 0.9px;
+          text-decoration: none;
+        }
+      }
+    }
+
+    .my-schema-list {
+      padding: 0 50px;
+      &.empty-my-schema {
+        padding-top: 10px;
+        font-size: 16px;
+      }
+      .schema-item {
+        border-bottom: 1px solid $silver;
+
+        .schema-content-wrapper {
+          @include flex-and-align-center;
+          justify-content: space-between;
+          .schema-content {
+            display: inline-block;
+          }
+        }
+        .item-title {
+          color: $ocean-blue;
+          display: inline-block;
+          margin: 21px 0 11px 0;
+          letter-spacing: 0.5px;
+          &:hover {
+            text-decoration: underline;
+          }
+          @media (max-width: 1024px) {
+            max-width: 424px;
+            overflow-wrap: break-word;
+          }
+        }
+        .item-description {
+          color: $body-text-color;
+          margin-bottom: 15px;
+          letter-spacing: 0.5px;
+        }
+        .item-namespace {
+          font-size: 14px;
+          letter-spacing: 0.5px;
+          color: $marine-blue;
+          margin-bottom: 13px;
+        }
       }
     }
   }
