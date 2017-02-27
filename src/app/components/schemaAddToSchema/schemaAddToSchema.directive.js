@@ -14,7 +14,7 @@
     .module('dhsniem')
     .directive('schemaAddToSchema', schemaAddToSchema);
 
-  function schemaAddToSchema(NODE_URL, $window, $rootScope) {
+  function schemaAddToSchema(mySchemaCart) {
     return {
       restrict: 'E',
       templateUrl: 'app/components/schemaAddToSchema/schemaAddToSchema.directive.html',
@@ -26,14 +26,12 @@
      */
     function link(scope) {
 
-      $rootScope.mySchemaArray = [];
+      scope.addToSchema = function (searchID) {
+        console.log(searchID);
+        mySchemaCart.addSchema(searchID);
+      };
 
-      scope.downloadSchema = function downloadSchema(searchID) {
-        $rootScope.mySchemaArray.push(searchID);
-        var schemaString = 'itemsToExport[]=' + $rootScope.mySchemaArray.join('&itemsToExport[]=');
-        scope.url =  NODE_URL + schemaString;
-        $window.open(scope.url, '_parent');
-      }
+
     }
   }
 })();
