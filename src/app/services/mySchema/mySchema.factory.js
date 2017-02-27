@@ -3,7 +3,7 @@
 /**
  * @ngdoc factory
  *
- * @name mySchemaCart
+ * @name mySchema
  *
  * @description
  * Factory for my schema cart
@@ -12,25 +12,21 @@
 
   angular
     .module('dhsniem')
-    .factory('mySchemaCart', mySchemaCart);
+    .factory('mySchema', mySchema);
 
-  function mySchemaCart ($q, $http, SOLR_URL) {
+  function mySchema () {
 
-    if (!localStorage.getItem('mySchema')) {
-      var schemaList = [];
-    } else {
+    if (localStorage.getItem('mySchema')) {
       var schemaList = JSON.parse(localStorage.getItem('mySchema'));
+    } else {
+      var schemaList = [];
     }
-
 
     return {
       addSchema: addSchema,
       getSchema: getSchema,
-      removeFromSchema: removeFromSchema
-      // removeAllFromSchema: removeAllFromSchema
-
+      removeAllFromSchema: removeAllFromSchema
     };
-
 
     function addSchema(searchID) {
       console.log(searchID);
@@ -39,7 +35,6 @@
 
       localStorage.setItem('mySchema', JSON.stringify(schemaList));
       console.log(localStorage);
-
     }
 
     function getSchema() {
@@ -49,19 +44,8 @@
       return schemaList;
     }
 
-
-    function removeFromSchema() {
-      localStorage.removeItem('mySchema');
-
-    }
-
-
     function removeAllFromSchema() {
-
-    }
-
-    function mySchemaCount() {
-
+      localStorage.removeItem('mySchema');
     }
 
   }

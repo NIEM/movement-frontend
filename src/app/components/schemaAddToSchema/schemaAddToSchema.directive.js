@@ -14,7 +14,7 @@
     .module('dhsniem')
     .directive('schemaAddToSchema', schemaAddToSchema);
 
-  function schemaAddToSchema(mySchemaCart) {
+  function schemaAddToSchema(mySchema) {
     return {
       restrict: 'E',
       templateUrl: 'app/components/schemaAddToSchema/schemaAddToSchema.directive.html',
@@ -25,10 +25,9 @@
      *  Defines variables and functions within schemaAddToSchema scope
      */
     function link(scope) {
-
       scope.addToSchema = function (searchID) {
         console.log(searchID);
-        mySchemaCart.addSchema(searchID);
+        mySchema.addSchema(searchID);
       };
 
 

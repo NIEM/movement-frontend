@@ -14,7 +14,7 @@
     .module('dhsniem')
     .directive('solrMySchemaDetails', solrMySchemaDetails);
 
-  function solrMySchemaDetails(solrRequest, $window, $q, mySchemaCart, NODE_URL) {
+  function solrMySchemaDetails(solrRequest, $window, $q, mySchema, NODE_URL) {
     return {
       restrict: 'E',
       templateUrl: 'app/components/solrMySchemaDetails/solrMySchemaDetails.directive.html',
@@ -34,7 +34,7 @@
       function init() {
         scope.isOpen = false;
 
-        getSchemaFromService();
+        getSchema();
 
       }
 
@@ -145,16 +145,22 @@
       }
 
 
-      function getSchemaFromService() {
-        scope.mySchemaArray = mySchemaCart.getSchema();
-        console.log(scope.mySchemaArray);
+      /**
+       * @name getSchema
+       *
+       * @memberof dhsniem.controller:DetailsCtrl
+       *
+       * @description Returns the elements in my schema
+       */
+      function getSchema() {
+        scope.mySchemaIDs = mySchema.getSchema();
+        console.log(scope.mySchemaIDs);
 
-        scope.mySchemaArrayDetails = [];
+        scope.mySchemaArray = [];
 
+        if (scope.mySchemaIDs) {
 
-        if (scope.mySchemaArray) {
-
-          scope.mySchemaArray.forEach(function (element) {
+          scope.mySchemaIDs.forEach(function (element) {
 
             var query = 'id:' + element.split(':')[0] + '\\:' + element.split(':')[1];
 
@@ -162,8 +168,8 @@
               scope.entity = data.response.docs[0];
               console.log(scope.entity);
 
-              scope.mySchemaArrayDetails.push(scope.entity);
-              console.log(scope.mySchemaArrayDetails);
+              scope.mySchemaArray.push(scope.entity);
+              console.log(scope.mySchemaArray);
 
               scope.formattedNamespaceType = formatNamespaceType(scope.entity.namespaceType);
 
@@ -181,20 +187,35 @@
 
           });
         }
-
       }
 
 
+      /**
+       * @name downloadSchema
+       *
+       * @memberof dhsniem.controller:DetailsCtrl
+       *
+       * @description Downloads all items in my schema to JSON file
+       */
       scope.downloadSchema = function downloadSchema() {
-        var schemaString = 'itemsToExport[]=' + scope.mySchemaArray.join('&itemsToExport[]=');
-        scope.url = NODE_URL + schemaString;
-        console.log(scope.url);
-        $window.open(scope.url, '_parent');
+          var schemaString = 'itemsToExport[]=' + scope.mySchemaIDs.join('&itemsToExport[]=');
+          scope.url = NODE_URL + schemaString;
+          console.log(scope.url);
+          $window.open(scope.url, '_parent');
       };
 
+
+      /**
+       * @name removeSchema
+       *
+       * @memberof dhsniem.controller:DetailsCtrl
+       *
+       * @description Removes all items in my schema
+       */
       scope.removeSchema = function removeSchema() {
-        mySchemaCart.removeFromSchema();
-        scope.mySchemaArrayDetails = [];
+        mySchema.removeAllFromSchema();
+        scope.mySchemaIDs = [];
+        scope.mySchemaArray = [];
       }
 
 
