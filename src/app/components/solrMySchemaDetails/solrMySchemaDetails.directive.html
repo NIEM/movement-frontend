@@ -3,5 +3,59 @@
     <div class="my-schema-heading row">
       <h1 class="keyword-search-text">My Schema</h1>
     </div>
+    <div>
+      <p>Total ({{mySchemaLength}} items)</p>
+      <button>Remove All</button>
+      <button ng-click="downloadSchema()">Download All</button>
+    </div>
+
+
+    <div class="details-content">
+      <div class="details-desc">
+        <div class="contain-list">
+          <div class="niem-accordion" ng-repeat="entity in mySchemaArrayDetails">
+            <div class="niem-accordion-heading" ng-click="expandDetails()">
+              <div>
+                <h3>
+                  <span class="contain-title">{{entity.name}}
+                    <span ng-if="entity.type">({{entity.namespacePrefix}}:{{entity.type.name}})</span>
+                    <span ng-if="!entity.type">(abstract)</span>
+                  </span>
+                </h3>
+                <div class="namespace text-uppercase">{{formattedNamespaceType}}: {{entity.namespace}}</div>
+                <p>{{entity.definition}}</p>
+              </div>
+              <div>
+                <schema-remove-from-schema-button></schema-remove-from-schema-button>
+              </div>
+            </div>
+
+            <div ng-show="isOpen">
+              <div ng-if="!entity.type.elements" class="has-none">
+                <h3>{{entity.name}} does not contain any child elements.</h3>
+              </div>
+              <div class="niem-accordion-list">
+                <div ng-repeat="item in entity.type.elements">
+                  <div class="niem-accordion-item" ng-if="!item.type.elements">
+                  <span class="item-name">
+                    <a ui-sref="main.details({ entityID: item.id })">{{item.name}}</a>
+                  </span>
+                    <span class="item-type" ng-if="!!item.type.name">({{item.type.name}})</span>
+                    <span class="item-type" ng-if="item.type === 'abstract'">({{item.type}})</span>
+                  </div>
+                  <div ng-if="!!item.type.elements">
+                    <niem-child-accordion element-data="item" click-handler="getElementObjects"></niem-child-accordion>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+
   </section>
 </div>
