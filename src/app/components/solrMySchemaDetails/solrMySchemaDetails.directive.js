@@ -214,11 +214,9 @@
        */
       scope.removeSchema = function removeSchema() {
         mySchema.removeAllFromSchema();
-        scope.mySchemaIDs = [];
-        scope.mySchemaArray = [];
+          scope.mySchemaIDs = '';
+          scope.mySchemaArray = '';
       }
-
-
     }
   }
 })();

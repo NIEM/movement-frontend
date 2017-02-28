@@ -46,11 +46,11 @@
     }
 
     function removeAllFromSchema() {
-      localStorage.removeItem('mySchema');
+      localStorage.clear();
     }
 
     function removeFromSchema(searchID) {
-      
+
     }
   }
 
