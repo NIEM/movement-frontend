@@ -25,7 +25,8 @@
     return {
       addSchema: addSchema,
       getSchema: getSchema,
-      removeAllFromSchema: removeAllFromSchema
+      removeAllFromSchema: removeAllFromSchema,
+      removeFromSchema: removeFromSchema
     };
 
     function addSchema(searchID) {
@@ -48,6 +49,9 @@
       localStorage.removeItem('mySchema');
     }
 
+    function removeFromSchema(searchID) {
+      
+    }
   }
 
 })();

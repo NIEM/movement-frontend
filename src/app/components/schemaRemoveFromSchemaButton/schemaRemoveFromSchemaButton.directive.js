@@ -14,7 +14,7 @@
     .module('dhsniem')
     .directive('schemaRemoveFromSchemaButton', schemaRemoveFromSchemaButton);
 
-  function schemaRemoveFromSchemaButton($rootScope) {
+  function schemaRemoveFromSchemaButton(mySchema) {
     return {
       restrict: 'E',
       templateUrl: 'app/components/schemaRemoveFromSchemaButton/schemaRemoveFromSchemaButton.directive.html',
@@ -25,12 +25,10 @@
      *  Defines variables and functions within schemaRemoveFromSchemaButton scope
      */
     function link(scope) {
-
-      $rootScope.mySchemaArray = [];
-
+      
       scope.removeFromSchema = function removeFromSchema(searchID) {
-        var index = $rootScope.mySchemaArray.indexOf(searchID);
-        $rootScope.mySchemaArray.splice(index, 1);
+        console.log(searchID);
+        mySchema.removeFromSchema(searchID);
       }
     }
   }
