@@ -27,7 +27,7 @@
     /**
      *  Defines variables and functions within solrSearchInput scope
      */
-    function link(scope, element, attrs) {
+    function link(scope) {
 
       function init () {
         scope.searchQuery = $location.search().q;
