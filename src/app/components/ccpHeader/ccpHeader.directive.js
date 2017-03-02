@@ -28,6 +28,14 @@
      */
     function link(scope) {
       scope.schemaCount = mySchema.getSchemaCount();
+
+      scope.$watch(function() {
+        return mySchema.getSchemaCount();
+      }, function(updatedSchemaIDs){
+        scope.schemaCount = updatedSchemaIDs;
+        console.log(scope.schemaCount);
+      });
+
     }
 
   }
