@@ -33,9 +33,7 @@
        */
       function init() {
         scope.isOpen = false;
-
         getSchema();
-
       }
 
       init();
@@ -65,11 +63,9 @@
       function getSearchParams(query) {
         var params = {
           'q': query,
-          'wt': 'json',
           'json.wrf': 'JSON_CALLBACK',
           'json.nl': 'map'
         };
-
         return params;
       }
 
@@ -134,9 +130,7 @@
        */
       function getTypeObject(element) {
         var deferred = $q.defer();
-
         var query = 'name:' + element.type.split(':')[1];
-
         solrRequest.makeSolrRequest(getSearchParams(query)).then(function (data) {
           deferred.resolve(data.response.docs[0]);
         });
@@ -154,39 +148,45 @@
        */
       function getSchema() {
         scope.mySchemaIDs = mySchema.getSchema();
-        console.log(scope.mySchemaIDs);
-
         scope.mySchemaArray = [];
-
+        scope.count = 0;
         if (scope.mySchemaIDs) {
-
-          scope.mySchemaIDs.forEach(function (element) {
-
-            var query = 'id:' + element.split(':')[0] + '\\:' + element.split(':')[1];
-
-            solrRequest.makeSolrRequest(getSearchParams(query)).then(function (data) {
-              scope.entity = data.response.docs[0];
-              console.log(scope.entity);
-
-              scope.mySchemaArray.push(scope.entity);
-              console.log(scope.mySchemaArray);
-
-              scope.formattedNamespaceType = formatNamespaceType(scope.entity.namespaceType);
-
-              if (scope.entity.type) {
-                getTypeObject(scope.entity).then(function (data) {
-                  scope.entity.type = data;
-                  console.log(data);
-                  if (data.elements) {
-                    scope.getElementObjects(scope.entity.type);
-                  }
-                });
-              }
-              $window.document.title = scope.entity.name + ' - CCP Details';
-            });
-
-          });
+          getSchemaDetails();
         }
+      }
+
+      /**
+       * @name getSchemaDetails
+       *
+       * @memberof dhsniem.controller:DetailsCtrl
+       *
+       * @description Returns the details for each item in my schema
+       */
+      function getSchemaDetails(){
+        var mySchemaItem = scope.mySchemaIDs[scope.count];
+        var query = 'id:' + mySchemaItem.split(':')[0] + '\\:' + mySchemaItem.split(':')[1];
+        solrRequest.makeSolrRequest(getSearchParams(query)).then(function (data) {
+          scope.entity = data.response.docs[0];
+          scope.mySchemaArray.push(scope.entity);
+
+          scope.formattedNamespaceType = formatNamespaceType(scope.entity.namespaceType);
+
+          if (scope.entity.type) {
+            getTypeObject(scope.entity).then(function (data) {
+              scope.entity.type = data;
+              if (data.elements) {
+                scope.getElementObjects(scope.entity.type);
+              }
+            });
+          }
+
+          $window.document.title = scope.entity.name + ' - CCP Details';
+
+          scope.count++;
+          if (scope.count != scope.mySchemaIDs.length){
+            getSchemaDetails();
+          }
+        });
       }
 
 
@@ -200,7 +200,6 @@
       scope.downloadSchema = function downloadSchema() {
           var schemaString = 'itemsToExport[]=' + scope.mySchemaIDs.join('&itemsToExport[]=');
           scope.url = NODE_URL + schemaString;
-          console.log(scope.url);
           $window.open(scope.url, '_parent');
       };
 

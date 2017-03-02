@@ -4,8 +4,6 @@
   }
   padding: 36px 30px 0 30px;
   background-color: transparent;
-  min-width: $niem-min-width;
-  margin: 0 auto;
   .header-top {
     padding-bottom: 30px;
     border-bottom: 1px solid $white;
@@ -23,9 +21,9 @@
       padding-top: 30px;
       letter-spacing: 2px;
       .header-inline-block {
-          display: inline-block;
-          color: $marine-blue;
-          font-weight: 600;
+        display: inline-block;
+        color: $marine-blue;
+        font-weight: 600;
         a {
           color: $marine-blue;
           font-weight: 600;
@@ -42,27 +40,22 @@
     }
   }
 
-  .item-button {
-    color: $marine-blue;
-    font-size: 18px;
-    letter-spacing: 2px;
-    float: right;
-    .dark-blue-button {
-      background-color: $marine-blue;
-      color: $white;
-      padding: 7px;
-      border: none;
-      border-radius: 4px;
-      vertical-align: middle;
-      &:hover {
-        background-color: $evergreen;
-      }
-      a, a:active, a:hover, a:visited {
-        color: $white;
-        font-size: 14px;
-        letter-spacing: 0.9px;
-        text-decoration: none;
-      }
+  .header-my-schema {
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 23px;
+    .schema-count {
+      @include flex-and-align-center;
+      justify-content: center;
+      width: 20px;
+      height: 20px;
+      border-radius: 50px;
+      box-shadow: 0 1px 2.5px 0 $shady-grey;
+      background: $white;
+      color: #0073b2;
+      position: relative;
+      top: -10px;
+      right: 11px;
     }
   }
 }
