@@ -8,28 +8,27 @@
  * @description
  * Main header throughout app
  */
-(function() {
+(function () {
 
   angular
     .module('dhsniem')
     .directive('ccpHeader', ccpHeader);
 
-  function ccpHeader() {
+  function ccpHeader(mySchema) {
     return {
       restrict: 'E',
       templateUrl: 'app/components/ccpHeader/ccpHeader.directive.html',
-      scope: {},
       link: link
     };
 
+
+    /**
+     *  Defines variables and functions within header scope
+     *
+     */
+    function link(scope) {
+      scope.schemaCount = mySchema.getSchemaCount();
+    }
+
   }
-
-  /**
-   *  Defines variables and functions within niemExport scope
-   *
-   */
-  function link(scope) {
-
-  }
-
 })();
