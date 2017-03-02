@@ -3,6 +3,11 @@
     <div class="my-schema-heading row">
       <h1 class="keyword-search-text">My Schema</h1>
     </div>
+
+    <div class="empty-my-schema" ng-if="!mySchemaIDs">
+      <h2>Your cart is currently empty.</h2>
+    </div>
+
     <div class="my-schema-actions" ng-if="mySchemaIDs">
       <h2 class="my-schema-count">Total ({{mySchemaArray.length}} items)</h2>
       <button ng-click="removeSchema()" class="remove-from-schema-button">Remove All</button>
@@ -10,9 +15,6 @@
     </div>
 
     <div class="my-schema-list">
-      <div class="empty-my-schema" ng-if="!mySchemaArray">
-        <h3>Your cart is currently empty.</h3>
-      </div>
       <div class="schema-item" ng-repeat="entity in mySchemaArray">
         <div class="schema-content-wrapper" ng-click="expandDetails()">
           <div class="schema-content col-sm-8">
@@ -31,10 +33,10 @@
         </div>
 
         <div ng-show="isOpen" class="schema-details">
-          <div class="contain-list">
-            <div class="niem-accordion">
+          <div class="niem-accordion">
+            <div class="contain-list">
               <div ng-if="!entity.type.elements" class="has-none">
-                <h3>{{entity.name}} does not contain any child elements.</h3>
+                <p>{{entity.name}} does not contain any child elements.</p>
               </div>
               <div class="niem-accordion-list">
                 <div ng-repeat="item in entity.type.elements">
