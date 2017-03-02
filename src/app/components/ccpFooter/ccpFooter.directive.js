@@ -24,14 +24,12 @@
       link: link
     };
 
-  }
 
   /**
-   *  Defines variables and functions within niemExport scope
+   *  Defines variables and functions within footer scope
    *
    */
-  function link(scope) {
+  function link() {}
 
   }
-
 })();

@@ -6,7 +6,7 @@
  * @name MySchemaCtrl
  *
  * @description
- * Controller for dhsniem
+ * Controller for My Schema Page of dhsniem app
  */
 (function() {
 
@@ -14,19 +14,6 @@
     .module('dhsniem')
     .controller('MySchemaCtrl', MySchemaCtrl);
 
-  function MySchemaCtrl() {
-
-    /**
-     * @name init
-     *
-     * @description Perform actions on page load
-     */
-    function init() {
-    }
-
-    init();
-
-  }
-
+  function MySchemaCtrl() {}
 
 })();
