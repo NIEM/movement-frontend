@@ -148,6 +148,7 @@
        */
       function getSchema() {
         scope.mySchemaIDs = mySchema.getSchema();
+        console.log(scope.mySchemaIDs);
         scope.mySchemaArray = [];
         scope.count = 0;
         if (scope.mySchemaIDs) {

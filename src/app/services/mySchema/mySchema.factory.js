@@ -14,7 +14,7 @@
     .module('dhsniem')
     .factory('mySchema', mySchema);
 
-  function mySchema () {
+  function mySchema() {
 
     if (localStorage.getItem('mySchema')) {
       var schemaList = JSON.parse(localStorage.getItem('mySchema'));
@@ -41,13 +41,23 @@
     }
 
     function removeAllFromSchema() {
-      localStorage.clear();
+      localStorage.removeItem('mySchema');
     }
 
     function getSchemaCount() {
       var schemaCount = JSON.parse(localStorage.getItem('mySchema')).length;
       return schemaCount;
+
+      // var schemaCount = JSON.parse(localStorage.getItem('mySchema')).length;
+      if (JSON.parse(localStorage.getItem('mySchema')).length > 0) {
+        var schemaCount = JSON.parse(localStorage.getItem('mySchema')).length;
+        return schemaCount;
+      } else {
+        var schemaCount = 0;
+        return schemaCount;
+      }
     }
+
 
     function removeFromSchema(searchID) {
 
