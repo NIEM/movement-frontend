@@ -45,17 +45,12 @@
     }
 
     function getSchemaCount() {
-      var schemaCount = JSON.parse(localStorage.getItem('mySchema')).length;
-      return schemaCount;
-
-      // var schemaCount = JSON.parse(localStorage.getItem('mySchema')).length;
-      if (JSON.parse(localStorage.getItem('mySchema')).length > 0) {
+      if (getSchema()) {
         var schemaCount = JSON.parse(localStorage.getItem('mySchema')).length;
-        return schemaCount;
       } else {
         var schemaCount = 0;
-        return schemaCount;
       }
+      return schemaCount;
     }
 
 

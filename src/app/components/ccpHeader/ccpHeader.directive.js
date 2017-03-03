@@ -33,7 +33,6 @@
         return mySchema.getSchemaCount();
       }, function(updatedSchemaIDs){
         scope.schemaCount = updatedSchemaIDs;
-        console.log(scope.schemaCount);
       });
 
     }
