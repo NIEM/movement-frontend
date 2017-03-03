@@ -14,7 +14,7 @@
     .module('dhsniem')
     .factory('mySchema', mySchema);
 
-  function mySchema () {
+  function mySchema() {
 
     if (localStorage.getItem('mySchema')) {
       var schemaList = JSON.parse(localStorage.getItem('mySchema'));
@@ -41,11 +41,15 @@
     }
 
     function removeAllFromSchema() {
-      localStorage.clear();
+      localStorage.removeItem('mySchema');
     }
 
     function getSchemaCount() {
-      var schemaCount = JSON.parse(localStorage.getItem('mySchema')).length;
+      if (getSchema()) {
+        var schemaCount = JSON.parse(localStorage.getItem('mySchema')).length;
+      } else {
+        var schemaCount = 0;
+      }
       return schemaCount;
     }
 

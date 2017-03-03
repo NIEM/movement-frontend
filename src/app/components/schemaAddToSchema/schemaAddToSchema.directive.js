@@ -26,7 +26,6 @@
      */
     function link(scope) {
       scope.addToSchema = function (searchID) {
-        console.log(searchID);
         mySchema.addSchema(searchID);
       };
 
