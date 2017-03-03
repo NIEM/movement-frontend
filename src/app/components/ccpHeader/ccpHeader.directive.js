@@ -28,6 +28,13 @@
      */
     function link(scope) {
       scope.schemaCount = mySchema.getSchemaCount();
+
+      scope.$watch(function() {
+        return mySchema.getSchemaCount();
+      }, function(updatedSchemaCount){
+        scope.schemaCount = updatedSchemaCount;
+      });
+
     }
 
   }
