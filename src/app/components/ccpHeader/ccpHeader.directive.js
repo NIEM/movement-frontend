@@ -31,8 +31,8 @@
 
       scope.$watch(function() {
         return mySchema.getSchemaCount();
-      }, function(updatedSchemaIDs){
-        scope.schemaCount = updatedSchemaIDs;
+      }, function(updatedSchemaCount){
+        scope.schemaCount = updatedSchemaCount;
       });
 
     }

@@ -53,7 +53,6 @@
       return schemaCount;
     }
 
-
     function removeFromSchema(searchID) {
 
     }
