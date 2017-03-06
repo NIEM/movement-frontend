@@ -85,7 +85,7 @@
         box-shadow: none;
       }
       .panel-title > a {
-        text-decoration: none !important;
+        text-decoration: none;
       }
       .panel-body {
         padding: 0;
@@ -107,7 +107,6 @@
             .item-title {
               color: $ocean-blue;
               display: inline-block;
-              //margin: 21px 0 11px 0;
               letter-spacing: 0.5px;
               &:hover {
                 text-decoration: underline;
