@@ -32,13 +32,12 @@
        * @description Initializes the view to set scope variables on page load and whenever a new search is triggered.
        */
       function init() {
-        scope.isOpen = false;
         getSchema();
       }
 
       init();
 
-      
+
       /**
        * @name getSearchParams
        *
@@ -190,9 +189,6 @@
               }
             });
           }
-
-          scope.isOpen = !scope.isOpen;
-
         });
       };
 
