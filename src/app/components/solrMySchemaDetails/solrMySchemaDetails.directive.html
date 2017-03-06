@@ -20,8 +20,8 @@
           <div class="schema-content col-sm-8">
             <h3>
                   <span class="item-title">{{entity.name}}
-                    <span ng-if="entity.typeString">({{entity.typeString}})</span>
-                    <span ng-if="!entity.typeString">(abstract)</span>
+                    <span ng-if="entity.typeString" class="item-type">({{entity.typeString}})</span>
+                    <span ng-if="!entity.typeString" class="item-type">(abstract)</span>
                   </span>
             </h3>
             <p class="item-description">{{entity.definition}}</p>
@@ -36,7 +36,7 @@
           <div class="niem-accordion">
             <div class="contain-list">
               <div ng-if="!entity.type.elements" class="has-none">
-                <p>{{entity.name}} does not contain any child elements.</p>
+                <h3>{{entity.name}} does not contain any child elements.</h3>
               </div>
 
               <div class="niem-accordion-list">

@@ -107,6 +107,10 @@
                 overflow-wrap: break-word;
               }
             }
+            .item-type {
+              color: $body-text-color;
+              font-size: 14px;
+            }
             .item-description {
               color: $body-text-color;
               margin-bottom: 15px;
