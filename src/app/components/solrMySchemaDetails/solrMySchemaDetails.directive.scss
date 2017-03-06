@@ -1,11 +1,9 @@
 .solr-my-schema-details {
-  padding: 0 43px;
 
   .content {
+    max-width: $niem-max-width;
     background-color: $white;
     position: relative;
-    min-width: $niem-min-width;
-    max-width: $niem-max-width;
     height: calc(100% - 373px);
     margin: 25px auto;
     .my-schema-heading {
