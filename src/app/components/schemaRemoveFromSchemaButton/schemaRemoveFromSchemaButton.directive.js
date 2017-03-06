@@ -25,9 +25,8 @@
      *  Defines variables and functions within schemaRemoveFromSchemaButton scope
      */
     function link(scope) {
-      
+
       scope.removeFromSchema = function removeFromSchema(searchID) {
-        console.log(searchID);
         mySchema.removeFromSchema(searchID);
       }
     }
