@@ -32,6 +32,7 @@
        * @description Initializes the view to set scope variables on page load and whenever a new search is triggered.
        */
       function init() {
+        $window.document.title = 'My Schema';
         getSchema();
       }
 
@@ -153,9 +154,9 @@
        */
       function getSchemaArray() {
 
-        scope.mySchemaIDs.forEach(function(element, index) {
+        scope.mySchemaIDs.forEach(function(element) {
 
-          var query = 'id:' + scope.mySchemaIDs[index].split(':')[0] + '\\:' + scope.mySchemaIDs[index].split(':')[1];
+          var query = 'id:' + element.split(':')[0] + '\\:' + element.split(':')[1];
 
           solrRequest.makeSolrRequest(getSearchParams(query)).then(function (data) {
             var entity = data.response.docs[0];
@@ -163,8 +164,6 @@
             scope.mySchemaArray.push(entity);
 
             scope.formattedNamespaceType = formatNamespaceType(entity.namespaceType);
-
-            $window.document.title = 'My Schema';
 
           });
         });
@@ -178,14 +177,14 @@
        *
        * @description Returns the type details for each item in my schema
        */
-      scope.getSchemaDetails = function getSchemaDetails(){
+      scope.getSchemaDetails = function getSchemaDetails() {
 
-        scope.mySchemaArray.forEach(function(element, index) {
-          if (scope.mySchemaArray[index].type) {
-            getTypeObject(scope.mySchemaArray[index]).then(function (data) {
-              scope.mySchemaArray[index].type = data;
+        scope.mySchemaArray.forEach(function(element) {
+          if (element.type) {
+            getTypeObject(element).then(function (data) {
+              element.type = data;
               if (data.elements) {
-                scope.getElementObjects(scope.mySchemaArray[index].type);
+                scope.getElementObjects(element.type);
               }
             });
           }
