@@ -38,17 +38,7 @@
 
       init();
 
-
-      /**
-       * @name expandDetails
-       *
-       * @description Accordion for my schema page
-       */
-      scope.expandDetails = function () {
-        scope.isOpen = !scope.isOpen;
-      };
-
-
+      
       /**
        * @name getSearchParams
        *
@@ -144,50 +134,67 @@
        *
        * @memberof dhsniem.controller:DetailsCtrl
        *
-       * @description Returns the elements in my schema
+       * @description Returns the element IDs in my schema
        */
       function getSchema() {
         scope.mySchemaIDs = mySchema.getSchema();
         scope.mySchemaArray = [];
-        scope.count = 0;
         if (scope.mySchemaIDs) {
-          getSchemaDetails();
+          getSchemaArray();
         }
       }
+
+
+      /**
+       * @name getSchemaArray
+       *
+       * @memberof dhsniem.controller:DetailsCtrl
+       *
+       * @description Calls solr and returns information about each of the elements in my schema
+       */
+      function getSchemaArray() {
+
+        scope.mySchemaIDs.forEach(function(element, index) {
+
+          var query = 'id:' + scope.mySchemaIDs[index].split(':')[0] + '\\:' + scope.mySchemaIDs[index].split(':')[1];
+
+          solrRequest.makeSolrRequest(getSearchParams(query)).then(function (data) {
+            var entity = data.response.docs[0];
+            entity.typeString = data.response.docs[0].type;
+            scope.mySchemaArray.push(entity);
+
+            scope.formattedNamespaceType = formatNamespaceType(entity.namespaceType);
+
+            $window.document.title = 'My Schema';
+
+          });
+        });
+      }
+
 
       /**
        * @name getSchemaDetails
        *
        * @memberof dhsniem.controller:DetailsCtrl
        *
-       * @description Returns the details for each item in my schema
+       * @description Returns the type details for each item in my schema
        */
-      function getSchemaDetails(){
-        var mySchemaItem = scope.mySchemaIDs[scope.count];
-        var query = 'id:' + mySchemaItem.split(':')[0] + '\\:' + mySchemaItem.split(':')[1];
-        solrRequest.makeSolrRequest(getSearchParams(query)).then(function (data) {
-          scope.entity = data.response.docs[0];
-          scope.mySchemaArray.push(scope.entity);
+      scope.getSchemaDetails = function getSchemaDetails(){
 
-          scope.formattedNamespaceType = formatNamespaceType(scope.entity.namespaceType);
-
-          if (scope.entity.type) {
-            getTypeObject(scope.entity).then(function (data) {
-              scope.entity.type = data;
+        scope.mySchemaArray.forEach(function(element, index) {
+          if (scope.mySchemaArray[index].type) {
+            getTypeObject(scope.mySchemaArray[index]).then(function (data) {
+              scope.mySchemaArray[index].type = data;
               if (data.elements) {
-                scope.getElementObjects(scope.entity.type);
+                scope.getElementObjects(scope.mySchemaArray[index].type);
               }
             });
           }
 
-          $window.document.title = scope.entity.name + ' - CCP Details';
+          scope.isOpen = !scope.isOpen;
 
-          scope.count++;
-          if (scope.count != scope.mySchemaIDs.length){
-            getSchemaDetails();
-          }
         });
-      }
+      };
 
 
       /**

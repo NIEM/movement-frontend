@@ -16,12 +16,12 @@
 
     <div class="my-schema-list">
       <div class="schema-item" ng-repeat="entity in mySchemaArray">
-        <div class="schema-content-wrapper" ng-click="expandDetails()">
+        <div class="schema-content-wrapper" ng-click="getSchemaDetails()">
           <div class="schema-content col-sm-8">
             <h3>
                   <span class="item-title">{{entity.name}}
-                    <span ng-if="entity.type">({{entity.type.namespacePrefix}}:{{entity.type.name}})</span>
-                    <span ng-if="!entity.type">(abstract)</span>
+                    <span ng-if="entity.typeString">({{entity.typeString}})</span>
+                    <span ng-if="!entity.typeString">(abstract)</span>
                   </span>
             </h3>
             <p class="item-description">{{entity.definition}}</p>
@@ -38,6 +38,7 @@
               <div ng-if="!entity.type.elements" class="has-none">
                 <p>{{entity.name}} does not contain any child elements.</p>
               </div>
+
               <div class="niem-accordion-list">
                 <div ng-repeat="item in entity.type.elements">
                   <div class="niem-accordion-item" ng-if="!item.type.elements">
