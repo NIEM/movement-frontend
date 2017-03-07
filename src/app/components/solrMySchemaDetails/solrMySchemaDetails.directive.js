@@ -120,7 +120,13 @@
        */
       function getTypeObject(element) {
         var deferred = $q.defer();
-        var query = 'name:' + element.type.split(':')[1];
+
+        if (element.type.split) {
+          var query = 'name:' + element.type.split(':')[1];
+        } else {
+          var query = 'name:' + element.type.id.split(':')[1];
+        }
+
         solrRequest.makeSolrRequest(getSearchParams(query)).then(function (data) {
           deferred.resolve(data.response.docs[0]);
         });
