@@ -159,14 +159,16 @@
               padding-top: 17px;
               border-bottom: 1px solid $silver;
               h2 {
-                letter-spacing: 0.5px;
-                padding-left: 18px;
-                color: $marine-blue;
-                display: inline-block;
-                margin: 0;
-                .contain-type {
-                  color: $ocean-blue;
+                .contain-title {
+                  letter-spacing: 0.5px;
+                  padding-left: 18px;
+                  color: $marine-blue;
                   display: inline-block;
+                  margin: 0;
+                }
+                .contain-type {
+                  color: $body-text-color;
+                  font-size: 14px;
                 }
               }
             }
