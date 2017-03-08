@@ -25,13 +25,12 @@
         scope.dataFound = false;
         scope.isOpen = false;
 
-        
         /**
-         * @name onClick
+         * @name expandElement
          *
-         * @description Handler for selection of accordion item
+         * @description Expands the accordion for the clicked element
          */
-        scope.onClick = function() {
+        scope.expandElement = function() {
           scope.isOpen = !scope.isOpen;
 
           if (scope.isOpen && scope.dataFound === false) {

@@ -1,26 +1,20 @@
 <div class="niem-child-accordion">
 
-  <div class="niem-child-accordion-heading" ng-click="onClick()" ng-cloak>
+  <div class="niem-child-accordion-heading" ng-click="expandElement()" ng-cloak>
     <img src="images/ic_carot.svg" class="carot-img float-left" ng-class="{'caret-down': isOpen}">
     <div class="niem-child-accordion-heading-text">
-      <span class="child-heading-title">
-        <a ui-sref="main.details({ entityID: elementData.id })">{{elementData.name}}</a>
-      </span>
-      <span class="child-heading-type" ng-if="!!elementData.type.name">({{elementData.type.id}})</span>
-      <span class="child-heading-type" ng-if="elementData.type === 'abstract'">({{elementData.type}})</span>
+      <a class="child-heading-title" ui-sref="main.details({ entityID: elementData.id })">{{elementData.name}}</a>
+      <span class="child-heading-type">({{elementData.type.id ? elementData.type.id : 'abstract'}})</span>
     </div>
   </div>
 
   <div class="niem-accordion-list" ng-show="isOpen">
     <div ng-repeat="currElement in elementData.type.elements">
       <div class="niem-accordion-item" ng-if="!currElement.type.elements">
-        <span class="item-name">
-          <a ui-sref="main.details({ entityID: currElement.id })">{{currElement.name}}</a>
-        </span>
-        <span class="item-type" ng-if="!!currElement.type.name">({{currElement.type.name}})</span>
-        <span class="item-type" ng-if="currElement.type === 'abstract'">({{currElement.type}})</span>
+        <a class="item-name" ui-sref="main.details({ entityID: currElement.id })">{{currElement.name}}</a>
+        <span class="item-type">({{currElement.type.name ? currElement.type.name : 'abstract'}})</span>
       </div>
-      <div ng-if="!!currElement.type.elements">
+      <div ng-if="currElement.type.elements">
         <niem-child-accordion element-data="elementData.type.elements[$index]"></niem-child-accordion>
       </div>
     </div>
