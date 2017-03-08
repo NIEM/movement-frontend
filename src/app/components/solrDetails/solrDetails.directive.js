@@ -14,7 +14,7 @@
     .module('dhsniem')
     .directive('solrDetails', solrDetails);
 
-  function solrDetails(solrRequest, $location, $window, $q) {
+  function solrDetails(solrRequest, $location, $window) {
     return {
       restrict: 'E',
       templateUrl: 'app/components/solrDetails/solrDetails.directive.html',
@@ -35,25 +35,76 @@
        * @description Initializes controller, retrieves data for the specific entity
        */
       function init() {
-        scope.doc = {
-          id: $location.search().entityID
-        };
 
-        var query = 'id:' + scope.doc.id.split(':')[0] + '\\:' + scope.doc.id.split(':')[1];
+        var entityID = $location.search().entityID;
+        $window.document.title = entityID + ' - CCP Details';
 
-        solrRequest.makeSolrRequest(getSearchParams(query)).then(function (data) {
-          scope.entity = data.response.docs[0];
+        getDocById(entityID).then(function (entityDoc) {
+          scope.entity = entityDoc;
           scope.formattedNamespaceType = formatNamespaceType(scope.entity.namespaceType);
           if (scope.entity.type) {
-            getTypeObject(scope.entity).then(function (data) {
-              scope.entity.type = data;
-              if (data.elements) {
-                scope.getElementObjects(scope.entity.type);
+            getDocById(scope.entity.type).then(function (typeDoc) {
+              scope.entity.type = typeDoc;
+              if (typeDoc.elements) {
+                scope.getElementObjects(typeDoc.elements).then(function(elements) {
+                  scope.entity.type.elements = elements;
+                });
               }
             });
           }
-          $window.document.title = scope.entity.name + ' - CCP Details';
         });
+      }
+
+
+      /**
+       * @name getDocById
+       *
+       * @description Makes a request to Solr to retrieve the document for an entity ID.
+       *
+       * @param id - Unique ID of the NIEM entity
+       *
+       * @retruns {Promise} 
+       */
+      function getDocById(id) {
+        var idQuery = 'id:' + splitId(id);
+        return solrRequest.makeSolrRequest(getSearchParams(idQuery)).then(function (solrResponse) {
+          return solrResponse.response.docs[0];
+        });
+      }
+
+
+      /**
+       * @name getDocsByIds
+       *
+       * @description Makes a request to Solr to retrieve n documents from n ids
+       *
+       * @param ids - Array of unique NIEM entity ids
+       *
+       * @retruns {Promise} 
+       */
+      function getDocsByIds(ids) {
+        var orQueryString = ids.map( (id) => {
+          return splitId(id);
+        }).join(' OR ');
+        var idsQuery = 'id:(' + orQueryString + ')';
+
+        return solrRequest.makeSolrRequest(getSearchParams(idsQuery)).then(function (solrResponse) {
+          return solrResponse.response.docs;
+        });
+      }
+
+
+      /**
+       * @name splitId
+       *
+       * @description Split an id to prepare it for a solr query with the colon
+       *
+       * @param id - A NIEM id
+       *
+       * @retruns {string} 
+       */
+      function splitId(id) {
+        return id.split(':')[0] + '\\:' + id.split(':')[1];
       }
 
 
@@ -82,50 +133,33 @@
       /**
        * @name getElementObjects
        *
-       * @memberof dhsniem.controller:DetailsCtrl
+       * @description Fetches full element documents with full type doc references for a given list of elements
        *
-       * @description Modifies a Type object's element array from a string reference to full Element objects
+       * @param elements - an array of elements
        *
-       * @param typeDoc - type object (document)
+       * @returns {Promise}
        */
-      scope.getElementObjects = function getElementObjects(typeDoc) {
-        typeDoc.elements.forEach(function (element, index, arr) {
-          var query = 'name:' + element.split(':')[1];
-          solrRequest.makeSolrRequest(getSearchParams(query)).then(function (data) {
-            arr[index] = data.response.docs[0];
+      scope.getElementObjects = function getElementObjects(elements) {
 
-            if (arr[index].type) {
-              getTypeObject(arr[index]).then(function (data) {
-                arr[index].type = data;
+        return getDocsByIds(elements).then(function (elementDocs) {
+
+          elementDocs = elementDocs.filter(function (elementDoc) {
+            return elementDoc.isBG;
+          });
+
+          return Promise.all(elementDocs.map(function (elementDoc) {
+            if (elementDoc.type) {
+              return getDocById(elementDoc.type).then(function (typeDoc) {
+                elementDoc.type = typeDoc;
+                return elementDoc;
               });
             } else {
-                arr[index].type = 'abstract';
+              return elementDoc;
             }
-          });
+          }));
         });
+
       };
-
-
-      /**
-       * @name getTypeObject
-       *
-       * @memberof dhsniem.controller:DetailsCtrl
-       *
-       * @description Returns the full type object for an element's type field
-       *
-       * @param element
-       */
-      function getTypeObject(element) {
-        var deferred = $q.defer();
-
-        var query = 'name:' + element.type.split(':')[1];
-
-        solrRequest.makeSolrRequest(getSearchParams(query)).then(function (data) {
-          deferred.resolve(data.response.docs[0]);
-        });
-
-        return deferred.promise;
-      }
 
 
       /**
@@ -145,7 +179,6 @@
           'json.wrf': 'JSON_CALLBACK',
           'json.nl': 'map'
         };
-
         return params;
       }
 

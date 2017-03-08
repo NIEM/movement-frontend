@@ -36,7 +36,9 @@
           scope.isOpen = !scope.isOpen;
 
           if (scope.isOpen && scope.dataFound === false) {
-            scope.clickHandler(scope.elementData.type);
+            scope.clickHandler(scope.elementData.type.elements).then(function (elements) {
+              scope.elementData.type.elements = elements;
+            });
             scope.dataFound = true;
           }
         };
