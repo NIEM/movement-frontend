@@ -21,7 +21,7 @@
         <span class="item-type" ng-if="currElement.type === 'abstract'">({{currElement.type}})</span>
       </div>
       <div ng-if="!!currElement.type.elements">
-        <niem-child-accordion element-data="elementData.type.elements[$index]" click-handler="clickHandler"></niem-child-accordion>
+        <niem-child-accordion element-data="elementData.type.elements[$index]"></niem-child-accordion>
       </div>
     </div>
   </div>
