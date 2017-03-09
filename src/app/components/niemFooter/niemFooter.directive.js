@@ -3,7 +3,7 @@
 /**
  * @ngdoc directive
  *
- * @name ccp
+ * @name niemFooter
  *
  * @description
  * Main footer throughout app
@@ -12,12 +12,12 @@
 
   angular
     .module('dhsniem')
-    .directive('ccpFooter', ccpFooter);
+    .directive('niemFooter', niemFooter);
 
-  function ccpFooter() {
+  function niemFooter() {
     return {
       restrict: 'E',
-      templateUrl: 'app/components/ccpFooter/ccpFooter.directive.html',
+      templateUrl: 'app/components/niemFooter/niemFooter.directive.html',
       scope: {
         isAbsolutePositioning: '='
       },
