@@ -29,7 +29,7 @@
           <uib-accordion close-others="false" ng-click="expandTree(entity)">
             <div uib-accordion-group>
               <div uib-accordion-heading>
-                <p class="accordion-heading-text">{{entity.name}} comes with other elements</p>
+                <p class="accordion-heading-text">{{entity.name}} comes with other elements - <span class="toggle-button">{{entity.expanded ? 'Hide Details' : 'Show Details'}}</span></p>
               </div>
               <div ng-repeat="item in entity.type.elements">
                 <div class="niem-accordion-item" ng-if="!item.type.elements">

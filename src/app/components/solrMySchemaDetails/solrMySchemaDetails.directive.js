@@ -73,6 +73,7 @@
           });
           entity.dataFound = true;
         }
+        entity.expanded = !entity.expanded;
       };
 
 

@@ -113,6 +113,10 @@
     .accordion-heading-text {
       font-size: 14px;
       font-style: italic;
+      .toggle-button {
+        color: $ocean-blue;
+        font-style: normal;
+      }
     }
     .carot-img {
       display: inline-block;
