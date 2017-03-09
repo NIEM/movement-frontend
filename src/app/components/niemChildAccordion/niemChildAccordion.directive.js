@@ -14,29 +14,29 @@
     .module('dhsniem')
     .directive('niemChildAccordion', niemChildAccordion);
 
-  function niemChildAccordion() {
+  function niemChildAccordion(niemTree) {
     return {
       restrict: 'E',
       templateUrl: 'app/components/niemChildAccordion/niemChildAccordion.directive.html',
       scope: {
-        elementData: '=',
-        clickHandler: '='
+        elementData: '='
       },
       link: function(scope) {
         scope.dataFound = false;
         scope.isOpen = false;
 
-        
         /**
-         * @name onClick
+         * @name expandElement
          *
-         * @description Handler for selection of accordion item
+         * @description Expands the accordion for the clicked element
          */
-        scope.onClick = function() {
+        scope.expandElement = function() {
           scope.isOpen = !scope.isOpen;
 
           if (scope.isOpen && scope.dataFound === false) {
-            scope.clickHandler(scope.elementData.type);
+            niemTree.getElementObjects(scope.elementData.type.elements).then(function (elements) {
+              scope.elementData.type.elements = elements;
+            });
             scope.dataFound = true;
           }
         };
