@@ -6,19 +6,24 @@
     position: relative;
     height: calc(100% - 373px);
     margin: 25px auto;
+
     .my-schema-heading {
       padding: 0 20px;
       background-image: linear-gradient(to left, $teal-gradient, $marine-blue);
       color: $white;
-      margin: 0 29px 0 30px;
+      display: flex;
+      align-items: center;
       letter-spacing: 0.5px;
       height: 80px;
+      h1 {
+        margin: 0;
+      }
     }
+
     .empty-my-schema {
       @include flex-and-align-center;
       justify-content: center;
-      margin: 30px 29px 30px 30px;
-      padding: 20px;
+      margin: 30px 0;
       color: $evergreen;
       letter-spacing: 0.5px;
       background-color: rgba(0, 115, 178, 0.1);
@@ -30,15 +35,14 @@
       justify-content: flex-end;
       align-items: center;
       border-bottom: 1px solid $teal;
-      margin: 0 30px;
-      padding: 20px 0;
+      padding: 20px 30px;
       .my-schema-count {
         margin: 0 10px 0 10px;
         color: $evergreen;
         letter-spacing: 0.5px;
       }
       .remove-from-schema-button {
-        margin: 0 10px 0 10px;
+        margin: 0 10px;
         background-color: $white;
         color: $ocean-blue;
         padding: 10px;
@@ -49,15 +53,9 @@
         &:hover {
           background-color: $silver;
         }
-        a, a:active, a:hover, a:visited {
-          color: $ocean-blue;
-          font-size: 14px;
-          letter-spacing: 0.9px;
-          text-decoration: none;
-        }
       }
 
-      .add-to-schema-button {
+      .download-schema-button {
         margin-left: 10px;
         background-color: $ocean-blue;
         color: $white;
@@ -70,19 +68,15 @@
         &:hover {
           background-color: $dark-ocean;
         }
-        a, a:active, a:hover, a:visited {
-          color: $white;
-          font-size: 14px;
-          letter-spacing: 0.9px;
-          text-decoration: none;
-        }
       }
     }
     .panel-group {
-      margin: 0 40px;
       .panel {
         border: none;
         box-shadow: none;
+      }
+      .panel-heading {
+        padding: 0;
       }
       .panel-title > a {
         text-decoration: none;
@@ -91,93 +85,62 @@
         padding: 0;
       }
     }
-    .my-schema-list {
-      padding: 0 50px;
-      &.empty-my-schema {
-        padding-top: 10px;
-        font-size: 16px;
-      }
-      .schema-item {
-        border-bottom: 1px solid $silver;
-        .schema-content-wrapper {
-          @include flex-and-align-center;
-          justify-content: space-between;
-          .schema-content {
-            display: inline-block;
-            .item-title {
-              color: $ocean-blue;
-              display: inline-block;
-              letter-spacing: 0.5px;
-              &:hover {
-                text-decoration: underline;
-              }
-              @media (max-width: 1024px) {
-                max-width: 424px;
-                overflow-wrap: break-word;
-              }
-            }
-            .item-type {
-              color: $body-text-color;
-              font-size: 14px;
-            }
-            .item-description {
-              color: $body-text-color;
-              margin-bottom: 15px;
-              letter-spacing: 0.5px;
-              font-size: 14px;
-            }
-            .item-namespace {
-              font-size: 14px;
-              letter-spacing: 0.5px;
-              color: $marine-blue;
-              margin-bottom: 13px;
-            }
+
+    .schema-item {
+      padding-left: 40px;
+      border-bottom: 1px solid $silver;
+      .schema-content-wrapper {
+        @include flex-and-align-center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        .item-title {
+          color: $ocean-blue;
+          display: inline-block;
+          letter-spacing: 0.5px;
+          &:hover {
+            text-decoration: underline;
           }
         }
+        .item-type {
+          color: $body-text-color;
+          font-size: 14px;
+        }
+        .item-description {
+          color: $body-text-color;
+          margin-bottom: 15px;
+          letter-spacing: 0.5px;
+          font-size: 14px;
+        }
+        .item-namespace {
+          font-size: 14px;
+          letter-spacing: 0.5px;
+          color: $marine-blue;
+          margin-bottom: 13px;
+        }
+      }
 
-        .schema-details {
-          .niem-accordion {
-            .contain-list {
-              .carot-img {
-                display: inline-block;
-                &.caret-down {
-                  transform: rotate(90deg);
-                }
-              }
-              .niem-accordion-list {
-                padding-left: 40px;
-                .niem-accordion-item {
-                  padding: 20px 0 20px 30px;
-                  letter-spacing: 0.5px;
-                  border-bottom: 1px solid $silver;
-                  .item-name {
-                    color: $ocean-blue;
-                    h3 {
-                      margin: 0;
-                    }
-                  }
-                  .item-type {
-                    color: $body-text-color;
-                  }
-                  &.additional-elements-link {
-                    background-color: rgba(209, 210, 212, 0.1);
-                    color: $ocean-blue;
-                    font-size: 14px;
-                    letter-spacing: 1px;
-                    text-align: right;
-                    padding-right: 10px;
-                    cursor: pointer;
-                  }
-                }
-              }
-            }
-            .has-none {
-              padding: 20px 70px;
-              p {
-                margin: 0;
-              }
-            }
+      .accordion-heading-text {
+        font-size: 14px;
+        font-style: italic;
+      }
+      .carot-img {
+        display: inline-block;
+        &.caret-down {
+          transform: rotate(90deg);
+        }
+      }
+      .niem-accordion-item {
+        padding: 20px 0 20px 30px;
+        letter-spacing: 0.5px;
+        border-bottom: 1px solid $silver;
+        .item-name {
+          color: $ocean-blue;
+          h3 {
+            margin: 0;
           }
+        }
+        .item-type {
+          color: $body-text-color;
         }
       }
     }
