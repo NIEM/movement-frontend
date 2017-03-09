@@ -1,14 +1,16 @@
 <div class="niem-child-accordion">
 
-  <div class="niem-child-accordion-heading" ng-click="expandElement()" ng-cloak>
-    <img src="images/ic_carot.svg" class="carot-img float-left" ng-class="{'caret-down': isOpen}">
+  <div class="niem-child-accordion-heading" ng-cloak tabindex="0"
+       ng-keypress="expandElement()" ng-click="expandElement()" role="heading" aria-controls="{{elementData.type.id}}"
+       aria-expanded="{{isOpen}}">
+    <img src="images/ic_carot.svg" alt="Accordion" class="carot-img float-left" ng-class="{'caret-down': isOpen}">
     <div class="niem-child-accordion-heading-text">
       <a class="child-heading-title" ui-sref="main.details({ entityID: elementData.id })">{{elementData.name}}</a>
       <span class="child-heading-type">({{elementData.type.id ? elementData.type.id : 'abstract'}})</span>
     </div>
   </div>
 
-  <div class="niem-accordion-list" ng-show="isOpen">
+  <div class="niem-accordion-list" ng-show="isOpen" id="{{elementData.type.id}}">
     <div ng-repeat="currElement in elementData.type.elements">
       <div class="niem-accordion-item" ng-if="!currElement.type.elements">
         <a class="item-name" ui-sref="main.details({ entityID: currElement.id })">{{currElement.name}}</a>
