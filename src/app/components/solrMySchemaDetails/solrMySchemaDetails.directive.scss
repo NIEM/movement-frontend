@@ -124,6 +124,11 @@
         transform: rotate(90deg);
       }
     }
+    .niem-accordion-item-wrapper:last-of-type {
+      .niem-accordion-item {
+        border-bottom: none;
+      }
+    }
     .niem-accordion-item {
       padding: 20px 0 20px 30px;
       letter-spacing: 0.5px;
