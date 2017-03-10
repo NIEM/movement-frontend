@@ -2,13 +2,13 @@
   <div class="form-group row">
     <form ng-submit="search()" class="form-inline">
       <div class="dropdown-group" uib-dropdown is-open="status.isopen" ng-show="!hasLabel">
-        <button type="button" class="domain-button" uib-dropdown-toggle tabindex="200">
+        <button id="domain-dropdown" type="button" class="domain-button" uib-dropdown-toggle tabindex="200">
           <span class="dropdown-text">{{selectedDomain}}</span>
           <span>
-            <img class="dropdown-caret" src="images/ic_carot.svg" aria-hidden="true">
+            <img class="dropdown-caret" src="images/ic_carot.svg" aria-hidden="true" alt="Select a domain">
           </span>
         </button>
-        <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
+        <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="domain-dropdown">
           <li role="menuitem"><a href="#" ng-click="domainSelect('All Domains')">All Domains</a></li>
           <li role="menuitem" ng-repeat="domain in domainNames | orderBy:sortByName">
             <a href="#" ng-click="domainSelect(domain)">{{domain}}</a>
@@ -26,7 +26,7 @@
           </div>
           <div class="input-group-btn">
             <button type="submit" class="search-btn btn" aria-label="Search" tabindex="210">
-              <img src="images/icon_search.svg" aria-hidden="true">
+              <img src="images/icon_search.svg" aria-hidden="true" alt="Search NIEM Open Source Tool">
             </button>
           </div>
         </div>
