@@ -1,7 +1,7 @@
 <div class="solr-search form-horizontal">
   <div class="form-group row">
     <form ng-submit="search()" class="form-inline">
-      <div class="dropdown-group" uib-dropdown is-open="status.isopen" ng-show="!hasLabel">
+      <div class="dropdown-group" uib-dropdown is-open="status.isopen" ng-if="!hasLabel">
         <button id="domain-dropdown" type="button" class="domain-button" uib-dropdown-toggle tabindex="200">
           <span class="dropdown-text">{{selectedDomain}}</span>
           <span>
@@ -16,7 +16,7 @@
         </ul>
       </div>
       <div class="input-group">
-        <label for="solr-search-input" ng-show="!!hasLabel && hasLabel">Search Model</label>
+        <label for="solr-search-input" ng-if="!!hasLabel && hasLabel">Search Model</label>
         <div class="search-group">
           <div ng-class="domainSpecified">
             <input placeholder="Enter Keyword" type="text" id="solr-search-input" class="form-control"

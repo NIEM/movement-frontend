@@ -1,7 +1,7 @@
-<div class="checkbox" ng-show="key">
+<div class="checkbox" ng-if="key">
   <label class="filter-group-option">
     <div class="custom-checkbox">
-      <img class="checked-image" src="images/checkbox-blue.svg" ng-show="isSelected()">
+      <img class="checked-image" src="images/checkbox-blue.svg" ng-if="isSelected()">
     </div>
     <input type="checkbox" ng-checked="isSelected()" ng-click="addRemoveFacet()">{{key}}
     <em>({{count}})</em>
