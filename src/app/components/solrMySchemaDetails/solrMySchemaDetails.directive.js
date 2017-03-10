@@ -14,7 +14,7 @@
     .module('dhsniem')
     .directive('solrMySchemaDetails', solrMySchemaDetails);
 
-  function solrMySchemaDetails(solrRequest, $window, $q, mySchema, NODE_URL) {
+  function solrMySchemaDetails($window, mySchema, NODE_URL, niemTree) {
     return {
       restrict: 'E',
       templateUrl: 'app/components/solrMySchemaDetails/solrMySchemaDetails.directive.html',
@@ -40,30 +40,7 @@
 
 
       /**
-       * @name getSearchParams
-       *
-       * @memberof dhsniem.controller:DetailsCtrl
-       *
-       * @description Builds the search params for a solr query
-       *
-       * @param query
-       *
-       * @return params
-       */
-      function getSearchParams(query) {
-        var params = {
-          'q': query,
-          'json.wrf': 'JSON_CALLBACK',
-          'json.nl': 'map'
-        };
-        return params;
-      }
-
-
-      /**
        * @name formatNamespaceType
-       *
-       * @memberOf dhsniem.controller:DetailsCtrl
        *
        * @description transform the Namespace type returned into readable text
        *
@@ -71,7 +48,7 @@
        *
        * @returns {string}
        */
-      function formatNamespaceType(namespaceType) {
+      scope.formatNamespaceType = function formatNamespaceType(namespaceType) {
         var mapping = {
           'domain': 'Domain',
           'otherNamespace': 'Other',
@@ -79,66 +56,29 @@
         };
 
         return mapping[namespaceType];
-      }
-
-
-      /**
-       * @name getElementObjects
-       *
-       * @memberof dhsniem.controller:DetailsCtrl
-       *
-       * @description Modifies a Type object's element array from a string reference to full Element objects
-       *
-       * @param typeDoc - type object (document)
-       */
-      scope.getElementObjects = function getElementObjects(typeDoc) {
-        typeDoc.elements.forEach(function (element, index, arr) {
-          var query = 'name:' + element.split(':')[1];
-          solrRequest.makeSolrRequest(getSearchParams(query)).then(function (data) {
-            arr[index] = data.response.docs[0];
-
-            if (arr[index].type) {
-              getTypeObject(arr[index]).then(function (data) {
-                arr[index].type = data;
-              });
-            } else {
-              arr[index].type = 'abstract';
-            }
-          });
-        });
       };
 
 
       /**
-       * @name getTypeObject
+       * @name expandTree
        *
-       * @memberof dhsniem.controller:DetailsCtrl
+       * @description While expanding the accordion via uib-accordion, will also make call to get the children elements
        *
-       * @description Returns the full type object for an element's type field
-       *
-       * @param element
+       * @param entity - The entity or my schema item being expanded
        */
-      function getTypeObject(element) {
-        var deferred = $q.defer();
-
-        if (element.type.split) {
-          var query = 'name:' + element.type.split(':')[1];
-        } else {
-          var query = 'name:' + element.type.id.split(':')[1];
+      scope.expandTree = function expandTree(entity) {
+        if (!entity.dataFound) {
+          niemTree.getElementObjects(entity.type.elements).then(function(elementDocs) {
+            entity.type.elements = elementDocs;
+          });
+          entity.dataFound = true;
         }
-
-        solrRequest.makeSolrRequest(getSearchParams(query)).then(function (data) {
-          deferred.resolve(data.response.docs[0]);
-        });
-
-        return deferred.promise;
-      }
+        entity.expanded = !entity.expanded;
+      };
 
 
       /**
        * @name getSchema
-       *
-       * @memberof dhsniem.controller:DetailsCtrl
        *
        * @description Returns the element IDs in my schema
        */
@@ -154,54 +94,17 @@
       /**
        * @name getSchemaArray
        *
-       * @memberof dhsniem.controller:DetailsCtrl
-       *
        * @description Calls solr and returns information about each of the elements in my schema
        */
       function getSchemaArray() {
-
-        scope.mySchemaIDs.forEach(function(element) {
-
-          var query = 'id:' + element.split(':')[0] + '\\:' + element.split(':')[1];
-
-          solrRequest.makeSolrRequest(getSearchParams(query)).then(function (data) {
-            var entity = data.response.docs[0];
-            entity.typeString = data.response.docs[0].type;
-            scope.mySchemaArray.push(entity);
-
-            scope.formattedNamespaceType = formatNamespaceType(entity.namespaceType);
-
-          });
+        niemTree.getElementObjects(scope.mySchemaIDs).then(function(elementDocs) {
+          scope.mySchemaArray = elementDocs;
         });
       }
 
 
       /**
-       * @name getSchemaDetails
-       *
-       * @memberof dhsniem.controller:DetailsCtrl
-       *
-       * @description Returns the type details for each item in my schema
-       */
-      scope.getSchemaDetails = function getSchemaDetails() {
-
-        scope.mySchemaArray.forEach(function(element) {
-          if (element.type) {
-            getTypeObject(element).then(function (data) {
-              element.type = data;
-              if (data.elements) {
-                scope.getElementObjects(element.type);
-              }
-            });
-          }
-        });
-      };
-
-
-      /**
        * @name downloadSchema
-       *
-       * @memberof dhsniem.controller:DetailsCtrl
        *
        * @description Downloads all items in my schema to JSON file
        */
@@ -215,15 +118,12 @@
       /**
        * @name removeSchema
        *
-       * @memberof dhsniem.controller:DetailsCtrl
-       *
        * @description Removes all items in my schema
        */
       scope.removeSchema = function removeSchema() {
         mySchema.removeAllFromSchema();
-          scope.mySchemaIDs = '';
-          scope.mySchemaArray = '';
-      }
+        getSchema();
+      };
     }
   }
 })();

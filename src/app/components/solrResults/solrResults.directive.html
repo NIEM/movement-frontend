@@ -1,67 +1,69 @@
 <div class="solr-results">
   <search-header></search-header>
-  <section class="content">
-    <div class="search-heading row">
-      <h1 class="keyword-search-text">
-        You searched for "{{query}}"
-      </h1>
-      <p class="results-total">Total Number of Results ({{numFound}})</p>
-    </div>
-
-    <div class="search-filter col-sm-4">
-      <div class="filter-heading row">
-        <h2>Filter by</h2>
-        <button class="clear-button pull-right text-uppercase" ng-click="clearAllFilters()">Clear All</button>
+  <section class="container">
+    <div class="row">
+      <div class="search-heading col-sm-12">
+        <h1 class="keyword-search-text">
+          You searched for "{{query}}"
+        </h1>
+        <p class="results-total">Total Number of Results ({{numFound}})</p>
       </div>
-      <div class="filter-details row">
-        <div class="solr-facet-group-tooltip">
-          <solr-facet display="Domain" field="domain"></solr-facet>
-        </div>
-        <div class="solr-facet-group-tooltip">
-          <solr-facet display="External Standards" field="externalStandard"></solr-facet>
-        </div>
-        <div class="solr-facet-group-tooltip">
-          <solr-facet display="Others" field="otherNamespace"></solr-facet>
-        </div>
-      </div>
-    </div>
 
-    <div class="search-results col-sm-8">
-      <solr-sort></solr-sort>
-      <div class="results-list row">
-        <div class="result no-result" ng-show="numFound === 0">The term "{{query}}" has returned no results. Please try
-          a different term or variation.
+      <div class="search-filter col-sm-4">
+        <div class="filter-heading">
+          <h2>Filter by</h2>
+          <button class="clear-button pull-right text-uppercase" ng-click="clearAllFilters()">Clear All</button>
         </div>
-        <div class="result">
-          <div class="result-item" ng-repeat="doc in docs">
-            <h2 class="result-heading" ng-show="isFirstOfNamespace(docs[$index - 1].namespace, doc)">
-              <span ng-click="closeOtherPopovers('core')" uib-popover-template="popovers['core'].popoverTemplateUrl"
-                    popover-placement="right"
-                    popover-is-open="popovers['core'].popoverIsOpen"
-                    popover-enable="doc.namespace == 'Core'">
-                {{doc.namespace}} ({{doc.namespaceCount}})
-              </span>
-            </h2>
-            <h2 class="result-heading" ng-show="isFirstOfAlphabet(docs[$index - 1].name, doc)">
-              <span>
-              {{doc.name.substring(0,1).toUpperCase()}}
-              </span>
-            </h2>
-            <div class="result-content-wrapper">
-              <div class="result-content item-details col-sm-8">
-                <a ui-sref="main.details({ entityID: doc.id })">
-                  <h3 class="item-title">{{doc.name}}</h3>
-                </a>
-                <p class="item-description">{{doc.definition}}</p>
-                <p class="item-namespace">{{namespaceTypes[doc.namespaceType]}}: {{doc.namespace}}</p>
-              </div>
-              <schema-add-to-schema class="col-sm-4 results-add-to-schema-button"></schema-add-to-schema>
-            </div>
+        <div class="filter-details">
+          <div class="solr-facet-group-tooltip">
+            <solr-facet display="Domain" field="domain"></solr-facet>
           </div>
-          <solr-results-pagination ng-hide="numFound === 0" class="pagination-bottom"></solr-results-pagination>
+          <div class="solr-facet-group-tooltip">
+            <solr-facet display="External Standards" field="externalStandard"></solr-facet>
+          </div>
+          <div class="solr-facet-group-tooltip">
+            <solr-facet display="Others" field="otherNamespace"></solr-facet>
+          </div>
+        </div>
+      </div>
+
+      <div class="search-results col-sm-8">
+        <solr-sort></solr-sort>
+        <div class="results-list">
+          <div class="result no-result" ng-if="numFound === 0">The term "{{query}}" has returned no results. Please try
+            a different term or variation.
+          </div>
+          <div class="result">
+            <div class="result-item" ng-repeat="doc in docs">
+              <h2 class="result-heading" ng-if="isFirstOfNamespace(docs[$index - 1].namespace, doc)">
+                <span ng-click="closeOtherPopovers('core')" uib-popover-template="popovers['core'].popoverTemplateUrl"
+                      popover-placement="right"
+                      popover-is-open="popovers['core'].popoverIsOpen"
+                      popover-enable="doc.namespace == 'Core'">
+                  {{doc.namespace}} ({{doc.namespaceCount}})
+                </span>
+              </h2>
+              <h2 class="result-heading" ng-if="isFirstOfAlphabet(docs[$index - 1].name, doc)">
+                <span>
+                {{doc.name.substring(0,1).toUpperCase()}}
+                </span>
+              </h2>
+              <div class="result-content-wrapper">
+                <div class="result-content item-details col-sm-8">
+                  <a ui-sref="main.details({ entityID: doc.id })">
+                    <h3 class="item-title">{{doc.name}}</h3>
+                  </a>
+                  <p class="item-description">{{doc.definition}}</p>
+                  <p class="item-namespace">{{namespaceTypes[doc.namespaceType]}}: {{doc.namespace}}</p>
+                </div>
+                <schema-add-to-schema class="col-sm-4 results-add-to-schema-button"></schema-add-to-schema>
+              </div>
+            </div>
+            <solr-results-pagination ng-hide="numFound === 0" class="pagination-bottom"></solr-results-pagination>
+          </div>
         </div>
       </div>
     </div>
   </section>
-  <ccp-footer></ccp-footer>
+  <niem-footer></niem-footer>
 </div>

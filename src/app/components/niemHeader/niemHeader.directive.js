@@ -3,7 +3,7 @@
 /**
  * @ngdoc directive
  *
- * @name ccpHeader
+ * @name niemHeader
  *
  * @description
  * Main header throughout app
@@ -12,12 +12,12 @@
 
   angular
     .module('dhsniem')
-    .directive('ccpHeader', ccpHeader);
+    .directive('niemHeader', niemHeader);
 
-  function ccpHeader(mySchema) {
+  function niemHeader(mySchema) {
     return {
       restrict: 'E',
-      templateUrl: 'app/components/ccpHeader/ccpHeader.directive.html',
+      templateUrl: 'app/components/niemHeader/niemHeader.directive.html',
       link: link
     };
 

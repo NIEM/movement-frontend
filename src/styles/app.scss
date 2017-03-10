@@ -143,12 +143,10 @@ h6 {
 
 
 // injector
-@import '../app/components/ccpFooter/ccpFooter.directive.scss';
-@import '../app/components/ccpHeader/ccpHeader.directive.scss';
-@import '../app/components/detailsPagination/detailsPagination.directive.scss';
-@import '../app/components/facetDetails/facetDetails.directive.scss';
 @import '../app/components/niemChildAccordion/niemChildAccordion.directive.scss';
 @import '../app/components/niemExport/niemExport.directive.scss';
+@import '../app/components/niemFooter/niemFooter.directive.scss';
+@import '../app/components/niemHeader/niemHeader.directive.scss';
 @import '../app/components/schemaAddToSchema/schemaAddToSchema.directive.scss';
 @import '../app/components/schemaDownload/schemaDownload.directive.scss';
 @import '../app/components/schemaMySchemaButton/schemaMySchemaButton.directive.scss';

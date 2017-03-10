@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html class="no-js" ng-app="dhsniem" ng-controller="AppCtrl as AppCtrl">
+<html class="no-js" ng-app="dhsniem" ng-controller="AppCtrl as AppCtrl" lang="en">
 
 <head>
   <meta charset="utf-8">
@@ -24,9 +24,6 @@
   <!-- build:css(.tmp) styles/main.css -->
   <link rel="stylesheet" href="styles/app.css">
   <!-- endbuild -->
-  <!--[if IE 9]>
-    <link rel="stylesheet" href="styles/ie9.css" type="text/css" />
-  <![endif]-->
 
 </head>
 
@@ -65,12 +62,10 @@
   <script src="env.js"></script>
 
   <!-- injector:js -->
-  <script src="app/components/ccpFooter/ccpFooter.directive.js"></script>
-  <script src="app/components/ccpHeader/ccpHeader.directive.js"></script>
-  <script src="app/components/detailsPagination/detailsPagination.directive.js"></script>
-  <script src="app/components/facetDetails/facetDetails.directive.js"></script>
   <script src="app/components/niemChildAccordion/niemChildAccordion.directive.js"></script>
   <script src="app/components/niemExport/niemExport.directive.js"></script>
+  <script src="app/components/niemFooter/niemFooter.directive.js"></script>
+  <script src="app/components/niemHeader/niemHeader.directive.js"></script>
   <script src="app/components/schemaAddToSchema/schemaAddToSchema.directive.js"></script>
   <script src="app/components/schemaDownload/schemaDownload.directive.js"></script>
   <script src="app/components/schemaMySchemaButton/schemaMySchemaButton.directive.js"></script>
@@ -85,6 +80,7 @@
   <script src="app/components/solrSearchInput/solrSearchInput.directive.js"></script>
   <script src="app/components/solrSort/solrSort.directive.js"></script>
   <script src="app/services/mySchema/mySchema.factory.js"></script>
+  <script src="app/services/niemTree/niemTree.factory.js"></script>
   <script src="app/services/solrRequest/solrRequest.factory.js"></script>
   <script src="app/services/solrSearch/solrSearch.factory.js"></script>
   <script src="app/views/application/application.controller.js"></script>
