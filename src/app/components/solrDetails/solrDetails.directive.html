@@ -1,6 +1,6 @@
 <div class="solr-details">
   <section class="container">
-    <a ng-click="goBack()" class="back-link" ng-show="query">&#060; Back to search results for "{{query}}"</a>
+    <a ng-click="goBack()" class="back-link" ng-if="query">&#060; Back to search results for "{{query}}"</a>
     <div class="details-heading">
       <div>
         <h1>{{entity.name}}</h1>
