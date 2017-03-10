@@ -1,6 +1,6 @@
 'use strict';
 
-describe('Directive: ccpHeader', function () {
+describe('Directive: niemHeader', function () {
 
   // load the directive's module and view
   beforeEach(module('dhsniem'));
@@ -16,7 +16,7 @@ describe('Directive: ccpHeader', function () {
 
   // compile the element to be tested
   it('should be a thing', inject(function () {
-    element = angular.element('<ccp-header></ccp-header>');
+    element = angular.element('<niem-header></niem-header>');
     element = $compile(element)(scope);
     scope.$apply();
   }));
