@@ -1,6 +1,6 @@
 'use strict';
 
-describe('Directive: ccpFooter', function () {
+describe('Directive: niemFooter', function () {
 
   // load the directive's module and view
   beforeEach(module('dhsniem'));
@@ -16,7 +16,7 @@ describe('Directive: ccpFooter', function () {
 
   // compile the element to be tested
   it('should be a thing', inject(function () {
-    element = angular.element('<ccp-footer></ccp-footer>');
+    element = angular.element('<niem-footer></niem-footer>');
     element = $compile(element)(scope);
     scope.$apply();
   }));
