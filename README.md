@@ -58,3 +58,4 @@ If you are using the [JSDoc](http://usejsdoc.org/) style of comments (which you 
 ```
 npm run docs
 ```
+

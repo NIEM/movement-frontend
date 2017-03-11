@@ -1,31 +1,154 @@
-.results {
-  .item-details {
-    width: calc(63% - 5px);
+.solr-results {
+  .search-heading {
+    padding: 0 20px;
+    background-image: linear-gradient(to left, $teal-gradient, $marine-blue);
+    color: $white;
+    margin-top: 25px;
+    letter-spacing: 0.5px;
+    height: 80px;
+    .keyword-search-text {
+      font-size: 27px;
+      margin: 13px 0 5px;
+    }
+    .results-total {
+      font-size: 14px;
+      color: $seafoam;
+      margin-bottom: 11px;
+      text-transform: uppercase;
+    }
   }
-  .item-button {
-    width: calc(37% - 5px);
-    float: right;
-    color: $marine-blue;
-    font-size: 18px;
-    letter-spacing: 2px;
-    padding-top: 50px;
-    .light-blue-button {
-      background-color: $ocean-blue;
-      color: $white;
-      padding: 10px;
-      border: none;
-      border-radius: 4px;
-      vertical-align: middle;
-      &:hover {
-        background-color: $dark-ocean;
+  .search-filter {
+    background: $white;
+    padding: 0 0 40px;
+    .filter-heading {
+      display: inline-block;
+      margin: 0;
+      width: 100%;
+      padding: 30px 0 10px;
+      border-bottom: 1px solid $teal;
+      h2 {
+        color: $black;
+        display: inline-block;
+        margin: 0;
+        color: $evergreen;
+        letter-spacing: 0.6px;
       }
-      a, a:active, a:hover, a:visited {
-        color: $white;
+      .clear-button {
+        border: none;
+        background: transparent;
+        color: $ocean-blue;
+        padding-top: 8px;
+        letter-spacing: 0.5px;
         font-size: 14px;
-        letter-spacing: 0.9px;
-        text-decoration: none;
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+    .filter-details {
+      color: $body-text-color;
+      .solr-facet-group-tooltip, .filter-group {
+        font-size: 18px;
+        letter-spacing: 0.5px;
+        color: $marine-blue;
+        margin-top: 18px;
+        .dotted-underline {
+          border-bottom: 1px dashed;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+  .search-results {
+    padding: 0 0 0 40px;
+    .results-list {
+      .result {
+        &.no-result {
+          padding-top: 10px;
+          font-size: 16px;
+        }
+        .result-item {
+          border-bottom: 1px solid $silver;
+          .result-heading {
+            padding: 38px 0 18px 0;
+            border-bottom: 1px solid $silver;
+            margin: 0;
+            color: $evergreen;
+            letter-spacing: 0.5px;
+            &:first-child {
+              padding-top: 28px;
+            }
+          }
+          .result-content-wrapper {
+            @include flex-and-align-center;
+            justify-content: space-between;
+            .result-content {
+              display: inline-block;
+              padding: 0 30px;
+            }
+            .results-add-to-schema-button {
+              padding: 0 30px 0 30px;
+            }
+            .add-to-schema-button {
+              background-color: $ocean-blue;
+              color: $white;
+              padding: 10px;
+              border: none;
+              border-radius: 4px;
+              vertical-align: middle;
+              white-space: nowrap;
+              &:hover {
+                background-color: $dark-ocean;
+              }
+              a, a:active, a:hover, a:visited {
+                color: $white;
+                font-size: 14px;
+                letter-spacing: 0.9px;
+                text-decoration: none;
+              }
+            }
+          }
+          .item-img-section {
+            display: inline-block;
+            padding: 0 5px;
+            .item-img {
+              width: 12px;
+              height: 14.1px;
+              opacity: 0.3;
+            }
+          }
+          .item-title {
+            color: $ocean-blue;
+            display: inline-block;
+            margin: 21px 0 11px 0;
+            letter-spacing: 0.5px;
+            &:hover {
+              text-decoration: underline;
+            }
+            @media (max-width: 1024px) {
+              max-width: 424px;
+              overflow-wrap: break-word;
+            }
+          }
+          .item-description {
+            color: $body-text-color;
+            margin-bottom: 15px;
+            letter-spacing: 0.5px;
+          }
+          .item-namespace {
+            font-size: 14px;
+            letter-spacing: 0.5px;
+            color: $marine-blue;
+            margin-bottom: 13px;
+          }
+        }
+        .pagination-bottom {
+          .solr-pagination {
+            padding-top: 15px;
+            padding-bottom: 71px;
+          }
+        }
       }
     }
   }
 }
-

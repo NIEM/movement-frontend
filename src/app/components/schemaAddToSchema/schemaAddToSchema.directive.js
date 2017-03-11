@@ -8,13 +8,13 @@
  * @description
  * My Schema button in the header
  */
-(function() {
+(function () {
 
   angular
     .module('dhsniem')
     .directive('schemaAddToSchema', schemaAddToSchema);
 
-  function schemaAddToSchema() {
+  function schemaAddToSchema(mySchema) {
     return {
       restrict: 'E',
       templateUrl: 'app/components/schemaAddToSchema/schemaAddToSchema.directive.html',
@@ -25,6 +25,10 @@
      *  Defines variables and functions within schemaAddToSchema scope
      */
     function link(scope) {
+      scope.addToSchema = function (searchID) {
+        mySchema.addSchema(searchID);
+      };
+
 
     }
   }

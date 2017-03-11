@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat:400,600,700,800');
 
-//Color variables to be used throughout all stylesheets
+//Variables to be used throughout all stylesheets
 $darkest-blue:    #005170;
 $dark-ocean:      #026399;
 $medium-blue:     #007fb9;
@@ -16,6 +16,7 @@ $seafoam:         #58cba9;
 $seafoam-light:   rgba(88,203,169, 0.1);
 $evergreen:       #062434;
 $warm-grey:       #9b9b9b;
+$shady-grey:      #676767;
 $silver:          #d1d2d4;
 $body-text-color: rgba(0,0,0,0.58);
 $mont-extra-bold: 800;
@@ -24,6 +25,18 @@ $mont-regular:    400;
 $mont-semi-bold:  600;
 $niem-min-width:  768px;
 $niem-max-width:  1280px;
+$desktop-md-max-width: 992px;
+
+//Mixins
+@mixin flex-and-align-center {
+  display: flex;
+  align-items: center;
+}
+@mixin desktop {
+  @media only screen and (max-width: $desktop-md-max-width) {
+    @content;
+  }
+}
 
 .browsehappy {
   margin: 0.2em 0;
@@ -130,17 +143,19 @@ h6 {
 
 
 // injector
-@import '../app/components/ccpFooter/ccpFooter.directive.scss';
-@import '../app/components/ccpHeader/ccpHeader.directive.scss';
-@import '../app/components/detailsPagination/detailsPagination.directive.scss';
-@import '../app/components/facetDetails/facetDetails.directive.scss';
 @import '../app/components/niemChildAccordion/niemChildAccordion.directive.scss';
 @import '../app/components/niemExport/niemExport.directive.scss';
+@import '../app/components/niemFooter/niemFooter.directive.scss';
+@import '../app/components/niemHeader/niemHeader.directive.scss';
 @import '../app/components/schemaAddToSchema/schemaAddToSchema.directive.scss';
+@import '../app/components/schemaDownload/schemaDownload.directive.scss';
 @import '../app/components/schemaMySchemaButton/schemaMySchemaButton.directive.scss';
+@import '../app/components/schemaRemoveFromSchemaButton/schemaRemoveFromSchemaButton.directive.scss';
 @import '../app/components/searchHeader/searchHeader.scss';
+@import '../app/components/solrDetails/solrDetails.directive.scss';
 @import '../app/components/solrFacet/solrFacet.directive.scss';
 @import '../app/components/solrFacetResult/solrFacetResult.directive.scss';
+@import '../app/components/solrMySchemaDetails/solrMySchemaDetails.directive.scss';
 @import '../app/components/solrResults/solrResults.directive.scss';
 @import '../app/components/solrResultsPagination/solrResultsPagination.directive.scss';
 @import '../app/components/solrSearchInput/solrSearchInput.directive.scss';
@@ -148,5 +163,6 @@ h6 {
 @import '../app/views/details/details.view.scss';
 @import '../app/views/home/home.view.scss';
 @import '../app/views/main/main.view.scss';
+@import '../app/views/mySchema/mySchema.view.scss';
 @import '../app/views/results/results.view.scss';
 // endinjector

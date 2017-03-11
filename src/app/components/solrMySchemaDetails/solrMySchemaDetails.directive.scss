@@ -1,0 +1,147 @@
+.solr-my-schema-details {
+  margin: 25px 0;
+
+  .my-schema-heading {
+    padding: 0 20px;
+    background-image: linear-gradient(to left, $teal-gradient, $marine-blue);
+    color: $white;
+    display: flex;
+    align-items: center;
+    letter-spacing: 0.5px;
+    height: 80px;
+    h1 {
+      margin: 0;
+    }
+  }
+
+  .empty-my-schema {
+    @include flex-and-align-center;
+    justify-content: center;
+    margin: 30px 0;
+    color: $evergreen;
+    letter-spacing: 0.5px;
+    background-color: rgba(0, 115, 178, 0.1);
+    height: 200px;
+  }
+
+  .my-schema-actions {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    border-bottom: 1px solid $teal;
+    padding: 20px 30px;
+    .my-schema-count {
+      margin: 0 10px 0 10px;
+      color: $evergreen;
+      letter-spacing: 0.5px;
+    }
+    .remove-from-schema-button {
+      margin: 0 10px;
+      background-color: $white;
+      color: $ocean-blue;
+      padding: 10px;
+      border: $medium-blue solid 1px;
+      border-radius: 4px;
+      vertical-align: middle;
+      text-transform: uppercase;
+      &:hover {
+        background-color: $silver;
+      }
+    }
+
+    .download-schema-button {
+      margin-left: 10px;
+      background-color: $ocean-blue;
+      color: $white;
+      padding: 10px;
+      border: none;
+      border-radius: 4px;
+      vertical-align: middle;
+      white-space: nowrap;
+      text-transform: uppercase;
+      &:hover {
+        background-color: $dark-ocean;
+      }
+    }
+  }
+  .panel-group {
+    .panel {
+      border: none;
+      box-shadow: none;
+    }
+    .panel-heading {
+      padding: 0;
+    }
+    .panel-title > a {
+      text-decoration: none;
+    }
+    .panel-body {
+      padding: 0;
+    }
+  }
+
+  .schema-item {
+    padding-left: 40px;
+    border-bottom: 1px solid $silver;
+    .schema-content-wrapper {
+      @include flex-and-align-center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      .item-title {
+        color: $ocean-blue;
+        display: inline-block;
+        letter-spacing: 0.5px;
+      }
+      .item-type {
+        color: $body-text-color;
+        font-size: 14px;
+      }
+      .item-description {
+        color: $body-text-color;
+        margin-bottom: 15px;
+        letter-spacing: 0.5px;
+        font-size: 14px;
+      }
+      .item-namespace {
+        font-size: 14px;
+        letter-spacing: 0.5px;
+        color: $marine-blue;
+        margin-bottom: 13px;
+      }
+    }
+
+    .accordion-heading-text {
+      font-size: 14px;
+      font-style: italic;
+      .toggle-button {
+        color: $ocean-blue;
+        font-style: normal;
+      }
+    }
+    .carot-img {
+      display: inline-block;
+      &.caret-down {
+        transform: rotate(90deg);
+      }
+    }
+    .niem-accordion-item-wrapper:last-of-type {
+      .niem-accordion-item {
+        border-bottom: none;
+      }
+    }
+    .niem-accordion-item {
+      padding: 20px 0 20px 30px;
+      letter-spacing: 0.5px;
+      border-bottom: 1px solid $silver;
+      .item-name {
+        color: $ocean-blue;
+        h3 {
+          margin: 0;
+        }
+      }
+      .item-type {
+        color: $body-text-color;
+      }
+    }
+  }
+}
