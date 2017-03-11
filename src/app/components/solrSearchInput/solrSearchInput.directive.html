@@ -1,12 +1,10 @@
 <div class="solr-search form-horizontal">
   <div class="form-group row">
     <form ng-submit="search()" class="form-inline">
-      <div class="dropdown-group" uib-dropdown is-open="status.isopen" ng-if="!hasLabel">
+      <div class="dropdown-group" uib-dropdown is-open="status.isopen" ng-if="!hasLabel" keyboard-nav>
         <button id="domain-dropdown" type="button" class="domain-button" uib-dropdown-toggle tabindex="200">
           <span class="dropdown-text">{{selectedDomain}}</span>
-          <span>
-            <img class="dropdown-caret" src="images/ic_carot.svg" aria-hidden="true" alt="Select a domain">
-          </span>
+          <img class="dropdown-caret" src="images/ic_carot.svg" aria-hidden="true" alt="Select a domain">
         </button>
         <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="domain-dropdown">
           <li role="menuitem"><a href="#" ng-click="domainSelect('All Domains')">All Domains</a></li>

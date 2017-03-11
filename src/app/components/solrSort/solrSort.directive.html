@@ -1,9 +1,17 @@
 <div class="sort-bar">
-  <label for="sortSelect">Sort by</label>
-  <select name="sortSelect" ng-model="sortOption" ng-change="sortBy()">
-    <option value="namespacePriority asc">Domain</option>
-    <option value="name asc">Alphabetical</option>
-    <option value="score desc">Relevance</option>
-  </select>
+  <div class="sort-group">
+    <label for="sort-select">Sort by</label>
+    <div id="sort-select" class="dropdown-group" uib-dropdown is-open="status.isopen" keyboard-nav>
+      <button id="domain-dropdown" type="button" class="domain-button" uib-dropdown-toggle tabindex="0">
+        <span class="dropdown-text">{{selected}}</span>
+        <img class="dropdown-caret" src="images/ic_carot.svg" aria-hidden="true" alt="Select a domain">
+      </button>
+      <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="domain-dropdown">
+        <li role="menuitem" ng-repeat="(key, value) in sortCriteria">
+          <a ng-click="sortBy(key, value)">{{value}}</a>
+        </li>
+      </ul>
+    </div>
+  </div>
   <solr-results-pagination ng-hide="numFound === 0"></solr-results-pagination>
 </div>
