@@ -8,7 +8,7 @@
  * @description
  * Sort bar on results page
  */
-(function() {
+(function () {
 
   angular
     .module('dhsniem')
@@ -26,14 +26,22 @@
      */
     function link(scope) {
       scope.sortOption = solrSearch.getSort();
+      scope.sortCriteria = {
+        'namespacePriority asc': 'Domain',
+        'name asc': 'Alphabetical',
+        'score desc': 'Relevance'
+      };
+      scope.selected = scope.sortCriteria[scope.sortOption];
+      
 
       /**
        * @name sortBy
        *
        * @description Sets the sortBy parameter on the $location service and calls a new solr search.
        */
-      scope.sortBy = function() {
-        $location.search('sortBy', scope.sortOption);
+      scope.sortBy = function (key, value) {
+        scope.selected = value;
+        $location.search('sortBy', key);
         solrSearch.search();
       };
     }

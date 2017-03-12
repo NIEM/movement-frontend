@@ -34,7 +34,7 @@
       function init() {
 
         var entityID = $location.search().entityID;
-        $window.document.title = entityID + ' - CCP Details';
+        $window.document.title = entityID + ' Details - Open Source Tool';
 
         niemTree.getDocById(entityID).then(function (entityDoc) {
           scope.entity = entityDoc;

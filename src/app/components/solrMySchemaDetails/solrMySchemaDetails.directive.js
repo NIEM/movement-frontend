@@ -32,7 +32,7 @@
        * @description Initializes the view to set scope variables on page load and whenever a new search is triggered.
        */
       function init() {
-        $window.document.title = 'My Schema';
+        $window.document.title = 'My Schema - Open Source Tool';
         getSchema();
       }
 
