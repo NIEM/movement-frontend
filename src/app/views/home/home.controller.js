@@ -15,7 +15,7 @@
     .controller('HomeCtrl', HomeCtrl);
 
   function HomeCtrl($window, $rootScope) {
-    $window.document.title = 'CCP - Data Information Exchange Tool';
+    $window.document.title = 'Open Source Tool';
     $rootScope.query = null;
   }
 
