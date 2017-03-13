@@ -42,17 +42,17 @@
           text-decoration: none;
         }
         .dropdown-text {
-          width: 150px;
+          width: 120px;
           text-overflow: ellipsis;
           overflow: hidden;
           white-space: nowrap;
           float: left;
         }
         .dropdown-caret {
-          -webkit-transform: rotate(90deg);
-          -ms-transform: rotate(90deg);
+          padding-left: 3px;
           transform: rotate(90deg);
           float: right;
+
         }
       }
     }
