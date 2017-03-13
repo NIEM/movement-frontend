@@ -131,13 +131,9 @@
        */
       scope.isFirstOfAlphabet = function (previousName, currentName, index) {
         if (scope.sort === 'name asc') {
-          if (index > 0) {
-            if (currentName.substring(0, 1).toUpperCase() !== previousName.substring(0, 1).toUpperCase()) {
+            if (index < 1 || currentName.substring(0, 1).toUpperCase() !== previousName.substring(0, 1).toUpperCase()) {
               return true;
             }
-          } else {
-            return true;
-          }
         }
       };
 
