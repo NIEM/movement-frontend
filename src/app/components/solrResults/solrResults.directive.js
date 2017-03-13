@@ -8,7 +8,7 @@
  * @description
  * Solr results
  */
-(function() {
+(function () {
 
   angular
     .module('dhsniem')
@@ -35,7 +35,7 @@
         scope.docs = solrSearch.getDocs();
         scope.numFound = solrSearch.getNumFound();
         scope.query = solrSearch.getQuery();
-        scope.totalPages = Math.ceil( scope.numFound / 100);
+        scope.totalPages = Math.ceil(scope.numFound / 100);
         scope.sort = solrSearch.getSort();
         scope.namespaceTypes = {
           'domain': 'Domain',
@@ -52,7 +52,7 @@
 
       init();
 
-      $rootScope.$on('newSearch', function() {
+      $rootScope.$on('newSearch', function () {
         init();
       });
 
@@ -61,7 +61,7 @@
        *
        * @description Unselects all filters and adjusts displayed results accordingly
        */
-      scope.clearAllFilters = function() {
+      scope.clearAllFilters = function () {
         solrSearch.clearAllFilters();
       };
 
@@ -73,7 +73,7 @@
        *
        * @description Closes the popover related to the specified type
        */
-      scope.closePopover = function(type) {
+      scope.closePopover = function (type) {
         scope.popovers[type].popoverIsOpen = false;
       };
 
@@ -85,9 +85,9 @@
        *
        * @param type
        */
-      scope.closeOtherPopovers = function(type) {
-        angular.forEach(scope.popovers, function(value, key) {
-          if(key !== type) {
+      scope.closeOtherPopovers = function (type) {
+        angular.forEach(scope.popovers, function (value, key) {
+          if (key !== type) {
             scope.popovers[key].popoverIsOpen = false;
           }
         });
@@ -131,9 +131,7 @@
        */
       scope.isFirstOfAlphabet = function (previousName, currentName, index) {
         if (scope.sort === 'name asc') {
-            if (index < 1 || currentName.substring(0, 1).toUpperCase() !== previousName.substring(0, 1).toUpperCase()) {
-              return true;
-            }
+          return index < 1 || currentName.substring(0, 1).toUpperCase() !== previousName.substring(0, 1).toUpperCase();
         }
       };
 
