@@ -22,8 +22,8 @@
           <div class="item-namespace text-uppercase">{{formatNamespaceType(entity.namespaceType)}}: {{entity.namespace}}</div>
           <p class="item-description">{{entity.definition}}</p>
         </div>
-        <div class="col-sm-4">
-          <schema-remove-from-schema-button></schema-remove-from-schema-button>
+        <div class="col-sm-4 text-right">
+          <schema-remove-from-schema-button entity-id="entity.id" ng-click="removeFromSchema(entity.id)"></schema-remove-from-schema-button>
         </div>
 
         <div class="col-sm-12">

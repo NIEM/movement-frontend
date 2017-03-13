@@ -1,5 +1,6 @@
 .schema-remove-from-schema-button {
-  display: flex;
+  // display: flex;
+  display: inline-flex;
   justify-content: flex-end;
   .remove-from-schema-button {
     background-color: $white;

@@ -63,13 +63,11 @@
        * @returns {string}
        */
       function formatNamespaceType(namespaceType) {
-        var mapping = {
+        return {
           'domain': 'Domain',
           'otherNamespace': 'Other',
           'externalStandard': 'External Standard'
-        };
-
-        return mapping[namespaceType];
+        }[namespaceType];
       }
 
 

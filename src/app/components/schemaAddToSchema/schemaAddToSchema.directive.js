@@ -18,6 +18,9 @@
     return {
       restrict: 'E',
       templateUrl: 'app/components/schemaAddToSchema/schemaAddToSchema.directive.html',
+      scope: {
+        entityId: '='
+      },
       link: link
     };
 
@@ -25,11 +28,9 @@
      *  Defines variables and functions within schemaAddToSchema scope
      */
     function link(scope) {
-      scope.addToSchema = function (searchID) {
-        mySchema.addSchema(searchID);
+      scope.addToSchema = function() {
+        mySchema.addToSchema(scope.entityId);
       };
-
-
     }
   }
 })();
