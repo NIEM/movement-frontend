@@ -82,7 +82,6 @@
        */
       function getSchema() {
         scope.mySchemaIDs = mySchema.getSchema();
-        scope.mySchemaArray = [];
         if (scope.mySchemaIDs) {
           getSchemaArray();
         }
@@ -131,7 +130,7 @@
        */
       scope.removeSchema = function removeSchema() {
         mySchema.removeAllFromSchema();
-        getSchema();
+        scope.mySchemaArray = [];
       };
     }
   }

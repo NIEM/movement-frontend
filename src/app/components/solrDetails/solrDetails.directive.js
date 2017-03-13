@@ -14,7 +14,7 @@
     .module('dhsniem')
     .directive('solrDetails', solrDetails);
 
-  function solrDetails(niemTree, $location, $window) {
+  function solrDetails(niemTree, $location, $window, mySchema) {
     return {
       restrict: 'E',
       templateUrl: 'app/components/solrDetails/solrDetails.directive.html',
@@ -35,6 +35,7 @@
 
         var entityID = $location.search().entityID;
         $window.document.title = entityID + ' Details - Open Source Tool';
+        // scope.isInMySchema = mySchema.getSchema().indexOf(entityID) > -1;
 
         niemTree.getDocById(entityID).then(function (entityDoc) {
           scope.entity = entityDoc;
@@ -69,6 +70,16 @@
           'externalStandard': 'External Standard'
         }[namespaceType];
       }
+
+
+      /**
+       * @name toggleSchemaAddRemove
+       *
+       * @description Toggles the DOM add and remove schema buttons
+       */
+      scope.toggleSchemaAddRemove = function () {
+        scope.isInMySchema = !scope.isInMySchema;
+      };
 
 
       /**

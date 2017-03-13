@@ -3,7 +3,7 @@
 /**
  * @ngdoc directive
  *
- * @name schemaAddToSchema
+ * @name schemaAddToSchemaButton
  *
  * @description
  * My Schema button in the header
@@ -12,12 +12,12 @@
 
   angular
     .module('dhsniem')
-    .directive('schemaAddToSchema', schemaAddToSchema);
+    .directive('schemaAddToSchemaButton', schemaAddToSchemaButton);
 
-  function schemaAddToSchema(mySchema) {
+  function schemaAddToSchemaButton(mySchema) {
     return {
       restrict: 'E',
-      templateUrl: 'app/components/schemaAddToSchema/schemaAddToSchema.directive.html',
+      templateUrl: 'app/components/schemaAddToSchemaButton/schemaAddToSchemaButton.directive.html',
       scope: {
         entityId: '='
       },
@@ -25,7 +25,7 @@
     };
 
     /**
-     *  Defines variables and functions within schemaAddToSchema scope
+     *  Defines variables and functions within schemaAddToSchemaButton scope
      */
     function link(scope) {
       scope.addToSchema = function() {
