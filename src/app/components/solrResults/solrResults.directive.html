@@ -43,7 +43,7 @@
                   {{doc.namespace}} ({{doc.namespaceCount}})
                 </span>
               </h2>
-              <h2 class="result-heading" ng-if="isFirstOfAlphabet(docs[$index - 1].name, doc)">
+              <h2 class="result-heading" ng-if="isFirstOfAlphabet(docs[$index - 1].name, doc.name, $index)">
                 <span>
                 {{doc.name.substring(0,1).toUpperCase()}}
                 </span>

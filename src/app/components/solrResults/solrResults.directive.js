@@ -105,7 +105,7 @@
        *
        * @returns {boolean}
        */
-      scope.isFirstOfNamespace = function(previousNamespace, currentDoc) {
+      scope.isFirstOfNamespace = function (previousNamespace, currentDoc) {
         if (scope.sort === 'namespacePriority asc') {
           if (currentDoc.namespace !== previousNamespace) {
             currentDoc.namespaceCount = solrSearch.getFacet(currentDoc.namespaceType)[currentDoc.namespace];
@@ -123,17 +123,22 @@
        *
        * @param previousName - the previous row's (doucment's) name
        *
-       * @param currentDoc - the current row (document)
+       * @param currentName - the current row's (document's) name
+       *
+       * @param index - the current row's (document's) index
        *
        * @returns {boolean}
        */
-      scope.isFirstOfAlphabet = function(previousName, currentDoc) {
+      scope.isFirstOfAlphabet = function (previousName, currentName, index) {
         if (scope.sort === 'name asc') {
-          if (currentDoc.name.substring(0,1).toUpperCase() !== previousName.substring(0,1).toUpperCase()) {
+          if (index > 0) {
+            if (currentName.substring(0, 1).toUpperCase() !== previousName.substring(0, 1).toUpperCase()) {
+              return true;
+            }
+          } else {
             return true;
           }
         }
-        return false;
       };
 
     }
