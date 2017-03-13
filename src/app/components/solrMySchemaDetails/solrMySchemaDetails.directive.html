@@ -26,7 +26,7 @@
           <schema-remove-from-schema-button></schema-remove-from-schema-button>
         </div>
 
-        <div class="col-sm-12">
+        <div class="col-sm-12" ng-if="entity.type.elements">
           <uib-accordion close-others="false" ng-click="expandTree(entity)">
             <div uib-accordion-group>
               <div uib-accordion-heading>
