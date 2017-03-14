@@ -79,7 +79,6 @@
       padding: 0;
     }
   }
-
   .schema-item {
     padding-left: 40px;
     border-bottom: 1px solid $silver;
@@ -108,39 +107,44 @@
         color: $marine-blue;
         margin-bottom: 13px;
       }
-    }
-
-    .accordion-heading-text {
-      font-size: 14px;
-      font-style: italic;
-      .toggle-button {
-        color: $ocean-blue;
-        font-style: normal;
-      }
-    }
-    .carot-img {
-      display: inline-block;
-      &.caret-down {
-        transform: rotate(90deg);
-      }
-    }
-    .niem-accordion-item-wrapper:last-of-type {
-      .niem-accordion-item {
-        border-bottom: none;
-      }
-    }
-    .niem-accordion-item {
-      padding: 20px 0 20px 30px;
-      letter-spacing: 0.5px;
-      border-bottom: 1px solid $silver;
-      .item-name {
-        color: $ocean-blue;
-        h3 {
-          margin: 0;
+      .panel-group {
+        margin-bottom: 10px;
+        div[uib-accordion-group] > div {
+          margin-bottom: 10px;
+          span[uib-accordion-header] {
+            font-size: 14px;
+            font-style: italic;
+            .toggle-button {
+              color: $ocean-blue;
+              font-style: normal;
+            }
+          }
         }
       }
-      .item-type {
-        color: $body-text-color;
+      .carot-img {
+        display: inline-block;
+        &.caret-down {
+          transform: rotate(90deg);
+        }
+      }
+      .niem-accordion-item-wrapper:last-of-type {
+        .niem-accordion-item {
+          border-bottom: none;
+        }
+      }
+      .niem-accordion-item {
+        padding: 20px 0 20px 30px;
+        letter-spacing: 0.5px;
+        border-bottom: 1px solid $silver;
+        .item-name {
+          color: $ocean-blue;
+          h3 {
+            margin: 0;
+          }
+        }
+        .item-type {
+          color: $body-text-color;
+        }
       }
     }
   }

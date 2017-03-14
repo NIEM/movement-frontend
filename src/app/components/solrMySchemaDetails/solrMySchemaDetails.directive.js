@@ -70,8 +70,8 @@
         if (!entity.dataFound) {
           niemTree.getElementObjects(entity.type.elements).then(function(elementDocs) {
             entity.type.elements = elementDocs;
+            entity.dataFound = true;
           });
-          entity.dataFound = true;
         }
         entity.expanded = !entity.expanded;
       };
