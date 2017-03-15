@@ -29,39 +29,23 @@
     justify-content: flex-end;
     align-items: center;
     border-bottom: 1px solid $teal;
-    padding: 20px 30px;
+    padding: 20px;
     .my-schema-count {
-      margin: 0 10px 0 10px;
+      margin: 0 10px;
       color: $evergreen;
       letter-spacing: 0.5px;
     }
-    .remove-from-schema-button {
+
+    .remove-all-button {
+      @include niem-button-bordered;
       margin: 0 10px;
-      background-color: $white;
-      color: $ocean-blue;
       padding: 10px;
-      border: $medium-blue solid 1px;
-      border-radius: 4px;
-      vertical-align: middle;
-      text-transform: uppercase;
-      &:hover {
-        background-color: $silver;
-      }
     }
 
     .download-schema-button {
-      margin-left: 10px;
-      background-color: $ocean-blue;
-      color: $white;
+      @include niem-button-filled($ocean-blue, $white, $dark-ocean);
+      margin: 0 10px;
       padding: 10px;
-      border: none;
-      border-radius: 4px;
-      vertical-align: middle;
-      white-space: nowrap;
-      text-transform: uppercase;
-      &:hover {
-        background-color: $dark-ocean;
-      }
     }
   }
   .panel-group {
