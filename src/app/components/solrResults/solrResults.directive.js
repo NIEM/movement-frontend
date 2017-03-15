@@ -8,7 +8,7 @@
  * @description
  * Solr results
  */
-(function() {
+(function () {
 
   angular
     .module('dhsniem')
@@ -35,7 +35,7 @@
         scope.docs = solrSearch.getDocs();
         scope.numFound = solrSearch.getNumFound();
         scope.query = solrSearch.getQuery();
-        scope.totalPages = Math.ceil( scope.numFound / 100);
+        scope.totalPages = Math.ceil(scope.numFound / 100);
         scope.sort = solrSearch.getSort();
         scope.namespaceTypes = {
           'domain': 'Domain',
@@ -52,7 +52,7 @@
 
       init();
 
-      $rootScope.$on('newSearch', function() {
+      $rootScope.$on('newSearch', function () {
         init();
       });
 
@@ -61,7 +61,7 @@
        *
        * @description Unselects all filters and adjusts displayed results accordingly
        */
-      scope.clearAllFilters = function() {
+      scope.clearAllFilters = function () {
         solrSearch.clearAllFilters();
       };
 
@@ -73,7 +73,7 @@
        *
        * @description Closes the popover related to the specified type
        */
-      scope.closePopover = function(type) {
+      scope.closePopover = function (type) {
         scope.popovers[type].popoverIsOpen = false;
       };
 
@@ -85,9 +85,9 @@
        *
        * @param type
        */
-      scope.closeOtherPopovers = function(type) {
-        angular.forEach(scope.popovers, function(value, key) {
-          if(key !== type) {
+      scope.closeOtherPopovers = function (type) {
+        angular.forEach(scope.popovers, function (value, key) {
+          if (key !== type) {
             scope.popovers[key].popoverIsOpen = false;
           }
         });
@@ -105,7 +105,7 @@
        *
        * @returns {boolean}
        */
-      scope.isFirstOfNamespace = function(previousNamespace, currentDoc) {
+      scope.isFirstOfNamespace = function (previousNamespace, currentDoc) {
         if (scope.sort === 'namespacePriority asc') {
           if (currentDoc.namespace !== previousNamespace) {
             currentDoc.namespaceCount = solrSearch.getFacet(currentDoc.namespaceType)[currentDoc.namespace];
@@ -123,17 +123,16 @@
        *
        * @param previousName - the previous row's (doucment's) name
        *
-       * @param currentDoc - the current row (document)
+       * @param currentName - the current row's (document's) name
+       *
+       * @param index - the current row's (document's) index
        *
        * @returns {boolean}
        */
-      scope.isFirstOfAlphabet = function(previousName, currentDoc) {
+      scope.isFirstOfAlphabet = function (previousName, currentName, index) {
         if (scope.sort === 'name asc') {
-          if (currentDoc.name.substring(0,1).toUpperCase() !== previousName.substring(0,1).toUpperCase()) {
-            return true;
-          }
+          return index < 1 || currentName.substring(0, 1).toUpperCase() !== previousName.substring(0, 1).toUpperCase();
         }
-        return false;
       };
 
     }
