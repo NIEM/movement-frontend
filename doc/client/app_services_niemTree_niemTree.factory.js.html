@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: app/components/solrResultsPagination/solrResultsPagination.directive.js</title>
+    <title>JSDoc: Source: app/services/niemTree/niemTree.factory.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -18,7 +18,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: app/components/solrResultsPagination/solrResultsPagination.directive.js</h1>
+    <h1 class="page-title">Source: app/services/niemTree/niemTree.factory.js</h1>
 
     
 
@@ -29,65 +29,131 @@
             <pre class="prettyprint source linenums"><code>'use strict';
 
 /**
- * @ngdoc directive
+ * @ngdoc factory
  *
- * @name solrResultsPagination
+ * @name niemTree
  *
  * @description
- * Pagination widget in sort bar on results page
+ * Factory for dhsniem
  */
-(function() {
+(function () {
 
   angular
     .module('dhsniem')
-    .directive('solrResultsPagination', solrResultsPagination);
+    .factory('niemTree', niemTree);
 
-  function solrResultsPagination(solrSearch, $location, $rootScope) {
+  function niemTree(solrRequest, $q) {
+
     return {
-      restrict: 'E',
-      templateUrl: 'app/components/solrResultsPagination/solrResultsPagination.directive.html',
-      link: link
+      getElementObjects: getElementObjects,
+      getDocById: getDocById
     };
 
+
     /**
-     *  Defines variables and functions within solrResultsPagination scope
+     * @name getDocById
+     *
+     * @description Makes a request to Solr to retrieve the document for an entity ID.
+     *
+     * @param id - Unique ID of the NIEM entity
+     *
+     * @retruns {Promise} 
      */
-    function link(scope) {
-
-      scope.currentPage = $location.search().page || 1;
-
-      $rootScope.$on('newSearch', function() {
-        scope.currentPage = $location.search().page || 1;
+    function getDocById(id) {
+      var idQuery = 'id:' + splitId(id);
+      return solrRequest.makeSolrRequest(getSearchParams(idQuery)).then(function (solrResponse) {
+        return solrResponse.response.docs[0];
       });
-
-      /**
-       * @name nextPage
-       *
-       * @description Loads the next page of results if there is one
-       */
-      scope.nextPage = function() {
-        if (scope.currentPage &lt; scope.totalPages) {
-          scope.currentPage++;
-          $location.search('page', scope.currentPage);
-          solrSearch.search();
-        }
-      };
-
-      /**
-       * @name prevPage
-       *
-       * @description Loads the previous page of results if there is one
-       */
-      scope.prevPage = function() {
-        if (scope.currentPage > 1) {
-          scope.currentPage--;
-          $location.search('page', scope.currentPage);
-          solrSearch.search();
-        }
-      };
     }
+
+
+    /**
+     * @name getDocsByIds
+     *
+     * @description Makes a request to Solr to retrieve n documents from n ids
+     *
+     * @param ids - Array of unique NIEM entity ids
+     *
+     * @retruns {Promise} 
+     */
+    function getDocsByIds(ids) {
+      var orQueryString = ids.map(function (id) {
+        return splitId(id);
+      }).join(' OR ');
+      var idsQuery = 'id:(' + orQueryString + ')';
+
+      return solrRequest.makeSolrRequest(getSearchParams(idsQuery)).then(function (solrResponse) {
+        return solrResponse.response.docs;
+      });
+    }
+
+
+    /**
+     * @name splitId
+     *
+     * @description Split an id to prepare it for a solr query with the colon
+     *
+     * @param id - A NIEM id
+     *
+     * @retruns {string} 
+     */
+    function splitId(id) {
+      return id.split(':')[0] + '\\:' + id.split(':')[1];
+    }
+
+
+    /**
+     * @name getElementObjects
+     *
+     * @description Fetches full element documents with full type doc references for a given list of elements
+     *
+     * @param elements - an array of elements
+     *
+     * @returns {Promise}
+     */
+    function getElementObjects(elements) {
+      return getDocsByIds(elements).then(function (elementDocs) {
+
+        elementDocs = elementDocs.filter(function (elementDoc) {
+          return elementDoc.isBG;
+        });
+
+        return $q.all(elementDocs.map(function (elementDoc) {
+          if (elementDoc.type) {
+            return getDocById(elementDoc.type).then(function (typeDoc) {
+              elementDoc.type = typeDoc;
+              return elementDoc;
+            });
+          } else {
+            return elementDoc;
+          }
+        }));
+      });
+    }
+
+
+    /**
+     * @name getSearchParams
+     *
+     * @description Builds the search params for a solr query
+     *
+     * @param query
+     *
+     * @return params
+     */
+    function getSearchParams(query) {
+      var params = {
+        'q': query,
+        'json.wrf': 'JSON_CALLBACK',
+        'json.nl': 'map'
+      };
+      return params;
+    }
+
   }
+
 })();
+
 </code></pre>
         </article>
     </section>

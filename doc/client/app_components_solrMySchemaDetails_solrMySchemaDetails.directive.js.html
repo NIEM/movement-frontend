@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: app/components/solrResultsPagination/solrResultsPagination.directive.js</title>
+    <title>JSDoc: Source: app/components/solrMySchemaDetails/solrMySchemaDetails.directive.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -18,7 +18,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: app/components/solrResultsPagination/solrResultsPagination.directive.js</h1>
+    <h1 class="page-title">Source: app/components/solrMySchemaDetails/solrMySchemaDetails.directive.js</h1>
 
     
 
@@ -31,59 +31,138 @@
 /**
  * @ngdoc directive
  *
- * @name solrResultsPagination
+ * @name solrMySchemaDetails
  *
  * @description
- * Pagination widget in sort bar on results page
+ * Solr my schema details
  */
-(function() {
+(function () {
 
   angular
     .module('dhsniem')
-    .directive('solrResultsPagination', solrResultsPagination);
+    .directive('solrMySchemaDetails', solrMySchemaDetails);
 
-  function solrResultsPagination(solrSearch, $location, $rootScope) {
+  function solrMySchemaDetails($window, mySchema, NODE_URL, niemTree) {
     return {
       restrict: 'E',
-      templateUrl: 'app/components/solrResultsPagination/solrResultsPagination.directive.html',
+      templateUrl: 'app/components/solrMySchemaDetails/solrMySchemaDetails.directive.html',
       link: link
     };
 
     /**
-     *  Defines variables and functions within solrResultsPagination scope
+     *  Defines variables and functions within solr scope
      */
     function link(scope) {
 
-      scope.currentPage = $location.search().page || 1;
+      /**
+       * @name init
+       *
+       * @description Retrieves My Schema
+       */
+      function init() {
+        $window.document.title = 'My Schema - Open Source Tool';
+        getSchema();
+      }
 
-      $rootScope.$on('newSearch', function() {
-        scope.currentPage = $location.search().page || 1;
-      });
+      init();
+
 
       /**
-       * @name nextPage
+       * @name formatNamespaceType
        *
-       * @description Loads the next page of results if there is one
+       * @description Transforms the namespaceType returned into properly formatted text
+       *
+       * @param text - String representing the type of Namespace
+       *
+       * @returns {string}
        */
-      scope.nextPage = function() {
-        if (scope.currentPage &lt; scope.totalPages) {
-          scope.currentPage++;
-          $location.search('page', scope.currentPage);
-          solrSearch.search();
+      scope.formatNamespaceType = function formatNamespaceType(namespaceType) {
+        return {
+          'domain': 'Domain',
+          'otherNamespace': 'Other',
+          'externalStandard': 'External Standard'
+        }[namespaceType];
+      };
+
+
+      /**
+       * @name expandTree
+       *
+       * @description Fetches child elements for the top level accordion, if the data has not been previously loaded
+       *
+       * @param entity - The entity or my schema item being expanded
+       */
+      scope.expandTree = function expandTree(entity) {
+        if (!entity.dataFound) {
+          niemTree.getElementObjects(entity.type.elements).then(function(elementDocs) {
+            entity.type.elements = elementDocs;
+            entity.dataFound = true;
+          });
+        }
+        entity.expanded = !entity.expanded;
+      };
+
+
+      /**
+       * @name getSchema
+       *
+       * @description Sets scope variable to the element IDs in My Schema
+       */
+      function getSchema() {
+        scope.mySchemaIDs = mySchema.getSchema();
+        if (scope.mySchemaIDs) {
+          getSchemaArray();
+        }
+      }
+
+
+      /**
+       * @name getSchemaArray
+       *
+       * @description Sets the My Schema array of IDs to an array of full documents for those elements
+       */
+      function getSchemaArray() {
+        niemTree.getElementObjects(scope.mySchemaIDs).then(function(elementDocs) {
+          scope.mySchemaArray = elementDocs;
+        });
+      }
+
+
+      /**
+       * @name downloadSchema
+       *
+       * @description Downloads all items in my schema to JSON file
+       */
+      scope.downloadSchema = function downloadSchema() {
+        scope.url = NODE_URL + 'itemsToExport[]=' + scope.mySchemaIDs.join('&amp;itemsToExport[]=');
+        $window.open(scope.url, '_parent');
+      };
+
+
+      /**
+       * @name removeFromSchema
+       *
+       * @description Removes a particular item from the mySchema array
+       */
+      scope.removeFromSchema = function removeFromSchema(elementID) {
+        scope.mySchemaArray = scope.mySchemaArray.filter(function(schemaElement) {
+          return schemaElement.id !== elementID;
+        });
+        if (!scope.mySchemaArray.length) {
+          getSchema();
         }
       };
 
+
       /**
-       * @name prevPage
+       * @name removeSchema
        *
-       * @description Loads the previous page of results if there is one
+       * @description Removes all items in my schema
        */
-      scope.prevPage = function() {
-        if (scope.currentPage > 1) {
-          scope.currentPage--;
-          $location.search('page', scope.currentPage);
-          solrSearch.search();
-        }
+      scope.removeSchema = function removeSchema() {
+        mySchema.removeAllFromSchema();
+        scope.mySchemaIDs = [];
+        scope.mySchemaArray = [];
       };
     }
   }

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: app/components/solrResultsPagination/solrResultsPagination.directive.js</title>
+    <title>JSDoc: Source: app/services/mySchema/mySchema.factory.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -18,7 +18,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: app/components/solrResultsPagination/solrResultsPagination.directive.js</h1>
+    <h1 class="page-title">Source: app/services/mySchema/mySchema.factory.js</h1>
 
     
 
@@ -29,64 +29,106 @@
             <pre class="prettyprint source linenums"><code>'use strict';
 
 /**
- * @ngdoc directive
+ * @ngdoc factory
  *
- * @name solrResultsPagination
+ * @name mySchema
  *
  * @description
- * Pagination widget in sort bar on results page
+ * Factory for my schema cart
  */
-(function() {
+(function () {
 
   angular
     .module('dhsniem')
-    .directive('solrResultsPagination', solrResultsPagination);
+    .factory('mySchema', mySchema);
 
-  function solrResultsPagination(solrSearch, $location, $rootScope) {
+  function mySchema() {
+
     return {
-      restrict: 'E',
-      templateUrl: 'app/components/solrResultsPagination/solrResultsPagination.directive.html',
-      link: link
+      addToSchema: addToSchema,
+      getSchema: getSchema,
+      removeAllFromSchema: removeAllFromSchema,
+      removeFromSchema: removeFromSchema,
+      getSchemaCount: getSchemaCount
     };
 
     /**
-     *  Defines variables and functions within solrResultsPagination scope
+     * @name addToSchema
+     *
+     * @description Adds a new entityID to the local storage schema
+     *
+     * @param {String} - entityID
      */
-    function link(scope) {
+    function addToSchema(entityID) {
+      var newSchema = getSchema();
+      newSchema.push(entityID);
+      setSchema(newSchema);
+    }
 
-      scope.currentPage = $location.search().page || 1;
 
-      $rootScope.$on('newSearch', function() {
-        scope.currentPage = $location.search().page || 1;
-      });
+    /**
+     * @name getSchema
+     *
+     * @description Returns the mySchema JSON object from local storage
+     *
+     * @returns String[] - array of entity ids  
+     */
+    function getSchema() {
+      return localStorage.getItem('mySchema') ? JSON.parse(localStorage.getItem('mySchema')) : [];
+    }
 
-      /**
-       * @name nextPage
-       *
-       * @description Loads the next page of results if there is one
-       */
-      scope.nextPage = function() {
-        if (scope.currentPage &lt; scope.totalPages) {
-          scope.currentPage++;
-          $location.search('page', scope.currentPage);
-          solrSearch.search();
-        }
-      };
 
-      /**
-       * @name prevPage
-       *
-       * @description Loads the previous page of results if there is one
-       */
-      scope.prevPage = function() {
-        if (scope.currentPage > 1) {
-          scope.currentPage--;
-          $location.search('page', scope.currentPage);
-          solrSearch.search();
-        }
-      };
+    /**
+     * @name setSchema
+     *
+     * @description Sets the mySchema JSON object to local storage
+     *
+     * @param {Object} - schema
+     */
+    function setSchema(schema) {
+      localStorage.setItem('mySchema', JSON.stringify(schema));
+    }
+
+
+    /**
+     * @name removeAllFromSchema
+     *
+     * @description Removes all items from the mySchema local storage object
+     */
+    function removeAllFromSchema() {
+      setSchema([]);
+    }
+
+
+    /**
+     * @name getSchemaCount
+     *
+     * @description Returns the count of the mySchema local storage array
+     *
+     * @return Number - the length of the mySchema array
+     */
+    function getSchemaCount() {
+      return getSchema().length;
+    }
+
+
+    /**
+     * @name removeFromSchema
+     *
+     * @description Removes an entity ID from the mySchea local storage array
+     *
+     * @param entityID - the entityID to be removed from mySchema
+     */
+    function removeFromSchema(entityID) {
+      var schema = getSchema();
+      var idIndex = schema.indexOf(entityID);
+      if (idIndex > -1) {
+        schema.splice(idIndex, 1);
+        setSchema(schema);
+      }
     }
   }
+
 })();
 </code></pre>
         </article>

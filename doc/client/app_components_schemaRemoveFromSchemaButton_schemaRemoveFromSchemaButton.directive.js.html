@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: app/components/solrResultsPagination/solrResultsPagination.directive.js</title>
+    <title>JSDoc: Source: app/components/schemaRemoveFromSchemaButton/schemaRemoveFromSchemaButton.directive.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -18,7 +18,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: app/components/solrResultsPagination/solrResultsPagination.directive.js</h1>
+    <h1 class="page-title">Source: app/components/schemaRemoveFromSchemaButton/schemaRemoveFromSchemaButton.directive.js</h1>
 
     
 
@@ -31,59 +31,39 @@
 /**
  * @ngdoc directive
  *
- * @name solrResultsPagination
+ * @name schemaRemoveFromSchemaButton
  *
  * @description
- * Pagination widget in sort bar on results page
+ * My Schema button in the header
  */
-(function() {
+(function () {
 
   angular
     .module('dhsniem')
-    .directive('solrResultsPagination', solrResultsPagination);
+    .directive('schemaRemoveFromSchemaButton', schemaRemoveFromSchemaButton);
 
-  function solrResultsPagination(solrSearch, $location, $rootScope) {
+  function schemaRemoveFromSchemaButton(mySchema) {
     return {
       restrict: 'E',
-      templateUrl: 'app/components/solrResultsPagination/solrResultsPagination.directive.html',
+      templateUrl: 'app/components/schemaRemoveFromSchemaButton/schemaRemoveFromSchemaButton.directive.html',
+      scope: {
+        entityId: '='
+      },
       link: link
     };
 
     /**
-     *  Defines variables and functions within solrResultsPagination scope
+     *  Defines variables and functions within schemaRemoveFromSchemaButton scope
      */
     function link(scope) {
 
-      scope.currentPage = $location.search().page || 1;
-
-      $rootScope.$on('newSearch', function() {
-        scope.currentPage = $location.search().page || 1;
-      });
-
       /**
-       * @name nextPage
+       * @name removeFromSchema
        *
-       * @description Loads the next page of results if there is one
+       * @description Removes the scope entityId from My Schema
        */
-      scope.nextPage = function() {
-        if (scope.currentPage &lt; scope.totalPages) {
-          scope.currentPage++;
-          $location.search('page', scope.currentPage);
-          solrSearch.search();
-        }
-      };
-
-      /**
-       * @name prevPage
-       *
-       * @description Loads the previous page of results if there is one
-       */
-      scope.prevPage = function() {
-        if (scope.currentPage > 1) {
-          scope.currentPage--;
-          $location.search('page', scope.currentPage);
-          solrSearch.search();
-        }
+      scope.removeFromSchema = function removeFromSchema() {
+        mySchema.removeFromSchema(scope.entityId);
       };
     }
   }

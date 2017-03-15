@@ -1,5 +1,5 @@
 FROM node:boron
-MAINTAINER Sam Rubin "srubin@deloitte.com"
+MAINTAINER Sam Rubin "smrubin"
 
 # Get updates and install nginx
 RUN apt-get update

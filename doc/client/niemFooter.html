@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: app/components/solrResultsPagination/solrResultsPagination.directive.js</title>
+    <title>JSDoc: directive: niemFooter</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -18,79 +18,125 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: app/components/solrResultsPagination/solrResultsPagination.directive.js</h1>
+    <h1 class="page-title">directive: niemFooter</h1>
 
     
 
 
+
+<section>
+
+<header>
+    <h2>
+    niemFooter
+    </h2>
     
-    <section>
-        <article>
-            <pre class="prettyprint source linenums"><code>'use strict';
+</header>
 
-/**
- * @ngdoc directive
- *
- * @name solrResultsPagination
- *
- * @description
- * Pagination widget in sort bar on results page
- */
-(function() {
+<article>
+    <div class="container-overview">
+    
 
-  angular
-    .module('dhsniem')
-    .directive('solrResultsPagination', solrResultsPagination);
+    
+        
+<dt>
+    
+    
+    
 
-  function solrResultsPagination(solrSearch, $location, $rootScope) {
-    return {
-      restrict: 'E',
-      templateUrl: 'app/components/solrResultsPagination/solrResultsPagination.directive.html',
-      link: link
-    };
+    
+</dt>
+<dd>
 
-    /**
-     *  Defines variables and functions within solrResultsPagination scope
-     */
-    function link(scope) {
+    
+    <div class="description">
+        <p>Main footer throughout app</p>
+    </div>
+    
 
-      scope.currentPage = $location.search().page || 1;
+    
 
-      $rootScope.$on('newSearch', function() {
-        scope.currentPage = $location.search().page || 1;
-      });
+    
 
-      /**
-       * @name nextPage
-       *
-       * @description Loads the next page of results if there is one
-       */
-      scope.nextPage = function() {
-        if (scope.currentPage &lt; scope.totalPages) {
-          scope.currentPage++;
-          $location.search('page', scope.currentPage);
-          solrSearch.search();
-        }
-      };
+    
 
-      /**
-       * @name prevPage
-       *
-       * @description Loads the previous page of results if there is one
-       */
-      scope.prevPage = function() {
-        if (scope.currentPage > 1) {
-          scope.currentPage--;
-          $location.search('page', scope.currentPage);
-          solrSearch.search();
-        }
-      };
-    }
-  }
-})();
-</code></pre>
-        </article>
-    </section>
+    
+<dl class="details">
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="app_components_niemFooter_niemFooter.directive.js.html">app/components/niemFooter/niemFooter.directive.js</a>, <a href="app_components_niemFooter_niemFooter.directive.js.html#line3">line 3</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dd>
+
+    
+    </div>
+
+    
+
+    
+
+    <!--
+    
+    -->
+
+    
+
+     
+
+    
+
+    
+
+    
+
+    
+
+    
+</article>
+
+</section>
 
 
 

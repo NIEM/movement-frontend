@@ -36,7 +36,7 @@
  * @description
  * Solr results
  */
-(function() {
+(function () {
 
   angular
     .module('dhsniem')
@@ -52,7 +52,7 @@
     /**
      *  Defines variables and functions within solr scope
      */
-    function link(scope, element, attrs, ctrl) {
+    function link(scope) {
 
       /**
        * @name init
@@ -63,13 +63,24 @@
         scope.docs = solrSearch.getDocs();
         scope.numFound = solrSearch.getNumFound();
         scope.query = solrSearch.getQuery();
-        scope.totalPages = Math.ceil( scope.numFound / 100);
+        scope.totalPages = Math.ceil(scope.numFound / 100);
         scope.sort = solrSearch.getSort();
+        scope.namespaceTypes = {
+          'domain': 'Domain',
+          'externalStandard': 'External Standard',
+          'otherNamespace': 'Other Namespace'
+        };
+        scope.popovers = {
+          'core': {
+            'popoverIsOpen': false,
+            'popoverTemplateUrl': 'app/components/solrResults/corePopoverTemplate.html'
+          }
+        };
       }
 
       init();
 
-      $rootScope.$on('newSearch', function() {
+      $rootScope.$on('newSearch', function () {
         init();
       });
 
@@ -78,41 +89,8 @@
        *
        * @description Unselects all filters and adjusts displayed results accordingly
        */
-      scope.clearAllFilters = function() {
+      scope.clearAllFilters = function () {
         solrSearch.clearAllFilters();
-      };
-
-      /**
-       * @name getImagePath
-       *
-       * @param entityType
-       *
-       * @returns {string} Location of image to display corresponding to entityType
-       */
-      scope.getImagePath = function(entityType) {
-        return 'images/icon_' + entityType.substring(0,1).toLowerCase() + '.svg';
-      };
-
-
-      scope.popovers = {
-        'core': {
-          'popoverIsOpen': false,
-          'popoverTemplateUrl': 'app/components/solrResults/corePopoverTemplate.html'
-        },
-        'element': {
-          'popoverIsOpen': false,
-          'popoverTemplateUrl': 'app/components/solrResults/elementPopoverTemplate.html'
-        },
-        'type': {
-          'popoverIsOpen': false,
-          'popoverTemplateUrl': 'app/components/solrResults/typePopoverTemplate.html'
-        }
-      };
-
-      scope.namespaceTypes = {
-        'domain': 'Domain',
-        'externalStandard': 'External Standard',
-        'otherNamespace': 'Other Namespace'
       };
 
 
@@ -123,7 +101,7 @@
        *
        * @description Closes the popover related to the specified type
        */
-      scope.closePopover = function(type) {
+      scope.closePopover = function (type) {
         scope.popovers[type].popoverIsOpen = false;
       };
 
@@ -135,9 +113,9 @@
        *
        * @param type
        */
-      scope.closeOtherPopovers = function(type) {
-        angular.forEach(scope.popovers, function(value, key) {
-          if(key !== type) {
+      scope.closeOtherPopovers = function (type) {
+        angular.forEach(scope.popovers, function (value, key) {
+          if (key !== type) {
             scope.popovers[key].popoverIsOpen = false;
           }
         });
@@ -155,7 +133,7 @@
        *
        * @returns {boolean}
        */
-      scope.isFirstOfNamespace = function(previousNamespace, currentDoc) {
+      scope.isFirstOfNamespace = function (previousNamespace, currentDoc) {
         if (scope.sort === 'namespacePriority asc') {
           if (currentDoc.namespace !== previousNamespace) {
             currentDoc.namespaceCount = solrSearch.getFacet(currentDoc.namespaceType)[currentDoc.namespace];
@@ -173,19 +151,18 @@
        *
        * @param previousName - the previous row's (doucment's) name
        *
-       * @param currentDoc - the current row (document)
+       * @param currentName - the current row's (document's) name
+       *
+       * @param index - the current row's (document's) index
        *
        * @returns {boolean}
        */
-      scope.isFirstOfAlphabet = function(previousName, currentDoc) {
+      scope.isFirstOfAlphabet = function (previousName, currentName, index) {
         if (scope.sort === 'name asc') {
-          if (currentDoc.name.substring(0,1).toUpperCase() !== previousName.substring(0,1).toUpperCase()) {
-            return true;
-          }
+          return index &lt; 1 || currentName.substring(0, 1).toUpperCase() !== previousName.substring(0, 1).toUpperCase();
         }
-        return false;
       };
-      
+
     }
   }
 })();
@@ -199,7 +176,7 @@
 </div>
 
 <nav>
-    <h2><a href="index.html">Index</a></h2><h3>Modules</h3><ul><li><a href="module-dhsniem.html">dhsniem</a></li></ul><h3>controller</h3><ul><li><a href="AppCtrl.html">AppCtrl</a></li><li><a href="DetailsCtrl.html">DetailsCtrl</a></li><li><a href="HomeCtrl.html">HomeCtrl</a></li><li><a href="MainCtrl.html">MainCtrl</a></li><li><a href="ResultsCtrl.html">ResultsCtrl</a></li></ul><h3>directive</h3><ul><li><a href="ccp.html">ccp</a></li><li><a href="ccpHeader.html">ccpHeader</a></li><li><a href="detailsPagination.html">detailsPagination</a></li><li><a href="facetDetails.html">facetDetails</a></li><li><a href="NiemAccordion.html">NiemAccordion</a></li><li><a href="NiemChildAccordion.html">NiemChildAccordion</a></li><li><a href="NiemExport.html">NiemExport</a></li><li><a href="searchHeader.html">searchHeader</a></li><li><a href="solrFacet.html">solrFacet</a></li><li><a href="solrFacetResult.html">solrFacetResult</a></li><li><a href="solrResults.html">solrResults</a></li><li><a href="solrResultsPagination.html">solrResultsPagination</a></li><li><a href="solrSearchInput.html">solrSearchInput</a></li><li><a href="solrSort.html">solrSort</a></li></ul><h3>factory</h3><ul><li><a href="solrRequest.html">solrRequest</a></li><li><a href="solrSearch.html">solrSearch</a></li></ul><h3>Global</h3><ul><li><a href="global.html#addRemoveFacet">addRemoveFacet</a></li><li><a href="global.html#clearAllFilters">clearAllFilters</a></li><li><a href="global.html#closeOtherPopovers">closeOtherPopovers</a></li><li><a href="global.html#closePopover">closePopover</a></li><li><a href="global.html#facetString">facetString</a></li><li><a href="global.html#getImagePath">getImagePath</a></li><li><a href="global.html#getPageInfo">getPageInfo</a></li><li><a href="global.html#getTooltipText">getTooltipText</a></li><li><a href="global.html#getTypeaheadResults">getTypeaheadResults</a></li><li><a href="global.html#init">init</a></li><li><a href="global.html#isFirstOfAlphabet">isFirstOfAlphabet</a></li><li><a href="global.html#isFirstOfNamespace">isFirstOfNamespace</a></li><li><a href="global.html#isSelected">isSelected</a></li><li><a href="global.html#nextPage">nextPage</a></li><li><a href="global.html#onClick">onClick</a></li><li><a href="global.html#prevPage">prevPage</a></li><li><a href="global.html#search">search</a></li><li><a href="global.html#setFacetResults">setFacetResults</a></li><li><a href="global.html#showMore">showMore</a></li><li><a href="global.html#sortBy">sortBy</a></li><li><a href="global.html#sortByName">sortByName</a></li><li><a href="global.html#toggleAccordion">toggleAccordion</a></li></ul>
+    <h2><a href="index.html">Index</a></h2><h3>Modules</h3><ul><li><a href="module-dhsniem.html">dhsniem</a></li></ul><h3>controller</h3><ul><li><a href="AppCtrl.html">AppCtrl</a></li><li><a href="DetailsCtrl.html">DetailsCtrl</a></li><li><a href="HomeCtrl.html">HomeCtrl</a></li><li><a href="MainCtrl.html">MainCtrl</a></li><li><a href="MySchemaCtrl.html">MySchemaCtrl</a></li><li><a href="ResultsCtrl.html">ResultsCtrl</a></li></ul><h3>factory</h3><ul><li><a href="mySchema.html">mySchema</a></li><li><a href="niemTree.html">niemTree</a></li><li><a href="solrRequest.html">solrRequest</a></li><li><a href="solrSearch.html">solrSearch</a></li></ul><h3>directive</h3><ul><li><a href="NiemChildAccordion.html">NiemChildAccordion</a></li><li><a href="NiemExport.html">NiemExport</a></li><li><a href="niemFooter.html">niemFooter</a></li><li><a href="niemHeader.html">niemHeader</a></li><li><a href="schemaAddRemoveBtnGroup.html">schemaAddRemoveBtnGroup</a></li><li><a href="schemaAddToSchemaButton.html">schemaAddToSchemaButton</a></li><li><a href="schemaMySchemaButton.html">schemaMySchemaButton</a></li><li><a href="schemaRemoveFromSchemaButton.html">schemaRemoveFromSchemaButton</a></li><li><a href="searchHeader.html">searchHeader</a></li><li><a href="solrDetails.html">solrDetails</a></li><li><a href="solrFacet.html">solrFacet</a></li><li><a href="solrFacetResult.html">solrFacetResult</a></li><li><a href="solrMySchemaDetails.html">solrMySchemaDetails</a></li><li><a href="solrResults.html">solrResults</a></li><li><a href="solrResultsPagination.html">solrResultsPagination</a></li><li><a href="solrSearchInput.html">solrSearchInput</a></li><li><a href="solrSort.html">solrSort</a></li></ul><h3>Global</h3><ul><li><a href="global.html#addRemoveFacet">addRemoveFacet</a></li><li><a href="global.html#addToSchema">addToSchema</a></li><li><a href="global.html#clearAllFilters">clearAllFilters</a></li><li><a href="global.html#closeOtherPopovers">closeOtherPopovers</a></li><li><a href="global.html#closePopover">closePopover</a></li><li><a href="global.html#domainSelect">domainSelect</a></li><li><a href="global.html#downloadSchema">downloadSchema</a></li><li><a href="global.html#expandElement">expandElement</a></li><li><a href="global.html#expandTree">expandTree</a></li><li><a href="global.html#facetString">facetString</a></li><li><a href="global.html#formatNamespaceType">formatNamespaceType</a></li><li><a href="global.html#getDocById">getDocById</a></li><li><a href="global.html#getDocsByIds">getDocsByIds</a></li><li><a href="global.html#getElementObjects">getElementObjects</a></li><li><a href="global.html#getFacets">getFacets</a></li><li><a href="global.html#getSchema">getSchema</a></li><li><a href="global.html#getSchemaArray">getSchemaArray</a></li><li><a href="global.html#getSchemaCount">getSchemaCount</a></li><li><a href="global.html#getSearchParams">getSearchParams</a></li><li><a href="global.html#getTooltipText">getTooltipText</a></li><li><a href="global.html#getTypeaheadResults">getTypeaheadResults</a></li><li><a href="global.html#goBack">goBack</a></li><li><a href="global.html#init">init</a></li><li><a href="global.html#isFirstOfAlphabet">isFirstOfAlphabet</a></li><li><a href="global.html#isFirstOfNamespace">isFirstOfNamespace</a></li><li><a href="global.html#isSelected">isSelected</a></li><li><a href="global.html#nextPage">nextPage</a></li><li><a href="global.html#prevPage">prevPage</a></li><li><a href="global.html#removeAllFromSchema">removeAllFromSchema</a></li><li><a href="global.html#removeFromSchema">removeFromSchema</a></li><li><a href="global.html#removeSchema">removeSchema</a></li><li><a href="global.html#search">search</a></li><li><a href="global.html#setFacetResults">setFacetResults</a></li><li><a href="global.html#setNamespace">setNamespace</a></li><li><a href="global.html#setSchema">setSchema</a></li><li><a href="global.html#sortBy">sortBy</a></li><li><a href="global.html#sortByName">sortByName</a></li><li><a href="global.html#splitId">splitId</a></li><li><a href="global.html#toggleSchemaAddRemove">toggleSchemaAddRemove</a></li></ul>
 </nav>
 
 <br clear="both">

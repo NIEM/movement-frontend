@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: app/components/solrResultsPagination/solrResultsPagination.directive.js</title>
+    <title>JSDoc: Source: app/components/niemFooter/niemFooter.directive.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -18,7 +18,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: app/components/solrResultsPagination/solrResultsPagination.directive.js</h1>
+    <h1 class="page-title">Source: app/components/niemFooter/niemFooter.directive.js</h1>
 
     
 
@@ -31,61 +31,22 @@
 /**
  * @ngdoc directive
  *
- * @name solrResultsPagination
+ * @name niemFooter
  *
  * @description
- * Pagination widget in sort bar on results page
+ * Main footer throughout app
  */
 (function() {
 
   angular
     .module('dhsniem')
-    .directive('solrResultsPagination', solrResultsPagination);
+    .directive('niemFooter', niemFooter);
 
-  function solrResultsPagination(solrSearch, $location, $rootScope) {
+  function niemFooter() {
     return {
       restrict: 'E',
-      templateUrl: 'app/components/solrResultsPagination/solrResultsPagination.directive.html',
-      link: link
+      templateUrl: 'app/components/niemFooter/niemFooter.directive.html'
     };
-
-    /**
-     *  Defines variables and functions within solrResultsPagination scope
-     */
-    function link(scope) {
-
-      scope.currentPage = $location.search().page || 1;
-
-      $rootScope.$on('newSearch', function() {
-        scope.currentPage = $location.search().page || 1;
-      });
-
-      /**
-       * @name nextPage
-       *
-       * @description Loads the next page of results if there is one
-       */
-      scope.nextPage = function() {
-        if (scope.currentPage &lt; scope.totalPages) {
-          scope.currentPage++;
-          $location.search('page', scope.currentPage);
-          solrSearch.search();
-        }
-      };
-
-      /**
-       * @name prevPage
-       *
-       * @description Loads the previous page of results if there is one
-       */
-      scope.prevPage = function() {
-        if (scope.currentPage > 1) {
-          scope.currentPage--;
-          $location.search('page', scope.currentPage);
-          solrSearch.search();
-        }
-      };
-    }
   }
 })();
 </code></pre>

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: app/components/solrResultsPagination/solrResultsPagination.directive.js</title>
+    <title>JSDoc: Source: app/components/solrDetails/solrDetails.directive.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -18,7 +18,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: app/components/solrResultsPagination/solrResultsPagination.directive.js</h1>
+    <h1 class="page-title">Source: app/components/solrDetails/solrDetails.directive.js</h1>
 
     
 
@@ -31,60 +31,84 @@
 /**
  * @ngdoc directive
  *
- * @name solrResultsPagination
+ * @name solrDetails
  *
  * @description
- * Pagination widget in sort bar on results page
+ * Solr details
  */
-(function() {
+(function () {
 
   angular
     .module('dhsniem')
-    .directive('solrResultsPagination', solrResultsPagination);
+    .directive('solrDetails', solrDetails);
 
-  function solrResultsPagination(solrSearch, $location, $rootScope) {
+  function solrDetails(niemTree, $location, $window) {
     return {
       restrict: 'E',
-      templateUrl: 'app/components/solrResultsPagination/solrResultsPagination.directive.html',
+      templateUrl: 'app/components/solrDetails/solrDetails.directive.html',
       link: link
     };
 
     /**
-     *  Defines variables and functions within solrResultsPagination scope
+     *  Defines variables and functions within solrDetails scope
      */
     function link(scope) {
 
-      scope.currentPage = $location.search().page || 1;
+      /**
+       * @name init
+       *
+       * @description Initializes controller, retrieves the type and child elements for the scope entity
+       */
+      function init() {
 
-      $rootScope.$on('newSearch', function() {
-        scope.currentPage = $location.search().page || 1;
-      });
+        scope.entityID = $location.search().entityID;
+        $window.document.title = scope.entityID + ' Details - Open Source Tool';
+
+        niemTree.getDocById(scope.entityID).then(function (entityDoc) {
+          scope.entity = entityDoc;
+          scope.formattedNamespaceType = formatNamespaceType(scope.entity.namespaceType);
+          if (scope.entity.type) {
+            niemTree.getDocById(scope.entity.type).then(function (typeDoc) {
+              scope.entity.type = typeDoc;
+              if (typeDoc.elements) {
+                niemTree.getElementObjects(typeDoc.elements).then(function(elements) {
+                  scope.entity.type.elements = elements;
+                });
+              }
+            });
+          }
+        });
+      }
+
 
       /**
-       * @name nextPage
+       * @name formatNamespaceType
        *
-       * @description Loads the next page of results if there is one
+       * @description Transforms the namespaceType returned into properly formatted text
+       *
+       * @param text - String representing the type of Namespace
+       *
+       * @returns {string}
        */
-      scope.nextPage = function() {
-        if (scope.currentPage &lt; scope.totalPages) {
-          scope.currentPage++;
-          $location.search('page', scope.currentPage);
-          solrSearch.search();
-        }
-      };
+      function formatNamespaceType(namespaceType) {
+        return {
+          'domain': 'Domain',
+          'otherNamespace': 'Other',
+          'externalStandard': 'External Standard'
+        }[namespaceType];
+      }
+
 
       /**
-       * @name prevPage
+       * @name goBack
        *
-       * @description Loads the previous page of results if there is one
+       * @description Navigates back to the search results page with previous search params
        */
-      scope.prevPage = function() {
-        if (scope.currentPage > 1) {
-          scope.currentPage--;
-          $location.search('page', scope.currentPage);
-          solrSearch.search();
-        }
+      scope.goBack = function () {
+        $window.history.back();
       };
+
+      init();
     }
   }
 })();

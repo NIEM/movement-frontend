@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: app/components/solrResultsPagination/solrResultsPagination.directive.js</title>
+    <title>JSDoc: Source: app/components/schemaAddRemoveBtnGroup/schemaAddRemoveBtnGroup.directive.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -18,7 +18,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: app/components/solrResultsPagination/solrResultsPagination.directive.js</h1>
+    <h1 class="page-title">Source: app/components/schemaAddRemoveBtnGroup/schemaAddRemoveBtnGroup.directive.js</h1>
 
     
 
@@ -31,63 +31,48 @@
 /**
  * @ngdoc directive
  *
- * @name solrResultsPagination
+ * @name schemaAddRemoveBtnGroup
  *
  * @description
- * Pagination widget in sort bar on results page
+ * directive for dhsniem
  */
-(function() {
+(function () {
 
   angular
     .module('dhsniem')
-    .directive('solrResultsPagination', solrResultsPagination);
+    .directive('schemaAddRemoveBtnGroup', schemaAddRemoveBtnGroup);
 
-  function solrResultsPagination(solrSearch, $location, $rootScope) {
+  function schemaAddRemoveBtnGroup(mySchema) {
     return {
       restrict: 'E',
-      templateUrl: 'app/components/solrResultsPagination/solrResultsPagination.directive.html',
+      templateUrl: 'app/components/schemaAddRemoveBtnGroup/schemaAddRemoveBtnGroup.directive.html',
+      scope: {
+        entityId: '='
+      },
       link: link
     };
 
     /**
-     *  Defines variables and functions within solrResultsPagination scope
+     *  Defines variables and functions within schemaAddRemoveBtnGroup scope
      */
     function link(scope) {
 
-      scope.currentPage = $location.search().page || 1;
-
-      $rootScope.$on('newSearch', function() {
-        scope.currentPage = $location.search().page || 1;
-      });
+      scope.isInMySchema = mySchema.getSchema().indexOf(scope.entityId) > -1;
 
       /**
-       * @name nextPage
+       * @name toggleSchemaAddRemove
        *
-       * @description Loads the next page of results if there is one
+       * @description Toggles the isInMySchema scope variable to show/hide the add/remove buttons
        */
-      scope.nextPage = function() {
-        if (scope.currentPage &lt; scope.totalPages) {
-          scope.currentPage++;
-          $location.search('page', scope.currentPage);
-          solrSearch.search();
-        }
-      };
-
-      /**
-       * @name prevPage
-       *
-       * @description Loads the previous page of results if there is one
-       */
-      scope.prevPage = function() {
-        if (scope.currentPage > 1) {
-          scope.currentPage--;
-          $location.search('page', scope.currentPage);
-          solrSearch.search();
-        }
+      scope.toggleSchemaAddRemove = function() {
+        scope.isInMySchema = !scope.isInMySchema;
       };
     }
   }
+
 })();
+
+
 </code></pre>
         </article>
     </section>
