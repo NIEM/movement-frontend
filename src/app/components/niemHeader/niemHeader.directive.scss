@@ -1,8 +1,10 @@
 .niem-header {
+  display: flex;
+  flex-wrap: wrap;
+
   &.header {
     border: 0;
   }
-  padding: 36px 30px 0 30px;
   background-color: transparent;
   .header-top {
     padding-bottom: 30px;
@@ -10,6 +12,7 @@
     display: flex;
     align-items: flex-end;
     justify-content: space-between;
+    width: 100%;
     .header-link-left {
       display: inline-block;
       width: 215px;
@@ -40,25 +43,6 @@
           }
         }
       }
-    }
-  }
-
-  .header-my-schema {
-    display: flex;
-    justify-content: flex-end;
-    padding-top: 23px;
-    .schema-count {
-      @include flex-and-align-center;
-      justify-content: center;
-      width: 20px;
-      height: 20px;
-      border-radius: 50px;
-      box-shadow: 0 1px 2.5px 0 $shady-grey;
-      background: $white;
-      color: #0073b2;
-      position: relative;
-      top: -10px;
-      right: 11px;
     }
   }
 }
