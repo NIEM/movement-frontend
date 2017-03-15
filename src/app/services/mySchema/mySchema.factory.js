@@ -92,9 +92,11 @@
      * @param entityID - the entityID to be removed from mySchema
      */
     function removeFromSchema(entityID) {
-      var idIndex = getSchema().indexOf(entityID);
-      if (idIndex) {
-        setSchema(getSchema().splice(idIndex, 1));
+      var schema = getSchema();
+      var idIndex = schema.indexOf(entityID);
+      if (idIndex > -1) {
+        schema.splice(idIndex, 1);
+        setSchema(schema);
       }
     }
   }

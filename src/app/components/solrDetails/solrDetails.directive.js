@@ -33,10 +33,10 @@
        */
       function init() {
 
-        var entityID = $location.search().entityID;
-        $window.document.title = entityID + ' Details - Open Source Tool';
+        scope.entityID = $location.search().entityID;
+        $window.document.title = scope.entityID + ' Details - Open Source Tool';
 
-        niemTree.getDocById(entityID).then(function (entityDoc) {
+        niemTree.getDocById(scope.entityID).then(function (entityDoc) {
           scope.entity = entityDoc;
           scope.formattedNamespaceType = formatNamespaceType(scope.entity.namespaceType);
           if (scope.entity.type) {

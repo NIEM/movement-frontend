@@ -120,6 +120,9 @@
         scope.mySchemaArray = scope.mySchemaArray.filter(function(schemaElement) {
           return schemaElement.id !== elementID;
         });
+        if (!scope.mySchemaArray.length) {
+          getSchema();
+        }
       };
 
 
