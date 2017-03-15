@@ -8,11 +8,7 @@
  */
 angular
   .module('dhsniem', [
-    'ngAnimate',
-    'ngCookies',
     'ui.router',
-    'ngSanitize',
-    'ngTouch',
     'ui.bootstrap'
   ])
   .config(function ($urlRouterProvider) {
