@@ -17,18 +17,7 @@
   function searchHeader() {
     return {
       restrict: 'E',
-      templateUrl: 'app/components/searchHeader/searchHeader.directive.html',
-      link: link
+      templateUrl: 'app/components/searchHeader/searchHeader.directive.html'
     };
-
   }
-
-  /**
-   *  Defines variables and functions within niemExport scope
-   *
-   */
-  function link(scope) {
-
-  }
-
 })();

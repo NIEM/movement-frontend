@@ -1,0 +1,5 @@
+.schema-add-to-schema-button {
+  .add-to-schema-button {
+    @include niem-button-filled($ocean-blue, $white, $dark-ocean);
+  }
+}

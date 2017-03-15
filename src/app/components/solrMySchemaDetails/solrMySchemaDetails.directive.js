@@ -49,13 +49,11 @@
        * @returns {string}
        */
       scope.formatNamespaceType = function formatNamespaceType(namespaceType) {
-        var mapping = {
+        return {
           'domain': 'Domain',
           'otherNamespace': 'Other',
           'externalStandard': 'External Standard'
-        };
-
-        return mapping[namespaceType];
+        }[namespaceType];
       };
 
 
@@ -84,7 +82,6 @@
        */
       function getSchema() {
         scope.mySchemaIDs = mySchema.getSchema();
-        scope.mySchemaArray = [];
         if (scope.mySchemaIDs) {
           getSchemaArray();
         }
@@ -109,9 +106,23 @@
        * @description Downloads all items in my schema to JSON file
        */
       scope.downloadSchema = function downloadSchema() {
-          var schemaString = 'itemsToExport[]=' + scope.mySchemaIDs.join('&itemsToExport[]=');
-          scope.url = NODE_URL + schemaString;
-          $window.open(scope.url, '_parent');
+        scope.url = NODE_URL + 'itemsToExport[]=' + scope.mySchemaIDs.join('&itemsToExport[]=');
+        $window.open(scope.url, '_parent');
+      };
+
+
+      /**
+       * @name removeFromSchema
+       *
+       * @description Removes a particular item from the mySchema array
+       */
+      scope.removeFromSchema = function removeFromSchema(elementID) {
+        scope.mySchemaArray = scope.mySchemaArray.filter(function(schemaElement) {
+          return schemaElement.id !== elementID;
+        });
+        if (!scope.mySchemaArray.length) {
+          getSchema();
+        }
       };
 
 
@@ -122,7 +133,8 @@
        */
       scope.removeSchema = function removeSchema() {
         mySchema.removeAllFromSchema();
-        getSchema();
+        scope.mySchemaIDs = [];
+        scope.mySchemaArray = [];
       };
     }
   }

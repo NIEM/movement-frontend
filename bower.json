@@ -5,10 +5,6 @@
   "dependencies": {
     "angular": "~1.5.x",
     "bootstrap": "^3.3.5",
-    "angular-animate": "~1.5.x",
-    "angular-cookies": "~1.5.x",
-    "angular-sanitize": "~1.5.x",
-    "angular-touch": "~1.5.x",
     "angular-bootstrap": "^2.1.4",
     "angular-ui-router": "~0.2.15"
   },
