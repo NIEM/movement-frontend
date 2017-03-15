@@ -17,18 +17,8 @@
   function niemExport() {
     return {
       restrict: 'E',
-      templateUrl: 'app/components/niemExport/niemExport.directive.html',
-      scope: {},
-      link: link
+      templateUrl: 'app/components/niemExport/niemExport.directive.html'
     };
-
-  }
-
-  /**
-   *  Defines variables and functions within niemExport scope
-   *
-   */
-  function link(scope) {
 
   }
 

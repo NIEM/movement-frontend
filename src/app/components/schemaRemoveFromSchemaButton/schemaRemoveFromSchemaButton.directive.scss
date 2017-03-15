@@ -1,17 +1,5 @@
 .schema-remove-from-schema-button {
-  display: inline-flex;
-  justify-content: flex-end;
   .remove-from-schema-button {
-    background-color: $white;
-    color: $ocean-blue;
-    padding: 10px;
-    border: $medium-blue solid 1px;
-    border-radius: 4px;
-    vertical-align: middle;
-    text-transform: uppercase;
-    white-space: nowrap;
-    &:hover {
-      background-color: $silver;
-    }
+    @include niem-button-bordered;
   }
 }

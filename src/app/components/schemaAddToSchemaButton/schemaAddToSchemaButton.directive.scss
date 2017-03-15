@@ -1,7 +1,5 @@
 .schema-add-to-schema-button {
-  .item-button {
-    color: $marine-blue;
-    font-size: 18px;
-    letter-spacing: 2px;
+  .add-to-schema-button {
+    @include niem-button-filled($ocean-blue, $white, $dark-ocean);
   }
 }

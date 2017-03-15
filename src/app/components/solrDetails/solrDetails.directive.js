@@ -35,7 +35,6 @@
 
         var entityID = $location.search().entityID;
         $window.document.title = entityID + ' Details - Open Source Tool';
-        // scope.isInMySchema = mySchema.getSchema().indexOf(entityID) > -1;
 
         niemTree.getDocById(entityID).then(function (entityDoc) {
           scope.entity = entityDoc;

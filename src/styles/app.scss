@@ -37,6 +37,33 @@ $desktop-md-max-width: 992px;
     @content;
   }
 }
+@mixin niem-button {
+  background-color: $white;
+  border: none;
+  border-radius: 4px;
+  color: $ocean-blue;
+  font-size: 14px;
+  letter-spacing: 0.9px;
+  padding: 12px 10px;
+  text-transform: uppercase;
+  vertical-align: middle;
+  white-space: nowrap;
+  &:hover {
+    background-color: $silver;
+  }
+}
+@mixin niem-button-bordered {
+  @include niem-button;
+  border: $medium-blue solid 1px;
+}
+@mixin niem-button-filled($background-color, $color, $hover-background-color) {
+  @include niem-button;
+  background-color: $background-color;
+  color: $color;
+  &:hover {
+    background-color: $hover-background-color;
+  }
+}
 
 .browsehappy {
   margin: 0.2em 0;
@@ -87,7 +114,7 @@ h6 {
 }
 
 /* Everything but the jumbotron gets side spacing for mobile first views */
-.header, .marketing, .footer {
+.header, .footer {
   padding-left: 20px;
   padding-right: 20px;
 }
@@ -108,36 +135,11 @@ h6 {
 
 /* Custom page footer */
 .footer {
-  //border-top: 1px solid #e5e5e5;
   width: 100%;
   background-color: $white;
   padding: 0;
   .footer-bottom {
     padding: 10px 20px;
-  }
-}
-
-.container-narrow > hr {
-  margin: 30px 0;
-}
-
-/* Main marketing message and sign up button */
-.jumbotron {
-  background-color: $white;
-  border-bottom: 1px solid #e5e5e5;
-
-  .btn {
-    font-size: 21px;
-    padding: 14px 24px;
-  }
-}
-
-/* Supporting marketing content */
-.marketing {
-  margin: 40px 0;
-
-  p + h4 {
-    margin-top: 28px;
   }
 }
 
