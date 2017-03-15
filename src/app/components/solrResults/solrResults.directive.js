@@ -24,7 +24,7 @@
     /**
      *  Defines variables and functions within solr scope
      */
-    function link(scope, element, attrs, ctrl) {
+    function link(scope) {
 
       /**
        * @name init

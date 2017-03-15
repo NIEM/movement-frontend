@@ -14,7 +14,7 @@
     .module('dhsniem')
     .directive('solrDetails', solrDetails);
 
-  function solrDetails(niemTree, $location, $window, mySchema) {
+  function solrDetails(niemTree, $location, $window) {
     return {
       restrict: 'E',
       templateUrl: 'app/components/solrDetails/solrDetails.directive.html',
@@ -69,16 +69,6 @@
           'externalStandard': 'External Standard'
         }[namespaceType];
       }
-
-
-      /**
-       * @name toggleSchemaAddRemove
-       *
-       * @description Toggles the DOM add and remove schema buttons
-       */
-      scope.toggleSchemaAddRemove = function () {
-        scope.isInMySchema = !scope.isInMySchema;
-      };
 
 
       /**
