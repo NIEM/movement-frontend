@@ -32,7 +32,7 @@
        * @description Retrieves My Schema
        */
       function init() {
-        $window.document.title = 'My Schema - Open Source Tool';
+        $window.document.title = 'My Schema Builder - Open Source Tool';
         getSchema();
       }
 
