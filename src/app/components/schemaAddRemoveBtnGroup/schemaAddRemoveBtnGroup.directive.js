@@ -31,6 +31,11 @@
 
       scope.isInMySchema = mySchema.getSchema().indexOf(scope.entityId) > -1;
 
+      /**
+       * @name toggleSchemaAddRemove
+       *
+       * @description Toggles the isInMySchema scope variable to show/hide the add/remove buttons
+       */
       scope.toggleSchemaAddRemove = function() {
         scope.isInMySchema = !scope.isInMySchema;
       };

@@ -20,7 +20,7 @@
     .domain-button {
       background-color: $white;
       color: $marine-blue;
-      padding: 6px 12px 6px 12px;
+      padding: 6px 12px;
       width: 200px;
       height: 41px;
       text-align: left;
@@ -46,8 +46,6 @@
         float: left;
       }
       .dropdown-caret {
-        -webkit-transform: rotate(90deg);
-        -ms-transform: rotate(90deg);
         transform: rotate(90deg);
         float: right;
       }
@@ -78,6 +76,10 @@
   .input-group {
     display: flex;
     align-items: center;
+
+    .input-group-btn {
+      width: auto;
+    }
 
     .search-group {
       display: flex;

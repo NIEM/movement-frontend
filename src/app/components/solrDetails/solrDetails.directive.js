@@ -29,7 +29,7 @@
       /**
        * @name init
        *
-       * @description Initializes controller, retrieves data for the specific entity
+       * @description Initializes controller, retrieves the type and child elements for the scope entity
        */
       function init() {
 
@@ -56,7 +56,7 @@
       /**
        * @name formatNamespaceType
        *
-       * @description transform the Namespace type returned into readable text
+       * @description Transforms the namespaceType returned into properly formatted text
        *
        * @param text - String representing the type of Namespace
        *

@@ -8,9 +8,7 @@
       $stateProvider
         .state('main.details', {
           url: '/details?entityID',
-          templateUrl: 'app/views/details/details.view.html',
-          controller: 'DetailsCtrl',
-          controllerAs: 'DetailsCtrl'
+          templateUrl: 'app/views/details/details.view.html'
         });
     });
 

@@ -8,9 +8,7 @@
       $stateProvider
         .state('main', {
           url         : '',
-          templateUrl : 'app/views/main/main.view.html',
-          controller  : 'MainCtrl',
-          controllerAs: 'MainCtrl'
+          templateUrl : 'app/views/main/main.view.html'
         });
     });
 
