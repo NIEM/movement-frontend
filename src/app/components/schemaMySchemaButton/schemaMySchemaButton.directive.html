@@ -1,8 +1,4 @@
 <div class="schema-my-schema-button">
-  <div class="my-schema-button">
-    <button class="dark-blue-button text-uppercase" ng-click="mySchemaPage()" tabindex="250">
-      <a>My Schema</a>
-    </button>
-  </div>
+  <button class="my-schema-button" ui-sref="main.mySchema" tabindex="250">My Schema</button>
+  <div class="schema-count" ng-if="schemaCount">{{schemaCount}}</div>
 </div>
-

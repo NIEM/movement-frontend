@@ -14,28 +14,26 @@
     .module('dhsniem')
     .directive('niemHeader', niemHeader);
 
-  function niemHeader(mySchema, $rootScope, $location, $anchorScroll, $window) {
+  function niemHeader($rootScope, $location, $anchorScroll, $window) {
     return {
       restrict: 'E',
       templateUrl: 'app/components/niemHeader/niemHeader.directive.html',
       link: link
     };
 
-
     /**
-     *  Defines variables and functions within header scope
-     *
+     *  Defines variables and functions within niemHeader scope
      */
-    function link(scope) {
-      scope.schemaCount = mySchema.getSchemaCount();
+    function link() {
 
-      scope.$watch(function () {
-        return mySchema.getSchemaCount();
-      }, function (updatedSchemaCount) {
-        scope.schemaCount = updatedSchemaCount;
-      });
-
-      $rootScope.goToAnchor = function goToAnchor(anchor) {
+      /**
+       * @name skipToContent
+       *
+       * @param anchor - String representing the section to navigate to on a page
+       *
+       * @description Allows a user to skip to the main section of the page
+       */
+      $rootScope.skipToContent = function skipToContent(anchor) {
         $location.hash(anchor);
         $anchorScroll();
         var el = $window.document.getElementById(anchor);
@@ -43,9 +41,6 @@
           el.focus();
         }
       };
-
-
     }
-
   }
 })();

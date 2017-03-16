@@ -1,32 +1,20 @@
 .search-header {
-  height: 200px;
   background: url(./../images/mainbg.svg);
   background-size: cover;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  padding: 30px 30px 20px;
+
+  .header-container {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
   .header-search {
-    padding: 23px 30px;
-    display:flex;
-    align-items: center;
-    justify-content: space-between;
     .form-control {
       width: 436px;
     }
-    .header-my-schema {
-      display: flex;
-      justify-content: flex-end;
-      .schema-count {
-        @include flex-and-align-center;
-        justify-content: center;
-        width: 20px;
-        height: 20px;
-        border-radius: 50px;
-        box-shadow: 0 1px 2.5px 0 $shady-grey;
-        background: $white;
-        color: #0073b2;
-        position: relative;
-        top: -10px;
-        right: 11px;
-      }
-    }
-
   }
 }

@@ -17,19 +17,7 @@
   function niemFooter() {
     return {
       restrict: 'E',
-      templateUrl: 'app/components/niemFooter/niemFooter.directive.html',
-      scope: {
-        isAbsolutePositioning: '='
-      },
-      link: link
+      templateUrl: 'app/components/niemFooter/niemFooter.directive.html'
     };
-
-
-  /**
-   *  Defines variables and functions within footer scope
-   *
-   */
-  function link() {}
-
   }
 })();

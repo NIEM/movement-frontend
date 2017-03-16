@@ -83,30 +83,10 @@
           .result-content-wrapper {
             @include flex-and-align-center;
             justify-content: space-between;
+            padding: 0 30px;
             .result-content {
-              display: inline-block;
-              padding: 0 30px;
-            }
-            .results-add-to-schema-button {
-              padding: 0 30px 0 30px;
-            }
-            .add-to-schema-button {
-              background-color: $ocean-blue;
-              color: $white;
-              padding: 10px;
-              border: none;
-              border-radius: 4px;
-              vertical-align: middle;
-              white-space: nowrap;
-              &:hover {
-                background-color: $dark-ocean;
-              }
-              a, a:active, a:hover, a:visited {
-                color: $white;
-                font-size: 14px;
-                letter-spacing: 0.9px;
-                text-decoration: none;
-              }
+              max-width: 66.67%;
+              padding-right: 20px;
             }
           }
           .item-img-section {

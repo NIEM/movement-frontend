@@ -29,7 +29,7 @@
       /**
        * @name init
        *
-       * @description Initializes the view to set scope variables on page load and whenever a new search is triggered.
+       * @description Retrieves My Schema
        */
       function init() {
         $window.document.title = 'My Schema - Open Source Tool';
@@ -42,27 +42,25 @@
       /**
        * @name formatNamespaceType
        *
-       * @description transform the Namespace type returned into readable text
+       * @description Transforms the namespaceType returned into properly formatted text
        *
-       * @param text - String representing the type of Namespace
+       * @param namespaceType - String representing the type of Namespace
        *
        * @returns {string}
        */
       scope.formatNamespaceType = function formatNamespaceType(namespaceType) {
-        var mapping = {
+        return {
           'domain': 'Domain',
           'otherNamespace': 'Other',
           'externalStandard': 'External Standard'
-        };
-
-        return mapping[namespaceType];
+        }[namespaceType];
       };
 
 
       /**
        * @name expandTree
        *
-       * @description While expanding the accordion via uib-accordion, will also make call to get the children elements
+       * @description Fetches child elements for the top level accordion, if the data has not been previously loaded
        *
        * @param entity - The entity or my schema item being expanded
        */
@@ -80,11 +78,10 @@
       /**
        * @name getSchema
        *
-       * @description Returns the element IDs in my schema
+       * @description Sets scope variable to the element IDs in My Schema
        */
       function getSchema() {
         scope.mySchemaIDs = mySchema.getSchema();
-        scope.mySchemaArray = [];
         if (scope.mySchemaIDs) {
           getSchemaArray();
         }
@@ -94,7 +91,7 @@
       /**
        * @name getSchemaArray
        *
-       * @description Calls solr and returns information about each of the elements in my schema
+       * @description Sets the My Schema array of IDs to an array of full documents for those elements
        */
       function getSchemaArray() {
         niemTree.getElementObjects(scope.mySchemaIDs).then(function(elementDocs) {
@@ -109,9 +106,23 @@
        * @description Downloads all items in my schema to JSON file
        */
       scope.downloadSchema = function downloadSchema() {
-          var schemaString = 'itemsToExport[]=' + scope.mySchemaIDs.join('&itemsToExport[]=');
-          scope.url = NODE_URL + schemaString;
-          $window.open(scope.url, '_parent');
+        scope.url = NODE_URL + 'itemsToExport[]=' + scope.mySchemaIDs.join('&itemsToExport[]=');
+        $window.open(scope.url, '_parent');
+      };
+
+
+      /**
+       * @name removeFromSchema
+       *
+       * @description Removes a particular item from the mySchema array
+       */
+      scope.removeFromSchema = function removeFromSchema(elementID) {
+        scope.mySchemaArray = scope.mySchemaArray.filter(function(schemaElement) {
+          return schemaElement.id !== elementID;
+        });
+        if (!scope.mySchemaArray.length) {
+          getSchema();
+        }
       };
 
 
@@ -122,7 +133,8 @@
        */
       scope.removeSchema = function removeSchema() {
         mySchema.removeAllFromSchema();
-        getSchema();
+        scope.mySchemaIDs = [];
+        scope.mySchemaArray = [];
       };
     }
   }

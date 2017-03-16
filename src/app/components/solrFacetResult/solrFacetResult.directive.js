@@ -29,7 +29,7 @@
     /**
      *  Defines variables and functions within solrFacetResult scope
      */
-    function link(scope, element, attrs) {
+    function link(scope) {
 
       /**
        * @name facetString

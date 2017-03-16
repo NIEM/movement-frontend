@@ -1,25 +1,22 @@
 NIEM - WIST: Frontend
 =====================
 
-
 The other repositories include the [WIST - Backend](https://github.com/NIEMconnects/wist-backend) and the [WIST - Solr](https://github.com/NIEMconnects/wist-solr).
 
-# Frontend Setup
+# Running the App with Docker
 
-Frontend is run via Docker. To run the web app locally with Docker:
+The frontend can be run via Docker. To run the web app locally with Docker, first make sure you have installed and setup the NIEM WIST Docker config:
+```
+docker network create niem-network
+docker run -dti -p 27017:27017 --name wist-mongo --net niem-network
+```
 
+Note: Also, build and run the Solr and Backend Docker containers. Then build and run the frontend container, from the repo's root directory:
 ```
 docker build -t wist-frontend .
-docker run -d -p 80:80 -t wist-frontend
+docker run -dti -p 7000:7000 --name wist-frontend --net niem-network wist-frontend
 ```
 
-# Jenkins Job Setup 
-
-```
-#!bin/bash
-chmod u+x deploy.sh
-./deploy.sh
-```
 
 # Web App Features
 
@@ -58,4 +55,3 @@ If you are using the [JSDoc](http://usejsdoc.org/) style of comments (which you 
 ```
 npm run docs
 ```
-

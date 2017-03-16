@@ -3,12 +3,12 @@
     <div class="my-schema-heading">
       <h1>My Schema</h1>
     </div>
-    <div class="empty-my-schema" ng-if="!mySchemaIDs">
+    <div class="empty-my-schema" ng-if="!mySchemaIDs.length">
       <h2>Your cart is currently empty</h2>
     </div>
-    <div class="my-schema-actions" ng-if="mySchemaIDs">
+    <div class="my-schema-actions" ng-if="mySchemaIDs.length">
       <h2 class="my-schema-count">Total ({{mySchemaArray.length}} items)</h2>
-      <button ng-click="removeSchema()" class="remove-from-schema-button">Remove All</button>
+      <button ng-click="removeSchema()" class="remove-all-button">Remove All</button>
       <button ng-click="downloadSchema()" class="download-schema-button">Download All</button>
     </div>
     <div class="schema-item" ng-repeat="entity in mySchemaArray">
@@ -21,8 +21,8 @@
           <div class="item-namespace text-uppercase">{{formatNamespaceType(entity.namespaceType)}}: {{entity.namespace}}</div>
           <p class="item-description">{{entity.definition}}</p>
         </div>
-        <div class="col-sm-4">
-          <schema-remove-from-schema-button></schema-remove-from-schema-button>
+        <div class="col-sm-4 text-right">
+          <schema-remove-from-schema-button entity-id="entity.id" ng-click="removeFromSchema(entity.id)"></schema-remove-from-schema-button>
         </div>
 
         <div class="col-sm-12" ng-if="entity.type.elements">
