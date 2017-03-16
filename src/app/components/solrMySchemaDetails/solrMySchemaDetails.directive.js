@@ -44,7 +44,7 @@
        *
        * @description Transforms the namespaceType returned into properly formatted text
        *
-       * @param text - String representing the type of Namespace
+       * @param namespaceType - String representing the type of Namespace
        *
        * @returns {string}
        */

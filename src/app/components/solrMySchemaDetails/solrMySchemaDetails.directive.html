@@ -1,4 +1,4 @@
-<div class="solr-my-schema-details">
+<div class="solr-my-schema-details" tabindex="-1" id="main">
   <section class="container">
     <div class="my-schema-heading">
       <h1>My Schema Builder</h1>
@@ -11,7 +11,6 @@
       <button ng-click="removeSchema()" class="remove-all-button">Remove All</button>
       <button ng-click="downloadSchema()" class="download-schema-button">Download JSON Schema</button>
     </div>
-
     <div class="schema-item" ng-repeat="entity in mySchemaArray">
       <div class="schema-content-wrapper row">
         <div class="col-sm-8">

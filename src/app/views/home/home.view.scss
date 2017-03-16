@@ -4,14 +4,13 @@
     background-image: url(./../images/mainbg.svg);
     background-size: cover;
     padding: 30px 30px 20px;
-
     .header-wrapper {
       margin-bottom: 20px;
     }
-
     .welcome {
       width: $niem-min-width;
       margin: 0 auto;
+      outline: none;
       .welcome-items {
         .welcome-main {
           margin: 0 auto;
