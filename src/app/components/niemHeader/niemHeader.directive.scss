@@ -6,6 +6,25 @@
     border: 0;
   }
   background-color: transparent;
+  .invisible-element {
+    a {
+      position: absolute;
+      left: -10000px;
+      top: auto;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+    }
+    a:active, a:focus, a:hover {
+        left: 0;
+        top: 0;
+        width: auto;
+        height: auto;
+        overflow: visible;
+        background: $white;
+        padding: 5px;
+    }
+  }
   .header-top {
     padding-bottom: 30px;
     border-bottom: 1px solid $white;

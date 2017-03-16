@@ -32,7 +32,7 @@
        * @description Retrieves My Schema
        */
       function init() {
-        $window.document.title = 'My Schema - Open Source Tool';
+        $window.document.title = 'My Schema Builder - Open Source Tool';
         getSchema();
       }
 
@@ -44,7 +44,7 @@
        *
        * @description Transforms the namespaceType returned into properly formatted text
        *
-       * @param text - String representing the type of Namespace
+       * @param namespaceType - String representing the type of Namespace
        *
        * @returns {string}
        */
