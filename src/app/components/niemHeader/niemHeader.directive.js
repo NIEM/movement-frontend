@@ -14,7 +14,7 @@
     .module('dhsniem')
     .directive('niemHeader', niemHeader);
 
-  function niemHeader($rootScope, $location, $anchorScroll, $window) {
+  function niemHeader($location, $anchorScroll, $window) {
     return {
       restrict: 'E',
       templateUrl: 'app/components/niemHeader/niemHeader.directive.html',
@@ -24,7 +24,7 @@
     /**
      *  Defines variables and functions within niemHeader scope
      */
-    function link() {
+    function link(scope) {
 
       /**
        * @name skipToContent
@@ -33,7 +33,7 @@
        *
        * @description Allows a user to skip to the main section of the page
        */
-      $rootScope.skipToContent = function skipToContent(anchor) {
+      scope.skipToContent = function skipToContent(anchor) {
         $location.hash(anchor);
         $anchorScroll();
         var el = $window.document.getElementById(anchor);
