@@ -14,7 +14,7 @@
     .module('dhsniem')
     .directive('niemHeader', niemHeader);
 
-  function niemHeader(mySchema) {
+  function niemHeader(mySchema, $rootScope, $location, $anchorScroll, $window) {
     return {
       restrict: 'E',
       templateUrl: 'app/components/niemHeader/niemHeader.directive.html',
@@ -29,11 +29,21 @@
     function link(scope) {
       scope.schemaCount = mySchema.getSchemaCount();
 
-      scope.$watch(function() {
+      scope.$watch(function () {
         return mySchema.getSchemaCount();
-      }, function(updatedSchemaCount){
+      }, function (updatedSchemaCount) {
         scope.schemaCount = updatedSchemaCount;
       });
+
+      $rootScope.goToAnchor = function goToAnchor(anchor) {
+        $location.hash(anchor);
+        $anchorScroll();
+        var el = $window.document.getElementById(anchor);
+        if (el) {
+          el.focus();
+        }
+      };
+
 
     }
 
