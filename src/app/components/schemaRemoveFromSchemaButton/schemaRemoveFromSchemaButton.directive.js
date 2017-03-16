@@ -28,6 +28,12 @@
      *  Defines variables and functions within schemaRemoveFromSchemaButton scope
      */
     function link(scope) {
+
+      /**
+       * @name removeFromSchema
+       *
+       * @description Removes the scope entityId from My Schema
+       */
       scope.removeFromSchema = function removeFromSchema() {
         mySchema.removeFromSchema(scope.entityId);
       };

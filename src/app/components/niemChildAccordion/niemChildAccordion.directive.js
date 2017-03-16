@@ -28,7 +28,7 @@
         /**
          * @name expandElement
          *
-         * @description Expands the accordion for the clicked element
+         * @description Expands the accordion for the clicked element and fetches the data if not previously loaded
          */
         scope.expandElement = function() {
           scope.isOpen = !scope.isOpen;

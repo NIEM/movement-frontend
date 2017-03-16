@@ -28,6 +28,12 @@
      *  Defines variables and functions within schemaAddToSchemaButton scope
      */
     function link(scope) {
+
+      /**
+       * @name addToSchema
+       *
+       * @description Adds the current entityId to My Schema
+       */
       scope.addToSchema = function() {
         mySchema.addToSchema(scope.entityId);
       };
