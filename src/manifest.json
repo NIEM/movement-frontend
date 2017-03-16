@@ -1,0 +1,17 @@
+{
+  "lang": "en",
+  "dir": "ltr",
+  "name": "DHS NIEM",
+  "description": "DHS NIEM Open Source Tool",
+  "short_name": "NIEM",
+  "icons": [{
+    "src": "images/niemblue.svg",
+    "sizes": "144x144",
+    "type": "image/png"
+  }],
+  "start_url": "/index.html",
+  "theme_color": "#005170",
+  "background_color": "#fff",
+  "display": "fullscreen",
+  "orientation": "portrait"
+}
