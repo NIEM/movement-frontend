@@ -14,28 +14,10 @@
     .module('dhsniem')
     .directive('niemHeader', niemHeader);
 
-  function niemHeader(mySchema) {
+  function niemHeader() {
     return {
       restrict: 'E',
-      templateUrl: 'app/components/niemHeader/niemHeader.directive.html',
-      link: link
+      templateUrl: 'app/components/niemHeader/niemHeader.directive.html'
     };
-
-
-    /**
-     *  Defines variables and functions within header scope
-     *
-     */
-    function link(scope) {
-      scope.schemaCount = mySchema.getSchemaCount();
-
-      scope.$watch(function() {
-        return mySchema.getSchemaCount();
-      }, function(updatedSchemaCount){
-        scope.schemaCount = updatedSchemaCount;
-      });
-
-    }
-
   }
 })();
