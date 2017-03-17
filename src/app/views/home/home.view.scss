@@ -8,9 +8,11 @@
       margin-bottom: 20px;
     }
     .welcome {
-      width: $niem-min-width;
       margin: 0 auto;
       outline: none;
+      display: flex;
+      justify-content: center;
+      width: 100%;
       .welcome-items {
         .welcome-main {
           margin: 0 auto;
