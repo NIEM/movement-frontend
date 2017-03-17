@@ -1,14 +1,16 @@
-<div>
-  <h3 class="filter-group">
-  <span class="dotted-underline" popover-enable="display != 'Others'"
+<form>
+  <div role="group">
+    <h3 class="filter-group" aria-label="{{display}}" id="{{display}}">
+      <span class="dotted-underline" popover-enable="display != 'Others'"
         uib-popover-template="popoverTemplateUrl" popover-placement="right"
-        popover-is-open="popoverIsOpen">
-  {{display}}
-    </span>
-  </h3>
-</div>
-<ul class="list-unstyled">
-  <li ng-repeat="key in keys(results) | orderBy:sortByName">
-    <solr-facet-result field="{{field}}" key="{{key}}" count="{{results[key]}}"></solr-facet-result>
-  </li>
-</ul>
+        popover-is-open="popoverIsOpen" tabindex="0" popover-trigger="'focus'">
+          {{display}}
+      </span>
+    </h3>
+  </div>
+  <ul class="list-unstyled">
+    <li ng-repeat="key in keys(results) | orderBy:sortByName">
+      <solr-facet-result field="{{field}}" key="{{key}}" count="{{results[key]}}"></solr-facet-result>
+    </li>
+  </ul>
+</form>
