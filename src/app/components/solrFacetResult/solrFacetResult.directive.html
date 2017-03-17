@@ -3,7 +3,8 @@
     <div class="custom-checkbox">
       <img alt="Filter search results checkbox checked" class="checked-image" src="images/checkbox-blue.svg" ng-if="isSelected()">
     </div>
-    <input type="checkbox" ng-checked="isSelected()" aria-checked="{{isSelected()}}" ng-click="addRemoveFacet()">{{key}}
-    <em>({{count}})</em>
+    <input type="checkbox" ng-checked="isSelected()" aria-checked="{{isSelected()}}" aria-labelledby="{{key}} {{display}}" ng-click="addRemoveFacet()">
+      <span id="{{key}}">{{key}}</span>
+      <em>({{count}})</em>
   </label>
 </div>
