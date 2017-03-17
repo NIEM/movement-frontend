@@ -7,8 +7,10 @@
     </span>
   </h3>
 </div>
-<ul class="list-unstyled">
-  <li ng-repeat="key in keys(results) | orderBy:sortByName">
-    <solr-facet-result field="{{field}}" key="{{key}}" count="{{results[key]}}"></solr-facet-result>
-  </li>
-</ul>
+<form>
+  <ul class="list-unstyled">
+    <li ng-repeat="key in keys(results) | orderBy:sortByName">
+      <solr-facet-result field="{{field}}" key="{{key}}" count="{{results[key]}}"></solr-facet-result>
+    </li>
+  </ul>
+</form>
