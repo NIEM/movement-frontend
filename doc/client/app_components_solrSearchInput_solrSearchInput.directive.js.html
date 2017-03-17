@@ -55,45 +55,115 @@
     /**
      *  Defines variables and functions within solrSearchInput scope
      */
-    function link(scope, element, attrs) {
+    function link(scope) {
 
-      scope.searchQuery = $location.search().q;
+      function init () {
+        scope.searchQuery = $location.search().q;
+        scope.selectedDomain = 'All Domains';
+        getFacets();
+      }
+
+      init();
+
+
+      /**
+       * @name sortByName
+       *
+       * @description Sorting function used to boost the NIEM Core to the top of the dropdown
+       *
+       * @returns {(string|number)}
+       */
+      scope.sortByName = function(result) {
+        if (result === 'Core') {
+          return -1;
+        } else {
+          return result;
+        }
+      };
+
+
+      /**
+       * @name getFacets
+       *
+       * @description Gets a list of domain names for the domain dropdown, and stores them for reuse.
+       */
+      function getFacets() {
+        if (!$rootScope.rootDomain) {
+          solrSearch.getFacetName().then(function(data) {
+            $rootScope.rootDomain = Object.keys(data.domain);
+            scope.domainNames = $rootScope.rootDomain;
+          });
+        } else if ($rootScope.rootDomain &amp;&amp; !scope.hasLabel) {
+          scope.domainNames = $rootScope.rootDomain;
+        }
+      }
+
+
+      /**
+       * @name domainSelect
+       *
+       * @description Sets the domain name in the domain search dropdown.
+       *
+       * @param domain - A parameter passed from the view that indicates the intended domain for search.
+       */
+      scope.domainSelect = function(domain) {
+        scope.selectedDomain = domain;
+      };
+
 
       /**
        * @name search
        *
-       * @description Handles logic to determine the query and selected facet (namespace) to send to solr to make a full search and navigate the user to the results page.
+       * @description Handles logic to determine the query to send to solr to make a full search and navigate the user to the results page.
        *
        * @param taItem - An optional parameter used if the user clicks on an item in the typeahead suggested terms.
        */
       scope.search = function search(taItem) {
 
-        var namespaceParam = '';
-
-        if (taItem &amp;&amp; taItem.taNS) {
-          scope.searchQuery = taItem.query;
-          if (taItem.taNS !== 'all') {
-            namespaceParam = taItem.taNSType + ':"' + taItem.taNS + '"';
-          }
-        }
+        scope.setNamespace(taItem);
 
         var query = scope.searchQuery || '*';
         $rootScope.query = query;
 
         if (!$state.includes('main.results')) {
-          $state.go('main.results', {q: query, selectedFacets: namespaceParam});
+          $state.go('main.results', {q: query, selectedFacets: scope.namespaceParam});
         } else {
           $location.search('q', query);
-          solrSearch.clearAllFilters(namespaceParam);
+          solrSearch.clearAllFilters(scope.namespaceParam);
         }
+      };
 
+
+      /**
+       * @name setNamespace
+       *
+       * @description Handles logic to determine the selected facet (namespace) that will be used as a parameter in the search function.
+       *
+       * @param taItem - An optional parameter passed from the search function and used if the user clicks on an item in the typeahead suggested terms.
+       */
+      scope.setNamespace = function setTaNS(taItem) {
+
+        if (taItem &amp;&amp; taItem.taNS) {
+          scope.searchQuery = taItem.query;
+          if (taItem.taNS !== 'all') {
+            scope.namespaceParam = taItem.taNSType + ':"' + taItem.taNS + '"';
+          }
+        } else {
+          if (scope.selectedDomain !== 'All Domains') {
+            var taNSparams = {'taNSType': 'domain', 'taNS': scope.selectedDomain};
+            scope.namespaceParam = taNSparams.taNSType + ':"' + taNSparams.taNS + '"';
+          }
+          else {
+            scope.namespaceParam = undefined;
+          }
+        }
       };
 
 
       /**
        * @name getTypeaheadResults
        *
-       * @description Returns the top five results, if they exist, for when the typeahead functionality is triggered in the search bar. For each result, the object contains the solr object if it is a natural result from solr. Otherwise, returns a custom object that is hard-coded for the first three results displayed in typeahead.
+       * @description Returns the top five results, if they exist, for when the typeahead functionality is triggered in the search bar. For each result, the object contains the solr object if it is a natural result from solr. Otherwise, when domain is not specified in the dropdown, returns a custom object that is hard-coded for the first three results displayed in typeahead.
        *
        * @param query - the query of the typeahead search
        *
@@ -101,21 +171,37 @@
        */
       scope.getTypeaheadResults = function(query) {
 
-        var params = {
-          'q': 'name:*' + query + '*',
-          'rows': 5,
-          'wt': 'json',
-          'json.wrf': 'JSON_CALLBACK',
-          'json.nl': 'map'
-        };
+        var facet = ['isBG:(1)'];
+        if (scope.selectedDomain !== 'All Domains') {
+          facet.push('namespace:("' + scope.selectedDomain + '")');
+        }
 
-        var domainArray = [{'name': query + ' in All Domains', 'taNS': 'all', 'query': query}, {'name': query + ' in NIEM Core', 'taNS': 'Core', 'query': query, 'taNSType': 'domain'}];
+        var params = {
+          'q': query,
+          'rows': 5,
+          'json.wrf': 'JSON_CALLBACK',
+          'json.nl': 'map',
+          'facet': 'on',
+          'fq': facet,
+          'sort': 'score desc,nameLength asc,name asc',
+          'defType': 'edismax',
+          'bq': 'namespace:Core^2',
+          'qf': 'name^2 name_query^8'
+        };
 
         return solrRequest.makeSolrRequest(params).then(function(data) {
           if (data.response.docs.length > 0) {
             var topNamespace = data.response.docs[0].namespace;
             var topNamespaceType = data.response.docs[0].namespaceType;
-            domainArray.push({'name': query + ' in ' + topNamespace, 'taNS': topNamespace, 'query': query, 'taNSType': topNamespaceType});
+            var domainArray;
+            if (scope.selectedDomain === 'All Domains') {
+              domainArray = [{'name': query + ' in All Domains', 'taNS': 'all', 'query': query}, {'name': query + ' in NIEM Core', 'taNS': 'Core', 'query': query, 'taNSType': 'domain'}];
+              domainArray.push({'name': query + ' in ' + topNamespace, 'taNS': topNamespace, 'query': query, 'taNSType': topNamespaceType});
+              scope.domainSpecified = 'third-child';
+            } else {
+              domainArray = [{'name': query + ' in ' + scope.selectedDomain, 'taNS': scope.selectedDomain, 'query': query, 'taNSType': 'domain'}];
+              scope.domainSpecified = 'first-child';
+            }
             return domainArray.concat(data.response.docs);
           }
         });
@@ -133,7 +219,7 @@
 </div>
 
 <nav>
-    <h2><a href="index.html">Index</a></h2><h3>Modules</h3><ul><li><a href="module-dhsniem.html">dhsniem</a></li></ul><h3>controller</h3><ul><li><a href="AppCtrl.html">AppCtrl</a></li><li><a href="DetailsCtrl.html">DetailsCtrl</a></li><li><a href="HomeCtrl.html">HomeCtrl</a></li><li><a href="MainCtrl.html">MainCtrl</a></li><li><a href="ResultsCtrl.html">ResultsCtrl</a></li></ul><h3>directive</h3><ul><li><a href="ccp.html">ccp</a></li><li><a href="ccpHeader.html">ccpHeader</a></li><li><a href="detailsPagination.html">detailsPagination</a></li><li><a href="facetDetails.html">facetDetails</a></li><li><a href="NiemAccordion.html">NiemAccordion</a></li><li><a href="NiemChildAccordion.html">NiemChildAccordion</a></li><li><a href="NiemExport.html">NiemExport</a></li><li><a href="searchHeader.html">searchHeader</a></li><li><a href="solrFacet.html">solrFacet</a></li><li><a href="solrFacetResult.html">solrFacetResult</a></li><li><a href="solrResults.html">solrResults</a></li><li><a href="solrResultsPagination.html">solrResultsPagination</a></li><li><a href="solrSearchInput.html">solrSearchInput</a></li><li><a href="solrSort.html">solrSort</a></li></ul><h3>factory</h3><ul><li><a href="solrRequest.html">solrRequest</a></li><li><a href="solrSearch.html">solrSearch</a></li></ul><h3>Global</h3><ul><li><a href="global.html#addRemoveFacet">addRemoveFacet</a></li><li><a href="global.html#clearAllFilters">clearAllFilters</a></li><li><a href="global.html#closeOtherPopovers">closeOtherPopovers</a></li><li><a href="global.html#closePopover">closePopover</a></li><li><a href="global.html#facetString">facetString</a></li><li><a href="global.html#getImagePath">getImagePath</a></li><li><a href="global.html#getPageInfo">getPageInfo</a></li><li><a href="global.html#getTooltipText">getTooltipText</a></li><li><a href="global.html#getTypeaheadResults">getTypeaheadResults</a></li><li><a href="global.html#init">init</a></li><li><a href="global.html#isFirstOfAlphabet">isFirstOfAlphabet</a></li><li><a href="global.html#isFirstOfNamespace">isFirstOfNamespace</a></li><li><a href="global.html#isSelected">isSelected</a></li><li><a href="global.html#nextPage">nextPage</a></li><li><a href="global.html#onClick">onClick</a></li><li><a href="global.html#prevPage">prevPage</a></li><li><a href="global.html#search">search</a></li><li><a href="global.html#setFacetResults">setFacetResults</a></li><li><a href="global.html#showMore">showMore</a></li><li><a href="global.html#sortBy">sortBy</a></li><li><a href="global.html#sortByName">sortByName</a></li><li><a href="global.html#toggleAccordion">toggleAccordion</a></li></ul>
+    <h2><a href="index.html">Index</a></h2><h3>Modules</h3><ul><li><a href="module-dhsniem.html">dhsniem</a></li></ul><h3>controller</h3><ul><li><a href="AppCtrl.html">AppCtrl</a></li><li><a href="DetailsCtrl.html">DetailsCtrl</a></li><li><a href="HomeCtrl.html">HomeCtrl</a></li><li><a href="MainCtrl.html">MainCtrl</a></li><li><a href="MySchemaCtrl.html">MySchemaCtrl</a></li><li><a href="ResultsCtrl.html">ResultsCtrl</a></li></ul><h3>factory</h3><ul><li><a href="mySchema.html">mySchema</a></li><li><a href="niemTree.html">niemTree</a></li><li><a href="solrRequest.html">solrRequest</a></li><li><a href="solrSearch.html">solrSearch</a></li></ul><h3>directive</h3><ul><li><a href="NiemChildAccordion.html">NiemChildAccordion</a></li><li><a href="NiemExport.html">NiemExport</a></li><li><a href="niemFooter.html">niemFooter</a></li><li><a href="niemHeader.html">niemHeader</a></li><li><a href="schemaAddRemoveBtnGroup.html">schemaAddRemoveBtnGroup</a></li><li><a href="schemaAddToSchemaButton.html">schemaAddToSchemaButton</a></li><li><a href="schemaMySchemaButton.html">schemaMySchemaButton</a></li><li><a href="schemaRemoveFromSchemaButton.html">schemaRemoveFromSchemaButton</a></li><li><a href="searchHeader.html">searchHeader</a></li><li><a href="solrDetails.html">solrDetails</a></li><li><a href="solrFacet.html">solrFacet</a></li><li><a href="solrFacetResult.html">solrFacetResult</a></li><li><a href="solrMySchemaDetails.html">solrMySchemaDetails</a></li><li><a href="solrResults.html">solrResults</a></li><li><a href="solrResultsPagination.html">solrResultsPagination</a></li><li><a href="solrSearchInput.html">solrSearchInput</a></li><li><a href="solrSort.html">solrSort</a></li></ul><h3>Global</h3><ul><li><a href="global.html#addRemoveFacet">addRemoveFacet</a></li><li><a href="global.html#addToSchema">addToSchema</a></li><li><a href="global.html#clearAllFilters">clearAllFilters</a></li><li><a href="global.html#closeOtherPopovers">closeOtherPopovers</a></li><li><a href="global.html#closePopover">closePopover</a></li><li><a href="global.html#domainSelect">domainSelect</a></li><li><a href="global.html#downloadSchema">downloadSchema</a></li><li><a href="global.html#expandElement">expandElement</a></li><li><a href="global.html#expandTree">expandTree</a></li><li><a href="global.html#facetString">facetString</a></li><li><a href="global.html#formatNamespaceType">formatNamespaceType</a></li><li><a href="global.html#getDocById">getDocById</a></li><li><a href="global.html#getDocsByIds">getDocsByIds</a></li><li><a href="global.html#getElementObjects">getElementObjects</a></li><li><a href="global.html#getFacets">getFacets</a></li><li><a href="global.html#getSchema">getSchema</a></li><li><a href="global.html#getSchemaArray">getSchemaArray</a></li><li><a href="global.html#getSchemaCount">getSchemaCount</a></li><li><a href="global.html#getSearchParams">getSearchParams</a></li><li><a href="global.html#getTooltipText">getTooltipText</a></li><li><a href="global.html#getTypeaheadResults">getTypeaheadResults</a></li><li><a href="global.html#goBack">goBack</a></li><li><a href="global.html#init">init</a></li><li><a href="global.html#isFirstOfAlphabet">isFirstOfAlphabet</a></li><li><a href="global.html#isFirstOfNamespace">isFirstOfNamespace</a></li><li><a href="global.html#isSelected">isSelected</a></li><li><a href="global.html#nextPage">nextPage</a></li><li><a href="global.html#prevPage">prevPage</a></li><li><a href="global.html#removeAllFromSchema">removeAllFromSchema</a></li><li><a href="global.html#removeFromSchema">removeFromSchema</a></li><li><a href="global.html#removeSchema">removeSchema</a></li><li><a href="global.html#search">search</a></li><li><a href="global.html#setFacetResults">setFacetResults</a></li><li><a href="global.html#setNamespace">setNamespace</a></li><li><a href="global.html#setSchema">setSchema</a></li><li><a href="global.html#sortBy">sortBy</a></li><li><a href="global.html#sortByName">sortByName</a></li><li><a href="global.html#splitId">splitId</a></li><li><a href="global.html#toggleSchemaAddRemove">toggleSchemaAddRemove</a></li></ul>
 </nav>
 
 <br clear="both">

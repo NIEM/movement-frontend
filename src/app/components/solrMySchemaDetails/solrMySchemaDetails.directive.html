@@ -1,67 +1,49 @@
-<div class="solr-my-schema-details">
-  <section class="content">
-    <div class="my-schema-heading row">
-      <h1 class="keyword-search-text">My Schema</h1>
+<div class="solr-my-schema-details" tabindex="-1" id="main">
+  <section class="container">
+    <div class="my-schema-heading">
+      <h1>My Schema Builder</h1>
     </div>
-
-    <div class="empty-my-schema" ng-if="!mySchemaIDs">
+    <div class="empty-my-schema" ng-if="!mySchemaIDs.length">
       <h2>Your cart is currently empty</h2>
     </div>
-
-    <div class="my-schema-actions" ng-if="mySchemaIDs">
+    <div class="my-schema-actions" ng-if="mySchemaIDs.length">
       <h2 class="my-schema-count">Total ({{mySchemaArray.length}} items)</h2>
-      <button ng-click="removeSchema()" class="remove-from-schema-button">Remove All</button>
-      <button ng-click="downloadSchema()" class="add-to-schema-button">Download All</button>
+      <button ng-click="removeSchema()" class="remove-all-button">Remove All</button>
+      <button ng-click="downloadSchema()" class="download-schema-button">Download JSON Schema</button>
     </div>
-
-    <uib-accordion close-others="false" class="my-schema-list">
-
-      <div uib-accordion-group class="schema-item" ng-repeat="entity in mySchemaArray">
-        <div uib-accordion-heading >
-          <div class="schema-content-wrapper" ng-click="getSchemaDetails()">
-            <div class="schema-content col-sm-8">
-              <h3>
-                  <span class="item-title">{{entity.name}}
-                    <span ng-if="entity.typeString" class="item-type">({{entity.typeString}})</span>
-                    <span ng-if="!entity.typeString" class="item-type">(abstract)</span>
-                  </span>
-              </h3>
-              <p class="item-description">{{entity.definition}}</p>
-              <div class="item-namespace text-uppercase">{{formattedNamespaceType}}: {{entity.namespace}}</div>
-            </div>
-            <div class="col-sm-4">
-              <schema-remove-from-schema-button></schema-remove-from-schema-button>
-            </div>
-          </div>
+    <div class="schema-item" ng-repeat="entity in mySchemaArray">
+      <div class="schema-content-wrapper row">
+        <div class="col-sm-8">
+          <h3 class="item-title">
+            <a class="item-title" ui-sref="main.details({ entityID: entity.id })">{{entity.name}}</a>
+            <span class="item-type">({{entity.type.id ? entity.type.id : 'abstract'}})</span>
+          </h3>
+          <div class="item-namespace text-uppercase">{{formatNamespaceType(entity.namespaceType)}}: {{entity.namespace}}</div>
+          <p class="item-description">{{entity.definition}}</p>
+        </div>
+        <div class="col-sm-4 text-right">
+          <schema-remove-from-schema-button entity-id="entity.id" ng-click="removeFromSchema(entity.id)"></schema-remove-from-schema-button>
         </div>
 
-        <div class="schema-details">
-          <div class="niem-accordion">
-            <div class="contain-list">
-              <div ng-if="!entity.type.elements" class="has-none">
-                <p>{{entity.name}} does not contain any child elements.</p>
+        <div class="col-sm-12" ng-if="entity.type.elements">
+          <uib-accordion close-others="false" ng-click="expandTree(entity)">
+            <div uib-accordion-group>
+              <div uib-accordion-heading>
+                {{entity.name}} comes with other elements - <span class="toggle-button">{{entity.expanded ? 'Hide Details' : 'Show Details'}}</span>
               </div>
-
-              <div class="niem-accordion-list">
-                <div ng-repeat="item in entity.type.elements">
-                  <div class="niem-accordion-item" ng-if="!item.type.elements">
-                  <span class="item-name">
-                    <a ui-sref="main.details({ entityID: item.id })">{{item.name}}</a>
-                  </span>
-                    <span class="item-type" ng-if="!!item.type.name">({{item.type.name}})</span>
-                    <span class="item-type" ng-if="item.type === 'abstract'">({{item.type}})</span>
-                  </div>
-                  <div ng-if="!!item.type.elements">
-                    <niem-child-accordion element-data="item" click-handler="getElementObjects"></niem-child-accordion>
-                  </div>
+              <div class="niem-accordion-item-wrapper" ng-repeat="item in entity.type.elements" ng-if="entity.dataFound">
+                <div class="niem-accordion-item" ng-if="!item.type.elements">
+                  <a class="item-name" ui-sref="main.details({ entityID: item.id })">{{item.name}}</a>
+                  <span class="item-type">({{item.type.name ? item.type.name : 'abstract'}})</span>
+                </div>
+                <div ng-if="item.type.elements">
+                  <niem-child-accordion element-data="item"></niem-child-accordion>
                 </div>
               </div>
             </div>
-          </div>
+          </uib-accordion>
         </div>
       </div>
-
-    </uib-accordion>
-
+    </div>
   </section>
 </div>

@@ -1,11 +1,9 @@
 .niem-export {
   background: $darkest-blue;
-  height: 180px;
+  display: flex;
   color: $white;
   width: 100%;
   .export-top {
-    width: $niem-min-width;
-    height: 100%;
     margin: 0 auto;
     padding: 35px 30px;
     @include flex-and-align-center;

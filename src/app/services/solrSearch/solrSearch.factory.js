@@ -92,7 +92,7 @@
         facets = data.facet_counts.facet_fields;
         $rootScope.$emit('newSearch');
       });
-      $window.document.title = getQuery() + ' - CCP Search';
+      $window.document.title = '\'' + getQuery() + '\'' + ' seach results - Open Source Tool';
     }
 
 

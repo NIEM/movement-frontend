@@ -29,7 +29,7 @@
     /**
      *  Defines variables and functions within solrFacet scope
      */
-    function link(scope, element, attrs) {
+    function link(scope) {
 
       /**
        * @name sortByName
@@ -81,7 +81,6 @@
       };
 
       scope.tooltipText = {
-        'Entities': 'A physical thing, document, abstract concept, number, or string',
         'External Standards': 'Unmodified schema sources on the internet not encompassed by NIEM',
         'Domain': 'Communities of interest (COI) that are formally established, with an executive steward, to officially manage and govern a portion of the NIEM data model'
       };
@@ -89,8 +88,12 @@
 
       /**
        * @name getTooltipText
-       * @param display
-       * @returns {string} the text that should be displayed in the selected tooltip
+       *
+       * @description Maps the popover text for a given facet
+       *
+       * @param display - The display name of the facet
+       *
+       * @returns {string} Text to be displayed in the selected tooltip
        */
       scope.getTooltipText = function(display) {
         return scope.tooltipText[display];

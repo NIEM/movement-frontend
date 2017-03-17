@@ -18,6 +18,9 @@
     return {
       restrict: 'E',
       templateUrl: 'app/components/schemaRemoveFromSchemaButton/schemaRemoveFromSchemaButton.directive.html',
+      scope: {
+        entityId: '='
+      },
       link: link
     };
 
@@ -26,9 +29,14 @@
      */
     function link(scope) {
 
-      scope.removeFromSchema = function removeFromSchema(searchID) {
-        mySchema.removeFromSchema(searchID);
-      }
+      /**
+       * @name removeFromSchema
+       *
+       * @description Removes the scope entityId from My Schema
+       */
+      scope.removeFromSchema = function removeFromSchema() {
+        mySchema.removeFromSchema(scope.entityId);
+      };
     }
   }
 })();

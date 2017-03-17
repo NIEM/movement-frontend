@@ -9,7 +9,7 @@
         .state('main.results', {
           url: '/results?q&selectedFacets',
           templateUrl: 'app/views/results/results.view.html',
-          controller: 'ResultsCtrl',
+          controller  : 'ResultsCtrl',
           controllerAs: 'ResultsCtrl',
           reloadOnSearch: false
         });
