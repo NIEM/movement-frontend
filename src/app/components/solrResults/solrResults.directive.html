@@ -38,7 +38,7 @@
                 <span ng-click="closeOtherPopovers('core')" uib-popover-template="popovers['core'].popoverTemplateUrl"
                       popover-placement="right"
                       popover-is-open="popovers['core'].popoverIsOpen"
-                      popover-enable="doc.namespace == 'Core'">
+                      popover-enable="doc.namespace == 'Core'" popover-trigger="'focus'" aria-describedby="core-popover">
                   {{doc.namespace}} ({{doc.namespaceCount}})
                 </span>
               </h2>
