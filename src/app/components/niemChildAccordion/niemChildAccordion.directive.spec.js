@@ -17,7 +17,7 @@ describe('directive:niemChildAccordion', function () {
 
     $httpBackend.whenGET(new RegExp('\\' + 'uib/template')).respond(200, {});
 
-    element = angular.element('<niem-child-accordion click-handler="clickHandler" element-data="elementData"></niem-child-accordion>');
+    element = angular.element('<niem-child-accordion element-data="elementData"></niem-child-accordion>');
     scope.clickHandler = function(data) {return true;};
     scope.elementData = {type: 'CardType'};
     element = $compile(element)(scope);
