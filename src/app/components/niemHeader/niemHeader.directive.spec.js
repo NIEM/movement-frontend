@@ -14,7 +14,6 @@ describe('Directive: niemHeader', function () {
     $compile = $injector.get('$compile');
     $location = $injector.get('$location');
 
-
     element = angular.element('<niem-header></niem-header>');
     element = $compile(element)(scope);
     scope.$apply();

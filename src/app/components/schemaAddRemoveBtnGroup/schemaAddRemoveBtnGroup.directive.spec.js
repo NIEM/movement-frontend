@@ -19,5 +19,10 @@ describe('directive:schemaAddRemoveBtnGroup', function () {
     elScope = element.scope();
   }));
 
+  it('should toggle is in my schema', inject(function () {
+    elScope.isInMySchema = false;
+    elScope.toggleSchemaAddRemove();
+    expect(elScope.isInMySchema).toEqual(false);
+  }));
 
 });

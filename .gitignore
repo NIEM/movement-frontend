@@ -1,6 +1,5 @@
 node_modules
 dist
-doc
 .tmp
 .sass-cache
 bower_components
