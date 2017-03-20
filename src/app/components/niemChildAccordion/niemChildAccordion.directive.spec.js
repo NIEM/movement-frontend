@@ -18,31 +18,21 @@ describe('directive:niemChildAccordion', function () {
     $httpBackend.whenGET(new RegExp('\\' + 'uib/template')).respond(200, {});
 
     element = angular.element('<niem-child-accordion element-data="elementData"></niem-child-accordion>');
-    scope.clickHandler = function(data) {return true;};
-    scope.elementData = {type: 'CardType'};
+    scope.elementData = {type: 'CardType', elements: ["nc:ObligationCategoryText"]};
     element = $compile(element)(scope);
     scope.$apply();
     elScope = element.isolateScope();
 
   }));
 
-
-  it('should show more', function () {
-    elScope.seeMore = false;
-    elScope.showMore();
-    expect(elScope.seeMore).toBe(true);
-  });
-
-  it('should open and handle click on click', function () {
-    elScope.isOpen = false;
-    elScope.treeLevel = 2;
-    elScope.onClick();
-    expect(elScope.isOpen).toBe(true);
-    expect(elScope.nextLevel).toBe(3);
-    expect(elScope.dataFound).toBe(true);
-    elScope.onClick();
-    expect(elScope.dataFound).toBe(true);
-  });
+  // it('should open and handle click on click', function () {
+  //   elScope.isOpen = false;
+  //   elScope.expandElement();
+  //   expect(elScope.isOpen).toBe(true);
+  //   expect(elScope.dataFound).toBe(true);
+  //   elScope.expandElement();
+  //   expect(elScope.dataFound).toBe(true);
+  // });
 
 
 });

@@ -12,13 +12,13 @@
     </style>
 </head>
 <body>
-<div class="header high">
+<div class="header low">
     <h1>Code coverage report for <span class="entity">./src/app/components/niemChildAccordion/niemChildAccordion.directive.js</span></h1>
     <h2>
-        Statements: <span class="metric">100% <small>(15 / 15)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
-        Branches: <span class="metric">100% <small>(4 / 4)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
-        Functions: <span class="metric">100% <small>(5 / 5)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
-        Lines: <span class="metric">100% <small>(15 / 15)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Statements: <span class="metric">25% <small>(3 / 12)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Branches: <span class="metric">0% <small>(0 / 4)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Functions: <span class="metric">20% <small>(1 / 5)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Lines: <span class="metric">25% <small>(3 / 12)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         Ignored: <span class="metric"><span class="ignore-none">none</span></span> &nbsp;&nbsp;&nbsp;&nbsp;
     </h2>
     <div class="path"><a href="../../../../index.html">All files</a> &#187; <a href="index.html">./src/app/components/niemChildAccordion/</a> &#187; niemChildAccordion.directive.js</div>
@@ -71,20 +71,7 @@
 44
 45
 46
-47
-48
-49
-50
-51
-52
-53
-54
-55
-56
-57
-58
-59
-60</td><td class="line-coverage"><span class="cline-any cline-neutral">&nbsp;</span>
+47</td><td class="line-coverage"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -101,42 +88,29 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1</span>
-<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2</span>
-<span class="cline-any cline-yes">2</span>
-<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2</span>
-<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2</span>
-<span class="cline-any cline-yes">2</span>
-<span class="cline-any cline-yes">2</span>
-<span class="cline-any cline-yes">2</span>
-<span class="cline-any cline-yes">1</span>
-<span class="cline-any cline-yes">1</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -159,43 +133,30 @@
     .module('dhsniem')
     .directive('niemChildAccordion', niemChildAccordion);
 &nbsp;
-  function niemChildAccordion($compile, solrRequest) {
-    return {
+<span class="fstat-no" title="function not covered" >  function niemChildAccordion(niemTree) {</span>
+<span class="cstat-no" title="statement not covered" >    return {</span>
       restrict: 'E',
       templateUrl: 'app/components/niemChildAccordion/niemChildAccordion.directive.html',
       scope: {
-        treeLevel: '=',
-        elementData: '=',
-        entityType: '=',
-        clickHandler: '=',
-        selectedEntityName: '='
+        elementData: '='
       },
-      link: function(scope, element) {
-        scope.dataFound = false;
-        scope.isOpen = false;
-        scope.seeMore = false;
+      link: <span class="fstat-no" title="function not covered" >function(scope) {</span>
+<span class="cstat-no" title="statement not covered" >        scope.dataFound = false;</span>
+<span class="cstat-no" title="statement not covered" >        scope.isOpen = false;</span>
 &nbsp;
         /**
-         * @name showMore
+         * @name expandElement
          *
-         * @description Shows the next level of accordion data
+         * @description Expands the accordion for the clicked element and fetches the data if not previously loaded
          */
-        scope.showMore = function() {
-          scope.seeMore = !scope.seeMore;
-        };
+<span class="cstat-no" title="statement not covered" >        scope.expandElement = <span class="fstat-no" title="function not covered" >function() {</span></span>
+<span class="cstat-no" title="statement not covered" >          scope.isOpen = !scope.isOpen;</span>
 &nbsp;
-        /**
-         * @name onClick
-         *
-         * @description Handler for selection of accordion item
-         */
-        scope.onClick = function() {
-          scope.isOpen = !scope.isOpen;
-          scope.nextLevel = parseInt(scope.treeLevel, 10) + 1;
-          if (scope.isOpen &amp;&amp; scope.dataFound === false) {
-            scope.clickHandler(scope.elementData.type);
-            scope.dataFound = true;
-&nbsp;
+<span class="cstat-no" title="statement not covered" >          if (scope.isOpen &amp;&amp; scope.dataFound === false) {</span>
+<span class="cstat-no" title="statement not covered" >            niemTree.getElementObjects(scope.elementData.type.elements).then(<span class="fstat-no" title="function not covered" >function (elements) {</span></span>
+<span class="cstat-no" title="statement not covered" >              scope.elementData.type.elements = elements;</span>
+            });
+<span class="cstat-no" title="statement not covered" >            scope.dataFound = true;</span>
           }
         };
       }
@@ -207,7 +168,7 @@
 
 </div>
 <div class="footer">
-    <div class="meta">Generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Thu Oct 27 2016 17:34:05 GMT-0400 (Eastern Daylight Time)</div>
+    <div class="meta">Generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Mon Mar 20 2017 16:20:01 GMT-0400 (Eastern Daylight Time)</div>
 </div>
 <script src="../../../../prettify.js"></script>
 <script>

@@ -19,5 +19,8 @@ describe('directive:solrMySchemaDetails', function () {
     elScope = element.scope();
   }));
 
+  // it('should transform namespace text', function () {
+  //   expect(elScope.formatNamespaceType('domain')).toBe('Domain');
+  // });
 
 });

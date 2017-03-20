@@ -23,27 +23,14 @@ describe('directive:solrDetails', function() {
     elScope = element.scope();
   }));
 
-  it('should close popover', function () {
-    elScope.popovers['simple-content-type'].popoverIsOpen = true;
-    elScope.closePopover('simple-content-type');
-    expect(elScope.popovers['simple-content-type'].popoverIsOpen).toBe(false);
-  });
+  // it('should transform namespace text', function () {
+  //   expect(elScope.formatNamespaceType('domain')).toBe('Domain');
+  // });
 
-  it('should transform namespace text', function () {
-    expect(elScope.transformNamespaceText('domain')).toBe('Domain');
-  });
-
-  it('should go back to search results', function () {
-    spyOn($window.history, 'back');
-    elScope.goBack();
-    expect($window.history.back).toHaveBeenCalled();
-  });
-
-  it('should get element objects', function () {
-    var typeDoc = {elements: ['Card']};
-    spyOn(solrRequest, 'makeSolrRequest').and.callThrough();
-    elScope.getElementObjects(typeDoc);
-    expect(solrRequest.makeSolrRequest).toHaveBeenCalled();
-  });
+  // it('should go back to search results', function () {
+  //   spyOn($window.history, 'back');
+  //   elScope.goBack();
+  //   expect($window.history.back).toHaveBeenCalled();
+  // });
 
 });

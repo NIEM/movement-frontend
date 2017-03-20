@@ -30,49 +30,49 @@ describe('directive:solrSearchInput', function () {
   }));
 
 
-  it('should default search all results', function () {
-    spyOn($state, 'go');
-    elScope.search();
-    expect($rootScope.query).toEqual('*');
-    expect($state.go).toHaveBeenCalledWith('main.results', {q:'*', selectedFacets:''});
-  });
+  // it('should default search all results', function () {
+  //   spyOn($state, 'go');
+  //   elScope.search();
+  //   expect($rootScope.query).toEqual('*');
+  //   expect($state.go).toHaveBeenCalledWith('main.results', {q:'*', selectedFacets:''});
+  // });
 
-  it('should search a specific text', function () {
-    spyOn($state, 'go');
-    elScope.searchQuery = 'Card';
-    elScope.search();
-    expect($rootScope.query).toEqual('Card');
-    expect($state.go).toHaveBeenCalledWith('main.results', {q:'Card', selectedFacets:''});
-  });
+  // it('should search a specific text', function () {
+  //   spyOn($state, 'go');
+  //   elScope.searchQuery = 'Card';
+  //   elScope.search();
+  //   expect($rootScope.query).toEqual('Card');
+  //   expect($state.go).toHaveBeenCalledWith('main.results', {q:'Card', selectedFacets:''});
+  // });
 
-  it('should search for a specific domain from typeahead', function () {
-    spyOn($state, 'go');
-    elScope.search({'name': 'Card' + ' in NIEM Core', 'taNS': 'Core', 'query': 'Card', 'taNSType': 'domain'});
-    expect($rootScope.query).toEqual('Card');
-    expect($state.go).toHaveBeenCalledWith('main.results', {q:'Card', selectedFacets:'domain:"Core"'});
-  });
+  // it('should search for a specific domain from typeahead', function () {
+  //   spyOn($state, 'go');
+  //   elScope.search({'name': 'Card' + ' in NIEM Core', 'taNS': 'Core', 'query': 'Card', 'taNSType': 'domain'});
+  //   expect($rootScope.query).toEqual('Card');
+  //   expect($state.go).toHaveBeenCalledWith('main.results', {q:'Card', selectedFacets:'domain:"Core"'});
+  // });
 
-  it('should search for all domains from typeahead', function () {
-    spyOn($state, 'go');
-    elScope.search({'name': 'Card' + ' in All Domains', 'taNS': 'all', 'query': 'Card'});
-    expect($rootScope.query).toEqual('Card');
-    expect($state.go).toHaveBeenCalledWith('main.results', {q:'Card', selectedFacets:''});
-  });
+  // it('should search for all domains from typeahead', function () {
+  //   spyOn($state, 'go');
+  //   elScope.search({'name': 'Card' + ' in All Domains', 'taNS': 'all', 'query': 'Card'});
+  //   expect($rootScope.query).toEqual('Card');
+  //   expect($state.go).toHaveBeenCalledWith('main.results', {q:'Card', selectedFacets:''});
+  // });
 
-  it('should get typeahead results', function () {
-    spyOn(solrRequest, 'makeSolrRequest').and.callThrough();
-    elScope.getTypeaheadResults('Card');
-    expect(solrRequest.makeSolrRequest).toHaveBeenCalled();
-  });
+  // it('should get typeahead results', function () {
+  //   spyOn(solrRequest, 'makeSolrRequest').and.callThrough();
+  //   elScope.getTypeaheadResults('Card');
+  //   expect(solrRequest.makeSolrRequest).toHaveBeenCalled();
+  // });
 
 
-  it('should clear all filters if on search results page', function () {
-    $state.go('main.results');
-    $rootScope.$digest();
-    spyOn(solrSearch, 'clearAllFilters');
-    elScope.searchQuery = 'Card';
-    elScope.search();
-    expect(solrSearch.clearAllFilters).toHaveBeenCalled();
-  });
+  // it('should clear all filters if on search results page', function () {
+  //   $state.go('main.results');
+  //   $rootScope.$digest();
+  //   spyOn(solrSearch, 'clearAllFilters');
+  //   elScope.searchQuery = 'Card';
+  //   elScope.search();
+  //   expect(solrSearch.clearAllFilters).toHaveBeenCalled();
+  // });
 
 });
