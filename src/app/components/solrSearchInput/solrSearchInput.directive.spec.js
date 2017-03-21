@@ -89,7 +89,7 @@ describe('directive:solrSearchInput', function () {
   });
 
   it('should set the domain names in dropdown if they exist', function () {
-    $rootScope.rootDomain = ['Core', 'Emergency Management'];
+    $rootScope.domainList = ['Core', 'Emergency Management'];
     element = $compile(element)(scope);
     scope.$apply();
     elScope = element.isolateScope();

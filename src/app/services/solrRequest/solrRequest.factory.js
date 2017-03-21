@@ -45,7 +45,7 @@
     }
 
     /**
-     * @name makeFacetSolrRequest
+     * @name getDomains
      *
      * @memberof dhsniem.service:solrRequest
      *
