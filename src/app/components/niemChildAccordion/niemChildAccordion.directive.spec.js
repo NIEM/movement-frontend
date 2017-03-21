@@ -34,5 +34,4 @@ describe('directive:niemChildAccordion', function () {
   //   expect(elScope.dataFound).toBe(true);
   // });
 
-
 });

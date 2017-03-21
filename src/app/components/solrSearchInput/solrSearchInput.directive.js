@@ -32,7 +32,7 @@
       function init () {
         scope.searchQuery = $location.search().q;
         scope.selectedDomain = 'All Domains';
-        getFacets();
+        getDomainNames();
       }
 
       init();
@@ -55,18 +55,18 @@
 
 
       /**
-       * @name getFacets
+       * @name getDomainNames
        *
        * @description Gets a list of domain names for the domain dropdown, and stores them for reuse.
        */
-      function getFacets() {
-        if (!$rootScope.rootDomain) {
-          solrSearch.getFacetName().then(function(data) {
-            $rootScope.rootDomain = Object.keys(data.domain);
-            scope.domainNames = $rootScope.rootDomain;
+      function getDomainNames() {
+        if (!$rootScope.domainList) {
+          solrRequest.getDomains().then(function(domains) {
+            $rootScope.domainList = Object.keys(domains);
+            scope.domainNames = $rootScope.domainList;
           });
-        } else if ($rootScope.rootDomain && !scope.hasLabel) {
-          scope.domainNames = $rootScope.rootDomain;
+        } else {
+          scope.domainNames = $rootScope.domainList;
         }
       }
 
@@ -120,14 +120,9 @@
           if (taItem.taNS !== 'all') {
             scope.namespaceParam = taItem.taNSType + ':"' + taItem.taNS + '"';
           }
-        } else {
-          if (scope.selectedDomain !== 'All Domains') {
-            var taNSparams = {'taNSType': 'domain', 'taNS': scope.selectedDomain};
-            scope.namespaceParam = taNSparams.taNSType + ':"' + taNSparams.taNS + '"';
-          }
-          else {
-            scope.namespaceParam = undefined;
-          }
+        } else if (scope.selectedDomain !== 'All Domains') {
+          var taNSparams = {'taNSType': 'domain', 'taNS': scope.selectedDomain};
+          scope.namespaceParam = taNSparams.taNSType + ':"' + taNSparams.taNS + '"';
         }
       };
 

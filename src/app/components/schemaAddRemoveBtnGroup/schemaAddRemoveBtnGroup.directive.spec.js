@@ -16,13 +16,13 @@ describe('directive:schemaAddRemoveBtnGroup', function () {
     element = angular.element('<schema-add-remove-btn-group></schema-add-remove-btn-group>');
     element = $compile(element)(scope);
     scope.$apply();
-    elScope = element.scope();
+    elScope = element.isolateScope();
   }));
 
   it('should toggle is in my schema', inject(function () {
     elScope.isInMySchema = false;
     elScope.toggleSchemaAddRemove();
-    expect(elScope.isInMySchema).toEqual(false);
+    expect(elScope.isInMySchema).toEqual(true);
   }));
 
 });

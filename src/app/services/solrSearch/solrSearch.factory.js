@@ -33,7 +33,7 @@
       getFacet: getFacet,
       getSelectedFacets: getSelectedFacets,
       search: search,
-      getFacetName: getFacetName,
+      // getFacetName: getFacetName,
       clearAllFilters: clearAllFilters
     };
 
@@ -103,16 +103,16 @@
      *
      * @description Performs the solr search for facets via call to the http method. On success, sets response data to the service variables.
      */
-    function getFacetName() {
-      var defer = $q.defer();
+    // function getFacetName() {
+    //   var defer = $q.defer();
 
-      solrRequest.makeFacetSolrRequest(buildSearchParams()).then(function(data) {
-        defer.resolve(data);
-      }).catch(function(error) {
-        console.log('Error: ', error);
-      });
-      return defer.promise;
-    }
+    //   solrRequest.makeFacetSolrRequest(buildSearchParams()).then(function(data) {
+    //     defer.resolve(data);
+    //   }).catch(function(error) {
+    //     console.log('Error: ', error);
+    //   });
+    //   return defer.promise;
+    // }
 
 
     /**
