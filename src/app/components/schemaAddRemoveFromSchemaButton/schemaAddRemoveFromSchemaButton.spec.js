@@ -1,6 +1,6 @@
 'use strict';
 
-describe('directive:schemaAddRemoveBtnGroup', function () {
+describe('directive:schemaAddRemoveFromSchemaButton', function () {
 
   // load the directive's module and view
   beforeEach(angular.mock.module('dhsniem'));
@@ -15,7 +15,7 @@ describe('directive:schemaAddRemoveBtnGroup', function () {
 
   // compile the element to be tested
   it('should be a thing', inject(function ($compile) {
-    element = angular.element('<schema-add-remove-btn-group></schema-add-remove-btn-group>');
+    element = angular.element('<schema-add-remove-from-schema-button></schema-add-remove-from-schema-button>');
     element = $compile(element)(scope);
 
     scope.$apply();
