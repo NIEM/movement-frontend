@@ -113,7 +113,7 @@
        *
        * @param taItem - An optional parameter passed from the search function and used if the user clicks on an item in the typeahead suggested terms.
        */
-      scope.setNamespace = function setTaNS(taItem) {
+      scope.setNamespace = function setNamespace(taItem) {
 
         if (taItem && taItem.taNS) {
           scope.searchQuery = taItem.query;

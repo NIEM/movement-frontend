@@ -96,4 +96,11 @@ describe('directive:solrSearchInput', function () {
     expect(elScope.domainNames).toEqual(['Core', 'Emergency Management']);
   });
 
+  it('should search and typeahead within a specific domain when it is selected from the dropdown', function () {
+    elScope.selectedDomain = 'Emergency Management';
+    elScope.getTypeaheadResults('Card');
+    elScope.search();
+    expect(elScope.namespaceParam).toEqual('domain:"Emergency Management"');
+  });
+
 });
