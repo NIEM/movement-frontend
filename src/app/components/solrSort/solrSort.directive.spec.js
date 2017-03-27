@@ -25,7 +25,7 @@ describe('directive:solrSort', function () {
 
   it('should sort by option', function () {
     elScope.sortOption = 'name asc';
-    elScope.sortBy();
+    elScope.sortBy('name asc', 'Alphabetical');
     expect($location.search().sortBy).toEqual('name asc');
   });
 

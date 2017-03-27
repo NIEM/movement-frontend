@@ -6,15 +6,17 @@ describe('Directive: searchHeader', function () {
   beforeEach(module('dhsniem'));
   beforeEach(module('templates'));
 
-  var element, scope, $compile, $httpBackend;
+  var element, scope, $compile, $httpBackend, SOLR_URL;
 
   // Initialize a mock scope
   beforeEach(inject(function ($injector) {
     scope = $injector.get('$rootScope').$new();
     $compile = $injector.get('$compile');
     $httpBackend = $injector.get('$httpBackend');
+    SOLR_URL = $injector.get('SOLR_URL');
 
     $httpBackend.whenGET(new RegExp('\\' + 'uib/template')).respond(200, {});
+    $httpBackend.whenJSONP(new RegExp('\\' + SOLR_URL)).respond(200, {});
 
   }));
 

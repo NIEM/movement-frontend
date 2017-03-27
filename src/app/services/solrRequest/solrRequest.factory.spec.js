@@ -11,9 +11,7 @@ describe('Factory: solrRequest', function() {
     $httpBackend = $injector.get('$httpBackend');
     SOLR_URL = $injector.get('SOLR_URL');
     solrRequest = $injector.get('solrRequest');
-
     $httpBackend.whenJSONP(new RegExp('\\' + SOLR_URL)).respond(200, {});
-
   }));
 
   it('should make the solr request', function () {
