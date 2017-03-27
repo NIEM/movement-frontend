@@ -18,10 +18,10 @@ angular
   })
 
   .run(function ($rootScope, $window, $location) {
-    // $window.ga('create', 'UA-27432921-1', 'auto');
+    $window.ga('create', 'UA-27432921-1', 'auto');
     $rootScope.$on('$stateChangeSuccess', function () {
       $window.scroll(0, 0);
-      // $window.ga('send', 'pageview', $location.url());
+      $window.ga('send', 'pageview', $location.url());
     });
   });
 
