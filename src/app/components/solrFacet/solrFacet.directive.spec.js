@@ -36,8 +36,8 @@ describe('directive:solrFacet', function () {
   });
 
   it('should provide tooltip text', function () {
-    elScope.getTooltipText('Entities');
-    expect(elScope.tooltipText['Entities']).toBe('A physical thing, document, abstract concept, number, or string');
+    elScope.getTooltipText('Domain');
+    expect(elScope.tooltipText['Domain']).toBe('Communities of interest (COI) that are formally established, with an executive steward, to officially manage and govern a portion of the NIEM data model');
   });
 
 

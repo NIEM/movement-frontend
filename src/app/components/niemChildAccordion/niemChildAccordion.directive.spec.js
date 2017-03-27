@@ -6,7 +6,7 @@ describe('directive:niemChildAccordion', function () {
   beforeEach(module('dhsniem'));
   beforeEach(module('templates'));
 
-  var element, scope, elScope, $compile, $httpBackend;
+  var element, scope, elScope, $compile, $httpBackend, niemTree;
 
   // Initialize a mock scope
   beforeEach(inject(function ($injector) {
@@ -14,35 +14,29 @@ describe('directive:niemChildAccordion', function () {
     scope = $injector.get('$rootScope').$new();
     $compile = $injector.get('$compile');
     $httpBackend = $injector.get('$httpBackend');
+    niemTree = $injector.get('niemTree');
 
     $httpBackend.whenGET(new RegExp('\\' + 'uib/template')).respond(200, {});
 
-    element = angular.element('<niem-child-accordion click-handler="clickHandler" element-data="elementData"></niem-child-accordion>');
-    scope.clickHandler = function(data) {return true;};
-    scope.elementData = {type: 'CardType'};
+    element = angular.element('<niem-child-accordion element-data="elementData"></niem-child-accordion>');
+    scope.elementData = {type: {elements: ['nc:CardSubElement']}};
     element = $compile(element)(scope);
     scope.$apply();
     elScope = element.isolateScope();
 
   }));
 
-
-  it('should show more', function () {
-    elScope.seeMore = false;
-    elScope.showMore();
-    expect(elScope.seeMore).toBe(true);
-  });
-
   it('should open and handle click on click', function () {
+    spyOn(niemTree, 'getElementObjects').and.callThrough();
     elScope.isOpen = false;
-    elScope.treeLevel = 2;
-    elScope.onClick();
+    elScope.dataFound = false;
+    elScope.expandElement();
     expect(elScope.isOpen).toBe(true);
-    expect(elScope.nextLevel).toBe(3);
+    expect(niemTree.getElementObjects).toHaveBeenCalled();
     expect(elScope.dataFound).toBe(true);
-    elScope.onClick();
+    elScope.expandElement();
     expect(elScope.dataFound).toBe(true);
+    elScope.expandElement();
   });
-
 
 });
