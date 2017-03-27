@@ -6,18 +6,26 @@ describe('Directive: niemHeader', function () {
   beforeEach(module('dhsniem'));
   beforeEach(module('templates'));
 
-  var element, scope, $compile;
+  var element, scope, $compile, elScope, $location;
 
   // Initialize a mock scope
   beforeEach(inject(function ($injector) {
     scope = $injector.get('$rootScope').$new();
     $compile = $injector.get('$compile');
-  }));
+    $location = $injector.get('$location');
 
-  // compile the element to be tested
-  it('should be a thing', inject(function () {
     element = angular.element('<niem-header></niem-header>');
     element = $compile(element)(scope);
     scope.$apply();
+    elScope = element.scope();
   }));
+
+  it('should skip to content', inject(function () {
+    elScope.skipToContent('main'); // no content
+    var contentEl = '<div id="main"></div>';
+    angular.element(document.body).append(contentEl);
+    elScope.skipToContent('main'); // with content
+    expect($location.hash()).toEqual('main');
+  }));
+
 });

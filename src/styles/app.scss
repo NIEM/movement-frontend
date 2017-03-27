@@ -9,14 +9,14 @@ $light-teal:      #68d0b2;
 $teal-gradient:   #29819c;
 $black:           #000000;
 $white:           #ffffff;
-$ugly-blue:       #288b91;
 $marine-blue:     #004666;
 $ocean-blue:      #0073b2;
 $seafoam:         #58cba9;
-$seafoam-light:   rgba(88,203,169, 0.1);
 $evergreen:       #062434;
 $warm-grey:       #9b9b9b;
 $shady-grey:      #676767;
+$whisper-grey:    rgba(255, 255, 255, 0.2);
+$gray-grey:       rgba(214, 214, 214, 0.3);
 $silver:          #d1d2d4;
 $body-text-color: rgba(0,0,0,0.58);
 $mont-extra-bold: 800;
@@ -52,7 +52,7 @@ $desktop-md-max-width: 992px;
 }
 @mixin niem-button-bordered {
   @include niem-button;
-  border: $medium-blue solid 1px;
+  border: $ocean-blue solid 1px;
 }
 @mixin niem-button-filled($background-color, $color, $hover-background-color) {
   @include niem-button;

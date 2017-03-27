@@ -1,10 +1,14 @@
 <div class="solr-my-schema-details" tabindex="-1" id="main">
   <section class="container">
+    <div class="my-schema-disclaimer-text">
+      Final downloadable JSON schema format is still in progress and subject to change. For any feedback or improvements, please <a href="https://www.niem.gov/contact-us" target="_blank" rel="noopener noreferrer">contact us</a>.
+    </div>
     <div class="my-schema-heading">
       <h1>My Schema Builder</h1>
     </div>
     <div class="empty-my-schema" ng-if="!mySchemaIDs.length">
-      <h2>Your cart is currently empty</h2>
+      <h2>You have not yet chosen items for your schema.</h2>
+      <p>Enter a keyword in the search bar above to explore the model and begin creating your schema.</p>
     </div>
     <div class="my-schema-actions" ng-if="mySchemaIDs.length">
       <h2 class="my-schema-count">Total ({{mySchemaArray.length}} items)</h2>
@@ -12,14 +16,14 @@
       <button ng-click="downloadSchema()" class="download-schema-button">Download JSON Schema</button>
     </div>
     <div class="schema-item" ng-repeat="entity in mySchemaArray">
-      <div class="schema-content-wrapper row">
+      <div class="schema-content-wrapper">
         <div class="col-sm-8">
           <h3 class="item-title">
             <a class="item-title" ui-sref="main.details({ entityID: entity.id })">{{entity.name}}</a>
             <span class="item-type">({{entity.type.id ? entity.type.id : 'abstract'}})</span>
           </h3>
-          <div class="item-namespace text-uppercase">{{formatNamespaceType(entity.namespaceType)}}: {{entity.namespace}}</div>
           <p class="item-description">{{entity.definition}}</p>
+          <div class="item-namespace text-uppercase">{{formatNamespaceType(entity.namespaceType)}}: {{entity.namespace}}</div>
         </div>
         <div class="col-sm-4 text-right">
           <schema-remove-from-schema-button entity-id="entity.id" ng-click="removeFromSchema(entity.id)"></schema-remove-from-schema-button>

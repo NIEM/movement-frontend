@@ -7,7 +7,7 @@
       .form-control {
         height: 41px;
         @include desktop {
-          width: 300px;
+          width: 225px;
         }
       }
     }
@@ -182,5 +182,4 @@
       background-color: $dark-ocean;
     }
   }
-
 }
