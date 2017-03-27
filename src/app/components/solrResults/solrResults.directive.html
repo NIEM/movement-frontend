@@ -38,7 +38,7 @@
                 <span uib-popover-template="popovers['core'].popoverTemplateUrl"
                       popover-placement="right"
                       popover-is-open="popovers['core'].popoverIsOpen"
-                      popover-enable="doc.namespace == 'Core'">
+                      popover-enable="doc.namespace == 'Core'" popover-trigger="'focus'" aria-describedby="core-popover">
                   {{doc.namespace}} ({{doc.namespaceCount}})
                 </span>
               </h2>
@@ -55,7 +55,7 @@
                   <p class="item-description">{{doc.definition}}</p>
                   <p class="item-namespace">{{namespaceTypes[doc.namespaceType]}}: {{doc.namespace}}</p>
                 </div>
-                <schema-add-remove-btn-group entity-id="doc.id"></schema-add-remove-btn-group>
+                <schema-add-remove-from-schema-button entity-id="doc.id"></schema-add-remove-from-schema-button>
               </div>
             </div>
             <solr-results-pagination ng-hide="numFound === 0" class="pagination-bottom"></solr-results-pagination>
