@@ -65,7 +65,7 @@
     }
   }
   .schema-item {
-    padding-left: 40px;
+    padding: 0 30px;
     border-bottom: 1px solid $silver;
     .schema-content-wrapper {
       @include flex-and-align-center;

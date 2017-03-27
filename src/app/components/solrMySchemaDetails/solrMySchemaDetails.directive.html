@@ -12,7 +12,7 @@
       <button ng-click="downloadSchema()" class="download-schema-button">Download JSON Schema</button>
     </div>
     <div class="schema-item" ng-repeat="entity in mySchemaArray">
-      <div class="schema-content-wrapper row">
+      <div class="schema-content-wrapper">
         <div class="col-sm-8">
           <h3 class="item-title">
             <a class="item-title" ui-sref="main.details({ entityID: entity.id })">{{entity.name}}</a>
