@@ -18,8 +18,8 @@
             <a class="item-title" ui-sref="main.details({ entityID: entity.id })">{{entity.name}}</a>
             <span class="item-type">({{entity.type.id ? entity.type.id : 'abstract'}})</span>
           </h3>
-          <div class="item-namespace text-uppercase">{{formatNamespaceType(entity.namespaceType)}}: {{entity.namespace}}</div>
           <p class="item-description">{{entity.definition}}</p>
+          <div class="item-namespace text-uppercase">{{formatNamespaceType(entity.namespaceType)}}: {{entity.namespace}}</div>
         </div>
         <div class="col-sm-4 text-right">
           <schema-remove-from-schema-button entity-id="entity.id" ng-click="removeFromSchema(entity.id)"></schema-remove-from-schema-button>
