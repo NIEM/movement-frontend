@@ -4,7 +4,7 @@
   }
 
   .remove-from-schema-button {
-    @include niem-button-filled($white, $ocean-blue, $silver);
+    @include niem-button-filled($white, $ocean-blue, $light-grey);
     @include niem-button-bordered;
   }
 }

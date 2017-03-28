@@ -25,7 +25,7 @@
     }
   }
   .add-to-schema-button, .remove-from-schema-button {
-    @include niem-button-filled($white, $ocean-blue, $silver);
+    @include niem-button-filled($white, $ocean-blue, $light-grey);
   }
   .details-info {
     display: flex;
