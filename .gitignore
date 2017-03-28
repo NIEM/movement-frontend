@@ -1,6 +1,5 @@
 node_modules
 dist
-doc
 coverage
 .tmp
 .sass-cache
