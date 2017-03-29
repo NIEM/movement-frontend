@@ -15,7 +15,7 @@
     .controller('HomeCtrl', HomeCtrl);
 
   function HomeCtrl($window, $rootScope) {
-    $window.document.title = 'Open Source Tool';
+    $window.document.title = 'NIEM Movement';
     $rootScope.query = null;
   }
 
