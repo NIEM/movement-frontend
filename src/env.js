@@ -1,9 +1,8 @@
 "use strict";
 
- angular.module('dhsniem')
+angular.module('dhsniem')
 
-.constant('SOLR_URL', '/solr/dhsniem/select')
+  .constant('SOLR_URL', 'http://35.164.75.93:8983/solr/dhsniem/select')
 
-.constant('NODE_URL', '/api/jsonschema?')
-
+  .constant('NODE_URL', 'http://35.164.75.93:7000/jsonschema?')
 ;
