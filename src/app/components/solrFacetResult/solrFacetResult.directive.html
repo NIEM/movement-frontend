@@ -1,10 +1,10 @@
 <div role="checkbox" aria-label="Filter search results checkbox" class="checkbox" ng-if="key" tabindex="0" ng-keypress="addRemoveFacet()">
-  <label class="filter-group-option">
+  <label class="filter-group-option" for="{{key}}">
     <div class="custom-checkbox">
       <img alt="Filter search results checkbox checked" class="checked-image" src="images/checkbox-blue.svg" ng-if="isSelected()">
     </div>
-    <input type="checkbox" ng-checked="isSelected()" aria-checked="{{isSelected()}}" aria-labelledby="{{key}} {{display}}" ng-click="addRemoveFacet()">
-      <span id="{{key}}">{{key}}</span>
+    <input type="checkbox" ng-checked="isSelected()" aria-checked="{{isSelected()}}" id="{{key}}" aria-labelledby="{{key}} {{display}}" ng-click="addRemoveFacet()">
+      <span>{{key}}</span>
       <em>({{count}})</em>
   </label>
 </div>
