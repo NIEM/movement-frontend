@@ -1,11 +1,11 @@
-NIEM - WIST: Frontend
+NIEM - Movement: Frontend
 =====================
 
-The other repositories include the [WIST - Backend](https://github.com/NIEMconnects/wist-backend) and the [WIST - Solr](https://github.com/NIEMconnects/wist-solr).
+The other repositories include the [Movement - Backend](https://github.com/NIEMconnects/movement-backend) and the [Movement - Solr](https://github.com/NIEMconnects/movement-solr).
 
 # Running the App with Docker
 
-The frontend can be run via Docker. To run the web app locally with Docker, first make sure you have installed and setup the NIEM WIST Docker config:
+The frontend can be run via Docker. To run the web app locally with Docker, first make sure you have installed and setup the NIEM Movement Docker config:
 ```
 docker network create niem-network
 docker run -dti -p 27017:27017 --name wist-mongo --net niem-network
