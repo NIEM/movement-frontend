@@ -4,21 +4,23 @@
 $darkest-blue:    #005170;
 $dark-ocean:      #026399;
 $medium-blue:     #007fb9;
+$marine-blue:     #004666;
+$ocean-blue:      #0073b2;
+$light-ocean-blue:rgba(0, 115, 178, 0.1);
 $teal:            #35969b;
 $light-teal:      #68d0b2;
 $teal-gradient:   #29819c;
+$seafoam:         #58cba9;
+$evergreen:       #062434;
 $black:           #000000;
 $white:           #ffffff;
-$ugly-blue:       #288b91;
-$marine-blue:     #004666;
-$ocean-blue:      #0073b2;
-$seafoam:         #58cba9;
-$seafoam-light:   rgba(88,203,169, 0.1);
-$evergreen:       #062434;
 $warm-grey:       #9b9b9b;
 $shady-grey:      #676767;
+$whisper-grey:    rgba(255, 255, 255, 0.2);
+$gray-grey:       rgba(214, 214, 214, 0.3);
+$light-grey:       #f3f3f3;
 $silver:          #d1d2d4;
-$body-text-color: rgba(0,0,0,0.58);
+$body-text-color: #6B6B6B;
 $mont-extra-bold: 800;
 $mont-bold:       700;
 $mont-regular:    400;
@@ -47,12 +49,12 @@ $desktop-md-max-width: 992px;
   vertical-align: middle;
   white-space: nowrap;
   &:hover {
-    background-color: $silver;
+    background-color: $light-grey;
   }
 }
 @mixin niem-button-bordered {
   @include niem-button;
-  border: $medium-blue solid 1px;
+  border: $ocean-blue solid 1px;
 }
 @mixin niem-button-filled($background-color, $color, $hover-background-color) {
   @include niem-button;
@@ -141,7 +143,7 @@ h6 {
 @import '../app/components/niemExport/niemExport.directive.scss';
 @import '../app/components/niemFooter/niemFooter.directive.scss';
 @import '../app/components/niemHeader/niemHeader.directive.scss';
-@import '../app/components/schemaAddToSchemaButton/schemaAddToSchemaButton.directive.scss';
+@import '../app/components/schemaAddRemoveFromSchemaButton/schemaAddRemoveFromSchemaButton.directive.scss';
 @import '../app/components/schemaMySchemaButton/schemaMySchemaButton.directive.scss';
 @import '../app/components/schemaRemoveFromSchemaButton/schemaRemoveFromSchemaButton.directive.scss';
 @import '../app/components/searchHeader/searchHeader.scss';

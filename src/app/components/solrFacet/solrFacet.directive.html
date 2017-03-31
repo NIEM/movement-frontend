@@ -1,9 +1,9 @@
-<form>
+<div>
   <div role="group">
     <h3 class="filter-group" aria-label="{{display}}" id="{{display}}">
       <span class="dotted-underline" popover-enable="display != 'Others'"
         uib-popover-template="popoverTemplateUrl" popover-placement="right"
-        popover-is-open="popoverIsOpen" tabindex="0" popover-trigger="'focus'">
+        popover-is-open="popoverIsOpen" tabindex="0" popover-trigger="'focus'" aria-describedby="namespace-popover">
           {{display}}
       </span>
     </h3>
@@ -13,4 +13,4 @@
       <solr-facet-result field="{{field}}" key="{{key}}" count="{{results[key]}}"></solr-facet-result>
     </li>
   </ul>
-</form>
+</div>

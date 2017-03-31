@@ -12,8 +12,17 @@ describe('factory:mySchema', function () {
     mySchema = $injector.get('mySchema');
   }));
 
-  it('condition of test', function () {
+  it('should add to mySchema', function () {
+    mySchema.addToSchema('nc:Card');
+    expect(mySchema.getSchema()).toEqual(['nc:Card']);
+  });
 
+
+  it('should remove from mySchema', function () {
+    mySchema.addToSchema('nc:Person');
+    mySchema.removeFromSchema('nc:DateRange'); // remove invalid
+    mySchema.removeFromSchema('nc:Card'); // from add to my schema test
+    expect(mySchema.getSchema()).toEqual(['nc:Person']);
   });
 
 });

@@ -79,22 +79,6 @@
 
 
       /**
-       * @name closeOtherPopovers
-       *
-       * @description Opens the specifed popover tooltip and closes any other open tooltip
-       *
-       * @param type
-       */
-      scope.closeOtherPopovers = function (type) {
-        angular.forEach(scope.popovers, function (value, key) {
-          if (key !== type) {
-            scope.popovers[key].popoverIsOpen = false;
-          }
-        });
-      };
-
-
-      /**
        * @name isFirstOfNamespace
        *
        * @param previousNamespace - the previous row's (doucment's) namespace
@@ -130,9 +114,7 @@
        * @returns {boolean}
        */
       scope.isFirstOfAlphabet = function (previousName, currentName, index) {
-        if (scope.sort === 'name asc') {
-          return index < 1 || currentName.substring(0, 1).toUpperCase() !== previousName.substring(0, 1).toUpperCase();
-        }
+        return scope.sort === 'name asc' && (index < 1 || currentName.substring(0, 1).toUpperCase() !== previousName.substring(0, 1).toUpperCase());
       };
 
     }

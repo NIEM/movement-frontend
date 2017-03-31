@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: app/components/solrResultsPagination/solrResultsPagination.directive.js</title>
+    <title>JSDoc: Source: app/components/schemaAddRemoveFromSchemaButton/schemaAddRemoveFromSchemaButton.directive.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -18,7 +18,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: app/components/solrResultsPagination/solrResultsPagination.directive.js</h1>
+    <h1 class="page-title">Source: app/components/schemaAddRemoveFromSchemaButton/schemaAddRemoveFromSchemaButton.directive.js</h1>
 
     
 
@@ -31,63 +31,67 @@
 /**
  * @ngdoc directive
  *
- * @name solrResultsPagination
+ * @name schemaAddRemoveFromSchemaButton
  *
  * @description
- * Pagination widget in sort bar on results page
+ * directive for dhsniem
  */
-(function() {
+(function () {
 
   angular
     .module('dhsniem')
-    .directive('solrResultsPagination', solrResultsPagination);
+    .directive('schemaAddRemoveFromSchemaButton', schemaAddRemoveFromSchemaButton);
 
-  function solrResultsPagination(solrSearch, $location, $rootScope) {
+  function schemaAddRemoveFromSchemaButton(mySchema) {
     return {
       restrict: 'E',
-      templateUrl: 'app/components/solrResultsPagination/solrResultsPagination.directive.html',
+      templateUrl: 'app/components/schemaAddRemoveFromSchemaButton/schemaAddRemoveFromSchemaButton.directive.html',
+      scope: {
+        entityId: '='
+      },
       link: link
     };
 
     /**
-     *  Defines variables and functions within solrResultsPagination scope
+     *  Defines variables and functions within schemaAddRemoveFromSchemaButton scope
      */
     function link(scope) {
 
-      scope.currentPage = $location.search().page || 1;
+      scope.isInMySchema = mySchema.getSchema().indexOf(scope.entityId) > -1;
+      toggleSchemaButtonText();
 
-      $rootScope.$on('newSearch', function() {
-        scope.currentPage = $location.search().page || 1;
-      });
 
       /**
-       * @name nextPage
+       * @name toggleSchemaAddRemove
        *
-       * @description Loads the next page of results if there is one
+       * @description Toggles the isInMySchema scope variable to show/hide the add/remove buttons
        */
-      scope.nextPage = function() {
-        if (scope.currentPage &lt; scope.totalPages) {
-          scope.currentPage++;
-          $location.search('page', scope.currentPage);
-          solrSearch.search();
+      scope.toggleSchemaAddRemove = function () {
+        scope.isInMySchema = !scope.isInMySchema;
+        toggleSchemaButtonText();
+        if (scope.isInMySchema) {
+          mySchema.addToSchema(scope.entityId);
+        } else {
+          mySchema.removeFromSchema(scope.entityId);
         }
       };
 
+
       /**
-       * @name prevPage
+       * @name toggleSchemaButtonText
        *
-       * @description Loads the previous page of results if there is one
+       * @description Toggles button text based on if an item exists in my schema
        */
-      scope.prevPage = function() {
-        if (scope.currentPage > 1) {
-          scope.currentPage--;
-          $location.search('page', scope.currentPage);
-          solrSearch.search();
-        }
-      };
+      function toggleSchemaButtonText() {
+        scope.schemaAddRemoveButton = scope.isInMySchema ? 'Remove from Schema' : 'Add to Schema';
+      }
+
     }
   }
+
 })();
+
+
 </code></pre>
         </article>
     </section>
