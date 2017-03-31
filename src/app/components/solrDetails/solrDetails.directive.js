@@ -34,7 +34,7 @@
       function init() {
 
         scope.entityID = $location.search().entityID;
-        $window.document.title = scope.entityID + ' Details - Open Source Tool';
+        $window.document.title = scope.entityID + ' Details - NIEM Movement';
 
         niemTree.getDocById(scope.entityID).then(function (entityDoc) {
           scope.entity = entityDoc;
