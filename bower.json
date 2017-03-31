@@ -1,5 +1,5 @@
 {
-  "name": "NIEM Movement",
+  "name": "dhsniem",
   "appPath": "src",
   "version": "0.0.0",
   "dependencies": {
