@@ -1,8 +1,8 @@
 <div class="solr-pagination">
   Pages
-  <a tabindex="0" ng-click="prevPage()" ng-keypress="prevPage()" ng-class="{'selectable': (currentPage > 1)}" ng-hide="currentPage === 1">&#60;&#60;</a>
+  <a tabindex="0" ng-click="prevPage()" ng-keypress="prevPage()" class="selectable" ng-if="currentPage > 1" aria-label="Previous Page" title="Previous Page">&#60;&#60;</a>
   {{currentPage}}
   of
   {{totalPages}}
-  <a tabindex="0" ng-click="nextPage()" ng-keypress="nextPage()" ng-class="{'selectable': (currentPage < totalPages)}" ng-hide="currentPage === totalPages">&#62;&#62;</a>
+  <a tabindex="0" ng-click="nextPage()" ng-keypress="nextPage()" class="selectable" ng-if="currentPage < totalPages" aria-label="Next Page" title="Next Page">&#62;&#62;</a>
 </div>

@@ -1,4 +1,4 @@
-<div class="solr-my-schema-details" tabindex="-1" id="main">
+<div class="solr-my-schema-details" tabindex="-1" id="main" role="main" aria-label="My Schema Builder">
   <section class="container">
     <div class="my-schema-disclaimer-text">
       Final downloadable JSON schema format is still in progress and subject to change. For any feedback or improvements, please <a href="https://www.niem.gov/contact-us" target="_blank" rel="noopener noreferrer">contact us</a>.
@@ -12,14 +12,14 @@
     </div>
     <div class="my-schema-actions" ng-if="mySchemaIDs.length">
       <h2 class="my-schema-count">Total ({{mySchemaArray.length}} items)</h2>
-      <button ng-click="removeSchema()" class="remove-all-button">Remove All</button>
-      <button ng-click="downloadSchema()" class="download-schema-button">Download JSON Schema</button>
+      <button ng-click="removeSchema()" class="remove-all-button" aria-label="Remove All" title="Remove All">Remove All</button>
+      <button ng-click="downloadSchema()" class="download-schema-button" aria-label="Download JSON Schema" title="Download JSON Schema">Download JSON Schema</button>
     </div>
     <div class="schema-item" ng-repeat="entity in mySchemaArray">
       <div class="schema-content-wrapper">
         <div class="col-sm-8">
           <h3 class="item-title">
-            <a class="item-title" ui-sref="main.details({ entityID: entity.id })">{{entity.name}}</a>
+            <a class="item-title" ui-sref="main.details({ entityID: entity.id })" aria-label="{{entity.name}}" title="{{entity.name}}">{{entity.name}}</a>
             <span class="item-type">({{entity.type.id ? entity.type.id : 'abstract'}})</span>
           </h3>
           <p class="item-description">{{entity.definition}}</p>

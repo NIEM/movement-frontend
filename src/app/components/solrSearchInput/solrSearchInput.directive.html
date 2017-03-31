@@ -1,30 +1,32 @@
 <div class="solr-search form-horizontal">
   <div class="form-group row">
-    <form ng-submit="search()" class="form-inline">
+    <form ng-submit="search()" class="form-inline" role="search" aria-label="Search NIEM Movement" title="Search NIEM Movement">
       <div class="dropdown-group" uib-dropdown is-open="status.isopen" ng-if="!hasLabel" keyboard-nav>
-        <button id="domain-dropdown" type="button" class="domain-button" uib-dropdown-toggle tabindex="200">
+        <button id="domain-dropdown" type="button" class="domain-button" uib-dropdown-toggle aria-label="Select a Domain" title="Select a Domain" tabindex="200">
           <span class="dropdown-text">{{selectedDomain}}</span>
           <img class="dropdown-caret" src="images/ic_carot.svg" aria-hidden="true" alt="Select a domain">
         </button>
         <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="domain-dropdown">
-          <li role="menuitem"><a href="#" ng-click="domainSelect('All Domains')">All Domains</a></li>
-          <li role="menuitem" ng-repeat="domain in domainNames | orderBy:sortByName">
+          <li role="menuitem" aria-label="All Domains" title="All Domains">
+            <a href="#" ng-click="domainSelect('All Domains')">All Domains</a>
+          </li>
+          <li role="menuitem" ng-repeat="domain in domainNames | orderBy:sortByName" aria-label="{{domain}}" title="{{domain}}">
             <a href="" ng-click="domainSelect(domain)">{{domain}}</a>
           </li>
         </ul>
       </div>
       <div class="input-group">
-        <label for="solr-search-input" ng-if="!!hasLabel && hasLabel">Search Model</label>
+        <label for="solr-search-input" ng-show="!!hasLabel && hasLabel">Search Model</label>
         <div class="search-group">
           <div ng-class="domainSpecified">
             <input placeholder="Enter Keyword" type="text" id="solr-search-input" class="form-control"
-                   aria-label="Enter keyword" ng-model="searchQuery"
+                   aria-label="Search Model" title="Search Model" ng-model="searchQuery"
                    autocomplete="off" uib-typeahead="result.name for result in getTypeaheadResults($viewValue)"
                    typeahead-min-length="3" typeahead-on-select="search($item)" tabindex="205">
           </div>
           <div class="input-group-btn">
-            <button type="submit" class="search-btn btn" aria-label="Search" tabindex="210">
-              <img src="images/icon_search.svg" aria-hidden="true" alt="Search NIEM Open Source Tool">
+            <button type="submit" class="search-btn btn" aria-label="Search" title="Search" tabindex="210"> 
+              <img src="images/icon_search.svg" aria-hidden="true" alt="Search NIEM Movement">
             </button>
           </div>
         </div>

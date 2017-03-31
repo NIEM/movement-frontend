@@ -72,18 +72,18 @@
     letter-spacing: 2.6px;
     margin: 0;
   }
-
   .input-group {
     display: flex;
     align-items: center;
-
     .input-group-btn {
       width: auto;
     }
-
     .search-group {
       display: flex;
       margin: 2px;
+      input::placeholder {
+        color: $body-text-color;
+      }
       .third-child {
         #solr-search-input {
           color: $marine-blue;
