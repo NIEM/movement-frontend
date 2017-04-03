@@ -1,6 +1,6 @@
 <div class="solr-details" tabindex="-1" id="main" role="main" aria-label="Details">
   <section class="container">
-    <a tabindex="0" ng-click="goBack()" ng-keypress="goBack()" class="back-link" ng-if="query">&#060; Back to search results for "{{query}}"</a>
+    <a tabindex="0" ng-click="goBack()" ng-keypress="goBack()" class="back-link" ng-if="lastSearch">&#060; Back to search results for "{{lastSearch.q}}"</a>
     <div class="details-heading">
       <div>
         <h1>{{entity.name}}</h1>

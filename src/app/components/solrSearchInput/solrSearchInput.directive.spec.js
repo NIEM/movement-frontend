@@ -35,7 +35,7 @@ describe('directive:solrSearchInput', function () {
   it('should default search all results', function () {
     spyOn($state, 'go');
     elScope.search();
-    expect($rootScope.query).toEqual('*');
+    expect($rootScope.lastSearch.q).toEqual('*');
     expect($state.go).toHaveBeenCalledWith('main.results', {q:'*', selectedFacets:undefined});
   });
 
@@ -43,21 +43,21 @@ describe('directive:solrSearchInput', function () {
     spyOn($state, 'go');
     elScope.searchQuery = 'Card';
     elScope.search();
-    expect($rootScope.query).toEqual('Card');
+    expect($rootScope.lastSearch.q).toEqual('Card');
     expect($state.go).toHaveBeenCalledWith('main.results', {q:'Card', selectedFacets:undefined});
   });
 
   it('should search for a specific domain from typeahead', function () {
     spyOn($state, 'go');
     elScope.search({'name': 'Card' + ' in NIEM Core', 'taNS': 'Core', 'query': 'Card', 'taNSType': 'domain'});
-    expect($rootScope.query).toEqual('Card');
+    expect($rootScope.lastSearch.q).toEqual('Card');
     expect($state.go).toHaveBeenCalledWith('main.results', {q:'Card', selectedFacets:'domain:"Core"'});
   });
 
   it('should search for all domains from typeahead', function () {
     spyOn($state, 'go');
     elScope.search({'name': 'Card' + ' in All Domains', 'taNS': 'all', 'query': 'Card'});
-    expect($rootScope.query).toEqual('Card');
+    expect($rootScope.lastSearch.q).toEqual('Card');
     expect($state.go).toHaveBeenCalledWith('main.results', {q:'Card', selectedFacets:undefined});
   });
 

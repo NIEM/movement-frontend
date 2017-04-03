@@ -91,6 +91,7 @@
         facets = data.facet_counts.facet_fields;
         $rootScope.$emit('newSearch');
       });
+      $rootScope.lastSearch = $location.search();
       $window.document.title = '\'' + getQuery() + '\'' + ' search results - NIEM Movement';
     }
 

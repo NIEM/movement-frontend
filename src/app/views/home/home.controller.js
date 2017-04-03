@@ -16,7 +16,7 @@
 
   function HomeCtrl($window, $rootScope) {
     $window.document.title = 'NIEM Movement';
-    $rootScope.query = null;
+    $rootScope.lastSearch = null;
   }
 
 })();
