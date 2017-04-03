@@ -29,8 +29,8 @@
       <div class="search-results col-sm-8">
         <solr-sort></solr-sort>
         <div class="results-list">
-          <div class="result no-result" ng-if="numFound === 0">The term "{{query}}" has returned no results. Please try
-            a different term or variation.
+          <div class="result no-result" ng-if="numFound === 0">
+            {{query.length < 3 ? 'Your search must have at least 3 characters.' : 'The term "' + query + '" has returned no results. Please try a different term or variation.'}}
           </div>
           <div class="result">
             <div class="result-item" ng-repeat="doc in docs">
