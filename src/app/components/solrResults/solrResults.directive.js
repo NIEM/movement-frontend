@@ -48,6 +48,8 @@
             'popoverTemplateUrl': 'app/components/solrResults/corePopoverTemplate.html'
           }
         };
+
+        scope.errMessage = !scope.numFound && scope.query.length < 3 ? 'Your search must have at least 3 characters.' : 'The term "' + scope.query + '" has returned no results. Please try a different term or variation.';
       }
 
       init();
