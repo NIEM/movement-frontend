@@ -46,11 +46,20 @@ angular
   })
 
   .run(function ($rootScope, $window, $location) {
-    $window.ga('create', 'UA-27432921-1', 'auto');
+    $window.ga('create', 'UA-96555344-1', 'auto');
     $rootScope.$on('$stateChangeSuccess', function () {
       $window.scroll(0, 0);
       $window.ga('send', 'pageview', $location.url());
     });
+
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/service-worker.js').then(function(registration) {
+        console.log('ServiceWorker registration successful with scope: ', registration.scope);
+      }).catch(function(err) {
+        console.log('ServiceWorker registration failed: ', err);
+      });
+    }
+
   });
 
 </code></pre>

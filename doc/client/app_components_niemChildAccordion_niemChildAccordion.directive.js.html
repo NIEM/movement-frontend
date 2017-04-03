@@ -52,6 +52,10 @@
       link: function(scope) {
         scope.dataFound = false;
         scope.isOpen = false;
+        scope.$watch('isOpen', function () {
+          scope.accordionState = scope.isOpen ? 'Expanded' : 'Collapsed';
+        });
+
 
         /**
          * @name expandElement
