@@ -33,7 +33,6 @@
       getFacet: getFacet,
       getSelectedFacets: getSelectedFacets,
       search: search,
-      getFacetName: getFacetName,
       clearAllFilters: clearAllFilters
     };
 
@@ -92,26 +91,7 @@
         facets = data.facet_counts.facet_fields;
         $rootScope.$emit('newSearch');
       });
-      $window.document.title = '\'' + getQuery() + '\'' + ' seach results - Open Source Tool';
-    }
-
-
-    /**
-     * @name getFacetName
-     *
-     * @memberof dhsniem.service:solrSearch
-     *
-     * @description Performs the solr search for facets via call to the http method. On success, sets response data to the service variables.
-     */
-    function getFacetName() {
-      var defer = $q.defer();
-
-      solrRequest.makeFacetSolrRequest(buildSearchParams()).then(function(data) {
-        defer.resolve(data);
-      }).catch(function(error) {
-        console.log('Error: ', error);
-      });
-      return defer.promise;
+      $window.document.title = '\'' + getQuery() + '\'' + ' search results - NIEM Movement';
     }
 
 

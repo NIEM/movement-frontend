@@ -1,4 +1,5 @@
 .solr-results {
+  outline: none;
   .search-heading {
     padding: 0 20px;
     background-image: linear-gradient(to left, $teal-gradient, $marine-blue);
@@ -82,9 +83,10 @@
           .result-content-wrapper {
             @include flex-and-align-center;
             justify-content: space-between;
+            padding: 0 30px;
             .result-content {
-              display: inline-block;
-              padding: 0 30px;
+              max-width: 66.67%;
+              padding-right: 20px;
             }
           }
           .item-img-section {
@@ -99,7 +101,6 @@
           .item-title {
             color: $ocean-blue;
             display: inline-block;
-            margin: 21px 0 11px 0;
             letter-spacing: 0.5px;
             &:hover {
               text-decoration: underline;
@@ -119,6 +120,7 @@
             letter-spacing: 0.5px;
             color: $marine-blue;
             margin-bottom: 13px;
+            text-transform: uppercase;
           }
         }
         .pagination-bottom {

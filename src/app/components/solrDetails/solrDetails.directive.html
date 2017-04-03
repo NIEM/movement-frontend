@@ -1,12 +1,12 @@
-<div class="solr-details">
+<div class="solr-details" tabindex="-1" id="main" role="main" aria-label="Details">
   <section class="container">
-    <a ng-click="goBack()" class="back-link" ng-if="query">&#060; Back to search results for "{{query}}"</a>
+    <a tabindex="0" ng-click="goBack()" ng-keypress="goBack()" class="back-link" ng-if="query">&#060; Back to search results for "{{query}}"</a>
     <div class="details-heading">
       <div>
         <h1>{{entity.name}}</h1>
         <div class="namespace text-uppercase">{{formattedNamespaceType}}: {{entity.namespace}}</div>
       </div>
-      <schema-add-remove-btn-group entity-id="entityID"></schema-add-remove-btn-group>
+      <schema-add-remove-from-schema-button entity-id="entityID"></schema-add-remove-from-schema-button>
     </div>
 
     <div class="details-info row">
@@ -15,7 +15,7 @@
           <img src="images/ic_definition.svg" alt="Definition symbol">
         </div>
         <div class="details-text">
-          <h3>Definition</h3>
+          <h2>Definition</h2>
           <p>{{entity.definition}}</p>
         </div>
       </div>
@@ -24,7 +24,7 @@
           <img src="images/ic-typeofproperty.svg" alt="Type of Property symbol">
         </div>
         <div class="details-text">
-          <h3>Type of Property</h3>
+          <h2>Type of Property</h2>
           <p>{{entity.type.name}}</p>
         </div>
       </div>

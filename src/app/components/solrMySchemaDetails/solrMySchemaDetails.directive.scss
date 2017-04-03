@@ -1,6 +1,6 @@
 .solr-my-schema-details {
   margin: 25px 0;
-
+  outline: none;
   .my-schema-heading {
     padding: 0 20px;
     background-image: linear-gradient(to left, $teal-gradient, $marine-blue);
@@ -13,11 +13,22 @@
       margin: 0;
     }
   }
-
+  .my-schema-disclaimer-text {
+    text-align: center;
+    font-size: 12px;
+    letter-spacing: 0.2px;
+    margin: 0 40px 25px 40px;
+    padding: 10px;
+    border-radius: 2px;
+    background-color: $gray-grey;
+  }
   .empty-my-schema {
     @include flex-and-align-center;
+    flex-direction: column;
     justify-content: center;
+    text-align: center;
     margin: 30px 0;
+    padding: 30px;
     color: $evergreen;
     letter-spacing: 0.5px;
     background-color: rgba(0, 115, 178, 0.1);
@@ -64,7 +75,7 @@
     }
   }
   .schema-item {
-    padding-left: 40px;
+    padding: 0 30px;
     border-bottom: 1px solid $silver;
     .schema-content-wrapper {
       @include flex-and-align-center;

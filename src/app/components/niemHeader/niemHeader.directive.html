@@ -1,20 +1,19 @@
 <header class="niem-header header">
+  <div class="invisible-element">
+    <a href="" ng-click="skipToContent('main')" tabindex="100">Skip to main content</a>
+  </div>
   <div class="header-top">
-    <a href="#" class="header-link-left" tabindex="100">
-      <img class="header-top-img" src="images/niemblue.svg" alt="NIEM Logo">
+    <a href="#" class="header-link-left" tabindex="103">
+      <img class="header-top-img" src="images/movement_logo.svg" alt="NIEM Logo">
     </a>
     <div class="header-link-right pull-right">
       <div class="header-inline-block">
-        <p class="align-self-end">Not for Official Use - In Development</p>
-        <div class="align-self-end">
-          <a href="http://www.niem.gov" target="_blank" tabindex="105" rel="noopener noreferrer"> NIEM.gov </a> |
-          <a href="http://niem.gov/Pages/contact.aspx" target="_blank" tabindex="110" rel="noopener noreferrer">Contact Us</a>
+        <p class="align-self-end header-disclaimer-text">Beta Version - Subject to Change</p>
+        <div class="align-self-end header-link-text">
+          <a href="https://www.niem.gov" target="_blank" tabindex="105" rel="noopener noreferrer"> NIEM.gov </a> |
+          <a href="https://niem.gov/Pages/contact.aspx" target="_blank" tabindex="110" rel="noopener noreferrer">Contact Us</a>
         </div>
       </div>
     </div>
-  </div>
-  <div class="header-my-schema pull-right">
-    <schema-my-schema-button></schema-my-schema-button>
-    <div class="schema-count" ng-if="schemaCount">{{schemaCount}}</div>
   </div>
 </header>

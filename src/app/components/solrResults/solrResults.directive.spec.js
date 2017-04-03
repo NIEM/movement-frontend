@@ -46,13 +46,6 @@ describe('directive:solrResults', function () {
     expect(corePopover).toEqual(false);
   });
 
-  it('should close other popovers', function () {
-    var elementPopover = elScope.popovers.element.popoverIsOpen;
-    elScope.popovers.element.popoverIsOpen = true;
-    elScope.closeOtherPopovers('core');
-    expect(elementPopover).toEqual(false);
-  });
-
   it('should be first of namespace', function () {
     elScope.sort = '';
     var isFirst = elScope.isFirstOfNamespace('Core',{namespace:'Emergency Management', namespaceType:'domain'});
@@ -66,12 +59,14 @@ describe('directive:solrResults', function () {
 
   it('should be first of alphabet', function () {
     elScope.sort = '';
-    var isFirst = elScope.isFirstOfAlphabet('Alert',{name:'Card'});
+    var isFirst = elScope.isFirstOfAlphabet('Alert', 'Card', 1);
     expect(isFirst).toEqual(false); // for when sort is not applied
     elScope.sort = 'name asc';
-    isFirst = elScope.isFirstOfAlphabet('Alert',{name:'AlertCard'});
+    isFirst = elScope.isFirstOfAlphabet(undefined, 'Alert', 0);
+    expect(isFirst).toEqual(true); // for when it is the first document
+    isFirst = elScope.isFirstOfAlphabet('Alert', 'AlertCard', 1);
     expect(isFirst).toEqual(false); // for when names are the same
-    isFirst = elScope.isFirstOfAlphabet('Alert',{name:'Card'});
+    isFirst = elScope.isFirstOfAlphabet('Alert', 'Card', 1);
     expect(isFirst).toEqual(true);
   });
 

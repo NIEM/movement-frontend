@@ -28,7 +28,7 @@ describe('Factory: solrSearch', function() {
   });
 
   it('should get the sort', function () {
-    expect(solrSearch.getSort()).toBe('namespacePriority asc');
+    expect(solrSearch.getSort()).toBe('score desc');
     $location.search('sortBy', 'name asc');
     expect(solrSearch.getSort()).toBe('name asc');
   });

@@ -12,8 +12,12 @@ describe('factory:niemTree', function () {
     niemTree = $injector.get('niemTree');
   }));
 
-  it('condition of test', function () {
 
-  });
+  // it('should get element objects', function () {
+  //   var typeDoc = {elements: ['Card']};
+  //   spyOn(solrRequest, 'makeSolrRequest').and.callThrough();
+  //   elScope.getElementObjects(typeDoc);
+  //   expect(solrRequest.makeSolrRequest).toHaveBeenCalled();
+  // });
 
 });

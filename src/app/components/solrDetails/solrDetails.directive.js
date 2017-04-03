@@ -29,12 +29,12 @@
       /**
        * @name init
        *
-       * @description Initializes controller, retrieves data for the specific entity
+       * @description Initializes controller, retrieves the type and child elements for the scope entity
        */
       function init() {
 
         scope.entityID = $location.search().entityID;
-        $window.document.title = scope.entityID + ' Details - Open Source Tool';
+        $window.document.title = scope.entityID + ' Details - NIEM Movement';
 
         niemTree.getDocById(scope.entityID).then(function (entityDoc) {
           scope.entity = entityDoc;
@@ -56,7 +56,7 @@
       /**
        * @name formatNamespaceType
        *
-       * @description transform the Namespace type returned into readable text
+       * @description Transforms the namespaceType returned into properly formatted text
        *
        * @param text - String representing the type of Namespace
        *
