@@ -1,11 +1,11 @@
 {
   "lang": "en",
   "dir": "ltr",
-  "name": "DHS NIEM",
-  "description": "DHS NIEM Open Source Tool",
-  "short_name": "NIEM",
+  "name": "NIEM Movement",
+  "description": "The NIEM Movement Open Source Tool",
+  "short_name": "Movement",
   "icons": [{
-    "src": "images/niemblue.svg",
+    "src": "images/NIEM_Brackets_Icon_144.png",
     "sizes": "144x144",
     "type": "image/png"
   }],
