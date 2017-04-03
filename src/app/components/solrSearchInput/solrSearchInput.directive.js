@@ -93,9 +93,7 @@
       scope.search = function search(taItem) {
 
         scope.setNamespace(taItem);
-
         var query = scope.searchQuery || '*';
-        $rootScope.query = query;
 
         if (!$state.includes('main.results')) {
           $state.go('main.results', {q: query, selectedFacets: scope.namespaceParam});

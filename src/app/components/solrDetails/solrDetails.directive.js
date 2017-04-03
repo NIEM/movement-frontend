@@ -14,7 +14,7 @@
     .module('dhsniem')
     .directive('solrDetails', solrDetails);
 
-  function solrDetails(niemTree, $location, $window) {
+  function solrDetails(niemTree, $location, $window, $state, $rootScope) {
     return {
       restrict: 'E',
       templateUrl: 'app/components/solrDetails/solrDetails.directive.html',
@@ -77,7 +77,7 @@
        * @description Navigates back to the search results page with previous search params
        */
       scope.goBack = function () {
-        $window.history.back();
+        $state.go('main.results', $rootScope.lastSearch);
       };
 
       init();
