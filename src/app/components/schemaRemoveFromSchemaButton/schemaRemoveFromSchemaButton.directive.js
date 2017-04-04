@@ -19,7 +19,8 @@
       restrict: 'E',
       templateUrl: 'app/components/schemaRemoveFromSchemaButton/schemaRemoveFromSchemaButton.directive.html',
       scope: {
-        entityId: '='
+        entityId: '=',
+        mySchemaArray: '='
       },
       link: link
     };
@@ -36,6 +37,16 @@
        */
       scope.removeFromSchema = function removeFromSchema() {
         mySchema.removeFromSchema(scope.entityId);
+
+        scope.$emit('updatedMySchemaArray',
+          scope.mySchemaArray.filter(function(schemaElement) {
+            return schemaElement.id !== scope.entityId;
+          })
+        );
+
+        if (!scope.mySchemaArray.length) {
+          getSchema();
+        }
       };
     }
   }

@@ -25,6 +25,9 @@
      *  Defines variables and functions within solr scope
      */
     function link(scope) {
+      scope.$on('updatedMySchemaArray', function (event, args) {
+        scope.mySchemaArray = args;
+      });
 
       /**
        * @name init
@@ -82,7 +85,7 @@
        */
       function getSchema() {
         scope.mySchemaIDs = mySchema.getSchema();
-        if (scope.mySchemaIDs) {
+        if (scope.mySchemaIDs.length) {
           getSchemaArray();
         }
       }
@@ -108,21 +111,6 @@
       scope.downloadSchema = function downloadSchema() {
         scope.url = NODE_URL + 'itemsToExport[]=' + scope.mySchemaIDs.join('&itemsToExport[]=');
         $window.open(scope.url, '_parent');
-      };
-
-
-      /**
-       * @name removeFromSchema
-       *
-       * @description Removes a particular item from the mySchema array
-       */
-      scope.removeFromSchema = function removeFromSchema(elementID) {
-        scope.mySchemaArray = scope.mySchemaArray.filter(function(schemaElement) {
-          return schemaElement.id !== elementID;
-        });
-        if (!scope.mySchemaArray.length) {
-          getSchema();
-        }
       };
 
 

@@ -26,11 +26,11 @@
           <div class="item-namespace text-uppercase">{{formatNamespaceType(entity.namespaceType)}}: {{entity.namespace}}</div>
         </div>
         <div class="col-sm-4 text-right">
-          <schema-remove-from-schema-button entity-id="entity.id" ng-click="removeFromSchema(entity.id)"></schema-remove-from-schema-button>
+          <schema-remove-from-schema-button entity-id="entity.id" my-schema-array="mySchemaArray"></schema-remove-from-schema-button>
         </div>
 
         <div class="col-sm-12" ng-if="entity.type.elements">
-          <uib-accordion close-others="false" ng-click="expandTree(entity)">
+          <uib-accordion close-others="false" ng-click="expandTree(entity)" tabindex="-1">
             <div uib-accordion-group>
               <div uib-accordion-heading>
                 {{entity.name}} comes with other elements - <span class="toggle-button">{{entity.expanded ? 'Hide Details' : 'Show Details'}}</span>
