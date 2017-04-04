@@ -43,10 +43,6 @@
             return subsetElement.id !== scope.entityId;
           })
         );
-
-        if (!scope.mySubsetArray.length) {
-          getSubset();
-        }
       };
     }
   }
