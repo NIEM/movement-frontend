@@ -24,7 +24,7 @@
       letter-spacing: 0.5px;
     }
   }
-  .add-to-schema-button, .remove-from-schema-button {
+  .add-to-subset-button, .remove-from-subset-button {
     @include niem-button-filled($white, $ocean-blue, $light-grey);
   }
   .details-info {

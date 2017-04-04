@@ -1,6 +1,6 @@
 'use strict';
 
-describe('directive:schemaMySchemaButton', function () {
+describe('directive:subsetMySubsetButton', function () {
 
   // load the controller's module
   beforeEach(module('dhsniem'));
@@ -13,7 +13,7 @@ describe('directive:schemaMySchemaButton', function () {
     scope = $injector.get('$rootScope').$new();
     $compile = $injector.get('$compile');
 
-    element = angular.element('<schema-my-schema-button></schema-my-schema-button>');
+    element = angular.element('<subset-my-subset-button></subset-my-subset-button>');
     element = $compile(element)(scope);
     scope.$apply();
     elScope = element.scope();

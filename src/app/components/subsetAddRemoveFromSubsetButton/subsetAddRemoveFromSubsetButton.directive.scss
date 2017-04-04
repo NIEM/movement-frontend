@@ -1,9 +1,9 @@
-.schema-add-remove-from-schema-button {
-  .add-to-schema-button {
+.subset-add-remove-from-subset-button {
+  .add-to-subset-button {
     @include niem-button-filled($ocean-blue, $white, $dark-ocean);
   }
 
-  .remove-from-schema-button {
+  .remove-from-subset-button {
     @include niem-button-filled($white, $ocean-blue, $light-grey);
     @include niem-button-bordered;
   }
