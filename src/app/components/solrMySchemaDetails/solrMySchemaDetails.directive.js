@@ -82,7 +82,7 @@
        */
       function getSchema() {
         scope.mySchemaIDs = mySchema.getSchema();
-        if (scope.mySchemaIDs) {
+        if (scope.mySchemaIDs.length) {
           getSchemaArray();
         }
       }
