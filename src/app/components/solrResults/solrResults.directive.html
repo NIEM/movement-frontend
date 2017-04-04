@@ -37,7 +37,6 @@
               <h2 class="result-heading" ng-if="isFirstOfNamespace(docs[$index - 1].namespace, doc)">
                 <span uib-popover-template="popovers['core'].popoverTemplateUrl"
                       popover-placement="right"
-                      popover-is-open="popovers['core'].popoverIsOpen"
                       popover-enable="doc.namespace == 'Core'" popover-trigger="'focus'" aria-describedby="core-popover">
                   {{doc.namespace}} ({{doc.namespaceCount}})
                 </span>

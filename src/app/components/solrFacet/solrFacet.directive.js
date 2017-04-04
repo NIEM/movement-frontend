@@ -70,16 +70,6 @@
       scope.popoverIsOpen =  false;
       scope.popoverTemplateUrl = 'app/components/solrFacet/custom-popover-template.html';
 
-
-      /**
-       * @name closePopover
-       *
-       * @description Closes the selected tooltip popver in the filter column
-       */
-      scope.closePopover = function() {
-        scope.popoverIsOpen = false;
-      };
-
       scope.tooltipText = {
         'External Standards': 'Unmodified schema sources on the internet not encompassed by NIEM',
         'Domain': 'Communities of interest (COI) that are formally established, with an executive steward, to officially manage and govern a portion of the NIEM data model'

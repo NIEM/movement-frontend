@@ -44,7 +44,6 @@
         };
         scope.popovers = {
           'core': {
-            'popoverIsOpen': false,
             'popoverTemplateUrl': 'app/components/solrResults/corePopoverTemplate.html'
           }
         };
@@ -65,18 +64,6 @@
        */
       scope.clearAllFilters = function () {
         solrSearch.clearAllFilters();
-      };
-
-
-      /**
-       * @name closePopover
-       *
-       * @param type
-       *
-       * @description Closes the popover related to the specified type
-       */
-      scope.closePopover = function (type) {
-        scope.popovers[type].popoverIsOpen = false;
       };
 
 
