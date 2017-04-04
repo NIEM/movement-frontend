@@ -122,7 +122,6 @@
        */
       scope.removeSubset = function removeSubset() {
         mySubset.removeAllFromSubset();
-        scope.mySubsetIDs = [];
         scope.mySubsetArray = [];
       };
     }
