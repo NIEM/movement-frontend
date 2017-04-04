@@ -1,9 +1,9 @@
-.schema-my-schema-button {
+.subset-my-subset-button {
   display: flex;
-  .my-schema-button {
+  .my-subset-button {
     @include niem-button-filled($marine-blue, $white, $evergreen);
   }
-  .schema-count {
+  .subset-count {
     @include flex-and-align-center;
     justify-content: center;
     width: 20px;
