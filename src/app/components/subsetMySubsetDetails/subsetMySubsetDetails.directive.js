@@ -109,7 +109,8 @@
        * @description Downloads all items in my schema to JSON file
        */
       scope.downloadSchema = function downloadSchema() {
-        scope.url = NODE_URL + 'itemsToExport[]=' + scope.mySubsetIDs.join('&itemsToExport[]=');
+        $window.ga('send', 'event', 'button', 'click', 'download-schema');
+        scope.url = NODE_URL + 'itemsToExport[]=' + scope.mySchemaIDs.join('&itemsToExport[]=');
         $window.open(scope.url, '_parent');
       };
 
