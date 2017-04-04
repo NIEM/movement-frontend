@@ -1,7 +1,7 @@
-.solr-my-schema-details {
+.subset-my-subset-details {
   margin: 25px 0;
   outline: none;
-  .my-schema-heading {
+  .my-subset-heading {
     padding: 0 20px;
     background-image: linear-gradient(to left, $teal-gradient, $marine-blue);
     color: $white;
@@ -13,7 +13,7 @@
       margin: 0;
     }
   }
-  .my-schema-disclaimer-text {
+  .my-subset-disclaimer-text {
     text-align: center;
     font-size: 12px;
     letter-spacing: 0.2px;
@@ -22,7 +22,7 @@
     border-radius: 2px;
     background-color: $gray-grey;
   }
-  .empty-my-schema {
+  .empty-my-subset {
     @include flex-and-align-center;
     flex-direction: column;
     justify-content: center;
@@ -35,13 +35,13 @@
     height: 200px;
   }
 
-  .my-schema-actions {
+  .my-subset-actions {
     display: flex;
     justify-content: flex-end;
     align-items: center;
     border-bottom: 1px solid $teal;
     padding: 20px;
-    .my-schema-count {
+    .my-subset-count {
       margin: 0 10px;
       color: $evergreen;
       letter-spacing: 0.5px;
@@ -74,10 +74,10 @@
       padding: 0;
     }
   }
-  .schema-item {
+  .subset-item {
     padding: 0 30px;
     border-bottom: 1px solid $silver;
-    .schema-content-wrapper {
+    .subset-content-wrapper {
       @include flex-and-align-center;
       justify-content: space-between;
       flex-wrap: wrap;

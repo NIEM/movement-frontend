@@ -1,12 +1,12 @@
 'use strict';
 
-describe('directive:solrMySchemaDetails', function () {
+describe('directive:subsetMySubsetDetails', function () {
 
   // load the controller's module
   beforeEach(module('dhsniem'));
   beforeEach(module('templates'));
 
-  var element, scope, elScope, $compile, SOLR_URL, $httpBackend, $window, mySchema, NODE_URL, niemTree;
+  var element, scope, elScope, $compile, SOLR_URL, $httpBackend, $window, mySubset, NODE_URL, niemTree;
 
   // Initialize a mock scope
   beforeEach(inject(function ($injector) {
@@ -16,12 +16,12 @@ describe('directive:solrMySchemaDetails', function () {
     $window = $injector.get('$window');
     SOLR_URL = $injector.get('SOLR_URL');
     NODE_URL = $injector.get('NODE_URL');
-    mySchema = $injector.get('mySchema');
+    mySubset = $injector.get('mySubset');
     niemTree = $injector.get('niemTree');
 
     $httpBackend.whenJSONP(new RegExp('\\' + SOLR_URL)).respond(200, {});
 
-    element = angular.element('<solr-my-schema-details></solr-my-schema-details>');
+    element = angular.element('<subset-my-subset-details></subset-my-subset-details>');
     element = $compile(element)(scope);
     scope.$apply();
     elScope = element.scope();
@@ -35,33 +35,33 @@ describe('directive:solrMySchemaDetails', function () {
     spyOn($window, 'open').and.callFake(function() {
       return true;
     });
-    elScope.mySchemaIDs = ['nc:Card', 'nc:Person'];
+    elScope.mySubsetIDs = ['nc:Card', 'nc:Person'];
     elScope.downloadSchema();
     expect(elScope.url).toEqual(NODE_URL + 'itemsToExport[]=nc:Card&itemsToExport[]=nc:Person');
     expect($window.open).toHaveBeenCalled();
     expect($window.open).toHaveBeenCalledWith(elScope.url, '_parent');
   });
 
-  it('should remove all from schema', function () {
-    spyOn(mySchema, 'removeAllFromSchema').and.callThrough();
-    elScope.mySchemaIDs = ['nc:Card', 'nc:Person'];
-    elScope.mySchemaArray = [{'id': 'nc:Card'}, {'id': 'nc:Person'}];
-    elScope.removeSchema();
-    expect(mySchema.removeAllFromSchema).toHaveBeenCalled();
-    expect(elScope.mySchemaIDs).toEqual([]);
-    expect(elScope.mySchemaArray).toEqual([]);
+  it('should remove all from subset', function () {
+    spyOn(mySubset, 'removeAllFromSubset').and.callThrough();
+    elScope.mySubsetIDs = ['nc:Card', 'nc:Person'];
+    elScope.mySubsetArray = [{'id': 'nc:Card'}, {'id': 'nc:Person'}];
+    elScope.removeSubset();
+    expect(mySubset.removeAllFromSubset).toHaveBeenCalled();
+    expect(elScope.mySubsetIDs).toEqual([]);
+    expect(elScope.mySubsetArray).toEqual([]);
   });
 
-  it('should remove an item from the schema', function () {
-    spyOn(mySchema, 'getSchema').and.callThrough();
-    elScope.mySchemaIDs = ['nc:Card', 'nc:Person'];
-    elScope.mySchemaArray = [{'id': 'nc:Card'}, {'id': 'nc:Person'}];
-    elScope.removeFromSchema('nc:Person');
-    expect(elScope.mySchemaArray).toEqual([{'id': 'nc:Card'}]);
-    elScope.removeFromSchema('nc:Card');
-    expect(elScope.mySchemaArray).toEqual([]);
-    expect(mySchema.getSchema).toHaveBeenCalled();
-    expect(elScope.mySchemaIDs).toEqual([]);
+  it('should remove an item from the subset', function () {
+    spyOn(mySubset, 'getSubset').and.callThrough();
+    elScope.mySubsetIDs = ['nc:Card', 'nc:Person'];
+    elScope.mySubsetArray = [{'id': 'nc:Card'}, {'id': 'nc:Person'}];
+    elScope.removeFromSubset('nc:Person');
+    expect(elScope.mySubsetArray).toEqual([{'id': 'nc:Card'}]);
+    elScope.removeFromSubset('nc:Card');
+    expect(elScope.mySubsetArray).toEqual([]);
+    expect(mySubset.getSubset).toHaveBeenCalled();
+    expect(elScope.mySubsetIDs).toEqual([]);
   });
 
   it('should expand tree and fetch data if not already found', function () {

@@ -3,21 +3,21 @@
 /**
  * @ngdoc directive
  *
- * @name solrMySchemaDetails
+ * @name subsetMySubsetDetails
  *
  * @description
- * Solr my schema details
+ * My Subset details
  */
 (function () {
 
   angular
     .module('dhsniem')
-    .directive('solrMySchemaDetails', solrMySchemaDetails);
+    .directive('subsetMySubsetDetails', subsetMySubsetDetails);
 
-  function solrMySchemaDetails($window, mySchema, NODE_URL, niemTree) {
+  function subsetMySubsetDetails($window, mySubset, NODE_URL, niemTree) {
     return {
       restrict: 'E',
-      templateUrl: 'app/components/solrMySchemaDetails/solrMySchemaDetails.directive.html',
+      templateUrl: 'app/components/subsetMySubsetDetails/subsetMySubsetDetails.directive.html',
       link: link
     };
 
@@ -25,18 +25,18 @@
      *  Defines variables and functions within solr scope
      */
     function link(scope) {
-      scope.$on('updatedMySchemaArray', function (event, args) {
-        scope.mySchemaArray = args;
+      scope.$on('updatedMySubsetArray', function (event, args) {
+        scope.mySubsetArray = args;
       });
 
       /**
        * @name init
        *
-       * @description Retrieves My Schema
+       * @description Retrieves My Subset
        */
       function init() {
-        $window.document.title = 'My Schema Builder - NIEM Movement';
-        getSchema();
+        $window.document.title = 'My Subset Builder - NIEM Movement';
+        getSubset();
       }
 
       init();
@@ -65,7 +65,7 @@
        *
        * @description Fetches child elements for the top level accordion, if the data has not been previously loaded
        *
-       * @param entity - The entity or my schema item being expanded
+       * @param entity - The entity or my subset item being expanded
        */
       scope.expandTree = function expandTree(entity) {
         if (!entity.dataFound) {
@@ -79,26 +79,26 @@
 
 
       /**
-       * @name getSchema
+       * @name getSubset
        *
-       * @description Sets scope variable to the element IDs in My Schema
+       * @description Sets scope variable to the element IDs in My subset
        */
-      function getSchema() {
-        scope.mySchemaIDs = mySchema.getSchema();
-        if (scope.mySchemaIDs.length) {
-          getSchemaArray();
+      function getSubset() {
+        scope.mySubsetIDs = mySubset.getSubset();
+        if (scope.mySubsetIDs.length) {
+          getSubsetArray();
         }
       }
 
 
       /**
-       * @name getSchemaArray
+       * @name getSubsetArray
        *
-       * @description Sets the My Schema array of IDs to an array of full documents for those elements
+       * @description Sets the My subset array of IDs to an array of full documents for those elements
        */
-      function getSchemaArray() {
-        niemTree.getElementObjects(scope.mySchemaIDs).then(function(elementDocs) {
-          scope.mySchemaArray = elementDocs;
+      function getSubsetArray() {
+        niemTree.getElementObjects(scope.mySubsetIDs).then(function(elementDocs) {
+          scope.mySubsetArray = elementDocs;
         });
       }
 
@@ -109,20 +109,20 @@
        * @description Downloads all items in my schema to JSON file
        */
       scope.downloadSchema = function downloadSchema() {
+        $window.ga('send', 'event', 'button', 'click', 'download-schema');
         scope.url = NODE_URL + 'itemsToExport[]=' + scope.mySchemaIDs.join('&itemsToExport[]=');
         $window.open(scope.url, '_parent');
       };
 
 
       /**
-       * @name removeSchema
+       * @name removeSubset
        *
-       * @description Removes all items in my schema
+       * @description Removes all items in my subset
        */
-      scope.removeSchema = function removeSchema() {
-        mySchema.removeAllFromSchema();
-        scope.mySchemaIDs = [];
-        scope.mySchemaArray = [];
+      scope.removeSubset = function removeSubset() {
+        mySubset.removeAllFromSubset();
+        scope.mySubsetArray = [];
       };
     }
   }

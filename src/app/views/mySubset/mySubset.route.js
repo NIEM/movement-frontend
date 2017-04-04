@@ -6,9 +6,9 @@
     .module('dhsniem')
     .config(function ($stateProvider) {
       $stateProvider
-        .state('main.mySchema', {
-          url         : '/mySchema',
-          templateUrl : 'app/views/mySchema/mySchema.view.html'
+        .state('main.mySubset', {
+          url         : '/mySubset',
+          templateUrl : 'app/views/mySubset/mySubset.view.html'
         });
     });
 
