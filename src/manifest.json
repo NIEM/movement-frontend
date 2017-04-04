@@ -1,0 +1,17 @@
+{
+  "lang": "en",
+  "dir": "ltr",
+  "name": "NIEM Movement",
+  "description": "The NIEM Movement Open Source Tool",
+  "short_name": "Movement",
+  "icons": [{
+    "src": "images/NIEM_Brackets_Icon_144.png",
+    "sizes": "144x144",
+    "type": "image/png"
+  }],
+  "start_url": "/index.html",
+  "theme_color": "#005170",
+  "background_color": "#fff",
+  "display": "fullscreen",
+  "orientation": "portrait"
+}
