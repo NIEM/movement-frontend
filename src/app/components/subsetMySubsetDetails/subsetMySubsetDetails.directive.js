@@ -110,7 +110,7 @@
        */
       scope.downloadSchema = function downloadSchema() {
         $window.ga('send', 'event', 'button', 'click', 'download-schema');
-        scope.url = NODE_URL + 'itemsToExport[]=' + scope.mySchemaIDs.join('&itemsToExport[]=');
+        scope.url = NODE_URL + 'itemsToExport[]=' + scope.mySubsetIDs.join('&itemsToExport[]=');
         $window.open(scope.url, '_parent');
       };
 
