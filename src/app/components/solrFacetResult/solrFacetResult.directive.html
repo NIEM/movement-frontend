@@ -1,9 +1,9 @@
 <div class="solr-facet-result" aria-labelledby="{{key}} {{display}}">
-  <a class="facet-group" role="checkbox" aria-label="Filter search results checkbox" ng-if="key" tabindex="0"
+  <div class="facet-group" role="checkbox" aria-label="Filter search results checkbox" ng-if="key" tabindex="0"
        ng-click="addRemoveFacet()" ng-keypress="addRemoveFacet()" aria-checked="{{isSelected()}}">
     <div class="facet-checkbox" ng-class="{'active' : isSelected()}" for="{{key}}" ng-model="facetChecked" uib-btn-checkbox>
       <span ng-if="isSelected()">&#10004;</span>
     </div>
     <div class="facet-text" id="{{key}}">{{key}} <span>({{count}})</span></div>
-  </a>
+  </div>
 </div>
