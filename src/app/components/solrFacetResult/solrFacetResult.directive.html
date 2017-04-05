@@ -1,9 +1,56 @@
-<div class="solr-facet-result" aria-labelledby="{{key}} {{display}}">
-  <div class="facet-group" role="checkbox" aria-label="Filter search results checkbox" ng-if="key" tabindex="0"
-       ng-click="addRemoveFacet()" ng-keypress="addRemoveFacet()" aria-checked="{{isSelected()}}">
-    <div class="facet-checkbox" ng-class="{'active' : isSelected()}" for="{{key}}" ng-model="facetChecked" uib-btn-checkbox>
+<!--<div class="solr-facet-result" aria-labelledby="{{key}} {{display}}">-->
+  <!--<div class="facet-group" role="checkbox" aria-label="Filter search results checkbox" ng-if="key" tabindex="0"-->
+       <!--ng-click="addRemoveFacet()" ng-keypress="addRemoveFacet()" aria-checked="{{isSelected()}}">-->
+    <!--<div class="facet-checkbox" ng-class="{'active' : isSelected()}" for="{{key}}" ng-model="facetChecked" uib-btn-checkbox>-->
+      <!--<span ng-if="isSelected()">&#10004;</span>-->
+    <!--</div>-->
+    <!--<div class="facet-text" id="{{key}}">{{key}} <span>({{count}})</span></div>-->
+  <!--</div>-->
+<!--</div>-->
+
+<div class="solr-facet-result">
+  <div class="facet-group" ng-if="key" tabindex="0" ng-click="addRemoveFacet()" ng-keypress="addRemoveFacet()">
+    <div class="facet-checkbox" ng-class="{'active' : isSelected()}" ng-model="facetChecked" uib-btn-checkbox>
       <span ng-if="isSelected()">&#10004;</span>
     </div>
-    <div class="facet-text" id="{{key}}">{{key}} <span>({{count}})</span></div>
+    <div class="facet-text">{{key}} <span>({{count}})</span></div>
   </div>
 </div>
+
+<div class="solr-facet-result">
+  <div class="facet-group" ng-if="key">
+    <div class="facet-checkbox" ng-class="{'active' : isSelected()}" ng-model="facetChecked" uib-btn-checkbox tabindex="0" ng-click="addRemoveFacet()" ng-keypress="addRemoveFacet()">
+      <span ng-if="isSelected()">&#10004;</span>
+    </div>
+    <div class="facet-text">{{key}} <span>({{count}})</span></div>
+  </div>
+</div>
+
+<div class="solr-facet-result">
+  <button class="facet-group" ng-if="key" tabindex="0" ng-click="addRemoveFacet()" ng-keypress="addRemoveFacet()">
+    <div class="facet-checkbox" ng-class="{'active' : isSelected()}" ng-model="facetChecked" uib-btn-checkbox>
+      <span ng-if="isSelected()">&#10004;</span>
+    </div>
+    <div class="facet-text">{{key}} <span>({{count}})</span></div>
+  </button>
+</div>
+
+
+<div class="solr-facet-result">
+  <div role="button" class="facet-group" ng-if="key" tabindex="0" ng-click="addRemoveFacet()" ng-keypress="addRemoveFacet()">
+    <div class="facet-checkbox" ng-class="{'active' : isSelected()}" ng-model="facetChecked" uib-btn-checkbox>
+      <span ng-if="isSelected()">&#10004;</span>
+    </div>
+    <div class="facet-text">{{key}} <span>({{count}})</span></div>
+  </div>
+</div>
+
+<div class="solr-facet-result">
+  <div role="button" class="facet-group" ng-if="key" tabindex="0" ng-click="addRemoveFacet()" ng-keypress="addRemoveFacet()">
+    <div class="facet-checkbox" ng-class="{'active' : isSelected()}" ng-model="facetChecked">
+      <span ng-if="isSelected()">&#10004;</span>
+    </div>
+    <div class="facet-text">{{key}} <span>({{count}})</span></div>
+  </div>
+</div>
+
