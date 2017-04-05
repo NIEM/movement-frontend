@@ -3,7 +3,7 @@
     @include flex-and-align-center;
     margin: 10px 0;
     .facet-checkbox {
-      align-items: center;
+      @include flex-and-align-center;
       justify-content: center;
       padding: 3px;
       min-width: 26px;
@@ -12,6 +12,10 @@
       min-height: 25px;
       border: 1px solid $body-text-color;
       margin-right: 5px;
+      .facet-checkbox-checkmark {
+        width: 18px;
+        height: 20px;
+      }
     }
     .active {
       background-color: $ocean-blue;
