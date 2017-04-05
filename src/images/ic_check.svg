@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="10px" height="7px" viewBox="0 0 10 7" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 42 (36781) - http://www.bohemiancoding.com/sketch -->
+    <title>ic_check</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <polygon id="path-1" points="9.39857143 0.000156174146 9.39857143 6.15134286 0 6.15134286 0 0.000156174146 9.39857143 0.000156174146"></polygon>
+    </defs>
+    <g id="Visual-Design-Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="ic_check">
+            <g id="Page-1-Copy">
+                <mask id="mask-2" fill="white">
+                    <use xlink:href="#path-1"></use>
+                </mask>
+                <g id="Clip-2"></g>
+                <path d="M3.33571429,6.15134286 C3.13714286,6.15134286 2.94142857,6.06848571 2.8,5.90991429 C2.79142857,5.89991429 2.78428571,5.88991429 2.77571429,5.88277143 L2.75571429,5.86134286 L0.21,3.3242 C-0.07,3.04562857 -0.07,2.59277143 0.208571429,2.31277143 C0.487142857,2.03277143 0.941428571,2.0342 1.21857143,2.31134286 L3.36714286,4.45562857 L8.21142857,0.178485714 C8.50571429,-0.0815142857 8.96,-0.0543714286 9.22,0.241342857 C9.48142857,0.537057143 9.45285714,0.988485714 9.15714286,1.24991429 L3.80857143,5.97277143 C3.67285714,6.09277143 3.50428571,6.15134286 3.33571429,6.15134286" id="Fill-1" fill="#FEFEFE" mask="url(#mask-2)"></path>
+            </g>
+        </g>
+    </g>
+</svg>
