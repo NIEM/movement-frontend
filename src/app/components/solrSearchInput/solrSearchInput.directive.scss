@@ -4,6 +4,7 @@
     margin: 0;
     .form-inline {
       @include flex-and-align-center;
+      flex-wrap: wrap;
       .form-control {
         height: 41px;
         @include desktop {
