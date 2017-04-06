@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: app/components/solrFacetResult/solrFacetResult.directive.js</title>
+    <title>JSDoc: factory: mySubset</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -18,115 +18,126 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: app/components/solrFacetResult/solrFacetResult.directive.js</h1>
+    <h1 class="page-title">factory: mySubset</h1>
 
     
 
 
+
+<section>
+
+<header>
+    <h2>
+    mySubset
+    </h2>
     
-    <section>
-        <article>
-            <pre class="prettyprint source linenums"><code>'use strict';
+</header>
 
-/**
- * @ngdoc directive
- *
- * @name solrFacetResult
- *
- * @description
- * The specific facet result returned from Solr
- */
-(function() {
+<article>
+    <div class="container-overview">
+    
 
-  angular
-    .module('dhsniem')
-    .directive('solrFacetResult', solrFacetResult);
+    
+        
+<dt>
+    
+    
+      <a href="app_services_mySubset_mySubset.factory.js.html#line3" class="name-link"><h4 class="name" id="mySubset">mySubset<span class="signature">()</span><span class="type-signature"></span></h4></a>
+    
 
-  function solrFacetResult($location, solrSearch, $rootScope) {
-    return {
-      restrict: 'E',
-      scope: {
-        field: '@',
-        key: '@',
-        count: '@',
-      },
-      templateUrl: 'app/components/solrFacetResult/solrFacetResult.directive.html',
-      link: link
-    };
+    
+</dt>
+<dd>
 
-    /**
-     *  Defines variables and functions within solrFacetResult scope
-     */
-    function link(scope) {
+    
+    <div class="description">
+        <p>Factory for my subset cart</p>
+    </div>
+    
 
-      /**
-       * @name facetString
-       *
-       * @description Gets string value of result
-       *
-       * @returns {string}
-       */
-      scope.facetString = function() {
-        return scope.field + ':"' + scope.key + '"';
-      };
+    
+
+    
+
+    
+
+    
+<dl class="details">
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="app_services_mySubset_mySubset.factory.js.html">app/services/mySubset/mySubset.factory.js</a>, <a href="app_services_mySubset_mySubset.factory.js.html#line3">line 3</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
 
 
-      /**
-       * @name isSelected
-       *
-       * @description Determines if a given facet field (value) is selected by examining the $location.
-       *
-       * @returns {boolean}
-       */
-      scope.isSelected = function() {
-        var selectedFacets = solrSearch.getSelectedFacets();
-        var facetString = scope.facetString();
-        for (var i in selectedFacets) {
-          if (selectedFacets[i] === facetString) {
-            return true;
-          }
-        }
-        return false;
-      };
+    
 
+    
 
-      /**
-       * @name addRemoveFacet
-       *
-       * @description Adds or removes a facet from the $location service, calls a new search based on updated selected facets, and resets page number to 1.
-       */
-      scope.addRemoveFacet = function() {
-        var selectedFacets = solrSearch.getSelectedFacets();
-        if (!scope.isSelected()) {
-          selectedFacets.push(scope.facetString());
-        } else {
-          selectedFacets.splice(selectedFacets.indexOf(scope.facetString()), 1);
-        }
-        $location.search('selectedFacets', selectedFacets);
-        $location.search('page', 1);
-        solrSearch.search();
-      };
+    
 
-      /**
-       * @name init
-       *
-       * @description Initializes the values within the controller
-       */
-      function init() {
-        scope.isSelected();
-      }
+    
 
-      init();
+    
 
-      $rootScope.$on('newSearch', function() {
-        init();
-      });
-    }
-  }
-})();
-</code></pre>
-        </article>
-    </section>
+    
+
+    
+</dd>
+
+    
+    </div>
+
+    
+
+    
+
+    <!--
+    
+    -->
+
+    
+
+     
+
+    
+
+    
+
+    
+
+    
+
+    
+</article>
+
+</section>
 
 
 
