@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: app/components/solrFacetResult/solrFacetResult.directive.js</title>
+    <title>JSDoc: Source: app/components/subsetAddRemoveFromSubsetButton/subsetAddRemoveFromSubsetButton.directive.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -18,7 +18,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: app/components/solrFacetResult/solrFacetResult.directive.js</h1>
+    <h1 class="page-title">Source: app/components/subsetAddRemoveFromSubsetButton/subsetAddRemoveFromSubsetButton.directive.js</h1>
 
     
 
@@ -31,99 +31,67 @@
 /**
  * @ngdoc directive
  *
- * @name solrFacetResult
+ * @name subsetAddRemoveFromSubsetButton
  *
  * @description
- * The specific facet result returned from Solr
+ * directive for dhsniem
  */
-(function() {
+(function () {
 
   angular
     .module('dhsniem')
-    .directive('solrFacetResult', solrFacetResult);
+    .directive('subsetAddRemoveFromSubsetButton', subsetAddRemoveFromSubsetButton);
 
-  function solrFacetResult($location, solrSearch, $rootScope) {
+  function subsetAddRemoveFromSubsetButton(mySubset) {
     return {
       restrict: 'E',
+      templateUrl: 'app/components/subsetAddRemoveFromSubsetButton/subsetAddRemoveFromSubsetButton.directive.html',
       scope: {
-        field: '@',
-        key: '@',
-        count: '@',
+        entityId: '='
       },
-      templateUrl: 'app/components/solrFacetResult/solrFacetResult.directive.html',
       link: link
     };
 
     /**
-     *  Defines variables and functions within solrFacetResult scope
+     *  Defines variables and functions within subsetAddRemoveFromSubsetButton scope
      */
     function link(scope) {
 
-      /**
-       * @name facetString
-       *
-       * @description Gets string value of result
-       *
-       * @returns {string}
-       */
-      scope.facetString = function() {
-        return scope.field + ':"' + scope.key + '"';
-      };
+      scope.isInMySubset = mySubset.getSubset().indexOf(scope.entityId) > -1;
+      toggleSubsetButtonText();
 
 
       /**
-       * @name isSelected
+       * @name toggleSubsetAddRemove
        *
-       * @description Determines if a given facet field (value) is selected by examining the $location.
-       *
-       * @returns {boolean}
+       * @description Toggles the isInMySubset scope variable to show/hide the add/remove buttons
        */
-      scope.isSelected = function() {
-        var selectedFacets = solrSearch.getSelectedFacets();
-        var facetString = scope.facetString();
-        for (var i in selectedFacets) {
-          if (selectedFacets[i] === facetString) {
-            return true;
-          }
-        }
-        return false;
-      };
-
-
-      /**
-       * @name addRemoveFacet
-       *
-       * @description Adds or removes a facet from the $location service, calls a new search based on updated selected facets, and resets page number to 1.
-       */
-      scope.addRemoveFacet = function() {
-        var selectedFacets = solrSearch.getSelectedFacets();
-        if (!scope.isSelected()) {
-          selectedFacets.push(scope.facetString());
+      scope.toggleSubsetAddRemove = function () {
+        scope.isInMySubset = !scope.isInMySubset;
+        toggleSubsetButtonText();
+        if (scope.isInMySubset) {
+          mySubset.addToSubset(scope.entityId);
         } else {
-          selectedFacets.splice(selectedFacets.indexOf(scope.facetString()), 1);
+          mySubset.removeFromSubset(scope.entityId);
         }
-        $location.search('selectedFacets', selectedFacets);
-        $location.search('page', 1);
-        solrSearch.search();
       };
 
+
       /**
-       * @name init
+       * @name toggleSubsetButtonText
        *
-       * @description Initializes the values within the controller
+       * @description Toggles button text based on if an item exists in my subset
        */
-      function init() {
-        scope.isSelected();
+      function toggleSubsetButtonText() {
+        scope.subsetAddRemoveButton = scope.isInMySubset ? 'Remove from Subset' : 'Add to Subset';
       }
 
-      init();
-
-      $rootScope.$on('newSearch', function() {
-        init();
-      });
     }
   }
+
 })();
+
+
 </code></pre>
         </article>
     </section>

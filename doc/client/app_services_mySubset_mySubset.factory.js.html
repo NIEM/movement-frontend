@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: app/components/solrFacetResult/solrFacetResult.directive.js</title>
+    <title>JSDoc: Source: app/services/mySubset/mySubset.factory.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -18,7 +18,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: app/components/solrFacetResult/solrFacetResult.directive.js</h1>
+    <h1 class="page-title">Source: app/services/mySubset/mySubset.factory.js</h1>
 
     
 
@@ -29,100 +29,106 @@
             <pre class="prettyprint source linenums"><code>'use strict';
 
 /**
- * @ngdoc directive
+ * @ngdoc factory
  *
- * @name solrFacetResult
+ * @name mySubset
  *
  * @description
- * The specific facet result returned from Solr
+ * Factory for my subset cart
  */
-(function() {
+(function () {
 
   angular
     .module('dhsniem')
-    .directive('solrFacetResult', solrFacetResult);
+    .factory('mySubset', mySubset);
 
-  function solrFacetResult($location, solrSearch, $rootScope) {
+  function mySubset() {
+
     return {
-      restrict: 'E',
-      scope: {
-        field: '@',
-        key: '@',
-        count: '@',
-      },
-      templateUrl: 'app/components/solrFacetResult/solrFacetResult.directive.html',
-      link: link
+      addToSubset: addToSubset,
+      getSubset: getSubset,
+      removeAllFromSubset: removeAllFromSubset,
+      removeFromSubset: removeFromSubset,
+      getSubsetCount: getSubsetCount
     };
 
     /**
-     *  Defines variables and functions within solrFacetResult scope
+     * @name addToSubset
+     *
+     * @description Adds a new entityID to the local storage subset
+     *
+     * @param {String} - entityID
      */
-    function link(scope) {
-
-      /**
-       * @name facetString
-       *
-       * @description Gets string value of result
-       *
-       * @returns {string}
-       */
-      scope.facetString = function() {
-        return scope.field + ':"' + scope.key + '"';
-      };
+    function addToSubset(entityID) {
+      var newSubset = getSubset();
+      newSubset.push(entityID);
+      setSubset(newSubset);
+    }
 
 
-      /**
-       * @name isSelected
-       *
-       * @description Determines if a given facet field (value) is selected by examining the $location.
-       *
-       * @returns {boolean}
-       */
-      scope.isSelected = function() {
-        var selectedFacets = solrSearch.getSelectedFacets();
-        var facetString = scope.facetString();
-        for (var i in selectedFacets) {
-          if (selectedFacets[i] === facetString) {
-            return true;
-          }
-        }
-        return false;
-      };
+    /**
+     * @name getSubset
+     *
+     * @description Returns the mySubset JSON object from local storage
+     *
+     * @returns String[] - array of entity ids  
+     */
+    function getSubset() {
+      return localStorage.getItem('mySubset') ? JSON.parse(localStorage.getItem('mySubset')) : [];
+    }
 
 
-      /**
-       * @name addRemoveFacet
-       *
-       * @description Adds or removes a facet from the $location service, calls a new search based on updated selected facets, and resets page number to 1.
-       */
-      scope.addRemoveFacet = function() {
-        var selectedFacets = solrSearch.getSelectedFacets();
-        if (!scope.isSelected()) {
-          selectedFacets.push(scope.facetString());
-        } else {
-          selectedFacets.splice(selectedFacets.indexOf(scope.facetString()), 1);
-        }
-        $location.search('selectedFacets', selectedFacets);
-        $location.search('page', 1);
-        solrSearch.search();
-      };
+    /**
+     * @name setSubset
+     *
+     * @description Sets the mySubset JSON object to local storage
+     *
+     * @param {Object} - subset
+     */
+    function setSubset(subset) {
+      localStorage.setItem('mySubset', JSON.stringify(subset));
+    }
 
-      /**
-       * @name init
-       *
-       * @description Initializes the values within the controller
-       */
-      function init() {
-        scope.isSelected();
+
+    /**
+     * @name removeAllFromSubset
+     *
+     * @description Removes all items from the mySubset local storage object
+     */
+    function removeAllFromSubset() {
+      setSubset([]);
+    }
+
+
+    /**
+     * @name getSubsetCount
+     *
+     * @description Returns the count of the mySubset local storage array
+     *
+     * @return Number - the length of the mySubset array
+     */
+    function getSubsetCount() {
+      return getSubset().length;
+    }
+
+
+    /**
+     * @name removeFromSubset
+     *
+     * @description Removes an entity ID from the mySubset local storage array
+     *
+     * @param entityID - the entityID to be removed from mySubset
+     */
+    function removeFromSubset(entityID) {
+      var subset = getSubset();
+      var idIndex = subset.indexOf(entityID);
+      if (idIndex > -1) {
+        subset.splice(idIndex, 1);
+        setSubset(subset);
       }
-
-      init();
-
-      $rootScope.$on('newSearch', function() {
-        init();
-      });
     }
   }
+
 })();
 </code></pre>
         </article>
