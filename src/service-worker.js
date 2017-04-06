@@ -1,4 +1,4 @@
-var cacheName = 'niem-movement-app-cache-v1';
+var cacheName = 'niem-movement-app-cache-v2';
 var filesToCache = [
   '/',
   '/index.html',
