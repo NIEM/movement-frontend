@@ -20,7 +20,7 @@
       templateUrl: 'app/components/subsetRemoveFromSubsetButton/subsetRemoveFromSubsetButton.directive.html',
       scope: {
         entityId: '=',
-        mySubsetArray: '='
+        mySubsetIdArray: '='
       },
       link: link
     };
@@ -39,8 +39,8 @@
         mySubset.removeFromSubset(scope.entityId);
 
         scope.$emit('updatedMySubsetArray',
-          scope.mySubsetArray.filter(function(subsetElement) {
-            return subsetElement.id !== scope.entityId;
+          scope.mySubsetIdArray.filter(function(subsetElement) {
+            return subsetElement !== scope.entityId;
           })
         );
       };
