@@ -26,7 +26,8 @@
      */
     function link(scope) {
       scope.$on('updatedMySubsetArray', function (event, args) {
-        scope.mySubsetArray = args;
+        scope.mySubsetIDs = args;
+        getSubsetArray();
       });
 
       /**
