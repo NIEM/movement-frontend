@@ -38,9 +38,12 @@
           scope.isOpen = !scope.isOpen;
 
           if (scope.isOpen && scope.dataFound === false) {
-            niemTree.getElementObjects(scope.elementData.type.elements).then(function (elements) {
-              scope.elementData.type.elements = elements;
-            });
+            // Only fetch the full children docs, if they children are children of the type. Otherwise, if they are from a substitution group, don't fetch.
+            if(scope.elementData.type) {
+              niemTree.getElementObjects(scope.elementData.type.elements).then(function (elements) {
+                scope.elementData.type.elements = elements;
+              });
+            }
             scope.dataFound = true;
           }
         };

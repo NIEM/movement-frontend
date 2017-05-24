@@ -1,6 +1,10 @@
 .niem-child-accordion {
   .niem-accordion-list {
     padding-left: 40px;
+
+    &-header {
+      padding-top: 10px;    
+    }
   }
   .niem-child-accordion-heading {
     padding: 20px 0;

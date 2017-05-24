@@ -35,16 +35,32 @@
         <span class="contain-type">({{entity.type.id ? entity.type.id : 'abstract'}})</span>
       </h2>
     </div>
-    <div ng-if="!entity.type.elements" class="has-none">
+    <div ng-if="!entity.type.elements && !entity.subGroups.length" class="has-none">
       <h3>{{entity.name}} does not contain any child elements.</h3>
     </div>
 
+    <div ng-if="entity.subGroups.length">
+      <div class="niem-accordion-list-header">{{entity.name}} is part of a substitution group including the following elements:</div>
+      <div ng-repeat="subGroupElement in entity.subGroups">
+        <div class="niem-accordion-item" ng-if="!subGroupElement.type.elements">
+          <a class="item-name" ui-sref="main.details({ entityID: subGroupElement.id })">{{subGroupElement.name}}</a>
+          <span class="subGroupElement-type">({{subGroupElement.type.name ? subGroupElement.type.name : 'abstract'}})</span>
+        </div>
+        <div ng-if="subGroupElement.type.elements">
+          <niem-child-accordion element-data="subGroupElement"></niem-child-accordion>
+        </div>
+      </div>
+    </div>
+
     <div ng-repeat="item in entity.type.elements">
-      <div class="niem-accordion-item" ng-if="!item.type.elements">
+      <div class="niem-accordion-item" ng-if="!item.type.elements && !item.subGroups.length">
         <a class="item-name" ui-sref="main.details({ entityID: item.id })">{{item.name}}</a>
         <span class="item-type">({{item.type.name ? item.type.name : 'abstract'}})</span>
       </div>
       <div ng-if="item.type.elements">
+        <niem-child-accordion element-data="item"></niem-child-accordion>
+      </div>
+      <div ng-if="item.subGroups.length">
         <niem-child-accordion element-data="item"></niem-child-accordion>
       </div>
     </div>

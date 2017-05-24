@@ -48,6 +48,10 @@
                 });
               }
             });
+          } else {
+            niemTree.getSubstitutionGroups(scope.entityID).then(function(subGroups) {
+              scope.entity.subGroups = subGroups;
+            })
           }
         });
       }
