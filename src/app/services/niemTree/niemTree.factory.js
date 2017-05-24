@@ -18,7 +18,9 @@
 
     return {
       getElementObjects: getElementObjects,
-      getDocById: getDocById
+      getDocById: getDocById,
+      getSubstitutionGroups: getSubstitutionGroups,
+      getTypeDocsForElementDocs: getTypeDocsForElementDocs
     };
 
 
@@ -90,6 +92,12 @@
           return elementDoc.isBG;
         });
 
+        return getTypeDocsForElementDocs(elementDocs);
+      });
+    }
+
+
+    function getTypeDocsForElementDocs(elementDocs) {
         return $q.all(elementDocs.map(function (elementDoc) {
           if (elementDoc.type) {
             return getDocById(elementDoc.type).then(function (typeDoc) {
@@ -97,10 +105,14 @@
               return elementDoc;
             });
           } else {
-            return elementDoc;
+            return getSubstitutionGroups(elementDoc.id).then(function(subGroupDocs) {
+              if(subGroupDocs) {
+                elementDoc.subGroups = subGroupDocs;
+              }
+              return elementDoc;
+            });
           }
         }));
-      });
     }
 
 
@@ -120,6 +132,28 @@
         'json.nl': 'map'
       };
       return params;
+    }
+
+
+    /**
+     * @name getSubstitutionGroups
+     *
+     * @description For a given element id, checks to see if substitution groups exist for it. If subsitution groups are found, it calls the getElementObjects function.
+     *
+     * @param {String} - elementId
+     *
+     * @returns {Promise}
+     */
+    function getSubstitutionGroups(elementId) {
+      var sgQuery = 'substitutionGroup:' + splitId(elementId);
+      return solrRequest.makeSolrRequest(getSearchParams(sgQuery)).then(function(solrResponse) {
+        if (solrResponse.response.docs) {
+          // return the array of substitution group element objects with full type doc refs
+          return getTypeDocsForElementDocs(solrResponse.response.docs);
+        }
+      }).catch(function(err) {
+        return;
+      });
     }
 
   }
