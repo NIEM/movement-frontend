@@ -64,15 +64,4 @@ describe('directive:subsetMySubsetDetails', function () {
     expect(elScope.mySubsetIDs).toEqual([]);
   });
 
-  it('should expand tree and fetch data if not already found', function () {
-    spyOn(niemTree, 'getElementObjects').and.callThrough();
-    var entity = {'id': 'nc:Card', 'dataFound': false, 'expanded':false, 'type': {'elements': ['nc:CardSubElement']}};
-    elScope.expandTree(entity);
-    expect(niemTree.getElementObjects).toHaveBeenCalled();
-    expect(entity.expanded).toEqual(true); //open
-    entity.dataFound = true; // manually set
-    elScope.expandTree(entity);
-    expect(entity.expanded).toEqual(false); //closed
-  });
-
 });

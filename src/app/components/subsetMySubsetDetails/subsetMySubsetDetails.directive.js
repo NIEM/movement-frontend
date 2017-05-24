@@ -62,24 +62,6 @@
 
 
       /**
-       * @name expandTree
-       *
-       * @description Fetches child elements for the top level accordion, if the data has not been previously loaded
-       *
-       * @param entity - The entity or my subset item being expanded
-       */
-      scope.expandTree = function expandTree(entity) {
-        if (!entity.dataFound) {
-          niemTree.getElementObjects(entity.type.elements).then(function(elementDocs) {
-            entity.type.elements = elementDocs;
-            entity.dataFound = true;
-          });
-        }
-        entity.expanded = !entity.expanded;
-      };
-
-
-      /**
        * @name getSubset
        *
        * @description Sets scope variable to the element IDs in My subset
