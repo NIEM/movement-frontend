@@ -13,7 +13,7 @@
   <div class="niem-accordion-list" ng-if="isOpen" id="{{elementData.type.id}}">
 
     <div ng-if="elementData.subGroups.length">
-      <div class="niem-accordion-list-header">{{elementData.name}} is part of a substitution group including the following elements:</div>
+      <div class="niem-accordion-list-header">This term has synonym entries</div>
       <div ng-repeat="subGroupElement in elementData.subGroups">
         <div class="niem-accordion-item" ng-if="!subGroupElement.type.elements">
           <a class="item-name" ui-sref="main.details({ entityID: subGroupElement.id })">{{subGroupElement.name}}</a>
