@@ -15,6 +15,11 @@
       .child-heading-type {
         color: $body-text-color;
       }
+      .child-heading-subgroup {
+        font-style: italic;
+        padding-left: 15px;
+        color: $body-text-color;
+      }
     }
 
     .carot-img {
@@ -27,10 +32,6 @@
 
   &-list {
     padding-left: 40px;
-
-    &-header {
-      padding-top: 10px;    
-    }
 
     &-item {
       display: flex;

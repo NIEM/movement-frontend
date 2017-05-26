@@ -33,13 +33,13 @@
     <div class="niem-accordion-heading">
       <h2 class="contain-title">{{entity.name}}
         <span class="contain-type">({{entity.type.id ? entity.type.id : 'abstract'}})</span>
+        <span class="contain-subgroup" ng-if="entity.subGroups.length">This term has synonym entries</span>
       </h2>
     </div>
     <div ng-if="!entity.type.elements && !entity.subGroups.length" class="has-none">
       <h3>{{entity.name}} does not contain any child elements.</h3>
     </div>
 
-    <div class="niem-accordion-list-header" ng-if="entity.subGroups.length">This term has synonym entries</div>
     <div ng-repeat="subGroupElement in entity.subGroups" class="niem-accordion-item">
       <div class="niem-accordion-item-flat" ng-if="!subGroupElement.type.elements && !subGroupElement.subGroups.length">
         <div>
