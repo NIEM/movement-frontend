@@ -10,28 +10,40 @@
     </div>
   </div>
 
-  <div class="niem-accordion-list" ng-if="isOpen" id="{{elementData.type.id}}">
+  <div class="niem-child-accordion-list" ng-if="isOpen" id="{{elementData.type.id}}">
 
     <div ng-if="elementData.subGroups.length">
-      <div class="niem-accordion-list-header">This term has synonym entries</div>
+      <div class="niem-child-accordion-list-header">This term has synonym entries</div>
       <div ng-repeat="subGroupElement in elementData.subGroups">
-        <div class="niem-accordion-item" ng-if="!subGroupElement.type.elements">
-          <a class="item-name" ui-sref="main.details({ entityID: subGroupElement.id })">{{subGroupElement.name}}</a>
-          <span class="subGroupElement-type">({{subGroupElement.type.name ? subGroupElement.type.name : 'abstract'}})</span>
+        <div class="niem-child-accordion-list-item" ng-if="!subGroupElement.type.elements && !subGroupElement.subGroups.length">
+          <div>
+            <a class="item-name" ui-sref="main.details({ entityID: subGroupElement.id })">{{subGroupElement.name}}</a>
+            <span class="subGroupElement-type">({{subGroupElement.type.name ? subGroupElement.type.name : 'abstract'}})</span>
+          </div>
+          <subset-add-remove-from-subset-button entity-id="subGroupElement.id"></subset-add-remove-from-subset-button>
         </div>
         <div ng-if="subGroupElement.type.elements">
           <niem-child-accordion element-data="elementData.subGroups[$index]"></niem-child-accordion>
+        </div>
+        <div ng-if="subGroupElement.subGroups.length">
+          <niem-child-accordion element-data="subGroupElement"></niem-child-accordion>
         </div>
       </div>
     </div>
 
     <div ng-repeat="currElement in elementData.type.elements">
-      <div class="niem-accordion-item" ng-if="!currElement.type.elements">
-        <a class="item-name" ui-sref="main.details({ entityID: currElement.id })">{{currElement.name}}</a>
-        <span class="item-type">({{currElement.type.name ? currElement.type.name : 'abstract'}})</span>
+      <div class="niem-child-accordion-list-item" ng-if="!currElement.type.elements && !currElement.subGroups.length">
+        <div>
+          <a class="item-name" ui-sref="main.details({ entityID: currElement.id })">{{currElement.name}}</a>
+          <span class="item-type">({{currElement.type.name ? currElement.type.name : 'abstract'}})</span>
+        </div>
+        <subset-add-remove-from-subset-button entity-id="currElement.id"></subset-add-remove-from-subset-button>
       </div>
       <div ng-if="currElement.type.elements">
         <niem-child-accordion element-data="elementData.type.elements[$index]"></niem-child-accordion>
+      </div>
+      <div ng-if="currElement.subGroups.length">
+        <niem-child-accordion element-data="currElement"></niem-child-accordion>
       </div>
     </div>
 

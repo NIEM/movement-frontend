@@ -1,25 +1,14 @@
 .niem-child-accordion {
-  .niem-accordion-list {
-    padding-left: 40px;
 
-    &-header {
-      padding-top: 10px;    
-    }
-  }
-  .niem-child-accordion-heading {
-    padding: 20px 0;
-    border-bottom: 1px solid $silver;
+  &-heading {
+    padding: 27px 0;
     cursor: pointer;
-    .carot-img {
-      display: inline-block;
+    border-bottom: 1px solid $silver;
 
-      &.caret-down {
-        transform: rotate(90deg);
-      }
-    }
-    .niem-child-accordion-heading-text {
+    &-text {
       display: inline-block;
       padding-left: 14px;
+
       .child-heading-title {
         color: $ocean-blue;
       }
@@ -27,5 +16,30 @@
         color: $body-text-color;
       }
     }
+
+    .carot-img {
+      display: inline-block;
+      &.caret-down {
+        transform: rotate(90deg);
+      }
+    }
   }
+
+  &-list {
+    padding-left: 40px;
+
+    &-header {
+      padding-top: 10px;    
+    }
+
+    &-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 0 15px 27px;
+      border-bottom: 1px solid $silver;
+    }
+  }
+
+
 }

@@ -56,7 +56,7 @@
                   <p class="item-description">{{doc.definition}}</p>
                   <p class="item-namespace">{{namespaceTypes[doc.namespaceType]}}: {{doc.namespace}}</p>
                 </div>
-                <subset-add-remove-from-subset-button entity-id="doc.id"></subset-add-remove-from-subset-button>
+                <subset-add-remove-from-subset-button entity-id="doc.id" ng-if="!doc.isParent || !doc.type"></subset-add-remove-from-subset-button>
               </div>
             </div>
             <solr-results-pagination ng-hide="numFound === 0" class="pagination-bottom"></solr-results-pagination>

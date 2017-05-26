@@ -83,18 +83,31 @@
       font-size: 14px;
     }
   }
-  .niem-accordion-list-header {
-    padding-top: 10px;
-  }
-  .niem-accordion-item {
-    padding: 20px 0 20px 30px;
-    letter-spacing: 0.5px;
-    border-bottom: 1px solid $silver;
-    .item-name {
-      color: $ocean-blue;
+
+  .niem-accordion {
+    &-list-header {
+      padding-top: 10px;
     }
-    .item-type {
-      color: $body-text-color;
+
+    &-item {
+
+      &-name {
+        color: $ocean-blue;
+      }
+
+      &-type {
+        color: $body-text-color;
+      }
+
+      &-flat {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 0 15px 26px;
+        letter-spacing: 0.5px;
+        border-bottom: 1px solid $silver;
+      }
+
     }
   }
 }
