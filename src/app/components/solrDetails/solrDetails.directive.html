@@ -6,7 +6,7 @@
         <h1>{{entity.name}}</h1>
         <div class="namespace text-uppercase">{{formattedNamespaceType}}: {{entity.namespace}}</div>
       </div>
-      <subset-add-remove-from-subset-button entity-id="entityID" ng-if="!entity.isParent"></subset-add-remove-from-subset-button>
+      <subset-add-remove-from-subset-button entity-id="entityID" ng-if="!entity.isParent || !entity.type"></subset-add-remove-from-subset-button>
     </div>
 
     <div class="details-info row">
