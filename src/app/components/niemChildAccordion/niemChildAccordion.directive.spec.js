@@ -19,7 +19,7 @@ describe('directive:niemChildAccordion', function () {
     $httpBackend.whenGET(new RegExp('\\' + 'uib/template')).respond(200, {});
 
     element = angular.element('<niem-child-accordion element-data="elementData"></niem-child-accordion>');
-    scope.elementData = {type: {elements: ['nc:CardSubElement']}};
+    scope.elementData = {type: {elements: ['nc:Date']}};
     element = $compile(element)(scope);
     scope.$apply();
     elScope = element.isolateScope();
