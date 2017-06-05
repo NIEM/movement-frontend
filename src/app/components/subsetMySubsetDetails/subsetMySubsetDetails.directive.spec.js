@@ -35,17 +35,17 @@ describe('directive:subsetMySubsetDetails', function () {
     spyOn($window, 'open').and.callFake(function() {
       return true;
     });
-    elScope.mySubsetIDs = ['nc:Card', 'nc:Person'];
+    elScope.mySubsetIDs = ['nc:Date', 'nc:MapName'];
     elScope.downloadSchema();
-    expect(elScope.url).toEqual(NODE_URL + 'itemsToExport[]=nc:Card&itemsToExport[]=nc:Person');
+    expect(elScope.url).toEqual(NODE_URL + 'itemsToExport[]=nc:Date&itemsToExport[]=nc:MapName');
     expect($window.open).toHaveBeenCalled();
     expect($window.open).toHaveBeenCalledWith(elScope.url, '_parent');
   });
 
   it('should remove all from subset', function () {
     spyOn(mySubset, 'removeAllFromSubset').and.callThrough();
-    elScope.mySubsetIDs = ['nc:Card', 'nc:Person'];
-    elScope.mySubsetArray = [{'id': 'nc:Card'}, {'id': 'nc:Person'}];
+    elScope.mySubsetIDs = ['nc:Date', 'nc:MapName'];
+    elScope.mySubsetArray = [{'id': 'nc:Date'}, {'id': 'nc:MapName'}];
     elScope.removeSubset();
     expect(mySubset.removeAllFromSubset).toHaveBeenCalled();
     expect(elScope.mySubsetIDs).toEqual([]);
@@ -54,11 +54,11 @@ describe('directive:subsetMySubsetDetails', function () {
 
   it('should remove an item from the subset', function () {
     spyOn(mySubset, 'getSubset').and.callThrough();
-    elScope.mySubsetIDs = ['nc:Card', 'nc:Person'];
-    elScope.mySubsetArray = [{'id': 'nc:Card'}, {'id': 'nc:Person'}];
-    elScope.removeFromSubset('nc:Person');
-    expect(elScope.mySubsetArray).toEqual([{'id': 'nc:Card'}]);
-    elScope.removeFromSubset('nc:Card');
+    elScope.mySubsetIDs = ['nc:Date', 'nc:MapName'];
+    elScope.mySubsetArray = [{'id': 'nc:Date'}, {'id': 'nc:MapName'}];
+    elScope.removeFromSubset('nc:MapName');
+    expect(elScope.mySubsetArray).toEqual([{'id': 'nc:Date'}]);
+    elScope.removeFromSubset('nc:Date');
     expect(elScope.mySubsetArray).toEqual([]);
     expect(mySubset.getSubset).toHaveBeenCalled();
     expect(elScope.mySubsetIDs).toEqual([]);
