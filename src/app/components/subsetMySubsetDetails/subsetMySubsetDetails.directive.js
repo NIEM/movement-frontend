@@ -55,7 +55,6 @@
       scope.formatNamespaceType = function formatNamespaceType(namespaceType) {
         return {
           'domain': 'Domain',
-          'otherNamespace': 'Other',
           'externalStandard': 'External Standard'
         }[namespaceType];
       };

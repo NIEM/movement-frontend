@@ -21,8 +21,7 @@
 
     var facets = {
       'domain': {},
-      'externalStandard': {},
-      'otherNamespace': {}
+      'externalStandard': {}
     };
 
     return {
@@ -184,7 +183,7 @@
           return selectedFacet.split(':')[1];
         }).join(' ');
 
-        groupedFacets.push('{!tag=domaintag,otherNamespacetag,externalStandardtag}namespace:(' + selectedFacetValues + ')');
+        groupedFacets.push('{!tag=domaintag,externalStandardtag}namespace:(' + selectedFacetValues + ')');
       }
 
       return groupedFacets;
