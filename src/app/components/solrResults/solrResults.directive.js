@@ -39,8 +39,7 @@
         scope.sort = solrSearch.getSort();
         scope.namespaceTypes = {
           'domain': 'Domain',
-          'externalStandard': 'External Standard',
-          'otherNamespace': 'Other Namespace'
+          'externalStandard': 'External Standard'
         };
         scope.popovers = {
           'core': {
