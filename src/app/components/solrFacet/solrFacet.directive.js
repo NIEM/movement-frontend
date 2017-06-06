@@ -71,8 +71,8 @@
       scope.popoverTemplateUrl = 'app/components/solrFacet/custom-popover-template.html';
 
       scope.tooltipText = {
-        'External Standards': 'Unmodified schema sources on the internet not encompassed by NIEM',
-        'Domain': 'Communities of interest (COI) that are formally established, with an executive steward, to officially manage and govern a portion of the NIEM data model'
+        'External Standards': 'External Standards are sources not encompassed by NIEM that provide consistent definitions for data reusability.',
+        'Domain': 'Domains are Communities of interest (COI) that are formally established, with an executive steward, to officially manage and govern a portion of the NIEM model. The NIEM model includes community-specific elements, as well as core elements that are commonly agreed to by the communities who use NIEM.'
       };
 
 
