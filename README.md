@@ -1,13 +1,14 @@
 NIEM - Movement: Frontend
 =====================
 
-The other repositories include the [Movement - Backend](https://github.com/NIEM/movement-backend) and the [Movement - Solr](https://github.com/NIEM/movement-solr).
+The other repositories include the [Movement - Backend](https://github.com/NIEMconnects/movement-backend) and the [Movement - Solr](https://github.com/NIEMconnects/movement-solr).
 
 # Running the App with Docker
 
 The frontend can be run via Docker. To run the web app locally with Docker, first make sure you have installed and setup the NIEM Movement Docker config:
 ```
 docker network create niem-network
+docker run -dti -p 27017:27017 --name movement-mongo --net niem-network
 ```
 
 Note: Also, build and run the Solr and Backend Docker containers. Then build and run the frontend container, from the repo's root directory:
