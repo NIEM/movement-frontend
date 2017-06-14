@@ -1,7 +1,9 @@
 {
-  "name": "dhsniem",
+  "name": "movement-frontend",
   "version": "0.0.0",
-  "license": "MIT",
+  "description": "Frontend for the NIEM Movement project.",
+  "author": "NIEM",
+  "repository": "https://github.com/NIEM/movement-frontend",
   "devDependencies": {
     "angular-jsdoc": "~0.3.0",
     "grunt": "^0.4.5",
