@@ -1,7 +1,14 @@
 NIEM - Movement: Frontend
 =====================
 
-The other repositories include the [Movement - Backend](https://github.com/NIEM/movement-backend) and the [Movement - Solr](https://github.com/NIEM/movement-solr).
+The other code repositories include the [Movement - Backend](https://github.com/NIEM/movement-backend) and the [Movement - Solr](https://github.com/NIEM/movement-solr). 
+
+Prior to coming to this repo, did you happen to catch our [Movement overview](https://github.com/NIEM/Movement)?
+
+## Got feedback? 
+For general tool feedback or issues please [open an issue in the Movement repository](https://github.com/NIEM/Movement/issues)  or [contact us on NIEM.gov](https://niem.gov/contact-us). 
+
+For topics specific to contributions to Movement's frontend, please [submit an issue](https://github.com/NIEM/movement-frontend/issues).
 
 # Running the App with Docker
 
