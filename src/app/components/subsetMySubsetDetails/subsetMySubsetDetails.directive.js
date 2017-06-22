@@ -2,11 +2,16 @@
 
 /**
  * @ngdoc directive
- *
+ * @memberof dhsniem
  * @name subsetMySubsetDetails
- *
- * @description
- * My Subset details
+ * @param {service} $window A reference to the browser's window object
+ * @param {service} mySubset Handles getting and setting value in the subset generator
+ * @param {service} niemTree A service to handle requests for the element tree
+ * @param {constant} NODE_URL The URL endpoint for the JSON schema API transformation
+ * @description My Subset details
+ * @example
+ *  Usage:
+ *  <subset-my-subset-details></subset-my-subset-details>
  */
 (function () {
 
@@ -31,8 +36,7 @@
       });
 
       /**
-       * @name init
-       *
+       * @private
        * @description Retrieves My Subset
        */
       function init() {
@@ -44,13 +48,10 @@
 
 
       /**
-       * @name formatNamespaceType
-       *
+       * @memberof subsetMySubsetDetails
+       * @param {String} namespaceType String representing the type of Namespace
+       * @returns {String} Teh display value for the namespace type
        * @description Transforms the namespaceType returned into properly formatted text
-       *
-       * @param namespaceType - String representing the type of Namespace
-       *
-       * @returns {string}
        */
       scope.formatNamespaceType = function formatNamespaceType(namespaceType) {
         return {
@@ -61,8 +62,7 @@
 
 
       /**
-       * @name getSubset
-       *
+       * @private
        * @description Sets scope variable to the element IDs in My subset
        */
       function getSubset() {
@@ -74,8 +74,7 @@
 
 
       /**
-       * @name getSubsetArray
-       *
+       * @private
        * @description Sets the My subset array of IDs to an array of full documents for those elements
        */
       function getSubsetArray() {
@@ -86,8 +85,7 @@
 
 
       /**
-       * @name downloadSchema
-       *
+       * @memberof subsetMySubsetDetails
        * @description Downloads all items in my schema to JSON file
        */
       scope.downloadSchema = function downloadSchema() {
@@ -98,8 +96,7 @@
 
 
       /**
-       * @name removeSubset
-       *
+       * @memberof subsetMySubsetDetails
        * @description Removes all items in my subset
        */
       scope.removeSubset = function removeSubset() {

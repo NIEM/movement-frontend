@@ -184,9 +184,10 @@ module.exports = function (grunt) {
           '<%= appSettings.app %>/app/views/**/{,*/}*.js'
         ],
         options: {
-          destination: 'doc/client',
-          configure: 'node_modules/angular-jsdoc/conf.json',
-          template: 'doc/template'
+          destination: 'docs',
+          configure: 'node_modules/angular-jsdoc/common/conf.json',
+          template: 'node_modules/angular-jsdoc/angular-template',
+          readme: './README.md'
         }
       }
     },

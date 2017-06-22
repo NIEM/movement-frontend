@@ -1,0 +1,93 @@
+<!doctype html><html>  <head>    <meta charset="utf-8">    <base href="../">    <title>JSDoc: source : subsetMySubsetDetails.directive.js</title>    <link href="css/prettify-tomorrow.css" type="text/css" rel="stylesheet">    <link href="css/site.css" type="text/css" rel="stylesheet">  </head>  <body ng-app="">    <nav id="toc">      <input placeholder="Filter" id="filter-input" class="col12 block field" type="text">      <div class="nav-wrapper">      <h2><a href="index.html">Index</a></h2>      <ul class="module">        <!-- dhsniem -->        <h2 class="module">          <a chref="" ng-click="moduledhsniem = !moduledhsniem">            module: dhsniem          </a>          <i ng-cloak="" ng-show="moduledhsniem">+</i>        </h2>        <li id="dhsniem" ng-hide="moduledhsniem">          <ul class="group">            <h2>              <a href="" ng-click="dhsniemcontroller = !dhsniemcontroller">                controller              </a>              <i ng-cloak="" ng-show="dhsniemcontroller">+</i>            </h2>            <ul ng-hide="dhsniemcontroller">              <li>                <a href="dhsniem.AppCtrl.html">AppCtrl</a>              </li><li>                <a href="dhsniem.HomeCtrl.html">HomeCtrl</a>              </li><li>                <a href="dhsniem.ResultsCtrl.html">ResultsCtrl</a>              </li>            </ul>          </ul><ul class="group">            <h2>              <a href="" ng-click="dhsniemfactory = !dhsniemfactory">                factory              </a>              <i ng-cloak="" ng-show="dhsniemfactory">+</i>            </h2>            <ul ng-hide="dhsniemfactory">              <li>                <a href="dhsniem.mySubset.html">mySubset</a>              </li><li>                <a href="dhsniem.niemTree.html">niemTree</a>              </li><li>                <a href="dhsniem.solrRequest.html">solrRequest</a>              </li><li>                <a href="dhsniem.solrSearch.html">solrSearch</a>              </li>            </ul>          </ul><ul class="group">            <h2>              <a href="" ng-click="dhsniemdirective = !dhsniemdirective">                directive              </a>              <i ng-cloak="" ng-show="dhsniemdirective">+</i>            </h2>            <ul ng-hide="dhsniemdirective">              <li>                <a href="dhsniem.niemChildAccordion.html">niemChildAccordion</a>              </li><li>                <a href="dhsniem.niemExport.html">niemExport</a>              </li><li>                <a href="dhsniem.niemFooter.html">niemFooter</a>              </li><li>                <a href="dhsniem.niemHeader.html">niemHeader</a>              </li><li>                <a href="dhsniem.searchHeader.html">searchHeader</a>              </li><li>                <a href="dhsniem.solrDetails.html">solrDetails</a>              </li><li>                <a href="dhsniem.solrFacet.html">solrFacet</a>              </li><li>                <a href="dhsniem.solrFacetResult.html">solrFacetResult</a>              </li><li>                <a href="dhsniem.solrResults.html">solrResults</a>              </li><li>                <a href="dhsniem.solrResultsPagination.html">solrResultsPagination</a>              </li><li>                <a href="dhsniem.solrSearchInput.html">solrSearchInput</a>              </li><li>                <a href="dhsniem.solrSort.html">solrSort</a>              </li><li>                <a href="dhsniem.subsetAddRemoveFromSubsetButton.html">subsetAddRemoveFromSubsetButton</a>              </li><li>                <a href="dhsniem.subsetMySubsetButton.html">subsetMySubsetButton</a>              </li><li>                <a href="dhsniem.subsetMySubsetDetails.html">subsetMySubsetDetails</a>              </li><li>                <a href="dhsniem.subsetRemoveFromSubsetButton.html">subsetRemoveFromSubsetButton</a>              </li>            </ul>          </ul>        </li>      </ul>      </div>    </nav>    <div id="content" class="page-wrap">      <h1 class="title">        source : subsetMySubsetDetails.directive.js      </h1>      <div id="main" class="big-container">        <!-- source code html -->        <article>          <pre class="prettyprint source linenums"><code>'use strict';
+/**
+ * @ngdoc directive
+ * @memberof dhsniem
+ * @name subsetMySubsetDetails
+ * @param {service} $window A reference to the browser's window object
+ * @param {service} mySubset Handles getting and setting value in the subset generator
+ * @param {service} niemTree A service to handle requests for the element tree
+ * @param {constant} NODE_URL The URL endpoint for the JSON schema API transformation
+ * @description My Subset details
+ * @example
+ *  Usage:
+ *  &lt;subset-my-subset-details>&lt;/subset-my-subset-details>
+ */
+(function () {
+  angular
+    .module('dhsniem')
+    .directive('subsetMySubsetDetails', subsetMySubsetDetails);
+  function subsetMySubsetDetails($window, mySubset, NODE_URL, niemTree) {
+    return {
+      restrict: 'E',
+      templateUrl: 'app/components/subsetMySubsetDetails/subsetMySubsetDetails.directive.html',
+      link: link
+    };
+    /**
+     *  Defines variables and functions within solr scope
+     */
+    function link(scope) {
+      scope.$on('updatedMySubsetArray', function (event, args) {
+        scope.mySubsetIDs = args;
+        getSubsetArray();
+      });
+      /**
+       * @private
+       * @description Retrieves My Subset
+       */
+      function init() {
+        $window.document.title = 'My Subset Builder - NIEM Movement';
+        getSubset();
+      }
+      init();
+      /**
+       * @memberof subsetMySubsetDetails
+       * @param {String} namespaceType String representing the type of Namespace
+       * @returns {String} Teh display value for the namespace type
+       * @description Transforms the namespaceType returned into properly formatted text
+       */
+      scope.formatNamespaceType = function formatNamespaceType(namespaceType) {
+        return {
+          'domain': 'Domain',
+          'externalStandard': 'External Standard'
+        }[namespaceType];
+      };
+      /**
+       * @private
+       * @description Sets scope variable to the element IDs in My subset
+       */
+      function getSubset() {
+        scope.mySubsetIDs = mySubset.getSubset();
+        if (scope.mySubsetIDs.length) {
+          getSubsetArray();
+        }
+      }
+      /**
+       * @private
+       * @description Sets the My subset array of IDs to an array of full documents for those elements
+       */
+      function getSubsetArray() {
+        niemTree.getElementObjects(scope.mySubsetIDs).then(function(elementDocs) {
+          scope.mySubsetArray = elementDocs;
+        });
+      }
+      /**
+       * @memberof subsetMySubsetDetails
+       * @description Downloads all items in my schema to JSON file
+       */
+      scope.downloadSchema = function downloadSchema() {
+        $window.ga('send', 'event', 'button', 'click', 'download-schema');
+        scope.url = NODE_URL + 'itemsToExport[]=' + scope.mySubsetIDs.join('&itemsToExport[]=');
+        $window.open(scope.url, '_parent');
+      };
+      /**
+       * @memberof subsetMySubsetDetails
+       * @description Removes all items in my subset
+       */
+      scope.removeSubset = function removeSubset() {
+        mySubset.removeAllFromSubset();
+        scope.mySubsetArray = [];
+      };
+    }
+  }
+})();
+</code></pre>        </article>        <!-- index.html -->        <!-- class files -->      </div>      <footer style="clear:both">        Documentation generated by        <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.2</a>        using        <a href="https://github.com/allenhwkim/angular-jsdoc">Angular-JSDoc template</a>      </footer>    </div>    <script src="js/prettify.js"></script>    <script src="js/angular.min.js"></script>    <script src="js/site.js"></script>    <!--%= prettyJson %-->    <script>      prettyPrint();      var lineNo = window.location.hash.match(/#line([0-9]+)$/);      lineNo && document.querySelector("ol li:nth-child("+(lineNo[1])+")").scrollIntoView();    </script>  </body></html>

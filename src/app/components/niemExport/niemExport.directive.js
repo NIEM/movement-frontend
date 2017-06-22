@@ -2,11 +2,12 @@
 
 /**
  * @ngdoc directive
- *
- * @name NiemExport
- *
- * @description
- * Export section for NIEM model
+ * @memberof dhsniem
+ * @name niemExport
+ * @description Export section for NIEM model
+ * @example
+ *  Usage:
+ *  <niem-export></niem-export>
  */
 (function () {
 

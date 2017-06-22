@@ -2,11 +2,14 @@
 
 /**
  * @ngdoc factory
- *
+ * @memberof dhsniem
  * @name solrSearch
- *
- * @description
- * Factory for Solr Search
+ * @param {service} $location The $location service parses the URL in the browser address bar (based on the window.location) and makes the URL available to your application
+ * @param {service} $rootScope The root scope of the application
+ * @param {service} $window A reference to the browser's window object
+ * @param {service} $q A service that helps you run functions asynchronously, and use their return values (or exceptions) when they are done processing
+ * @param {service} solrRequest A service that handles requests to the Solr API
+ * @description Factory for Solr Search
  */
 (function () {
 
@@ -36,33 +39,60 @@
     };
 
 
-    /*
-    * Getters - used to extract data from $location service and handle logic.
-    */
+    /**
+     * @memberof solrSearch
+     * @description Gets the array of documents from solr search
+     */
     function getDocs() {
       return docs;
     }
 
+    /**
+     * @memberof solrSearch
+     * @description Gets the number of documents from solr search
+     */
     function getNumFound() {
       return numFound;
     }
 
+    /**
+     * @memberof solrSearch
+     * @description Gets the current query
+     */
     function getQuery() {
       return $location.search().q || '*';
     }
 
+
+    /**
+     * @memberof solrSearch
+     * @description Gets the current sort
+     */
     function getSort() {
       return $location.search().sortBy || 'score desc';
     }
 
+    /**
+     * @memberof solrSearch
+     * @description Gets the current page of results
+     */
     function getPage() {
       return $location.search().page || '1';
     }
 
+    /**
+     * @memberof solrSearch
+     * @param {String} facetField Facet field to retrieve facet values for
+     * @description Gets a list of facet values for a facet
+     */
     function getFacet(facetField) {
       return facets[facetField];
     }
 
+    /**
+     * @memberof solrSearch
+     * @description Gets the current selected facets
+     */
     function getSelectedFacets() {
       var selected = $location.search().selectedFacets;
       var selectedFacets = [];
@@ -77,10 +107,7 @@
 
 
     /**
-     * @name search
-     *
-     * @memberof dhsniem.service:solrSearch
-     *
+     * @memberof solrSearch
      * @description Performs the solr search via call to the http method. On success, sets response data to the service variables.
      */
     function search() {
@@ -96,13 +123,9 @@
 
 
     /**
-     * @name clearAllFilters
-     *
-     * @memberof dhsniem.service:solrSearch
-     *
+     * @memberof solrSearch
+     * @param {String} exception A filter to keep for use with typeahead
      * @description Clears any selected facets (filters) and calls a new search.
-     *
-     * @param exception - a filter to keep for use with typeahead
      */
     function clearAllFilters(exception) {
       var selectedFacets = [];
@@ -116,13 +139,9 @@
 
 
     /**
-     * @name buildSearchParams
-     *
-     * @memberof dhsniem.service:solrSearch
-     *
-     * @description Dynamically builds the search params for a jsonp $http request to the solr instance.
-     *
+     * @private
      * @returns {Object} The params object
+     * @description Dynamically builds the search params for a jsonp $http request to the solr instance.
      */
     function buildSearchParams() {
       var params = {
@@ -145,13 +164,9 @@
 
 
     /**
-     * @name getFacetFields
-     *
-     * @memberof dhsniem.service:solrSearch
-     *
+     * @private
+     * @returns {String[]} An array of the facet fields with exclude tags prepended.
      * @description Iterates over the facets object to return an array of the fields to be used as facets.
-     *
-     * @returns {string[]} An array of the facet fields with exclude tags prepended.
      */
     function getFacetFields() {
       var fields = [];
@@ -165,13 +180,9 @@
 
 
     /**
-     * @name groupSelectedFacets
-     *
-     * @memberof dhsniem.service:solrSearch
-     *
+     * @private
+     * @returns {String[]} A array of strings of the facets grouped by facet for when multiple facets values (fields) of the same facet are selected. Also includes the exclude tags so filters form a union.
      * @description Loops through the selected facets and groups the same facet values under the same facet name. Adds the exclude tag to make the array ready for the solr search param, fq. Modified from Release 1 to now only account for once facet group: namespace. Static fq applied to only include business glossary (bg) terms.
-     *
-     * @returns {string[]} A array of strings of the facets grouped by facet for when multiple facets values (fields) of the same facet are selected. Also includes the exclude tags so filters form a union.
      */
     function groupSelectedFacets() {
 
@@ -191,13 +202,9 @@
 
 
     /**
-     * @name convertPageToStart
-     *
-     * @memberof dhsniem.service:solrSearch
-     *
+     * @private
+     * @returns {Number} The start index for solr
      * @description Converts the current page number to a solr start index
-     *
-     * @returns {number} The start index for solr
      */
     function convertPageToStart() {
       return 100*(getPage() - 1);

@@ -2,11 +2,17 @@
 
 /**
  * @ngdoc directive
- *
+ * @memberof dhsniem
  * @name solrDetails
- *
- * @description
- * Solr details
+ * @param {service} $location The $location service parses the URL in the browser address bar (based on the window.location) and makes the URL available to your application
+ * @param {service} $rootScope The root scope of the application
+ * @param {service} $window A reference to the browser's window object
+ * @param {service} $state Handles the application's current state via ui-router
+ * @param {service} niemTree A service to handle requests for the element tree
+ * @description All of the details and tree for an element
+ * @example
+ *  Usage:
+ *  <solr-details></solr-details>
  */
 (function () {
 
@@ -27,12 +33,10 @@
     function link(scope) {
 
       /**
-       * @name init
-       *
+       * @private
        * @description Initializes controller, retrieves the type and child elements for the scope entity
        */
       function init() {
-
         scope.entityID = $location.search().entityID;
         $window.document.title = scope.entityID + ' Details - NIEM Movement';
 
@@ -58,13 +62,10 @@
 
 
       /**
-       * @name formatNamespaceType
-       *
+       * @private
+       * @param {String} namespaceType String representing the type of Namespace
+       * @returns {String} The formatted namespace type
        * @description Transforms the namespaceType returned into properly formatted text
-       *
-       * @param text - String representing the type of Namespace
-       *
-       * @returns {string}
        */
       function formatNamespaceType(namespaceType) {
         return {
@@ -75,8 +76,7 @@
 
 
       /**
-       * @name goBack
-       *
+       * @memberof solrDetails
        * @description Navigates back to the search results page with previous search params
        */
       scope.goBack = function () {

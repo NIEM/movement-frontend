@@ -1,0 +1,76 @@
+<!doctype html><html>  <head>    <meta charset="utf-8">    <base href="../">    <title>JSDoc: source : mySubset.factory.js</title>    <link href="css/prettify-tomorrow.css" type="text/css" rel="stylesheet">    <link href="css/site.css" type="text/css" rel="stylesheet">  </head>  <body ng-app="">    <nav id="toc">      <input placeholder="Filter" id="filter-input" class="col12 block field" type="text">      <div class="nav-wrapper">      <h2><a href="index.html">Index</a></h2>      <ul class="module">        <!-- dhsniem -->        <h2 class="module">          <a chref="" ng-click="moduledhsniem = !moduledhsniem">            module: dhsniem          </a>          <i ng-cloak="" ng-show="moduledhsniem">+</i>        </h2>        <li id="dhsniem" ng-hide="moduledhsniem">          <ul class="group">            <h2>              <a href="" ng-click="dhsniemcontroller = !dhsniemcontroller">                controller              </a>              <i ng-cloak="" ng-show="dhsniemcontroller">+</i>            </h2>            <ul ng-hide="dhsniemcontroller">              <li>                <a href="dhsniem.AppCtrl.html">AppCtrl</a>              </li><li>                <a href="dhsniem.HomeCtrl.html">HomeCtrl</a>              </li><li>                <a href="dhsniem.ResultsCtrl.html">ResultsCtrl</a>              </li>            </ul>          </ul><ul class="group">            <h2>              <a href="" ng-click="dhsniemfactory = !dhsniemfactory">                factory              </a>              <i ng-cloak="" ng-show="dhsniemfactory">+</i>            </h2>            <ul ng-hide="dhsniemfactory">              <li>                <a href="dhsniem.mySubset.html">mySubset</a>              </li><li>                <a href="dhsniem.niemTree.html">niemTree</a>              </li><li>                <a href="dhsniem.solrRequest.html">solrRequest</a>              </li><li>                <a href="dhsniem.solrSearch.html">solrSearch</a>              </li>            </ul>          </ul><ul class="group">            <h2>              <a href="" ng-click="dhsniemdirective = !dhsniemdirective">                directive              </a>              <i ng-cloak="" ng-show="dhsniemdirective">+</i>            </h2>            <ul ng-hide="dhsniemdirective">              <li>                <a href="dhsniem.niemChildAccordion.html">niemChildAccordion</a>              </li><li>                <a href="dhsniem.niemExport.html">niemExport</a>              </li><li>                <a href="dhsniem.niemFooter.html">niemFooter</a>              </li><li>                <a href="dhsniem.niemHeader.html">niemHeader</a>              </li><li>                <a href="dhsniem.searchHeader.html">searchHeader</a>              </li><li>                <a href="dhsniem.solrDetails.html">solrDetails</a>              </li><li>                <a href="dhsniem.solrFacet.html">solrFacet</a>              </li><li>                <a href="dhsniem.solrFacetResult.html">solrFacetResult</a>              </li><li>                <a href="dhsniem.solrResults.html">solrResults</a>              </li><li>                <a href="dhsniem.solrResultsPagination.html">solrResultsPagination</a>              </li><li>                <a href="dhsniem.solrSearchInput.html">solrSearchInput</a>              </li><li>                <a href="dhsniem.solrSort.html">solrSort</a>              </li><li>                <a href="dhsniem.subsetAddRemoveFromSubsetButton.html">subsetAddRemoveFromSubsetButton</a>              </li><li>                <a href="dhsniem.subsetMySubsetButton.html">subsetMySubsetButton</a>              </li><li>                <a href="dhsniem.subsetMySubsetDetails.html">subsetMySubsetDetails</a>              </li><li>                <a href="dhsniem.subsetRemoveFromSubsetButton.html">subsetRemoveFromSubsetButton</a>              </li>            </ul>          </ul>        </li>      </ul>      </div>    </nav>    <div id="content" class="page-wrap">      <h1 class="title">        source : mySubset.factory.js      </h1>      <div id="main" class="big-container">        <!-- source code html -->        <article>          <pre class="prettyprint source linenums"><code>'use strict';
+/**
+ * @ngdoc factory
+ * @memberof dhsniem
+ * @name mySubset
+ * @description Factory for my subset generator
+ */
+(function () {
+  angular
+    .module('dhsniem')
+    .factory('mySubset', mySubset);
+  function mySubset() {
+    return {
+      addToSubset: addToSubset,
+      getSubset: getSubset,
+      removeAllFromSubset: removeAllFromSubset,
+      removeFromSubset: removeFromSubset,
+      getSubsetCount: getSubsetCount
+    };
+    /**
+     * @memberof mySubset
+     * @param {String} entityID The Id of the entity to add to the subset
+     * @description Adds a new entityID to the local storage subset
+     */
+    function addToSubset(entityID) {
+      var newSubset = getSubset();
+      newSubset.push(entityID);
+      setSubset(newSubset);
+    }
+    /**
+     * @memberof mySubset
+     * @returns {String[]} An array of entity ids  
+     * @description Returns the mySubset JSON object from local storage
+     */
+    function getSubset() {
+      return localStorage.getItem('mySubset') ? JSON.parse(localStorage.getItem('mySubset')) : [];
+    }
+    /**
+     * @memberof mySubset
+     * @param {Object} subset The current subset object
+     * @description Sets the mySubset JSON object to local storage
+     */
+    function setSubset(subset) {
+      localStorage.setItem('mySubset', JSON.stringify(subset));
+    }
+    /**
+     * @memberof mySubset
+     * @description Removes all items from the mySubset local storage object
+     */
+    function removeAllFromSubset() {
+      setSubset([]);
+    }
+    /**
+     * @memberof mySubset
+     * @returns {Number} The length of the mySubset array
+     * @description Returns the count of the mySubset local storage array
+     */
+    function getSubsetCount() {
+      return getSubset().length;
+    }
+    /**
+     * @memberof mySubset
+     * @param {String} entityID The entityID to be removed from mySubset
+     * @description Removes an entity ID from the mySubset local storage array
+     */
+    function removeFromSubset(entityID) {
+      var subset = getSubset();
+      var idIndex = subset.indexOf(entityID);
+      if (idIndex > -1) {
+        subset.splice(idIndex, 1);
+        setSubset(subset);
+      }
+    }
+  }
+})();
+</code></pre>        </article>        <!-- index.html -->        <!-- class files -->      </div>      <footer style="clear:both">        Documentation generated by        <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.2</a>        using        <a href="https://github.com/allenhwkim/angular-jsdoc">Angular-JSDoc template</a>      </footer>    </div>    <script src="js/prettify.js"></script>    <script src="js/angular.min.js"></script>    <script src="js/site.js"></script>    <!--%= prettyJson %-->    <script>      prettyPrint();      var lineNo = window.location.hash.match(/#line([0-9]+)$/);      lineNo && document.querySelector("ol li:nth-child("+(lineNo[1])+")").scrollIntoView();    </script>  </body></html>
