@@ -1,0 +1,78 @@
+<!doctype html><html>  <head>    <meta charset="utf-8">    <base href="../">    <title>JSDoc: source : solrDetails.directive.js</title>    <link href="css/prettify-tomorrow.css" type="text/css" rel="stylesheet">    <link href="css/site.css" type="text/css" rel="stylesheet">  </head>  <body ng-app="">    <nav id="toc">      <input placeholder="Filter" id="filter-input" class="col12 block field" type="text">      <div class="nav-wrapper">      <h2><a href="index.html">Index</a></h2>      <ul class="module">        <!-- undefined -->        <h2 class="module">          <a chref="" ng-click="moduleundefined = !moduleundefined">            module: undefined          </a>          <i ng-cloak="" ng-show="moduleundefined">+</i>        </h2>        <li id="undefined" ng-hide="moduleundefined">          <ul class="group">            <h2>              <a href="" ng-click="undefinedcontroller = !undefinedcontroller">                controller              </a>              <i ng-cloak="" ng-show="undefinedcontroller">+</i>            </h2>            <ul ng-hide="undefinedcontroller">              <li>                <a href="AppCtrl.html">AppCtrl</a>              </li><li>                <a href="HomeCtrl.html">HomeCtrl</a>              </li><li>                <a href="ResultsCtrl.html">ResultsCtrl</a>              </li>            </ul>          </ul><ul class="group">            <h2>              <a href="" ng-click="undefinedfactory = !undefinedfactory">                factory              </a>              <i ng-cloak="" ng-show="undefinedfactory">+</i>            </h2>            <ul ng-hide="undefinedfactory">              <li>                <a href="mySubset.html">mySubset</a>              </li><li>                <a href="niemTree.html">niemTree</a>              </li><li>                <a href="solrRequest.html">solrRequest</a>              </li><li>                <a href="solrSearch.html">solrSearch</a>              </li>            </ul>          </ul><ul class="group">            <h2>              <a href="" ng-click="undefineddirective = !undefineddirective">                directive              </a>              <i ng-cloak="" ng-show="undefineddirective">+</i>            </h2>            <ul ng-hide="undefineddirective">              <li>                <a href="niemExport.html">niemExport</a>              </li><li>                <a href="niemFooter.html">niemFooter</a>              </li><li>                <a href="niemHeader.html">niemHeader</a>              </li><li>                <a href="searchHeader.html">searchHeader</a>              </li><li>                <a href="solrDetails.html">solrDetails</a>              </li><li>                <a href="solrFacet.html">solrFacet</a>              </li><li>                <a href="solrFacetResult.html">solrFacetResult</a>              </li><li>                <a href="solrResults.html">solrResults</a>              </li><li>                <a href="solrResultsPagination.html">solrResultsPagination</a>              </li><li>                <a href="solrSearchInput.html">solrSearchInput</a>              </li><li>                <a href="solrSort.html">solrSort</a>              </li><li>                <a href="subsetAddRemoveFromSubsetButton.html">subsetAddRemoveFromSubsetButton</a>              </li><li>                <a href="subsetMySubsetButton.html">subsetMySubsetButton</a>              </li><li>                <a href="subsetMySubsetDetails.html">subsetMySubsetDetails</a>              </li><li>                <a href="subsetRemoveFromSubsetButton.html">subsetRemoveFromSubsetButton</a>              </li>            </ul>          </ul>        </li>      </ul><ul class="module">        <!-- dhsniem -->        <h2 class="module">          <a chref="" ng-click="moduledhsniem = !moduledhsniem">            module: dhsniem          </a>          <i ng-cloak="" ng-show="moduledhsniem">+</i>        </h2>        <li id="dhsniem" ng-hide="moduledhsniem">          <ul class="group">            <h2>              <a href="" ng-click="dhsniemdirective = !dhsniemdirective">                directive              </a>              <i ng-cloak="" ng-show="dhsniemdirective">+</i>            </h2>            <ul ng-hide="dhsniemdirective">              <li>                <a href="dhsniem.niemChildAccordion.html">niemChildAccordion</a>              </li>            </ul>          </ul>        </li>      </ul>      </div>    </nav>    <div id="content" class="page-wrap">      <h1 class="title">        source : solrDetails.directive.js      </h1>      <div id="main" class="big-container">        <!-- source code html -->        <article>          <pre class="prettyprint source linenums"><code>'use strict';
+/**
+ * @ngdoc directive
+ * @name solrDetails
+ * @param {service} $location The $location service parses the URL in the browser address bar (based on the window.location) and makes the URL available to your application
+ * @param {service} $rootScope The root scope of the application
+ * @param {service} $window A reference to the browser's window object
+ * @param {service} $state Handles the application's current state via ui-router
+ * @param {service} niemTree A service to handle requests for the element tree
+ * @description All of the details and tree for an element
+ * @example
+ *  Usage:
+ *  &lt;solr-details>&lt;/solr-details>
+ */
+(function () {
+  angular
+    .module('dhsniem')
+    .directive('solrDetails', solrDetails);
+  function solrDetails(niemTree, $location, $window, $state, $rootScope) {
+    return {
+      restrict: 'E',
+      templateUrl: 'app/components/solrDetails/solrDetails.directive.html',
+      link: link
+    };
+    /**
+     *  Defines variables and functions within solrDetails scope
+     */
+    function link(scope) {
+      /**
+       * @private
+       * @description Initializes controller, retrieves the type and child elements for the scope entity
+       */
+      function init() {
+        scope.entityID = $location.search().entityID;
+        $window.document.title = scope.entityID + ' Details - NIEM Movement';
+        niemTree.getDocById(scope.entityID).then(function (entityDoc) {
+          scope.entity = entityDoc;
+          scope.formattedNamespaceType = formatNamespaceType(scope.entity.namespaceType);
+          if (scope.entity.type) {
+            niemTree.getDocById(scope.entity.type).then(function (typeDoc) {
+              scope.entity.type = typeDoc;
+              if (typeDoc.elements) {
+                niemTree.getElementObjects(typeDoc.elements).then(function(elements) {
+                  scope.entity.type.elements = elements;
+                });
+              }
+            });
+          } else {
+            niemTree.getSubstitutionGroups(scope.entityID).then(function(subGroups) {
+              scope.entity.subGroups = subGroups;
+            })
+          }
+        });
+      }
+      /**
+       * @private
+       * @param {String} namespaceType String representing the type of Namespace
+       * @returns {String} The formatted namespace type
+       * @description Transforms the namespaceType returned into properly formatted text
+       */
+      function formatNamespaceType(namespaceType) {
+        return {
+          'domain': 'Domain',
+          'externalStandard': 'External Standard'
+        }[namespaceType];
+      }
+      /**
+       * @memberof solrDetails
+       * @description Navigates back to the search results page with previous search params
+       */
+      scope.goBack = function () {
+        $state.go('main.results', $rootScope.lastSearch);
+      };
+      init();
+    }
+  }
+})();
+</code></pre>        </article>        <!-- index.html -->        <!-- class files -->      </div>      <footer style="clear:both">        Documentation generated by        <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.2</a>        using        <a href="https://github.com/allenhwkim/angular-jsdoc">Angular-JSDoc template</a>      </footer>    </div>    <script src="js/prettify.js"></script>    <script src="js/angular.min.js"></script>    <script src="js/site.js"></script>    <!--%= prettyJson %-->    <script>      prettyPrint();      var lineNo = window.location.hash.match(/#line([0-9]+)$/);      lineNo && document.querySelector("ol li:nth-child("+(lineNo[1])+")").scrollIntoView();    </script>  </body></html>

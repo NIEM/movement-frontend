@@ -1,0 +1,164 @@
+<!doctype html><html>  <head>    <meta charset="utf-8">    <base href="../">    <title>JSDoc: source : solrSearchInput.directive.js</title>    <link href="css/prettify-tomorrow.css" type="text/css" rel="stylesheet">    <link href="css/site.css" type="text/css" rel="stylesheet">  </head>  <body ng-app="">    <nav id="toc">      <input placeholder="Filter" id="filter-input" class="col12 block field" type="text">      <div class="nav-wrapper">      <h2><a href="index.html">Index</a></h2>      <ul class="module">        <!-- undefined -->        <h2 class="module">          <a chref="" ng-click="moduleundefined = !moduleundefined">            module: undefined          </a>          <i ng-cloak="" ng-show="moduleundefined">+</i>        </h2>        <li id="undefined" ng-hide="moduleundefined">          <ul class="group">            <h2>              <a href="" ng-click="undefinedcontroller = !undefinedcontroller">                controller              </a>              <i ng-cloak="" ng-show="undefinedcontroller">+</i>            </h2>            <ul ng-hide="undefinedcontroller">              <li>                <a href="AppCtrl.html">AppCtrl</a>              </li><li>                <a href="HomeCtrl.html">HomeCtrl</a>              </li><li>                <a href="ResultsCtrl.html">ResultsCtrl</a>              </li>            </ul>          </ul><ul class="group">            <h2>              <a href="" ng-click="undefinedfactory = !undefinedfactory">                factory              </a>              <i ng-cloak="" ng-show="undefinedfactory">+</i>            </h2>            <ul ng-hide="undefinedfactory">              <li>                <a href="mySubset.html">mySubset</a>              </li><li>                <a href="niemTree.html">niemTree</a>              </li><li>                <a href="solrRequest.html">solrRequest</a>              </li><li>                <a href="solrSearch.html">solrSearch</a>              </li>            </ul>          </ul><ul class="group">            <h2>              <a href="" ng-click="undefineddirective = !undefineddirective">                directive              </a>              <i ng-cloak="" ng-show="undefineddirective">+</i>            </h2>            <ul ng-hide="undefineddirective">              <li>                <a href="niemExport.html">niemExport</a>              </li><li>                <a href="niemFooter.html">niemFooter</a>              </li><li>                <a href="niemHeader.html">niemHeader</a>              </li><li>                <a href="searchHeader.html">searchHeader</a>              </li><li>                <a href="solrDetails.html">solrDetails</a>              </li><li>                <a href="solrFacet.html">solrFacet</a>              </li><li>                <a href="solrFacetResult.html">solrFacetResult</a>              </li><li>                <a href="solrResults.html">solrResults</a>              </li><li>                <a href="solrResultsPagination.html">solrResultsPagination</a>              </li><li>                <a href="solrSearchInput.html">solrSearchInput</a>              </li><li>                <a href="solrSort.html">solrSort</a>              </li><li>                <a href="subsetAddRemoveFromSubsetButton.html">subsetAddRemoveFromSubsetButton</a>              </li><li>                <a href="subsetMySubsetButton.html">subsetMySubsetButton</a>              </li><li>                <a href="subsetMySubsetDetails.html">subsetMySubsetDetails</a>              </li><li>                <a href="subsetRemoveFromSubsetButton.html">subsetRemoveFromSubsetButton</a>              </li>            </ul>          </ul>        </li>      </ul><ul class="module">        <!-- dhsniem -->        <h2 class="module">          <a chref="" ng-click="moduledhsniem = !moduledhsniem">            module: dhsniem          </a>          <i ng-cloak="" ng-show="moduledhsniem">+</i>        </h2>        <li id="dhsniem" ng-hide="moduledhsniem">          <ul class="group">            <h2>              <a href="" ng-click="dhsniemdirective = !dhsniemdirective">                directive              </a>              <i ng-cloak="" ng-show="dhsniemdirective">+</i>            </h2>            <ul ng-hide="dhsniemdirective">              <li>                <a href="dhsniem.niemChildAccordion.html">niemChildAccordion</a>              </li>            </ul>          </ul>        </li>      </ul>      </div>    </nav>    <div id="content" class="page-wrap">      <h1 class="title">        source : solrSearchInput.directive.js      </h1>      <div id="main" class="big-container">        <!-- source code html -->        <article>          <pre class="prettyprint source linenums"><code>'use strict';
+/**
+ * @ngdoc directive
+ * @name solrSearchInput
+ * @param {service} $location The $location service parses the URL in the browser address bar (based on the window.location) and makes the URL available to your application
+ * @param {service} $rootScope The root scope of the application
+ * @param {service} $state Handles the application's current state via ui-router
+ * @param {service} solrRequest A service that handles requests to the Solr API
+ * @param {service} solrSearch A service that handles custom querying for the Solr API
+ * @description Search input for solr
+ * @attr hasLabel Whether or not the search has a label
+ * @example
+ *  Usage:
+ *  &lt;solr-search-input has-label="true">&lt;/solr-search-input>
+ */
+(function() {
+  angular
+    .module('dhsniem')
+    .directive('solrSearchInput', solrSearchInput);
+  function solrSearchInput($location, $state, solrSearch, solrRequest, $rootScope) {
+    return {
+      restrict: 'E',
+      templateUrl: 'app/components/solrSearchInput/solrSearchInput.directive.html',
+      scope: {
+        hasLabel: '='
+      },
+      link: link
+    };
+    /**
+     *  Defines variables and functions within solrSearchInput scope
+     */
+    function link(scope) {
+      /**
+       * @private
+       * @description Initializes the view to set scope variables on page load
+       */
+      function init () {
+        /**
+         * @memberof solrSearchInput
+         * @property searchQuery
+         * @type {String}
+         * @description The search query
+         */
+        scope.searchQuery = $location.search().q;
+        /**
+         * @memberof solrSearchInput
+         * @property selectedDomain
+         * @type {String}
+         * @description The current selected domain
+         */
+        scope.selectedDomain = 'All Domains';
+        getDomainNames();
+      }
+      init();
+      /**
+       * @memberof solrSearchInput
+       * @param {String} result The value to sort by
+       * @returns {(String|Number)} Returns -1 if Core, else the value
+       * @description Sorting function used to boost the NIEM Core to the top of the dropdown
+       */
+      scope.sortByName = function(result) {
+        if (result === 'Core') {
+          return -1;
+        } else {
+          return result;
+        }
+      };
+      /**
+       * @private
+       * @description Gets a list of domain names for the domain dropdown, and stores them for reuse.
+       */
+      function getDomainNames() {
+        if (!$rootScope.domainList) {
+          solrRequest.getDomains().then(function(domains) {
+            $rootScope.domainList = Object.keys(domains);
+            scope.domainNames = $rootScope.domainList;
+          });
+        } else {
+          scope.domainNames = $rootScope.domainList;
+        }
+      }
+      /**
+       * @memberof solrSearchInput
+       * @param {String} domain A parameter passed from the view that indicates the intended domain for search.
+       * @description Sets the domain name in the domain search dropdown.
+       */
+      scope.domainSelect = function(domain) {
+        scope.selectedDomain = domain;
+      };
+      /**
+       * @memberof solrSearchInput
+       * @param {String} taItem An optional parameter used if the user clicks on an item in the typeahead suggested terms.
+       * @description Handles logic to determine the query to send to solr to make a full search and navigate the user to the results page.
+       */
+      scope.search = function search(taItem) {
+        scope.setNamespace(taItem);
+        var query = scope.searchQuery || '*';
+        if (!$state.includes('main.results')) {
+          $state.go('main.results', {q: query, selectedFacets: scope.namespaceParam});
+        } else {
+          $location.search('q', query);
+          solrSearch.clearAllFilters(scope.namespaceParam);
+        }
+      };
+      /**
+       * @memberof solrSearchInput
+       * @param {String} taItem An optional parameter passed from the search function and used if the user clicks on an item in the typeahead suggested terms.
+       * @description Handles logic to determine the selected facet (namespace) that will be used as a parameter in the search function.
+       */
+      scope.setNamespace = function setNamespace(taItem) {
+        if (taItem && taItem.taNS) {
+          scope.searchQuery = taItem.query;
+          if (taItem.taNS !== 'all') {
+            scope.namespaceParam = taItem.taNSType + ':"' + taItem.taNS + '"';
+          }
+        } else if (scope.selectedDomain !== 'All Domains') {
+          var taNSparams = {'taNSType': 'domain', 'taNS': scope.selectedDomain};
+          scope.namespaceParam = taNSparams.taNSType + ':"' + taNSparams.taNS + '"';
+        }
+      };
+      /**
+       * @memberof solrSearchInput
+       * @param {String} query The query of the typeahead search
+       * @returns {Object[]} An array of the matched element documents
+       * @description Returns the top five results, if they exist, for when the typeahead functionality is triggered in the search bar. For each result, the object contains the solr object if it is a natural result from solr. Otherwise, when domain is not specified in the dropdown, returns a custom object that is hard-coded for the first three results displayed in typeahead.
+       */
+      scope.getTypeaheadResults = function(query) {
+        var facet = ['isBG:(1)'];
+        if (scope.selectedDomain !== 'All Domains') {
+          facet.push('namespace:("' + scope.selectedDomain + '")');
+        }
+        var params = {
+          'q': query,
+          'rows': 5,
+          'json.wrf': 'JSON_CALLBACK',
+          'json.nl': 'map',
+          'facet': 'on',
+          'fq': facet,
+          'sort': 'score desc,nameLength asc,name asc',
+          'defType': 'edismax',
+          'bq': 'namespace:Core^2',
+          'qf': 'name^2 name_query^8'
+        };
+        return solrRequest.makeSolrRequest(params).then(function(data) {
+          if (data.response.docs.length > 0) {
+            var topNamespace = data.response.docs[0].namespace;
+            var topNamespaceType = data.response.docs[0].namespaceType;
+            var domainArray;
+            if (scope.selectedDomain === 'All Domains') {
+              domainArray = [{'name': query + ' in All Domains', 'taNS': 'all', 'query': query}, {'name': query + ' in NIEM Core', 'taNS': 'Core', 'query': query, 'taNSType': 'domain'}];
+              domainArray.push({'name': query + ' in ' + topNamespace, 'taNS': topNamespace, 'query': query, 'taNSType': topNamespaceType});
+              scope.domainSpecified = 'third-child';
+            } else {
+              domainArray = [{'name': query + ' in ' + scope.selectedDomain, 'taNS': scope.selectedDomain, 'query': query, 'taNSType': 'domain'}];
+              scope.domainSpecified = 'first-child';
+            }
+            return domainArray.concat(data.response.docs);
+          }
+        });
+      };
+    }
+  }
+})();
+</code></pre>        </article>        <!-- index.html -->        <!-- class files -->      </div>      <footer style="clear:both">        Documentation generated by        <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.2</a>        using        <a href="https://github.com/allenhwkim/angular-jsdoc">Angular-JSDoc template</a>      </footer>    </div>    <script src="js/prettify.js"></script>    <script src="js/angular.min.js"></script>    <script src="js/site.js"></script>    <!--%= prettyJson %-->    <script>      prettyPrint();      var lineNo = window.location.hash.match(/#line([0-9]+)$/);      lineNo && document.querySelector("ol li:nth-child("+(lineNo[1])+")").scrollIntoView();    </script>  </body></html>

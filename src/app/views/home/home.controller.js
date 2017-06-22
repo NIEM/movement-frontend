@@ -2,11 +2,9 @@
 
 /**
  * @ngdoc controller
- *
+ * @memberof dhsniem
  * @name HomeCtrl
- *
- * @description
- * Controller for dhsniem
+ * @description Controller for the landing page
  */
 (function() {
 

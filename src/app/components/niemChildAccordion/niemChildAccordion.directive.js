@@ -2,11 +2,14 @@
 
 /**
  * @ngdoc directive
- *
- * @name NiemChildAccordion
- *
- * @description
- * ChildAccordion section for NIEM model
+ * @memberof dhsniem
+ * @name niemChildAccordion
+ * @param {service} niemTree A service to handle requests for the element tree
+ * @description ChildAccordion section for NIEM model
+ * @attr {Object} elementData Document data for the accordion root level element
+ * @example
+ *  Usage:
+ *  <niem-child-accordion element-data="item"></niem-child-accordion>
  */
 (function() {
 
@@ -22,16 +25,30 @@
         elementData: '='
       },
       link: function(scope) {
+
+        /**
+         * @memberof niemChildAccordion
+         * @property dataFound
+         * @type {boolean}
+         * @description Whether or not child data has already been retrieved
+         */   
         scope.dataFound = false;
+
+        /**
+         * @memberof niemChildAccordion
+         * @property isOpen
+         * @type {boolean}
+         * @description Whether or not the accordion is expanded
+         */           
         scope.isOpen = false;
+        
         scope.$watch('isOpen', function () {
           scope.accordionState = scope.isOpen ? 'Expanded' : 'Collapsed';
         });
 
 
         /**
-         * @name expandElement
-         *
+         * @memberof niemChildAccordion
          * @description Expands the accordion for the clicked element and fetches the data if not previously loaded
          */
         scope.expandElement = function() {

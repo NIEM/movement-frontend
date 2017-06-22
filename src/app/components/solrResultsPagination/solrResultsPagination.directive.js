@@ -2,11 +2,15 @@
 
 /**
  * @ngdoc directive
- *
+ * @memberof dhsniem
  * @name solrResultsPagination
- *
- * @description
- * Pagination widget in sort bar on results page
+ * @param {service} $location The $location service parses the URL in the browser address bar (based on the window.location) and makes the URL available to your application
+ * @param {service} $rootScope The root scope of the application
+ * @param {service} solrSearch A service that handles custom querying for the Solr API
+ * @description Pagination widget in sort bar on results page
+ * @example
+ *  Usage:
+ *  <solr-results-pagination></solr-results-pagination>
  */
 (function() {
 
@@ -26,6 +30,12 @@
      */
     function link(scope) {
 
+      /**
+       * @memberof solrResultsPagination
+       * @property currentPage
+       * @type {Number}
+       * @description The current page
+       */      
       scope.currentPage = $location.search().page || 1;
 
       $rootScope.$on('newSearch', function() {
@@ -33,8 +43,7 @@
       });
 
       /**
-       * @name nextPage
-       *
+       * @memberof solrResultsPagination
        * @description Loads the next page of results if there is one
        */
       scope.nextPage = function() {
@@ -46,8 +55,7 @@
       };
 
       /**
-       * @name prevPage
-       *
+       * @memberof solrResultsPagination
        * @description Loads the previous page of results if there is one
        */
       scope.prevPage = function() {

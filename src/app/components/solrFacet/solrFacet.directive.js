@@ -2,11 +2,17 @@
 
 /**
  * @ngdoc directive
- *
+ * @memberof dhsniem
  * @name solrFacet
- *
- * @description
- * A Solr facet
+ * @param {service} $rootScope The root scope of the application
+ * @param {service} solrSearch A service that handles custom querying for the Solr API
+ * @description A Solr facet
+ * @attr display The display value
+ * @attr field The facet field
+ * @attr results The facet field values (results)
+ * @example
+ *  Usage:
+ *  <solr-facet display="Domain" field="domain"></solr-facet>
  */
 (function() {
 
@@ -32,11 +38,10 @@
     function link(scope) {
 
       /**
-       * @name sortByName
-       *
+       * @memberof solrFacet
+       * @param {String} result Name of the facet
+       * @returns {(String|Number)} If Core, returns -1, else returns the name
        * @description Sorting function used to boost the NIEM Core facet to the top of the filter list
-       *
-       * @returns {(string|number)}
        */
       scope.sortByName = function(result) {
         if (result === 'Core') {
@@ -48,11 +53,9 @@
 
 
       /**
-       * @name setFacetResults
-       *
+       * @private
+       * @returns {String[]} An array of the facet results
        * @description Sets the scope results from the the solr request, including the facet fields and their counts. Then, converts that object to an array of the keys to be used for the view.
-       *
-       * @returns {string[]}
        */
       function setFacetResults() {
         scope.results = solrSearch.getFacet(scope.field);
@@ -77,13 +80,10 @@
 
 
       /**
-       * @name getTooltipText
-       *
+       * @memberof solrFacet
+       * @param {String} display The display name of the facet
+       * @returns {String} Text to be displayed in the selected tooltip
        * @description Maps the popover text for a given facet
-       *
-       * @param display - The display name of the facet
-       *
-       * @returns {string} Text to be displayed in the selected tooltip
        */
       scope.getTooltipText = function(display) {
         return scope.tooltipText[display];

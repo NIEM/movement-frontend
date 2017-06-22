@@ -2,9 +2,7 @@
 
 /**
  * @module dhsniem
- *
- * @description
- * Main module of the application.
+ * @description Main module of the NIEM Movement application.
  */
 angular
   .module('dhsniem', [

@@ -2,11 +2,9 @@
 
 /**
  * @ngdoc controller
- *
+ * @memberof dhsniem
  * @name AppCtrl
- *
- * @description
- * The main application Controller for dhsniem
+ * @description The main application Controller for dhsniem
  */
 (function() {
 

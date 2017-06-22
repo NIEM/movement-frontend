@@ -2,11 +2,18 @@
 
 /**
  * @ngdoc directive
- *
+ * @memberof dhsniem
  * @name solrFacetResult
- *
- * @description
- * The specific facet result returned from Solr
+ * @param {service} $location The $location service parses the URL in the browser address bar (based on the window.location) and makes the URL available to your application
+ * @param {service} $rootScope The root scope of the application
+ * @param {service} solrSearch A service that handles custom querying for the Solr API
+ * @description The specific facet result returned from Solr
+ * @attr field The facet field
+ * @attr key A facet field value
+ * @attr count Total count for a facet field value
+ * @example
+ *  Usage:
+ *  <solr-facet-result field="field" key="key" count="count"></solr-facet-result>
  */
 (function() {
 
@@ -32,11 +39,9 @@
     function link(scope) {
 
       /**
-       * @name facetString
-       *
+       * @memberof solrFacetResult
+       * @returns {String} The key value string of the facet
        * @description Gets string value of result
-       *
-       * @returns {string}
        */
       scope.facetString = function() {
         return scope.field + ':"' + scope.key + '"';
@@ -44,11 +49,9 @@
 
 
       /**
-       * @name isSelected
-       *
-       * @description Determines if a given facet field (value) is selected by examining the $location.
-       *
+       * @memberof solrFacetResult
        * @returns {boolean}
+       * @description Determines if a given facet field (value) is selected by examining the $location.
        */
       scope.isSelected = function() {
         var selectedFacets = solrSearch.getSelectedFacets();
@@ -63,8 +66,7 @@
 
 
       /**
-       * @name addRemoveFacet
-       *
+       * @memberof solrFacetResult
        * @description Adds or removes a facet from the $location service, calls a new search based on updated selected facets, and resets page number to 1.
        */
       scope.addRemoveFacet = function() {
@@ -79,9 +81,9 @@
         solrSearch.search();
       };
 
+
       /**
-       * @name init
-       *
+       * @private
        * @description Initializes the values within the controller
        */
       function init() {
