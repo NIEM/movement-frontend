@@ -2,11 +2,10 @@
 
 /**
  * @ngdoc controller
- *
+ * @memberof dhsniem
  * @name ResultsCtrl
- *
- * @description
- * Controller for dhsniem
+ * @param {service} solrSearch A service that handles custom querying for the Solr API
+ * @description Controller for the search and results page
  */
 (function() {
 
@@ -17,8 +16,7 @@
   function ResultsCtrl(solrSearch) {
 
     /**
-     * @name init
-     *
+     * @private
      * @description On page load, calls solr search
      */
     function init() {
@@ -26,7 +24,6 @@
     }
 
     init();
-
   }
 
 

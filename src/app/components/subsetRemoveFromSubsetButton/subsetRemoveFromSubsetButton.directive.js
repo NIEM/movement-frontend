@@ -2,11 +2,15 @@
 
 /**
  * @ngdoc directive
- *
+ * @memberof dhsniem
  * @name subsetRemoveFromSubsetButton
- *
- * @description
- * My Subset button in the header
+ * @param {service} mySubset Handles getting and setting value in the subset generator
+ * @description The remove from subset button
+ * @attr entityId The Id of the entity to remove from the subset
+ * @attr mySubsetIdArray An array of the Ids in the subset
+ * @example
+ *  Usage:
+ *  <subset-remove-from-subset-button entity-id="nc:Person" my-subset-id-array=["nc:Card"]></subset-remove-from-subset-button>
  */
 (function () {
 
@@ -31,8 +35,7 @@
     function link(scope) {
 
       /**
-       * @name removeFromSubset
-       *
+       * @memberof subsetRemoveFromSubsetButton
        * @description Removes the scope entityId from My Subset
        */
       scope.removeFromSubset = function removeFromSubset() {

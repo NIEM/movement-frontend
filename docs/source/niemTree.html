@@ -1,0 +1,126 @@
+<!doctype html><html>  <head>    <meta charset="utf-8">    <base href="../">    <title>JSDoc: source : niemTree.factory.js</title>    <link href="css/prettify-tomorrow.css" type="text/css" rel="stylesheet">    <link href="css/site.css" type="text/css" rel="stylesheet">  </head>  <body ng-app="">    <nav id="toc">      <input placeholder="Filter" id="filter-input" class="col12 block field" type="text">      <div class="nav-wrapper">      <h2><a href="index.html">Index</a></h2>      <ul class="module">        <!-- undefined -->        <h2 class="module">          <a chref="" ng-click="moduleundefined = !moduleundefined">            module: undefined          </a>          <i ng-cloak="" ng-show="moduleundefined">+</i>        </h2>        <li id="undefined" ng-hide="moduleundefined">          <ul class="group">            <h2>              <a href="" ng-click="undefinedcontroller = !undefinedcontroller">                controller              </a>              <i ng-cloak="" ng-show="undefinedcontroller">+</i>            </h2>            <ul ng-hide="undefinedcontroller">              <li>                <a href="AppCtrl.html">AppCtrl</a>              </li><li>                <a href="HomeCtrl.html">HomeCtrl</a>              </li><li>                <a href="ResultsCtrl.html">ResultsCtrl</a>              </li>            </ul>          </ul><ul class="group">            <h2>              <a href="" ng-click="undefinedfactory = !undefinedfactory">                factory              </a>              <i ng-cloak="" ng-show="undefinedfactory">+</i>            </h2>            <ul ng-hide="undefinedfactory">              <li>                <a href="mySubset.html">mySubset</a>              </li><li>                <a href="niemTree.html">niemTree</a>              </li><li>                <a href="solrRequest.html">solrRequest</a>              </li><li>                <a href="solrSearch.html">solrSearch</a>              </li>            </ul>          </ul><ul class="group">            <h2>              <a href="" ng-click="undefineddirective = !undefineddirective">                directive              </a>              <i ng-cloak="" ng-show="undefineddirective">+</i>            </h2>            <ul ng-hide="undefineddirective">              <li>                <a href="niemExport.html">niemExport</a>              </li><li>                <a href="niemFooter.html">niemFooter</a>              </li><li>                <a href="niemHeader.html">niemHeader</a>              </li><li>                <a href="searchHeader.html">searchHeader</a>              </li><li>                <a href="solrDetails.html">solrDetails</a>              </li><li>                <a href="solrFacet.html">solrFacet</a>              </li><li>                <a href="solrFacetResult.html">solrFacetResult</a>              </li><li>                <a href="solrResults.html">solrResults</a>              </li><li>                <a href="solrResultsPagination.html">solrResultsPagination</a>              </li><li>                <a href="solrSearchInput.html">solrSearchInput</a>              </li><li>                <a href="solrSort.html">solrSort</a>              </li><li>                <a href="subsetAddRemoveFromSubsetButton.html">subsetAddRemoveFromSubsetButton</a>              </li><li>                <a href="subsetMySubsetButton.html">subsetMySubsetButton</a>              </li><li>                <a href="subsetMySubsetDetails.html">subsetMySubsetDetails</a>              </li><li>                <a href="subsetRemoveFromSubsetButton.html">subsetRemoveFromSubsetButton</a>              </li>            </ul>          </ul>        </li>      </ul><ul class="module">        <!-- dhsniem -->        <h2 class="module">          <a chref="" ng-click="moduledhsniem = !moduledhsniem">            module: dhsniem          </a>          <i ng-cloak="" ng-show="moduledhsniem">+</i>        </h2>        <li id="dhsniem" ng-hide="moduledhsniem">          <ul class="group">            <h2>              <a href="" ng-click="dhsniemdirective = !dhsniemdirective">                directive              </a>              <i ng-cloak="" ng-show="dhsniemdirective">+</i>            </h2>            <ul ng-hide="dhsniemdirective">              <li>                <a href="dhsniem.niemChildAccordion.html">niemChildAccordion</a>              </li>            </ul>          </ul>        </li>      </ul>      </div>    </nav>    <div id="content" class="page-wrap">      <h1 class="title">        source : niemTree.factory.js      </h1>      <div id="main" class="big-container">        <!-- source code html -->        <article>          <pre class="prettyprint source linenums"><code>'use strict';
+/**
+ * @ngdoc factory
+ * @name niemTree
+ * @param {service} $q A service that helps you run functions asynchronously, and use their return values (or exceptions) when they are done processing
+ * @param {service} solrRequest A service that handles requests to the Solr API
+ * @description Factory for the entity tree
+ */
+(function () {
+  angular
+    .module('dhsniem')
+    .factory('niemTree', niemTree);
+  function niemTree(solrRequest, $q) {
+    return {
+      getElementObjects: getElementObjects,
+      getDocById: getDocById,
+      getSubstitutionGroups: getSubstitutionGroups,
+      getTypeDocsForElementDocs: getTypeDocsForElementDocs
+    };
+    /**
+     * @memberof niemTree
+     * @param {String} id Unique ID of the NIEM entity
+     * @returns {Promise} A promise resolved with an entity document
+     * @description Makes a request to Solr to retrieve the document for an entity ID.
+     */
+    function getDocById(id) {
+      var idQuery = 'id:' + splitId(id);
+      return solrRequest.makeSolrRequest(getSearchParams(idQuery)).then(function (solrResponse) {
+        return solrResponse.response.docs[0];
+      });
+    }
+    /**
+     * @private
+     * @param {String[]} ids Array of unique NIEM entity ids
+     * @returns {Promise} A promise resolved with an array of entity documents
+     * @description Makes a request to Solr to retrieve n documents from n ids
+     */
+    function getDocsByIds(ids) {
+      var orQueryString = ids.map(function (id) {
+        return splitId(id);
+      }).join(' OR ');
+      var idsQuery = 'id:(' + orQueryString + ')';
+      return solrRequest.makeSolrRequest(getSearchParams(idsQuery)).then(function (solrResponse) {
+        return solrResponse.response.docs;
+      });
+    }
+    /**
+     * @private
+     * @returns {String} 
+     * @param {String} id A entity id
+     * @description Split an id to prepare it for a solr query with the colon
+     */
+    function splitId(id) {
+      return id.split(':')[0] + '\\:' + id.split(':')[1];
+    }
+    /**
+     * @memberof niemTree
+     * @param {String[]} elements An array of element ids
+     * @returns {Promise} A promise resolved with an array of element documents
+     * @description Fetches full element documents with full type doc references for a given list of elements
+     */
+    function getElementObjects(elements) {
+      return getDocsByIds(elements).then(function (elementDocs) {
+        elementDocs = elementDocs.filter(function (elementDoc) {
+          return elementDoc.isBG;
+        });
+        return getTypeDocsForElementDocs(elementDocs);
+      });
+    }
+    /**
+     * @memberof niemTree
+     * @param {Object[]} elementDocs An array of element documents
+     * @returns {Promise} A promise resolved with an array of element documents with full type documents embedded
+     * @description Fetches full element documents with full type doc references for a given list of elements
+     */
+    function getTypeDocsForElementDocs(elementDocs) {
+        return $q.all(elementDocs.map(function (elementDoc) {
+          if (elementDoc.type) {
+            return getDocById(elementDoc.type).then(function (typeDoc) {
+              elementDoc.type = typeDoc;
+              return elementDoc;
+            });
+          } else {
+            return getSubstitutionGroups(elementDoc.id).then(function(subGroupDocs) {
+              if(subGroupDocs) {
+                elementDoc.subGroups = subGroupDocs;
+              }
+              return elementDoc;
+            });
+          }
+        }));
+    }
+    /**
+     * @private
+     * @param {String} query Search query for Solr
+     * @return {Object} Params for solr search
+     * @description Builds the search params for a solr query
+     */
+    function getSearchParams(query) {
+      var params = {
+        'q': query,
+        'json.wrf': 'JSON_CALLBACK',
+        'json.nl': 'map'
+      };
+      return params;
+    }
+    /**
+     * @memberof niemTree
+     * @param {String} elementId An element Id
+     * @returns {Promise} A promise resolved with an array of full documents for an element's substitution group
+     * @description For a given element id, checks to see if substitution groups exist for it. If subsitution groups are found, it calls the getElementObjects function.
+     */
+    function getSubstitutionGroups(elementId) {
+      var sgQuery = 'substitutionGroup:' + splitId(elementId);
+      return solrRequest.makeSolrRequest(getSearchParams(sgQuery)).then(function(solrResponse) {
+        if (solrResponse.response.docs) {
+          // return the array of substitution group element objects with full type doc refs
+          return getTypeDocsForElementDocs(solrResponse.response.docs);
+        }
+      }).catch(function(err) {
+        return;
+      });
+    }
+  }
+})();
+</code></pre>        </article>        <!-- index.html -->        <!-- class files -->      </div>      <footer style="clear:both">        Documentation generated by        <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.2</a>        using        <a href="https://github.com/allenhwkim/angular-jsdoc">Angular-JSDoc template</a>      </footer>    </div>    <script src="js/prettify.js"></script>    <script src="js/angular.min.js"></script>    <script src="js/site.js"></script>    <!--%= prettyJson %-->    <script>      prettyPrint();      var lineNo = window.location.hash.match(/#line([0-9]+)$/);      lineNo && document.querySelector("ol li:nth-child("+(lineNo[1])+")").scrollIntoView();    </script>  </body></html>

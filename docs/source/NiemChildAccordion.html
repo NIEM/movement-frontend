@@ -1,0 +1,61 @@
+<!doctype html><html>  <head>    <meta charset="utf-8">    <base href="../">    <title>JSDoc: source : niemChildAccordion.directive.js</title>    <link href="css/prettify-tomorrow.css" type="text/css" rel="stylesheet">    <link href="css/site.css" type="text/css" rel="stylesheet">  </head>  <body ng-app="">    <nav id="toc">      <input placeholder="Filter" id="filter-input" class="col12 block field" type="text">      <div class="nav-wrapper">      <h2><a href="index.html">Index</a></h2>      <ul class="module">        <!-- undefined -->        <h2 class="module">          <a chref="" ng-click="moduleundefined = !moduleundefined">            module: undefined          </a>          <i ng-cloak="" ng-show="moduleundefined">+</i>        </h2>        <li id="undefined" ng-hide="moduleundefined">          <ul class="group">            <h2>              <a href="" ng-click="undefinedcontroller = !undefinedcontroller">                controller              </a>              <i ng-cloak="" ng-show="undefinedcontroller">+</i>            </h2>            <ul ng-hide="undefinedcontroller">              <li>                <a href="AppCtrl.html">AppCtrl</a>              </li><li>                <a href="HomeCtrl.html">HomeCtrl</a>              </li><li>                <a href="ResultsCtrl.html">ResultsCtrl</a>              </li>            </ul>          </ul><ul class="group">            <h2>              <a href="" ng-click="undefinedfactory = !undefinedfactory">                factory              </a>              <i ng-cloak="" ng-show="undefinedfactory">+</i>            </h2>            <ul ng-hide="undefinedfactory">              <li>                <a href="mySubset.html">mySubset</a>              </li><li>                <a href="niemTree.html">niemTree</a>              </li><li>                <a href="solrRequest.html">solrRequest</a>              </li><li>                <a href="solrSearch.html">solrSearch</a>              </li>            </ul>          </ul><ul class="group">            <h2>              <a href="" ng-click="undefineddirective = !undefineddirective">                directive              </a>              <i ng-cloak="" ng-show="undefineddirective">+</i>            </h2>            <ul ng-hide="undefineddirective">              <li>                <a href="niemChildAccordion.html">niemChildAccordion</a>              </li><li>                <a href="niemExport.html">niemExport</a>              </li><li>                <a href="niemFooter.html">niemFooter</a>              </li><li>                <a href="niemHeader.html">niemHeader</a>              </li><li>                <a href="searchHeader.html">searchHeader</a>              </li><li>                <a href="solrDetails.html">solrDetails</a>              </li><li>                <a href="solrFacet.html">solrFacet</a>              </li><li>                <a href="solrFacetResult.html">solrFacetResult</a>              </li><li>                <a href="solrResults.html">solrResults</a>              </li><li>                <a href="solrResultsPagination.html">solrResultsPagination</a>              </li><li>                <a href="solrSearchInput.html">solrSearchInput</a>              </li><li>                <a href="solrSort.html">solrSort</a>              </li><li>                <a href="subsetAddRemoveFromSubsetButton.html">subsetAddRemoveFromSubsetButton</a>              </li><li>                <a href="subsetMySubsetButton.html">subsetMySubsetButton</a>              </li><li>                <a href="subsetMySubsetDetails.html">subsetMySubsetDetails</a>              </li><li>                <a href="subsetRemoveFromSubsetButton.html">subsetRemoveFromSubsetButton</a>              </li>            </ul>          </ul>        </li>      </ul>      </div>    </nav>    <div id="content" class="page-wrap">      <h1 class="title">        source : niemChildAccordion.directive.js      </h1>      <div id="main" class="big-container">        <!-- source code html -->        <article>          <pre class="prettyprint source linenums"><code>'use strict';
+/**
+ * @ngdoc directive
+ * @name niemChildAccordion
+ * @param {service} niemTree A service to handle requests for the element tree
+ * @description ChildAccordion section for NIEM model
+ * @attr {Object} elementData Document data for the accordion root level element
+ * @example
+ *  Usage:
+ *  &lt;niem-child-accordion element-data="item">&lt;/niem-child-accordion>
+ */
+(function() {
+  angular
+    .module('dhsniem')
+    .directive('niemChildAccordion', niemChildAccordion);
+  function niemChildAccordion(niemTree) {
+    return {
+      restrict: 'E',
+      templateUrl: 'app/components/niemChildAccordion/niemChildAccordion.directive.html',
+      scope: {
+        elementData: '='
+      },
+      link: function(scope) {
+        /**
+         * @memberof niemChildAccordion
+         * @property dataFound
+         * @type {boolean}
+         * @description Whether or not child data has already been retrieved
+         */   
+        scope.dataFound = false;
+        /**
+         * @memberof niemChildAccordion
+         * @property isOpen
+         * @type {boolean}
+         * @description Whether or not the accordion is expanded
+         */           
+        scope.isOpen = false;
+        scope.$watch('isOpen', function () {
+          scope.accordionState = scope.isOpen ? 'Expanded' : 'Collapsed';
+        });
+        /**
+         * @memberof niemChildAccordion
+         * @description Expands the accordion for the clicked element and fetches the data if not previously loaded
+         */
+        scope.expandElement = function() {
+          scope.isOpen = !scope.isOpen;
+          if (scope.isOpen && scope.dataFound === false) {
+            // Only fetch the full children docs, if they children are children of the type. Otherwise, if they are from a substitution group, don't fetch.
+            if(scope.elementData.type) {
+              niemTree.getElementObjects(scope.elementData.type.elements).then(function (elements) {
+                scope.elementData.type.elements = elements;
+              });
+            }
+            scope.dataFound = true;
+          }
+        };
+      }
+    };
+  }
+})();
+</code></pre>        </article>        <!-- index.html -->        <!-- class files -->      </div>      <footer style="clear:both">        Documentation generated by        <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.2</a>        using        <a href="https://github.com/allenhwkim/angular-jsdoc">Angular-JSDoc template</a>      </footer>    </div>    <script src="js/prettify.js"></script>    <script src="js/angular.min.js"></script>    <script src="js/site.js"></script>    <!--%= prettyJson %-->    <script>      prettyPrint();      var lineNo = window.location.hash.match(/#line([0-9]+)$/);      lineNo && document.querySelector("ol li:nth-child("+(lineNo[1])+")").scrollIntoView();    </script>  </body></html>

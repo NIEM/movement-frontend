@@ -18,7 +18,7 @@ docker network create niem-network
 Note: Also, build and run the Solr and Backend Docker containers. Then build and run the frontend container, from the repo's root directory:
 ```
 docker build -t movement-frontend .
-docker run -dti -p 7000:7000 --name movement-frontend --net niem-network movement-frontend
+docker run -dti -p 80:80 --name movement-frontend --net niem-network movement-frontend
 ```
 
 
@@ -54,7 +54,7 @@ To build app for deployment with tests and docs
 npm run build
 ```
 
-If you are using the [JSDoc](http://usejsdoc.org/) style of comments (which you should!!!) you can generate your documentation with the following command. Documentation can be found under `docs/client/` (Hooray  for automated documentation!)
+If you are using the [JSDoc](http://usejsdoc.org/) style of comments (which you should!!!) you can generate your documentation with the following command. Documentation can be found under `docs/` (Hooray  for automated documentation!)
 
 ```
 npm run docs

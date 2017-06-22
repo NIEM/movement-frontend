@@ -2,11 +2,12 @@
 
 /**
  * @ngdoc directive
- *
+ * @memberof dhsniem
  * @name niemFooter
- *
- * @description
- * Main footer throughout app
+ * @description Main footer throughout app
+ * @example
+ *  Usage:
+ *  <niem-footer></niem-footer>
  */
 (function() {
 

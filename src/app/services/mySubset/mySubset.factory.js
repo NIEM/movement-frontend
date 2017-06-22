@@ -2,11 +2,9 @@
 
 /**
  * @ngdoc factory
- *
+ * @memberof dhsniem
  * @name mySubset
- *
- * @description
- * Factory for my subset cart
+ * @description Factory for my subset generator
  */
 (function () {
 
@@ -25,11 +23,9 @@
     };
 
     /**
-     * @name addToSubset
-     *
+     * @memberof mySubset
+     * @param {String} entityID The Id of the entity to add to the subset
      * @description Adds a new entityID to the local storage subset
-     *
-     * @param {String} - entityID
      */
     function addToSubset(entityID) {
       var newSubset = getSubset();
@@ -39,11 +35,9 @@
 
 
     /**
-     * @name getSubset
-     *
+     * @memberof mySubset
+     * @returns {String[]} An array of entity ids  
      * @description Returns the mySubset JSON object from local storage
-     *
-     * @returns String[] - array of entity ids  
      */
     function getSubset() {
       return localStorage.getItem('mySubset') ? JSON.parse(localStorage.getItem('mySubset')) : [];
@@ -51,11 +45,9 @@
 
 
     /**
-     * @name setSubset
-     *
+     * @memberof mySubset
+     * @param {Object} subset The current subset object
      * @description Sets the mySubset JSON object to local storage
-     *
-     * @param {Object} - subset
      */
     function setSubset(subset) {
       localStorage.setItem('mySubset', JSON.stringify(subset));
@@ -63,8 +55,7 @@
 
 
     /**
-     * @name removeAllFromSubset
-     *
+     * @memberof mySubset
      * @description Removes all items from the mySubset local storage object
      */
     function removeAllFromSubset() {
@@ -73,11 +64,9 @@
 
 
     /**
-     * @name getSubsetCount
-     *
+     * @memberof mySubset
+     * @returns {Number} The length of the mySubset array
      * @description Returns the count of the mySubset local storage array
-     *
-     * @return Number - the length of the mySubset array
      */
     function getSubsetCount() {
       return getSubset().length;
@@ -85,11 +74,9 @@
 
 
     /**
-     * @name removeFromSubset
-     *
+     * @memberof mySubset
+     * @param {String} entityID The entityID to be removed from mySubset
      * @description Removes an entity ID from the mySubset local storage array
-     *
-     * @param entityID - the entityID to be removed from mySubset
      */
     function removeFromSubset(entityID) {
       var subset = getSubset();

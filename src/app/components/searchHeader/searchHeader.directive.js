@@ -2,11 +2,12 @@
 
 /**
  * @ngdoc directive
- *
+ * @memberof dhsniem
  * @name searchHeader
- *
- * @description
- * Header used on results and details pages
+ * @description Header used on results and details pages
+ * @example
+ *  Usage:
+ *  <search-header></search-header>
  */
 (function() {
 

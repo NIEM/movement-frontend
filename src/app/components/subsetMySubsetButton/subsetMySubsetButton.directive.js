@@ -2,11 +2,13 @@
 
 /**
  * @ngdoc directive
- *
+ * @memberof dhsniem
  * @name subsetMySubsetButton
- *
- * @description
- * My Subset button in the header
+ * @param {service} mySubset Handles getting and setting value in the subset generator
+ * @description My Subset button in the header
+ * @example
+ *  Usage:
+ *  <subset-my-subset-button></subset-my-subset-button>
  */
 (function() {
 
@@ -27,6 +29,12 @@
      *
      */
     function link(scope) {
+      /**
+       * @memberof subsetMySubsetButton
+       * @property subsetCount
+       * @type {Number}
+       * @description The current number of items in the subset
+       */
       scope.subsetCount = mySubset.getSubsetCount();
 
       scope.$watch(function() {
